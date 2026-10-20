@@ -1,0 +1,76 @@
+/* Pill styles */
+.ww-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  background-color: var(--bg-surface-tint);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  line-height: 1.2;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.ww-pill.is-clickable {
+  cursor: pointer;
+}
+
+.ww-pill.is-clickable:hover {
+  border-color: var(--color-clay);
+  color: var(--color-clay);
+  background-color: var(--color-clay-subtle);
+}
+
+.ww-pill.is-selected,
+.ww-pill--active {
+  background-color: var(--color-ink-green);
+  color: var(--color-warm-paper);
+  border-color: var(--color-ink-green);
+}
+
+[data-theme="dark"] .ww-pill.is-selected,
+[data-theme="dark"] .ww-pill--active {
+  background-color: var(--color-clay);
+  color: #FFFFFF;
+  border-color: var(--color-clay);
+}
+
+.ww-pill--accent {
+  background-color: var(--color-clay-subtle);
+  color: var(--color-clay);
+  border-color: rgba(200, 85, 61, 0.25);
+}
+
+.ww-pill--sand {
+  background-color: var(--color-sand);
+  color: var(--color-ink-green);
+  border-color: var(--color-sand-dark);
+}
+
+.ww-pill__remove-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.15);
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  margin-left: 2px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.ww-pill__remove-btn:hover {
+  background: var(--color-danger);
+  color: #FFFFFF;
+}

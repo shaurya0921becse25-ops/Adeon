@@ -1,0 +1,199 @@
+/* Sticky Trip Context Bar */
+.sticky-trip-bar-wrap {
+  position: sticky;
+  top: 64px;
+  z-index: 800;
+  background-color: var(--color-porcelain);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 4px 14px rgba(59, 46, 39, 0.04);
+  transition: all var(--transition-normal);
+}
+
+[data-theme="dark"] .sticky-trip-bar-wrap {
+  background-color: var(--color-taupe-deep);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.sticky-trip-bar {
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.trip-bar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trip-bar-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-aegean-deep);
+  background-color: var(--color-mist);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+[data-theme="dark"] .trip-bar-tag {
+  background-color: rgba(145, 184, 199, 0.2);
+  color: var(--color-aegean);
+}
+
+.trip-bar-note {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.trip-bar-controls {
+  display: grid;
+  grid-template-columns: 1.2fr 1.1fr 1fr 1.2fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.trip-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trip-bar-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.trip-bar-icon {
+  color: var(--color-aegean-deep);
+}
+
+.trip-bar-select,
+.trip-bar-input {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.trip-bar-select:focus,
+.trip-bar-input:focus {
+  border-color: var(--color-aegean-deep);
+  box-shadow: 0 0 0 2px var(--color-aegean-subtle);
+}
+
+.trip-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  padding: 2px 4px;
+}
+
+.trip-stepper-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+
+.trip-stepper-btn:hover:not(:disabled) {
+  background-color: var(--color-mist);
+}
+
+.trip-stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.trip-stepper-val {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+.trip-budget-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.trip-rupee-symbol {
+  position: absolute;
+  left: 10px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.trip-budget-input-wrap .trip-bar-input {
+  padding-left: 24px;
+  width: 100%;
+}
+
+.trip-bar-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.trip-bar-reset:hover {
+  color: var(--color-brick);
+  border-color: var(--color-brick);
+  background-color: var(--color-brick-subtle);
+}
+
+@media (max-width: 900px) {
+  .trip-bar-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+  .trip-bar-reset {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .trip-bar-controls {
+    grid-template-columns: 1fr;
+  }
+}

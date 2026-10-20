@@ -1,0 +1,230 @@
+/* ==========================================================================
+   WanderWise Footer Styles — High Contrast (WCAG AAA Compliant)
+   Background: #141C1A (Deep Forest Charcoal)
+   Primary Text: #FAF7F0 (Porcelain) — Contrast > 14:1
+   Headings: #F0D9C5 (Limestone Warm Glow) — Contrast > 11:1
+   Links: rgba(250, 247, 240, 0.92) — Contrast > 12:1
+   Hover Link: #79C2DB (Bright Aegean Sky) — Contrast > 8.5:1
+   ========================================================================== */
+
+.ww-footer {
+  background-color: #141C1A;
+  color: #FAF7F0;
+  padding: var(--space-16) 0 var(--space-10);
+  margin-top: auto;
+  border-top: 2px solid rgba(216, 189, 166, 0.25);
+  font-family: var(--font-sans);
+}
+
+.ww-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.6fr;
+  gap: var(--space-10);
+  margin-bottom: var(--space-12);
+}
+
+/* ── Brand Column ────────────────────────────────────────────────────── */
+.ww-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.ww-footer__logo {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.ww-footer__badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background-color: rgba(216, 189, 166, 0.16);
+  color: #F0D9C5;
+  border: 1px solid rgba(216, 189, 166, 0.4);
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+}
+
+.ww-footer__tagline {
+  color: rgba(250, 247, 240, 0.9);
+  font-size: var(--font-sm);
+  line-height: 1.6;
+  margin-bottom: var(--space-5);
+  max-width: 38ch;
+}
+
+.ww-footer__meta-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: var(--space-4) var(--space-5);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(250, 247, 240, 0.16);
+  font-size: var(--font-xs);
+  color: rgba(250, 247, 240, 0.92);
+}
+
+.ww-footer__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ww-footer__meta-icon {
+  color: #79C2DB;
+  flex-shrink: 0;
+}
+
+/* ── Headings ────────────────────────────────────────────────────────── */
+.ww-footer__heading {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #F0D9C5;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Navigation Links ────────────────────────────────────────────────── */
+.ww-footer__links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.ww-footer__links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(250, 247, 240, 0.92);
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+  display: inline-block;
+}
+
+.ww-footer__links a:hover {
+  color: #79C2DB;
+  transform: translateX(4px);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ww-footer__links a:focus-visible {
+  outline: 2px solid #79C2DB;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Evaluation Card ─────────────────────────────────────────────────── */
+.ww-footer__eval-card {
+  padding: var(--space-5);
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(250, 247, 240, 0.22);
+}
+
+.ww-footer__eval-text {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.ww-footer__eval-sub {
+  font-size: 11.5px;
+  color: rgba(250, 247, 240, 0.82);
+  line-height: 1.5;
+  margin-bottom: var(--space-4);
+}
+
+.ww-footer__github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFFFFF;
+  padding: 7px 14px;
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 180ms ease;
+}
+
+.ww-footer__github-link:hover {
+  background-color: #3F6E80;
+  border-color: #79C2DB;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* ── Tear-line divider ───────────────────────────────────────────────── */
+.ww-footer__divider {
+  border-top: 1px dashed rgba(250, 247, 240, 0.25);
+  margin: var(--space-8) 0 var(--space-6);
+}
+
+/* ── Bottom Section ──────────────────────────────────────────────────── */
+.ww-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-size: 12px;
+  color: rgba(250, 247, 240, 0.82);
+}
+
+.ww-footer__disclaimer,
+.ww-footer__credits {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.ww-footer__legal-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.ww-footer__legal-links a {
+  color: rgba(250, 247, 240, 0.9);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.ww-footer__legal-links a:hover {
+  color: #79C2DB;
+  text-decoration: underline;
+}
+
+/* ── Responsive Footer ───────────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .ww-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 600px) {
+  .ww-footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

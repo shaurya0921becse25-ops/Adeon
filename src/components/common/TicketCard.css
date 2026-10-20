@@ -1,0 +1,122 @@
+/* Ticket Card with Notched Edges & Dashed Tear Line */
+.ww-ticket-card {
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.ww-ticket-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.ww-ticket-card--dark,
+.ww-ticket-card--inverted {
+  background-color: var(--color-ink-green);
+  color: var(--color-warm-paper);
+  border-color: rgba(232, 221, 200, 0.2);
+}
+
+.ww-ticket-card--sand {
+  background-color: var(--color-sand);
+  border-color: var(--color-sand-dark);
+}
+
+.ww-ticket-card__header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(15, 42, 40, 0.03);
+}
+
+.ww-ticket-card--inverted .ww-ticket-card__header {
+  border-bottom-color: rgba(232, 221, 200, 0.15);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.ww-ticket-card__body {
+  padding: var(--space-6);
+}
+
+/* Tear Line & Inward Notch Cutouts */
+.ww-ticket-card__tear-line {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin: 0;
+  overflow: visible;
+}
+
+.ww-ticket-card__dashed-rule {
+  flex: 1;
+  border-top: var(--border-dashed);
+  margin: 0 12px;
+}
+
+.ww-ticket-card--inverted .ww-ticket-card__dashed-rule {
+  border-top-color: rgba(232, 221, 200, 0.3);
+}
+
+.ww-ticket-card__stub {
+  padding: var(--space-4) var(--space-6);
+  background-color: rgba(15, 42, 40, 0.02);
+}
+
+.ww-ticket-card--inverted .ww-ticket-card__stub {
+  background-color: rgba(0, 0, 0, 0.18);
+}
+
+/* Notches using circles that blend into page background */
+.ww-ticket-notch {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ww-ticket-notch--stub-left {
+  left: -9px;
+  top: 4px;
+}
+
+.ww-ticket-notch--stub-right {
+  right: -9px;
+  top: 4px;
+}
+
+.ww-ticket-notch--tl {
+  top: -8px;
+  left: -8px;
+}
+
+.ww-ticket-notch--tr {
+  top: -8px;
+  right: -8px;
+}
+
+.ww-ticket-notch--bl {
+  bottom: -8px;
+  left: -8px;
+}
+
+.ww-ticket-notch--br {
+  bottom: -8px;
+  right: -8px;
+}
+
+@media (max-width: 640px) {
+  .ww-ticket-card__body {
+    padding: var(--space-4);
+  }
+  .ww-ticket-card__header,
+  .ww-ticket-card__stub {
+    padding: var(--space-3) var(--space-4);
+  }
+}

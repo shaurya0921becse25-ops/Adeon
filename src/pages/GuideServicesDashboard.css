@@ -1,0 +1,256 @@
+/* Guide Services Dashboard Styles */
+.guide-dashboard-page {
+  min-height: 100vh;
+  background-color: var(--color-porcelain);
+  padding: 36px 0 80px;
+}
+
+[data-theme="dark"] .guide-dashboard-page {
+  background-color: var(--color-taupe-deep);
+}
+
+.guide-dashboard-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.guide-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-aegean-deep);
+  background-color: var(--color-mist);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 8px;
+}
+
+.guide-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-aegean-deep);
+}
+
+.guide-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.guide-dashboard-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 1.8rem + 1.2vw, 2.8rem);
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.guide-dashboard-sub {
+  font-size: var(--font-sm);
+  color: var(--text-muted);
+  max-width: 620px;
+  margin: 0;
+}
+
+.guide-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Metrics Grid */
+.guide-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.metric-box {
+  padding: 18px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-lbl {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.metric-val {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-aegean-deep);
+}
+
+.metric-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Sections */
+.guide-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.section-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.guide-bookings-list,
+.guide-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guide-booking-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+}
+
+.gbk-status-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.gbk-status-pill.is-requested {
+  background-color: var(--color-mist);
+  color: var(--color-taupe-deep);
+}
+
+.gbk-status-pill.is-accepted {
+  background-color: rgba(63, 110, 128, 0.15);
+  color: var(--color-aegean-deep);
+}
+
+.gbk-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin: 0 0 4px;
+}
+
+.gbk-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.gbk-notes {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 6px 0 0;
+}
+
+.gbk-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.accepted-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-aegean-deep);
+}
+
+.guide-service-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+}
+
+.gsvc-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  margin: 0 0 4px;
+}
+
+.gsvc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.live-status-pill {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-aegean-deep);
+  background-color: var(--color-aegean-subtle);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+@media (max-width: 900px) {
+  .guide-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .guide-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .guide-booking-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .gbk-actions {
+    justify-content: flex-end;
+  }
+}

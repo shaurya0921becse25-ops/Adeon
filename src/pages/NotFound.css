@@ -1,0 +1,60 @@
+/* 404 Not Found Styles */
+.not-found-page {
+  padding: var(--space-16) 0 var(--space-20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.not-found-container {
+  max-width: 580px;
+}
+
+.not-found-ticket {
+  width: 100%;
+}
+
+.not-found-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.not-found-error-code {
+  font-family: var(--font-serif);
+  font-size: var(--font-2xl);
+  font-weight: 800;
+  color: var(--color-clay);
+  line-height: 1;
+}
+
+.not-found-badge {
+  font-size: 11px;
+  font-weight: 800;
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.not-found-body {
+  padding: var(--space-4) 0;
+  text-align: center;
+}
+
+.not-found-title {
+  font-size: var(--font-xl);
+  margin-bottom: var(--space-3);
+}
+
+.not-found-desc {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+}
+
+.not-found-stub {
+  display: flex;
+  justify-content: center;
+}

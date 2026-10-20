@@ -1,0 +1,559 @@
+/* HeroJournalCollage.css — Editorial Travel Journal Motif */
+
+.journal-hero-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* Collage Canvas Container */
+.journal-collage {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  background-color: rgba(227, 205, 180, 0.28);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  overflow: visible;
+}
+
+/* Common Collage Items */
+.collage-item {
+  position: absolute;
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 320ms ease,
+              z-index 0ms;
+}
+
+/* Hover: Items lift and straighten */
+.collage-item:hover {
+  transform: rotate(0deg) translateY(-6px) scale(1.02) !important;
+  z-index: 50 !important;
+  box-shadow: var(--shadow-hover);
+}
+
+/* Item 1: Shimla Toy Train (-2.5 deg) */
+.collage-item--photo1 {
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  transform: rotate(-2.8deg);
+}
+
+/* Item 2: Jaipur Old City (+2.2 deg) */
+.collage-item--photo2 {
+  top: 26px;
+  right: 18px;
+  z-index: 12;
+  transform: rotate(2.4deg);
+}
+
+/* Item 3: Field Verification Log (-1.2 deg) */
+.collage-item--photo3 {
+  bottom: 18px;
+  left: 64px;
+  z-index: 14;
+  transform: rotate(-1.5deg);
+}
+
+/* Item 4: Live Ticket Stub (+1.8 deg) */
+.collage-item--ticket {
+  bottom: 12px;
+  right: 24px;
+  z-index: 20;
+  transform: rotate(1.8deg);
+}
+
+/* Polaroid Photo Frames */
+.polaroid-frame {
+  background-color: #FFFFFF;
+  padding: 6px 6px 12px 6px;
+  border-radius: 2px;
+  border: 1px solid rgba(31, 22, 19, 0.12);
+  box-shadow: 0 4px 12px rgba(31, 22, 19, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.polaroid-frame img {
+  display: block;
+  object-fit: cover;
+  border-radius: 1px;
+  filter: contrast(1.04) saturate(0.96) sepia(0.06);
+}
+
+.polaroid-caption {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 5px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* Washi Tape Strips (Translucent clay & rani pink) */
+.washi-tape {
+  position: absolute;
+  width: 52px;
+  height: 14px;
+  z-index: 25;
+  pointer-events: none;
+  opacity: 0.88;
+  backdrop-filter: blur(1px);
+  box-shadow: 0 1px 3px rgba(31, 22, 19, 0.1);
+}
+
+.washi-tape--clay {
+  background-color: rgba(227, 205, 180, 0.85);
+  border-top: 1px dashed rgba(188, 90, 60, 0.35);
+  border-bottom: 1px dashed rgba(188, 90, 60, 0.35);
+}
+
+.washi-tape--pink {
+  background-color: rgba(214, 47, 107, 0.72);
+  border-top: 1px dashed rgba(244, 235, 221, 0.4);
+  border-bottom: 1px dashed rgba(244, 235, 221, 0.4);
+}
+
+.washi-tape--tl {
+  top: -6px;
+  left: 18px;
+  transform: rotate(-8deg);
+}
+
+.washi-tape--tr {
+  top: -6px;
+  right: 18px;
+  transform: rotate(7deg);
+}
+
+.washi-tape--tc {
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+}
+
+/* ==========================================================================
+   Live Feasibility Ticket Stub
+   ========================================================================== */
+.collage-ticket-stub {
+  position: relative;
+  width: 250px;
+  background-color: #FFFDF9;
+  border: 1px solid rgba(31, 22, 19, 0.18);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 6px 18px rgba(31, 22, 19, 0.14);
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+}
+
+.stub-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(31, 22, 19, 0.12);
+  padding-bottom: 5px;
+  margin-bottom: 6px;
+}
+
+.stub-code {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-terracotta);
+}
+
+.stub-carrier {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.stub-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stub-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.stub-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.stub-value {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stub-dest {
+  color: var(--color-terracotta);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+/* Status Pill */
+.stub-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stub-status-pill.status-feasible {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border: 1px solid var(--color-success-border);
+}
+
+.stub-status-pill.status-tight {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning-border);
+}
+
+.stub-status-pill.status-overbudget {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger-border);
+}
+
+/* Perforated Stub Line */
+.stub-perforated-rule {
+  position: relative;
+  height: 12px;
+  margin: 6px -12px 4px -12px;
+  border-bottom: 1px dashed rgba(31, 22, 19, 0.24);
+}
+
+.cutout-left,
+.cutout-right {
+  position: absolute;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(227, 205, 180, 0.6);
+  border: 1px solid rgba(31, 22, 19, 0.18);
+}
+
+.cutout-left {
+  left: -6px;
+}
+
+.cutout-right {
+  right: -6px;
+}
+
+.stub-barcode {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.barcode-bars {
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stub-sample-tag {
+  font-size: 8px;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Pink Rubber Stamp "CHECKED" */
+.ink-stamp {
+  position: absolute;
+  top: 18px;
+  right: -8px;
+  transform: rotate(-14deg);
+  pointer-events: none;
+  z-index: 30;
+}
+
+.ink-stamp--pink {
+  border: 2px solid var(--color-rani-pink);
+  border-radius: 4px;
+  padding: 3px 8px;
+  background-color: rgba(214, 47, 107, 0.1);
+  box-shadow: 0 0 0 1px rgba(214, 47, 107, 0.2);
+}
+
+.stamp-inner {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: var(--color-rani-pink);
+  text-shadow: 0 0 1px rgba(214, 47, 107, 0.5), 0 0 3px rgba(214, 47, 107, 0.25);
+  display: block;
+}
+
+/* ==========================================================================
+   Compact Working Feasibility Controls Card
+   ========================================================================== */
+.feasibility-control-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.feasibility-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feasibility-card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-terracotta);
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.feasibility-card-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.feasibility-sample-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background-color: var(--color-clay-subtle);
+  border: 1px solid var(--border-color);
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+}
+
+.feasibility-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Destination Chips */
+.destination-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.destination-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.destination-chip:hover {
+  border-color: var(--color-terracotta);
+  color: var(--color-terracotta);
+}
+
+.destination-chip.is-active {
+  background-color: var(--color-terracotta);
+  border-color: var(--color-terracotta);
+  color: #FFFFFF;
+}
+
+/* Stepper + Slider Row */
+.feasibility-control-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.feasibility-stepper-wrap {
+  flex-shrink: 0;
+}
+
+.feasibility-stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-page);
+  padding: 2px;
+}
+
+.stepper-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background-color: var(--color-clay);
+}
+
+.stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.stepper-val {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 0 6px;
+}
+
+/* Slider Wrap */
+.feasibility-slider-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.slider-label-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.slider-readout {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-terracotta);
+}
+
+/* Correct Left-to-Right Range Slider */
+.feasibility-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.feasibility-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 4px rgba(31, 22, 19, 0.25);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.feasibility-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.feasibility-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-terracotta);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 4px rgba(31, 22, 19, 0.25);
+  cursor: pointer;
+}
+
+.feasibility-open-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 640px) {
+  .journal-collage {
+    height: 380px;
+  }
+
+  .collage-item--photo1 {
+    top: 10px;
+    left: 8px;
+    transform: rotate(0deg);
+  }
+
+  .collage-item--photo2 {
+    top: 10px;
+    right: 8px;
+    transform: rotate(0deg);
+  }
+
+  .collage-item--photo3 {
+    display: none; /* Hide 3rd photo on small mobile to avoid cramped overlap */
+  }
+
+  .collage-item--ticket {
+    bottom: 12px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) rotate(0deg);
+    width: calc(100% - 24px);
+    max-width: 290px;
+  }
+
+  .feasibility-control-row {
+    flex-wrap: wrap;
+  }
+
+  .feasibility-open-btn {
+    width: 100%;
+    margin-top: 6px;
+  }
+}

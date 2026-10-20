@@ -1,0 +1,100 @@
+/* Toast Notifications */
+.ww-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  z-index: 2000;
+  max-width: 380px;
+  width: calc(100% - 48px);
+  pointer-events: none;
+}
+
+.ww-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-ink-green);
+  color: var(--color-warm-paper);
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(232, 221, 200, 0.2);
+  box-shadow: var(--shadow-modal);
+  animation: ww-toast-slide var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ww-toast--success {
+  border-left: 4px solid var(--color-success);
+}
+
+.ww-toast--warning {
+  border-left: 4px solid var(--color-warning);
+}
+
+.ww-toast--danger {
+  border-left: 4px solid var(--color-danger);
+}
+
+.ww-toast--info {
+  border-left: 4px solid var(--color-clay);
+}
+
+.ww-toast__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ww-toast--success .ww-toast__icon { color: var(--color-success); }
+.ww-toast--warning .ww-toast__icon { color: var(--color-warning); }
+.ww-toast--danger .ww-toast__icon { color: var(--color-danger); }
+.ww-toast--info .ww-toast__icon { color: var(--color-clay); }
+
+.ww-toast__message {
+  font-family: var(--font-sans);
+  font-size: var(--font-sm);
+  color: var(--color-warm-paper);
+  margin: 0;
+  flex: 1;
+}
+
+.ww-toast__close {
+  background: transparent;
+  border: none;
+  color: rgba(246, 241, 231, 0.6);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.ww-toast__close:hover {
+  color: var(--color-warm-paper);
+}
+
+@keyframes ww-toast-slide {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .ww-toast-container {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    max-width: none;
+    width: auto;
+  }
+}

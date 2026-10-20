@@ -1,0 +1,75 @@
+/* Badge Primitive */
+.ww-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.ww-badge--sm {
+  padding: 4px 8px;
+  font-size: var(--font-xs);
+}
+
+.ww-badge--md {
+  padding: 6px 12px;
+  font-size: var(--font-xs);
+}
+
+.ww-badge--lg {
+  padding: 8px 16px;
+  font-size: var(--font-sm);
+}
+
+/* Status variants with high contrast background + border */
+.ww-badge--success {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border-color: var(--color-success-border);
+}
+
+.ww-badge--warning {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+  border-color: var(--color-warning-border);
+}
+
+.ww-badge--danger {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-color: var(--color-danger-border);
+}
+
+.ww-badge--accent {
+  background-color: var(--color-clay-subtle);
+  color: var(--color-clay);
+  border-color: rgba(200, 85, 61, 0.3);
+}
+
+.ww-badge--neutral {
+  background-color: rgba(15, 42, 40, 0.06);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .ww-badge--neutral {
+  background-color: rgba(232, 221, 200, 0.08);
+}
+
+.ww-badge--sage {
+  background-color: var(--color-sage-soft);
+  color: var(--color-sage-deep);
+  border-color: var(--color-sage);
+}
+
+.ww-badge__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

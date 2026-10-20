@@ -1,0 +1,101 @@
+.pit-teaser {
+  background: var(--bg-surface-tint);
+  border-top: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+}
+
+.pit-teaser__header {
+  max-width: 600px;
+  margin-bottom: var(--space-12);
+}
+
+.pit-teaser__title {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: var(--font-2xl);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+.pit-teaser__sub {
+  font-size: var(--font-base);
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+  max-width: 54ch;
+}
+
+.pit-teaser__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.pit-teaser__card {
+  background: var(--bg-page);
+  border: var(--border-hairline);
+  border-radius: var(--radius-card);
+  padding: var(--space-8) var(--space-6);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.pit-teaser__card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+.pit-teaser__card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-mist);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-aegean-deep);
+  margin-bottom: var(--space-5);
+  transition: background var(--transition-fast);
+}
+
+.pit-teaser__card:hover .pit-teaser__card-icon {
+  background: var(--color-aegean);
+  color: var(--bg-page);
+}
+
+.pit-teaser__card-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-lg);
+  font-weight: 500;
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+.pit-teaser__card-desc {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-body);
+  max-width: 100%;
+}
+
+.pit-teaser__cta {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (max-width: 900px) {
+  .pit-teaser__cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .pit-teaser__cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .pit-teaser__cta {
+    justify-content: center;
+  }
+}

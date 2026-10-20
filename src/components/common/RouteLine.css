@@ -1,0 +1,109 @@
+/* RouteLine Motif Styles */
+.ww-route-line-vertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ww-route-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ww-route-path {
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* Horizontal Step Route Line (e.g. Chatbot Progress) */
+.ww-route-line-horizontal {
+  position: relative;
+  width: 100%;
+  padding: var(--space-4) 0;
+}
+
+.ww-route-track {
+  position: absolute;
+  top: 24px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  border-top: 2px dashed var(--border-color);
+  z-index: 1;
+}
+
+.ww-route-steps {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.ww-route-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.ww-route-waypoint {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+
+.ww-route-node {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color var(--transition-normal);
+}
+
+.ww-route-step.is-active .ww-route-waypoint {
+  border-color: var(--color-clay);
+  box-shadow: 0 0 0 4px var(--color-clay-subtle);
+}
+
+.ww-route-step.is-active .ww-route-node {
+  background-color: var(--color-clay);
+}
+
+.ww-route-step.is-completed .ww-route-waypoint {
+  background-color: var(--color-ink-green);
+  border-color: var(--color-ink-green);
+}
+
+.ww-route-step.is-completed .ww-route-node {
+  background-color: var(--color-warm-paper);
+}
+
+.ww-route-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.ww-route-step.is-active .ww-route-label {
+  color: var(--color-clay);
+  font-weight: 700;
+}
+
+.ww-route-step.is-completed .ww-route-label {
+  color: var(--text-primary);
+}

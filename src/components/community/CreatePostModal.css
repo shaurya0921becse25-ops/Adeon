@@ -1,0 +1,145 @@
+/* Create Post Modal Styles */
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form-row {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.form-row--2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-row--3 {
+  grid-template-columns: 1.2fr 1fr 1fr;
+}
+
+.form-group-star {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.star-picker-container {
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.segmented-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.segmented-controls {
+  display: flex;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface-tint);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 2px;
+}
+
+.segmented-btn {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.segmented-btn:hover {
+  color: var(--text-primary);
+}
+
+.segmented-btn.is-selected {
+  background-color: var(--bg-surface);
+  color: var(--color-clay);
+  box-shadow: var(--shadow-xs);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .segmented-btn.is-selected {
+  background-color: var(--color-clay);
+  color: #FFFFFF;
+}
+
+/* Tips Section */
+.tips-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background-color: var(--bg-surface-tint);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.tips-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-tip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--color-clay);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.tip-input-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.remove-tip-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--color-danger);
+  cursor: pointer;
+}
+
+.remove-tip-btn:hover {
+  background-color: var(--color-danger-bg);
+}
+
+.modal-actions-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .form-row--2,
+  .form-row--3 {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}

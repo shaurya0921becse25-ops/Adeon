@@ -1,0 +1,149 @@
+/* ==========================================================================
+   ABEON Design Tokens — Porcelain & Aegean Palette
+   Porcelain #FAF7F0 · Mist #D9E7EB · Aegean #91B8C7
+   Limestone #D8BDA6 · Taupe #765F53 · Deep Taupe #3B2E27 · Deep Aegean #3F6E80
+   ========================================================================== */
+
+:root {
+  --color-porcelain: #FAF7F0;
+  --color-mist: #D9E7EB;
+  --color-mist-hover: #C4D8DE;
+  --color-mist-subtle: rgba(217, 231, 235, 0.45);
+  --color-aegean: #91B8C7;
+  --color-aegean-deep: #3F6E80;
+  --color-aegean-subtle: rgba(145, 184, 199, 0.22);
+  --color-limestone: #D8BDA6;
+  --color-limestone-hover: #C8A98E;
+  --color-limestone-subtle: rgba(216, 189, 166, 0.38);
+  --color-taupe: #765F53;
+  --color-taupe-deep: #3B2E27;
+  --color-brick: #A2543F;
+  --color-brick-subtle: rgba(162, 84, 63, 0.14);
+
+  /* Legacy aliases → palette */
+  --color-bone: var(--color-porcelain);
+  --color-clay: var(--color-mist);
+  --color-clay-hover: var(--color-mist-hover);
+  --color-clay-subtle: var(--color-mist-subtle);
+  --color-chocolate: var(--color-taupe-deep);
+  --color-chocolate-deep: #2A211C;
+  --color-ink: var(--color-taupe-deep);
+  --color-ink-mid: #4A3D35;
+  --color-terracotta: var(--color-aegean-deep);
+  --color-terracotta-hover: #355F6E;
+  --color-terracotta-subtle: rgba(63, 110, 128, 0.14);
+  --color-brass: var(--color-taupe);
+  --color-brass-subtle: rgba(118, 95, 83, 0.16);
+  --color-rani: var(--color-aegean-deep);
+  --color-rani-pink: var(--color-aegean-deep);
+  --color-rani-subtle: var(--color-aegean-subtle);
+  --color-fig: var(--color-taupe-deep);
+  --color-marigold: var(--color-taupe);
+  --color-dusty-rose: var(--color-brick);
+  --color-sand: var(--color-limestone);
+  --color-taupe-alias: var(--color-taupe);
+  --color-ink-green: #141C1A;
+  --bg-footer: #141C1A;
+  --color-warm-paper: #FAF7F0;
+
+  --color-success: var(--color-aegean-deep);
+  --color-success-bg: rgba(63, 110, 128, 0.1);
+  --color-success-border: rgba(63, 110, 128, 0.35);
+  --color-warning: var(--color-taupe);
+  --color-warning-bg: rgba(118, 95, 83, 0.1);
+  --color-warning-border: rgba(118, 95, 83, 0.35);
+  --color-danger: var(--color-brick);
+  --color-danger-bg: var(--color-brick-subtle);
+  --color-danger-border: rgba(162, 84, 63, 0.35);
+
+  --bg-page: #FAF7F0;
+  --bg-surface: #F3EEE4;
+  --bg-surface-clay: #D9E7EB;
+  --bg-surface-dark: #3B2E27;
+  --bg-surface-fig: #3B2E27;
+  --bg-surface-tint: #F0EBE1;
+  --bg-nav: rgba(250, 247, 240, 0.88);
+  --bg-modal-backdrop: rgba(59, 46, 39, 0.72);
+
+  --text-primary: #3B2E27;
+  --text-secondary: #5A4A42;
+  --text-muted: #765F53;
+  --text-inverse: #FAF7F0;
+  --text-accent: #3F6E80;
+
+  --border-color: rgba(59, 46, 39, 0.12);
+  --border-hairline: 1px solid var(--border-color);
+  --border-strong: rgba(59, 46, 39, 0.26);
+  --border-dashed: 1.5px dashed rgba(59, 46, 39, 0.22);
+  --border-focus: #3F6E80;
+  --notch-bg: var(--bg-page);
+
+  --shadow-xs: 0 1px 2px rgba(59, 46, 39, 0.05);
+  --shadow-sm: 0 2px 6px rgba(59, 46, 39, 0.07);
+  --shadow-card: 0 4px 16px rgba(59, 46, 39, 0.08);
+  --shadow-hover: 0 8px 24px rgba(59, 46, 39, 0.1);
+  --shadow-modal: 0 20px 60px rgba(59, 46, 39, 0.22);
+
+  --font-heading: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-handwritten: var(--font-body);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
+
+  --font-xs: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+  --font-sm: clamp(0.8125rem, 0.78rem + 0.18vw, 0.875rem);
+  --font-base: clamp(0.95rem, 0.92rem + 0.15vw, 1.025rem);
+  --font-md: clamp(1.05rem, 1rem + 0.25vw, 1.15rem);
+  --font-lg: clamp(1.2rem, 1.12rem + 0.4vw, 1.35rem);
+  --font-xl: clamp(1.45rem, 1.3rem + 0.6vw, 1.7rem);
+  --font-2xl: clamp(1.8rem, 1.6rem + 1vw, 2.2rem);
+  --font-3xl: clamp(2.4rem, 2rem + 1.8vw, 3.4rem);
+  --font-hero: clamp(2.8rem, 2.2rem + 3.5vw, 5.2rem);
+
+  --lh-tight: 1.05;
+  --lh-heading: 1.12;
+  --lh-body: 1.58;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-card: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --radius-arch: 50% 50% 12% 12% / 38% 38% 8% 8%;
+  --radius-pebble: 42% 58% 52% 48% / 48% 42% 58% 52%;
+
+  --nav-height: 80px;
+  --nav-height-scrolled: 64px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --route-line-color: var(--color-mist);
+  --route-dot-color: var(--color-aegean-deep);
+  --route-station-color: var(--color-taupe-deep);
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-normal: 0ms;
+    --transition-slow: 0ms;
+  }
+}

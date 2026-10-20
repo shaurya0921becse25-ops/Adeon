@@ -1,0 +1,190 @@
+/* Mock Chat Window Styles */
+.mock-chat-teaser {
+  width: 100%;
+}
+
+.mock-chat-window {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mock-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--bg-surface-tint);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mock-chat-bot-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.mock-chat-bot-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--color-ink-green);
+  color: var(--color-warm-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .mock-chat-bot-avatar {
+  background-color: var(--color-sand);
+  color: var(--color-ink-green);
+}
+
+.mock-chat-bot-info strong {
+  font-size: var(--font-xs);
+  display: block;
+}
+
+.mock-chat-bot-info small {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.mock-chat-live-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: rgba(47, 143, 91, 0.12);
+  color: var(--color-success);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.mock-chat-body {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: 250px;
+  background-color: var(--bg-surface);
+}
+
+.mock-chat-msg {
+  display: flex;
+  gap: var(--space-2);
+  max-width: 86%;
+  animation: mock-fade-in 300ms ease-out;
+}
+
+.mock-chat-msg--bot {
+  align-self: flex-start;
+}
+
+.mock-chat-msg--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.mock-chat-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--color-sand);
+  color: var(--color-ink-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.mock-chat-bubble {
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: var(--font-xs);
+  line-height: 1.45;
+}
+
+.mock-chat-msg--bot .mock-chat-bubble {
+  background-color: var(--bg-surface-tint);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 4px;
+}
+
+.mock-chat-msg--user .mock-chat-bubble {
+  background-color: var(--color-ink-green);
+  color: var(--color-warm-paper);
+  border-bottom-right-radius: 4px;
+}
+
+[data-theme="dark"] .mock-chat-msg--user .mock-chat-bubble {
+  background-color: var(--color-clay);
+  color: #FFFFFF;
+}
+
+.mock-chat-msg.is-result .mock-chat-bubble {
+  background-color: var(--color-clay-subtle);
+  border: 1px solid var(--color-clay);
+  font-weight: 600;
+}
+
+.mock-chat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.mock-chat-chip {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.mock-chat-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+  animation: typing-blink 1.2s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-blink {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes mock-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mock-chat-footer {
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--bg-surface-tint);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.mock-chat-cta {
+  width: 100%;
+}

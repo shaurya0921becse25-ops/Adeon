@@ -1,0 +1,260 @@
+/* ═══════════════════════════════════════════════════════
+   AbeonHero — Cinematic canvas hero styles
+   Canvas fills behind; copy floats left, bottom-aligned
+   ═══════════════════════════════════════════════════════ */
+
+.abeon-hero {
+  position: relative;
+  width: 100%;
+  height: min(820px, 96vh);
+  min-height: 560px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: #1E1713; /* fallback while canvas loads */
+}
+
+/* ── Backdrop landscape layer ── */
+.abeon-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 35%;
+  opacity: 0.14;
+  filter: blur(1.5px) saturate(1.15);
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Canvas ── */
+.abeon-hero__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Left-side gradient overlay so text stays legible ── */
+.abeon-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(20, 14, 12, 0.94) 0%,
+    rgba(20, 14, 12, 0.76) 36%,
+    rgba(20, 14, 12, 0.28) 56%,
+    transparent 74%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Copy column ── */
+.abeon-hero__copy {
+  position: relative;
+  z-index: 3;
+  width: min(560px, 42vw);
+  padding: 0 0 clamp(48px, 8vh, 80px) clamp(24px, 5vw, 88px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Eyebrow */
+.abeon-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 0.6rem + 0.28vw, 0.8rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-aegean);
+  margin-bottom: 20px;
+  opacity: 1; /* overridden by GSAP */
+}
+
+.abeon-hero__rule {
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--color-aegean);
+  flex-shrink: 0;
+}
+
+/* Headline */
+.abeon-hero__title {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: clamp(2.8rem, 2.2rem + 3.5vw, 5.2rem);
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  color: var(--color-porcelain);
+  margin: 0 0 20px;
+  max-width: 14ch;
+}
+
+/* Sub-headline */
+.abeon-hero__sub {
+  font-family: var(--font-body);
+  font-size: clamp(0.92rem, 0.85rem + 0.35vw, 1.08rem);
+  line-height: 1.62;
+  color: rgba(250, 247, 240, 0.72);
+  max-width: 38ch;
+  margin-bottom: 32px;
+}
+
+/* CTAs */
+.abeon-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.abeon-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 13px 24px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.abeon-hero__btn--primary {
+  background: var(--color-aegean-deep);
+  color: var(--color-porcelain);
+  box-shadow: 0 4px 20px rgba(63, 110, 128, 0.45);
+}
+
+.abeon-hero__btn--primary:hover {
+  background: #355F6E;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(63, 110, 128, 0.55);
+}
+
+.abeon-hero__btn--primary:active {
+  transform: translateY(0);
+}
+
+.abeon-hero__btn--ghost {
+  background: rgba(250, 247, 240, 0.08);
+  color: var(--color-porcelain);
+  border: 1px solid rgba(250, 247, 240, 0.22);
+  backdrop-filter: blur(6px);
+}
+
+.abeon-hero__btn--ghost:hover {
+  background: rgba(250, 247, 240, 0.14);
+  border-color: rgba(250, 247, 240, 0.38);
+  transform: translateY(-2px);
+}
+
+.abeon-hero__btn--ghost:active {
+  transform: translateY(0);
+}
+
+.abeon-hero__btn:focus-visible {
+  outline: 2px solid var(--color-aegean);
+  outline-offset: 3px;
+}
+
+/* Stats row */
+.abeon-hero__stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.abeon-hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.abeon-hero__stat-num {
+  font-family: var(--font-mono);
+  font-size: clamp(1.05rem, 1rem + 0.28vw, 1.25rem);
+  color: var(--color-porcelain);
+  line-height: 1;
+}
+
+.abeon-hero__stat-lbl {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(250, 247, 240, 0.5);
+}
+
+.abeon-hero__stat-sep {
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: rgba(250, 247, 240, 0.18);
+}
+
+/* ── GSAP initial states ── */
+.abh-animate {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .abeon-hero__copy {
+    width: min(520px, 60vw);
+  }
+}
+
+@media (max-width: 680px) {
+  .abeon-hero {
+    min-height: 500px;
+    height: 92vh;
+    align-items: flex-end;
+  }
+
+  .abeon-hero__overlay {
+    background: linear-gradient(
+      to top,
+      rgba(30, 23, 19, 0.95) 0%,
+      rgba(30, 23, 19, 0.70) 50%,
+      rgba(30, 23, 19, 0.18) 100%
+    );
+  }
+
+  .abeon-hero__copy {
+    width: 100%;
+    padding: 0 20px 40px;
+  }
+
+  .abeon-hero__title {
+    max-width: none;
+  }
+
+  .abeon-hero__stats {
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abeon-hero__btn {
+    transition: none;
+  }
+  .abh-animate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

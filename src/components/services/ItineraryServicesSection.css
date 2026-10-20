@@ -1,0 +1,224 @@
+/* Itinerary Services Integration Section */
+.itinerary-services-section {
+  margin: 28px 0;
+  padding: 24px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.itinerary-services-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.itinerary-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--color-aegean-deep);
+  background-color: var(--color-aegean-subtle);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 6px;
+}
+
+.itinerary-services-title {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.itinerary-services-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0;
+}
+
+.itinerary-services-total-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-mist);
+  color: var(--color-taupe-deep);
+  border: 1px solid rgba(145, 184, 199, 0.4);
+}
+
+[data-theme="dark"] .itinerary-services-total-pill {
+  background-color: rgba(217, 231, 235, 0.15);
+  color: var(--text-primary);
+}
+
+.total-pill-label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.total-pill-amt {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--color-aegean-deep);
+}
+
+.total-pill-pct {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.itinerary-services-empty {
+  padding: 28px;
+  text-align: center;
+  background-color: var(--bg-surface-tint);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.itinerary-explore-link {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--color-aegean-deep);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.itinerary-explore-link:hover {
+  text-decoration: underline;
+}
+
+.itinerary-services-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.itinerary-service-card {
+  display: grid;
+  grid-template-columns: 50px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 18px;
+  background-color: var(--bg-surface-tint);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.itinerary-service-card:hover {
+  border-color: var(--color-aegean);
+}
+
+.itinerary-day-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-aegean-deep);
+  color: #FFFFFF;
+}
+
+.itinerary-day-badge span {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+}
+
+.itinerary-day-badge strong {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.itinerary-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0 0 4px;
+}
+
+.itinerary-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.meta-guide {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-primary);
+}
+
+.meta-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.itinerary-card-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.itinerary-price-val {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-aegean-deep);
+}
+
+.itinerary-remove-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--color-brick);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 4px;
+  transition: opacity var(--transition-fast);
+}
+
+.itinerary-remove-btn:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .itinerary-service-card {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .itinerary-card-pricing {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border-color);
+  }
+}

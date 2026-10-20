@@ -1,0 +1,335 @@
+/* ═══════════════════════════════════════════════════════════
+   TreeStory — Scroll-driven chapter section
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.tree-story {
+  position: relative;
+  background: var(--bg-page);
+  overflow: hidden;
+}
+
+/* ── Floral decorative layer ── */
+.ts-floral-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ts-floral {
+  position: absolute;
+}
+
+.ts-floral--topleft {
+  top: -16px;
+  left: -20px;
+  width: 110px;
+  height: 110px;
+  opacity: 0.85;
+  animation: floralSway 8s ease-in-out infinite;
+}
+
+.ts-floral--topright {
+  top: 24px;
+  right: 12%;
+  width: 72px;
+  height: 72px;
+  opacity: 0.7;
+  animation: floralSway 10s ease-in-out infinite reverse;
+}
+
+.ts-floral--mid {
+  top: 42%;
+  right: 4%;
+  width: 54px;
+  height: 54px;
+  opacity: 0.55;
+  animation: floralSway 12s ease-in-out infinite;
+}
+
+.ts-petal-dot {
+  position: absolute;
+  animation: petalDrift 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.ts-petal-dot:nth-child(odd) {
+  animation-duration: 7s;
+}
+
+@keyframes floralSway {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(4deg) scale(1.04); }
+}
+
+@keyframes petalDrift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(8deg); }
+}
+
+/* ── Section header ── */
+.ts-header {
+  padding: var(--space-20) 0 var(--space-10);
+  max-width: 680px;
+}
+
+.ts-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--font-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.ts-title {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: var(--font-3xl);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  max-width: 22ch;
+  margin-bottom: var(--space-8);
+}
+
+/* ── Progress bar ── */
+.ts-progress {
+  width: 100%;
+  height: 1.5px;
+  background: var(--border-color);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ts-progress-fill {
+  height: 100%;
+  background: var(--color-aegean-deep);
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  /* initial state — GSAP animates to scaleX(1) */
+}
+
+/* ── Sticky container ── */
+.ts-sticky {
+  /* height is set dynamically by pin duration */
+}
+
+.ts-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  min-height: 100vh;
+  align-items: center;
+}
+
+/* ── Canvas column (right) ── */
+.ts-canvas-col {
+  position: relative;
+  height: 560px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(160deg, #1E1713 0%, #3B2E27 100%);
+  display: flex;
+  align-items: stretch;
+}
+
+.ts-canvas-floral {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ts-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Panels column (left) ── */
+.ts-panels-col {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Individual chapter panel ── */
+.ts-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-5);
+  padding: var(--space-8) 0;
+  /* initial state */
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+/* First panel always visible initially */
+.ts-panel:first-child {
+  opacity: 1;
+  transform: none;
+}
+
+.ts-panel__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.ts-panel__num {
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 0.6rem + 0.2vw, 0.78rem);
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.ts-panel__label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 0.6rem + 0.2vw, 0.78rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ch-color);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--ch-color) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ch-color) 28%, transparent);
+}
+
+.ts-panel__title {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: clamp(2.4rem, 2rem + 2vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ts-panel__body {
+  font-family: var(--font-body);
+  font-size: var(--font-md);
+  line-height: var(--lh-body);
+  color: var(--text-secondary);
+  max-width: 42ch;
+}
+
+.ts-panel__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4) 0;
+  border-top: 1px solid color-mix(in srgb, var(--ch-color) 30%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--ch-color) 30%, transparent);
+  width: fit-content;
+  min-width: 120px;
+}
+
+.ts-panel__stat-val {
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.9rem);
+  color: var(--ch-color);
+  line-height: 1;
+}
+
+.ts-panel__stat-desc {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ts-panel__swatch {
+  width: 48px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--ch-color);
+  opacity: 0.55;
+  margin-top: var(--space-2);
+}
+
+/* ── Mobile static list ── */
+.ts-mobile-list {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-16);
+}
+
+.ts-mobile-item {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+}
+
+.ts-mobile-item__accent {
+  flex-shrink: 0;
+  width: 4px;
+  align-self: stretch;
+  border-radius: 999px;
+  background: var(--ch-color);
+  opacity: 0.7;
+}
+
+.ts-mobile-item__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .ts-sticky {
+    display: none;
+  }
+  .ts-mobile-list {
+    display: flex;
+  }
+  .ts-header {
+    padding: var(--space-12) 0 var(--space-6);
+  }
+  .ts-progress {
+    display: none;
+  }
+  .ts-title {
+    font-size: var(--font-2xl);
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .ts-layout {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .ts-panel {
+    opacity: 1 !important;
+    transform: none !important;
+    position: static;
+  }
+  .ts-panels-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    position: static;
+    min-height: auto;
+  }
+  .ts-progress-fill {
+    transform: scaleX(1);
+  }
+}

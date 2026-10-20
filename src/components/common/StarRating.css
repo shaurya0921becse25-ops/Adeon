@@ -1,0 +1,65 @@
+/* Star Rating Styles */
+.ww-star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  line-height: 1;
+}
+
+.ww-star-rating__stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ww-star,
+.ww-star-btn {
+  color: var(--border-color);
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+.ww-star-btn {
+  cursor: pointer;
+}
+
+.ww-star.is-filled,
+.ww-star-btn.is-filled {
+  color: #D9962B; /* Warm amber star */
+}
+
+.ww-star-rating.is-interactive .ww-star-btn:hover {
+  transform: scale(1.2);
+}
+
+.ww-star-btn:focus-visible {
+  outline: 2px solid var(--color-clay);
+  border-radius: 4px;
+}
+
+/* Sizes */
+.ww-star-rating--sm .ww-star,
+.ww-star-rating--sm .ww-star-btn {
+  font-size: 13px;
+}
+
+.ww-star-rating--md .ww-star,
+.ww-star-rating--md .ww-star-btn {
+  font-size: 17px;
+}
+
+.ww-star-rating--lg .ww-star,
+.ww-star-rating--lg .ww-star-btn {
+  font-size: 24px;
+}
+
+.ww-star-rating__score {
+  font-family: var(--font-sans);
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-left: 2px;
+}

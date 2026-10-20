@@ -1,0 +1,195 @@
+/* Pebble Chips and Filters Bar */
+.pebble-filters-wrap {
+  margin: 20px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pebble-filters-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Pebble Chips */
+.pebble-chips-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px;
+  scrollbar-width: none;
+}
+
+.pebble-chips-container::-webkit-scrollbar {
+  display: none;
+}
+
+.pebble-chip {
+  padding: 8px 16px;
+  border-radius: var(--radius-pebble);
+  border: 1px solid var(--border-color);
+  background-color: var(--color-porcelain);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-xs);
+}
+
+[data-theme="dark"] .pebble-chip {
+  background-color: var(--bg-surface);
+}
+
+.pebble-chip:hover {
+  background-color: var(--color-mist);
+  border-color: var(--color-aegean);
+  transform: translateY(-1px);
+}
+
+.pebble-chip.is-active {
+  background-color: var(--color-aegean-deep);
+  color: #FFFFFF;
+  border-color: var(--color-aegean-deep);
+  box-shadow: 0 2px 8px rgba(63, 110, 128, 0.3);
+}
+
+[data-theme="dark"] .pebble-chip.is-active {
+  background-color: var(--color-aegean);
+  color: var(--color-taupe-deep);
+}
+
+/* Right Actions */
+.filters-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.more-filters-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.more-filters-btn:hover {
+  border-color: var(--color-aegean);
+  background-color: var(--color-mist);
+}
+
+.more-filters-btn.has-active {
+  border-color: var(--color-aegean-deep);
+  color: var(--color-aegean-deep);
+  background-color: var(--color-mist-subtle);
+}
+
+.filters-active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-brick);
+}
+
+.sort-dropdown-wrap {
+  position: relative;
+}
+
+.service-sort-select {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.service-sort-select:focus {
+  border-color: var(--color-aegean-deep);
+}
+
+/* Active Filter Chips */
+.active-filter-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px 0;
+}
+
+.active-filters-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.active-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-mist);
+  border: 1px solid rgba(145, 184, 199, 0.4);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-taupe-deep);
+}
+
+[data-theme="dark"] .active-tag-chip {
+  background-color: rgba(217, 231, 235, 0.15);
+  color: var(--text-primary);
+}
+
+.active-tag-chip button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.active-tag-chip button:hover {
+  color: var(--color-brick);
+}
+
+.clear-all-filters-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: var(--color-brick);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.clear-all-filters-btn:hover {
+  text-decoration: underline;
+}

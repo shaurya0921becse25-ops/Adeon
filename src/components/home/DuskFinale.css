@@ -1,0 +1,37 @@
+.dusk-finale {
+  margin-top: var(--space-16);
+  background: linear-gradient(180deg, var(--color-limestone) 0%, var(--color-taupe-deep) 55%);
+  color: var(--text-inverse);
+  padding: var(--space-20) 0 0;
+}
+
+.dusk-finale__title {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  font-size: var(--font-3xl);
+  margin-bottom: var(--space-8);
+}
+
+.dusk-finale__footer {
+  margin-top: var(--space-16);
+  padding: var(--space-8) 0 var(--space-10);
+  border-top: 1px solid rgba(250, 247, 240, 0.2);
+}
+
+.dusk-finale__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.dusk-finale__links a {
+  color: var(--text-inverse);
+  opacity: 0.9;
+}
+
+.dusk-finale__note {
+  font-family: var(--font-mono);
+  font-size: var(--font-xs);
+  opacity: 0.75;
+}

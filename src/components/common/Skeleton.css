@@ -1,0 +1,57 @@
+/* Skeleton Loader Styles */
+.ww-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 42, 40, 0.06) 25%,
+    rgba(15, 42, 40, 0.12) 37%,
+    rgba(15, 42, 40, 0.06) 63%
+  );
+  background-size: 400% 100%;
+  border-radius: var(--radius-xs);
+  animation: ww-skeleton-shimmer 1.4s ease infinite;
+}
+
+[data-theme="dark"] .ww-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(232, 221, 200, 0.06) 25%,
+    rgba(232, 221, 200, 0.12) 37%,
+    rgba(232, 221, 200, 0.06) 63%
+  );
+  background-size: 400% 100%;
+}
+
+.ww-skeleton--text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.ww-skeleton--rect {
+  border-radius: var(--radius-md);
+}
+
+.ww-skeleton--circle {
+  border-radius: 50%;
+}
+
+.ww-skeleton--card {
+  height: 180px;
+  border-radius: var(--radius-card);
+}
+
+.ww-skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+@keyframes ww-skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}

@@ -1,0 +1,106 @@
+/* Compare Modal Table */
+.compare-table-container {
+  overflow-x: auto;
+  margin: var(--space-2) 0;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-xs);
+  text-align: left;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: var(--space-4);
+  border: 1px solid var(--border-color);
+  vertical-align: top;
+}
+
+.compare-th-metric {
+  width: 160px;
+  background-color: var(--bg-surface-tint);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.compare-th-city {
+  background-color: var(--bg-surface);
+  min-width: 220px;
+}
+
+.compare-city-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.compare-city-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color);
+}
+
+.compare-city-header strong {
+  font-size: var(--font-base);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.compare-match-pill {
+  font-size: 11px;
+  font-weight: 800;
+  background-color: var(--color-mist-blue);
+  color: var(--color-aegean-deep);
+  border: 1px solid rgba(145, 184, 199, 0.4);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.compare-metric-name {
+  font-weight: 700;
+  color: var(--text-primary);
+  background-color: var(--bg-surface-tint);
+}
+
+.compare-score-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.compare-bar-track {
+  flex: 1;
+  height: 6px;
+  background-color: var(--bg-surface-tint);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.compare-bar-fill {
+  height: 100%;
+  background-color: var(--color-aegean);
+  border-radius: var(--radius-pill);
+}
+
+.compare-watch-val {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-warning);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.watch-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
