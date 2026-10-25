@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABEON - Explore Journey</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            instrument: ['"Instrument Sans"', 'sans-serif'],
+            bebas: ['"Bebas Neue"', 'sans-serif'],
+            inter: ['"Inter"', 'sans-serif'],
+          },
+          colors: {
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            muted: {
+              foreground: 'hsl(var(--muted-foreground))',
+            },
+            ring: 'hsl(var(--ring))',
+            destructive: 'hsl(var(--destructive))',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --background: 210 100% 98%;
+      --foreground: 222 47% 11%;
+      --muted-foreground: 215 16% 47%;
+      --ring: 201 96% 32%;
+      --destructive: 0 84.2% 60.2%;
+    }
+
+    body {
+      background-color: #0b0d12;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', cursive, sans-serif;
+      letter-spacing: 0.02em;
+      line-height: 0.85;
+    }
+
+    /* Square Buttons Styling */
+    .btn-sq {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 0px; /* Square buttons */
+      transition: all 0.3s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-ghost-sq {
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      background: transparent;
+    }
+
+    .btn-ghost-sq:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #ffffff;
+    }
+
+    .btn-solid-sq {
+      background: #ffffff;
+      color: #0b0d12;
+      border: 1px solid #ffffff;
+    }
+
+    .btn-solid-sq:hover {
+      background: #e2e8f0;
+      border-color: #e2e8f0;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-white selection:text-black">
+
+  <!-- Fixed Header Navbar -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <nav class="mx-auto max-w-[1400px]">
+      
+      <!-- Unscrolled State -->
+      <div id="nav-container" class="flex items-center justify-between transition-all duration-500 px-6 lg:px-12 h-20">
+        
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-2 group">
+          <span id="logo-text" class="font-instrument text-[24px] font-semibold tracking-[-0.03em] uppercase transition-all duration-500 text-white hover:opacity-80">
+            ABEON
+          </span>
+        </a>
+
+        <!-- Navigation Links -->
+        <div id="nav-links" class="hidden md:flex items-center gap-12">
+          <a href="#home" class="nav-item text-sm transition-colors duration-300 relative group text-slate-300 hover:text-white">
+            Home
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-white"></span>
+          </a>
+          <a href="#explore" class="nav-item text-sm transition-colors duration-300 relative group text-slate-300 hover:text-white">
+            Explore
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-white"></span>
+          </a>
+          <a href="#community" class="nav-item text-sm transition-colors duration-300 relative group text-slate-300 hover:text-white">
+            Community
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-white"></span>
+          </a>
+          <a href="#my-trips" class="nav-item text-sm transition-colors duration-300 relative group text-slate-300 hover:text-white">
+            My Trips
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-white"></span>
+          </a>
+          <a href="#trip-finder" class="nav-item text-sm transition-colors duration-300 relative group text-slate-300 hover:text-white">
+            Trip Finder
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-white"></span>
+          </a>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="hidden md:flex items-center gap-4">
+          <a id="signin-link" href="#" class="transition-all duration-500 text-sm text-slate-300 hover:text-white font-medium">Sign in</a>
+        </div>
+
+        <!-- Mobile Toggle Button -->
+        <button id="mobile-toggle" class="md:hidden p-2 transition-colors duration-500 text-white" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-6 h-6">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- Main Hero Content -->
+  <main class="flex-grow flex flex-col justify-center pt-28 pb-12 px-6 lg:px-12 max-w-[1400px] w-full mx-auto">
+    
+    <!-- Top Left Stacked Tagline -->
+    <div class="mb-6 lg:mb-2">
+      <div class="hero-title text-[32px] sm:text-[40px] md:text-[48px] text-white/90 leading-tight tracking-wide">
+        <div>TRAVEL</div>
+        <div>EXPLORE</div>
+        <div>TRANSFORM</div>
+      </div>
+    </div>
+
+    <!-- Main Large Display Text Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 my-2 items-baseline">
+      <div>
+        <h1 class="hero-title text-[90px] sm:text-[130px] md:text-[160px] lg:text-[200px] text-white tracking-wider">
+          EXPLORE
+        </h1>
+      </div>
+      <div>
+        <h1 class="hero-title text-[90px] sm:text-[130px] md:text-[160px] lg:text-[200px] text-white tracking-wider">
+          JOURNEY
+        </h1>
+      </div>
+    </div>
+
+    <!-- Bottom Section: Left Paragraph & Right Square Action Buttons -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-6 lg:mt-12">
+      <!-- Paragraph Left -->
+      <div class="max-w-md">
+        <p class="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+          Uncover hidden places,<br />
+          breathtaking landscapes, and<br />
+          unforgettable moments crafted<br />
+          for true explorers.
+        </p>
+      </div>
+
+      <!-- Square Action Buttons Right -->
+      <div class="flex flex-wrap items-center gap-4">
+        <a href="https://www.blacktomato.com/the-trip-finder/results/?feeling=&amp;when=" class="btn-sq btn-ghost-sq" tabindex="0">
+          Trip Finder
+        </a>
+        <a href="https://www.blacktomato.com/make-an-enquiry/" class="btn-sq btn-solid-sq" tabindex="0">
+          Plan my Trip
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.getElementById('header');
+      const navContainer = document.getElementById('nav-container');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+          header.classList.add('bg-black/60', 'backdrop-blur-md', 'border-b', 'border-white/10', 'shadow-lg');
+          navContainer.classList.replace('h-20', 'h-14');
+        } else {
+          header.classList.remove('bg-black/60', 'backdrop-blur-md', 'border-b', 'border-white/10', 'shadow-lg');
+          navContainer.classList.replace('h-14', 'h-20');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

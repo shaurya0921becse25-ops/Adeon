@@ -1,0 +1,15 @@
+{
+  "name": "abeon-workspace",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Abeon Unified Guide & Traveler Experience Platform",
+  "scripts": {
+    "dev": "node start-both.js",
+    "dev:guide": "npm run dev --prefix guide",
+    "dev:user": "npm run dev --prefix \"user guide\"",
+    "build:guide": "npm run build --prefix guide",
+    "build:user": "npm run build --prefix \"user guide\"",
+    "build": "npm run build:guide && npm run build:user"
+  }
+}

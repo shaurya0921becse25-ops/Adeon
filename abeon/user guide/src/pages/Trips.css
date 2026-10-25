@@ -1,0 +1,224 @@
+.trips-page {
+  padding-top: 32px;
+  padding-bottom: 80px;
+}
+
+.trips-header-row {
+  margin-bottom: 24px;
+}
+
+.trips-title {
+  font-size: 2.2rem;
+  color: var(--taupe-deep);
+  margin-bottom: 6px;
+}
+
+/* Review prompt banner */
+.unreviewed-experience-banner {
+  background: linear-gradient(135deg, var(--mist), var(--aegean-surface));
+  border: 1px solid var(--aegean);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.banner-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--aegean-deep);
+  margin-bottom: 4px;
+}
+
+.banner-title {
+  font-size: 1.3rem;
+  color: var(--taupe-deep);
+  margin-bottom: 4px;
+}
+
+.banner-sub {
+  font-size: 0.92rem;
+  color: var(--taupe);
+  max-width: 600px;
+}
+
+.trips-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.trip-booking-card {
+  background-color: var(--white);
+  border: 1px solid var(--mist-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  box-shadow: var(--shadow-sm);
+}
+
+.trip-card-media {
+  position: relative;
+  width: 240px;
+  flex-shrink: 0;
+  background-color: var(--mist);
+}
+
+.trip-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.status-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-confirmed {
+  background-color: var(--success-bg);
+  color: var(--success);
+}
+
+.status-pending {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+}
+
+.status-completed {
+  background-color: var(--mist);
+  color: var(--aegean-deep);
+}
+
+.status-cancelled {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+}
+
+.trip-card-body {
+  padding: 20px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-meta-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.booking-ref {
+  color: var(--taupe-soft);
+  font-family: monospace;
+}
+
+.booking-cost {
+  color: var(--taupe-deep);
+}
+
+.trip-title {
+  font-size: 1.25rem;
+  color: var(--taupe-deep);
+  margin-bottom: 10px;
+}
+
+.trip-title a {
+  color: inherit;
+}
+
+.trip-title a:hover {
+  color: var(--aegean-deep);
+}
+
+.trip-specs-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 0.88rem;
+  color: var(--taupe-soft);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.spec-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cancellation-reason-note {
+  background-color: var(--danger-bg);
+  color: var(--danger);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.84rem;
+  margin-bottom: 16px;
+}
+
+.trip-actions-row {
+  margin-top: auto;
+  border-top: 1px solid var(--mist-light);
+  padding-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.simulation-btn {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px dashed #D97706;
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: all var(--transition-fast);
+}
+
+.simulation-btn:hover {
+  background-color: #FDE68A;
+}
+
+.trips-empty-box {
+  background-color: var(--white);
+  border: 1px solid var(--mist-border);
+  border-radius: var(--radius-xl);
+  padding: 60px 24px;
+}
+
+@media (max-width: 768px) {
+  .trip-booking-card {
+    flex-direction: column;
+  }
+  .trip-card-media {
+    width: 100%;
+    height: 160px;
+  }
+  .unreviewed-experience-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .simulation-btn {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+  }
+}

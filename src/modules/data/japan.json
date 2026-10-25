@@ -1,0 +1,720 @@
+{
+  "trip": {
+    "id": "japan-demo-trip-2026",
+    "title": "Tokyo & Beyond Discovery",
+    "destination": "Tokyo, Japan",
+    "description": "7 days exploring vibrant Tokyo culture, historic temples, culinary gems, and scenic gardens.",
+    "coverImageUrl": "/assets/japan-hero.jpg",
+    "startDate": "2026-10-18",
+    "endDate": "2026-10-24",
+    "currency": "JPY",
+    "budget": 350000,
+    "tags": [
+      "Culture",
+      "Food & Dining",
+      "Temples",
+      "Gardens",
+      "Photography"
+    ],
+    "status": "planned",
+    "createdAt": "2026-10-17T00:00:00.000Z",
+    "updatedAt": "2026-10-17T00:00:00.000Z",
+    "seedId": "japan-demo-trip-2026"
+  },
+  "places": [
+    {
+      "id": "place-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Senso-ji Temple",
+      "category": "sight",
+      "note": "Tokyo's oldest and most significant Buddhist temple, featuring the iconic Kaminarimon Thunder Gate.",
+      "tip": "Visit Nakamise-dori shopping street early morning for photos without dense crowds.",
+      "imageUrl": "https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=600&auto=format&fit=crop&q=80",
+      "latitude": 35.7148,
+      "longitude": 139.7967,
+      "estimatedCost": 0,
+      "isFavorite": true,
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "place-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Meiji Jingu Shrine",
+      "category": "nature",
+      "note": "Serene Shinto shrine dedicated to Emperor Meiji and Empress Shoken, surrounded by an evergreen forest.",
+      "tip": "Write an ema prayer plaque near the central courtyard.",
+      "imageUrl": "https://res-4.cloudinary.com/jnto/image/upload/w_2064,h_1300,c_fill,f_auto,fl_lossy,q_auto/v1513945803/tokyo/Tokyo2331_8",
+      "latitude": 35.6764,
+      "longitude": 139.6993,
+      "estimatedCost": 0,
+      "isFavorite": true,
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "place-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Shibuya Crossing & Hachiko",
+      "category": "sight",
+      "note": "The world's most famous pedestrian scramble intersection and beloved bronze Hachiko memorial statue.",
+      "tip": "Best elevated viewing perspective from the 2nd floor café or Shibuya Sky observatory deck.",
+      "imageUrl": "https://th.bing.com/th/id/OIP.9Cr99CrvP7S8TH4FgeFUOAHaEK?r=0&o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "latitude": 35.6595,
+      "longitude": 139.7005,
+      "estimatedCost": 0,
+      "isFavorite": true,
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "place-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Tsukiji Outer Market",
+      "category": "restaurant",
+      "note": "Historic food market bustling with sushi stalls, fresh oysters, wagyu skewers, and tamagoyaki.",
+      "tip": "Arrive around 8:30 AM before tour buses arrive. Bring yen cash for food stalls.",
+      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.hmbG-FqjtDhcyUznxy3HdAHaDr?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "latitude": 35.6655,
+      "longitude": 139.7708,
+      "estimatedCost": 3500,
+      "isFavorite": false,
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "place-jp-5",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Shinjuku Gyoen National Garden",
+      "category": "nature",
+      "note": "Expansive 144-acre park blending traditional Japanese landscape, English formal, and French garden styles.",
+      "tip": "Admission is ¥500. Perfect peaceful sanctuary after lively Shinjuku streets.",
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.ED77qC1FDOOqWViDcNSb-AHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "latitude": 35.6852,
+      "longitude": 139.7101,
+      "estimatedCost": 500,
+      "isFavorite": false,
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "place-jp-6",
+      "tripId": "japan-demo-trip-2026",
+      "name": "teamLab Planets TOKYO",
+      "category": "activity",
+      "note": "Immersive digital museum where visitors walk through water and dissolve boundaries between art and body.",
+      "tip": "Pre-booking time slots online is mandatory. Wear clothes that can be rolled above the knees.",
+      "imageUrl": "https://www.nippon.com/en/ncommon/contents/guide-to-japan/2736202/2736202.jpg",
+      "latitude": 35.6491,
+      "longitude": 139.7898,
+      "estimatedCost": 3800,
+      "isFavorite": true,
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "place-jp-7",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Tokyo Tower",
+      "category": "sight",
+      "note": "Iconic 333-meter communications and observation tower inspired by the Eiffel Tower.",
+      "tip": "Stunning illumination at night with panoramic skyline views of Mount Fuji on clear days.",
+      "imageUrl": "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?w=600&auto=format&fit=crop&q=80",
+      "latitude": 35.6586,
+      "longitude": 139.7454,
+      "estimatedCost": 1200,
+      "isFavorite": false,
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    }
+  ],
+  "days": [
+    {
+      "id": "day-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "date": "2026-10-18",
+      "title": "Historic Asakusa & Arrival",
+      "dayNote": "Arrival at Haneda, train check-in, and sunset stroll at Senso-ji temple grounds.",
+      "transportNote": "Keikyu Line from Haneda Airport to Asakusa.",
+      "weatherIcon": "sun",
+      "weatherTemp": "21°C"
+    },
+    {
+      "id": "day-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "date": "2026-10-19",
+      "title": "Harajuku & Shibuya Energy",
+      "dayNote": "Morning at peaceful Meiji Shrine, afternoon shopping, evening Shibuya scramble.",
+      "transportNote": "Yamanote Line loop train.",
+      "weatherIcon": "cloud-sun",
+      "weatherTemp": "19°C"
+    },
+    {
+      "id": "day-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "date": "2026-10-20",
+      "title": "Tsukiji Seafood & Odaiba Waterway",
+      "dayNote": "Early breakfast at Tsukiji Outer Market, afternoon tea, Yurikamome monorail.",
+      "transportNote": "Toei Oedo Line & Yurikamome.",
+      "weatherIcon": "sun",
+      "weatherTemp": "22°C"
+    },
+    {
+      "id": "day-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "date": "2026-10-21",
+      "title": "Shinjuku Gardens & Skylines",
+      "dayNote": "Picnic in Shinjuku Gyoen gardens and evening skyline views.",
+      "transportNote": "Tokyo Metro Marunouchi Line.",
+      "weatherIcon": "cloud",
+      "weatherTemp": "18°C"
+    },
+    {
+      "id": "day-jp-5",
+      "tripId": "japan-demo-trip-2026",
+      "date": "2026-10-22",
+      "title": "Digital Art in Toyosu",
+      "dayNote": "Immersive exhibition at teamLab Planets followed by waterfront dinner.",
+      "transportNote": "Yurikamome Line to Shin-Toyosu Station.",
+      "weatherIcon": "sun",
+      "weatherTemp": "20°C"
+    },
+    {
+      "id": "day-jp-6",
+      "tripId": "japan-demo-trip-2026",
+      "date": "2026-10-23",
+      "title": "Tokyo Tower & Roppongi",
+      "dayNote": "Afternoon ascent up Tokyo Tower and farewell celebration dinner.",
+      "transportNote": "Hibiya Subway Line.",
+      "weatherIcon": "sun",
+      "weatherTemp": "20°C"
+    },
+    {
+      "id": "day-jp-7",
+      "tripId": "japan-demo-trip-2026",
+      "date": "2026-10-24",
+      "title": "Souvenir Packing & Departure",
+      "dayNote": "Last minute shopping in Ginza, packing luggage, departure flight.",
+      "transportNote": "Tokyo Monorail or Narita Express to airport.",
+      "weatherIcon": "cloud-sun",
+      "weatherTemp": "19°C"
+    }
+  ],
+  "visits": [
+    {
+      "id": "visit-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "dayId": "day-jp-1",
+      "placeId": "place-jp-1",
+      "order": 0,
+      "scheduledTime": "15:30",
+      "notes": "Walk through Kaminarimon Gate and view the five-story pagoda lit up at dusk."
+    },
+    {
+      "id": "visit-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "dayId": "day-jp-2",
+      "placeId": "place-jp-2",
+      "order": 0,
+      "scheduledTime": "09:30",
+      "notes": "Enter through the giant torii gate made from 1,500-year-old Taiwanese cypress."
+    },
+    {
+      "id": "visit-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "dayId": "day-jp-2",
+      "placeId": "place-jp-3",
+      "order": 1,
+      "scheduledTime": "17:00",
+      "notes": "Experience peak rush hour crossing spectacle."
+    },
+    {
+      "id": "visit-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "dayId": "day-jp-3",
+      "placeId": "place-jp-4",
+      "order": 0,
+      "scheduledTime": "08:30",
+      "notes": "Fresh sashimi bowl and grilled tamagoyaki breakfast."
+    },
+    {
+      "id": "visit-jp-5",
+      "tripId": "japan-demo-trip-2026",
+      "dayId": "day-jp-4",
+      "placeId": "place-jp-5",
+      "order": 0,
+      "scheduledTime": "10:00",
+      "notes": "Relaxing stroll across the Japanese landscape garden and greenhouse."
+    },
+    {
+      "id": "visit-jp-6",
+      "tripId": "japan-demo-trip-2026",
+      "dayId": "day-jp-5",
+      "placeId": "place-jp-6",
+      "order": 0,
+      "scheduledTime": "14:00",
+      "notes": "Walk barefoot through the infinite crystal universe and floating flower garden."
+    },
+    {
+      "id": "visit-jp-7",
+      "tripId": "japan-demo-trip-2026",
+      "dayId": "day-jp-6",
+      "placeId": "place-jp-7",
+      "order": 0,
+      "scheduledTime": "18:00",
+      "notes": "Night observation deck view of Tokyo metropolis illuminated."
+    }
+  ],
+  "expenses": [
+    {
+      "id": "exp-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Haneda Airport Limousine & Suica Transit",
+      "amount": 7500,
+      "category": "transport",
+      "date": "2026-10-18",
+      "dayIndices": [
+        0
+      ],
+      "linkedTransportId": "trans-jp-1",
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "exp-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Asakusa Traditional Ryokan (2 nights)",
+      "amount": 42000,
+      "category": "accommodation",
+      "date": "2026-10-18",
+      "dayIndices": [
+        0,
+        1
+      ],
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "exp-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Tsukiji Seafood & Wagyu Tasting",
+      "amount": 6800,
+      "category": "food",
+      "date": "2026-10-20",
+      "dayIndices": [
+        2
+      ],
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "exp-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "name": "teamLab Planets Admission (2 tickets)",
+      "amount": 7600,
+      "category": "activities",
+      "date": "2026-10-22",
+      "dayIndices": [
+        4
+      ],
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "exp-jp-5",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Shinjuku Boutique Hotel (4 nights)",
+      "amount": 76000,
+      "category": "accommodation",
+      "date": "2026-10-20",
+      "dayIndices": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "exp-jp-6",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Tokyo Tower Main Observatory Access",
+      "amount": 2400,
+      "category": "activities",
+      "date": "2026-10-23",
+      "dayIndices": [
+        5
+      ],
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "exp-jp-7",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Tonkatsu & Craft Ramen Dinners",
+      "amount": 11500,
+      "category": "food",
+      "date": "2026-10-21",
+      "dayIndices": [
+        3
+      ],
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "exp-jp-8",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Handmade Souvenirs & Matcha Green Tea",
+      "amount": 14200,
+      "category": "other",
+      "date": "2026-10-23",
+      "dayIndices": [
+        5
+      ],
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    }
+  ],
+  "transports": [
+    {
+      "id": "trans-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "type": "flight",
+      "status": "confirmed",
+      "title": "Flight to Tokyo (HND)",
+      "confirmationCode": "JL-004-DEMO",
+      "carrier": "Japan Airlines",
+      "from": "SFO San Francisco",
+      "to": "HND Tokyo Haneda",
+      "flightNumber": "JL 004",
+      "seatNumber": "14A",
+      "departureDate": "2026-10-17T11:45:00.000Z",
+      "arrivalDate": "2026-10-18T15:10:00.000Z",
+      "price": 145000,
+      "currency": "JPY",
+      "notes": "Non-stop direct transpacific flight. Baggage allowance: 2 checked bags.",
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "trans-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "type": "train",
+      "status": "confirmed",
+      "title": "Tokyo Metro & Toei Subway 72-Hour Pass",
+      "confirmationCode": "SUB-TK-8821",
+      "carrier": "Tokyo Metro",
+      "from": "Tokyo Metro Network",
+      "to": "All Lines",
+      "departureDate": "2026-10-19T08:00:00.000Z",
+      "price": 1500,
+      "currency": "JPY",
+      "notes": "Unlimited travel on all 13 Tokyo subway lines for 72 consecutive hours.",
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "trans-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "type": "train",
+      "status": "confirmed",
+      "title": "Narita Express (N'EX) Airport Return",
+      "confirmationCode": "NEX-9014",
+      "carrier": "JR East",
+      "from": "Shinjuku Station",
+      "to": "Narita Airport T1",
+      "seatNumber": "Car 4, Seat 7D",
+      "departureDate": "2026-10-24T13:30:00.000Z",
+      "price": 3250,
+      "currency": "JPY",
+      "notes": "Direct airport express train with reserved seating.",
+      "createdAt": "2026-10-17T00:00:00.000Z",
+      "updatedAt": "2026-10-17T00:00:00.000Z"
+    }
+  ],
+  "packingItems": [
+    {
+      "id": "pack-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "text": "Passport & Japan Visit Web QR Code",
+      "category": "Documents",
+      "quantity": 1,
+      "checked": true,
+      "order": 0,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "pack-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "text": "Pocket Wi-Fi / Japanese eSIM confirmation",
+      "category": "Electronics",
+      "quantity": 1,
+      "checked": true,
+      "order": 1,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "pack-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "text": "Type A 2-prong power adapters",
+      "category": "Electronics",
+      "quantity": 2,
+      "checked": true,
+      "order": 2,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "pack-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "text": "Comfortable slip-on walking shoes (temple visits)",
+      "category": "Clothing",
+      "quantity": 1,
+      "checked": true,
+      "order": 3,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "pack-jp-5",
+      "tripId": "japan-demo-trip-2026",
+      "text": "Lightweight water-repellent windbreaker jacket",
+      "category": "Clothing",
+      "quantity": 1,
+      "checked": false,
+      "order": 4,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "pack-jp-6",
+      "tripId": "japan-demo-trip-2026",
+      "text": "Compact coin purse (essential for ¥100 / ¥500 coins)",
+      "category": "Accessories",
+      "quantity": 1,
+      "checked": false,
+      "order": 5,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "pack-jp-7",
+      "tripId": "japan-demo-trip-2026",
+      "text": "Reusable tote bag for shopping & street snacks",
+      "category": "Accessories",
+      "quantity": 2,
+      "checked": false,
+      "order": 6,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    }
+  ],
+  "todoItems": [
+    {
+      "id": "todo-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "title": "Add digital Suica / Pasmo transit card to phone wallet",
+      "description": "Enables contactless tapping on all Tokyo subways, buses, and convenience stores.",
+      "done": true,
+      "priority": "p1",
+      "dueDate": "2026-10-15",
+      "order": 0,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "todo-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "title": "Confirm teamLab Planets timed entry reservation",
+      "description": "Pre-booked for Day 5 (Oct 22 at 14:00). Save ticket barcodes.",
+      "done": true,
+      "priority": "p1",
+      "dueDate": "2026-10-16",
+      "order": 1,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "todo-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "title": "Notify bank of international travel and withdraw initial Yen cash",
+      "description": "Many traditional food stalls in Asakusa and Tsukiji remain cash-only.",
+      "done": false,
+      "priority": "p2",
+      "dueDate": "2026-10-17",
+      "order": 2,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    },
+    {
+      "id": "todo-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "title": "Download Tokyo offline maps on phone",
+      "description": "Save offline area in Google Maps for Central Tokyo, Asakusa, and Shibuya.",
+      "done": false,
+      "priority": "p2",
+      "dueDate": "2026-10-17",
+      "order": 3,
+      "createdAt": "2026-10-17T00:00:00.000Z"
+    }
+  ],
+  "foodGuide": [
+    {
+      "id": "food-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Tonkotsu Ramen",
+      "category": "Noodles & Soup",
+      "emoji": "🍜",
+      "tagLine": "Noodle soup · ¥900–¥1,400",
+      "story": "Rich, creamy pork bone broth simmered for 18+ hours, served with springy thin noodles, tender chashu pork, and seasoned soft-boiled egg.",
+      "whereToFind": "Ichiran Shibuya or Fuunji Shinjuku for rich dipping tsukemen.",
+      "tip": "Customise your noodle firmness to 'katame' (firm) for best texture.",
+      "gradientColors": [
+        "#c2410c",
+        "#7c2d12"
+      ],
+      "tried": true,
+      "order": 0
+    },
+    {
+      "id": "food-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Edomae Nigiri Sushi",
+      "category": "Seafood",
+      "emoji": "🍣",
+      "tagLine": "Fresh seafood · ¥2,500–¥8,000",
+      "story": "Tokyo's heritage sushi style featuring seasoned vinegared rice and pristine fresh fish from Tokyo Bay and Toyosu market.",
+      "whereToFind": "Tsukiji Outer Market stalls or Ginza standing sushi bars.",
+      "tip": "Dip fish side down into soy sauce so the rice doesn't crumble.",
+      "gradientColors": [
+        "#b45309",
+        "#78350f"
+      ],
+      "tried": false,
+      "order": 1
+    },
+    {
+      "id": "food-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Takoyaki & Yakitori",
+      "category": "Street Food",
+      "emoji": "🍢",
+      "tagLine": "Street snacks · ¥600–¥1,200",
+      "story": "Golden octopus balls drizzled with savory sauce and bonito flakes, paired with charcoal-grilled skewered chicken.",
+      "whereToFind": "Omoide Yokocho in Shinjuku or Asakusa market alleyways.",
+      "tip": "Extremely hot inside when freshly cooked—eat carefully!",
+      "gradientColors": [
+        "#0e7490",
+        "#164e63"
+      ],
+      "tried": true,
+      "order": 2
+    },
+    {
+      "id": "food-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Matcha Wagashi & Parfait",
+      "category": "Desserts & Tea",
+      "emoji": "🍵",
+      "tagLine": "Traditional sweet · ¥700–¥1,600",
+      "story": "Ceremonial Uji green tea paired with delicate handcrafted seasonal sweets made from sweet red bean paste and rice flour.",
+      "whereToFind": "Suzukien Asakusa (famous for 7 levels of matcha gelato intensity).",
+      "tip": "Level 7 is the richest, most intense matcha gelato in the world.",
+      "gradientColors": [
+        "#1d4ed8",
+        "#1e3a8a"
+      ],
+      "tried": false,
+      "order": 3
+    }
+  ],
+  "shopGuide": [
+    {
+      "id": "shop-jp-1",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Japanese Kitchen Knife (Santoku)",
+      "category": "Kitchenware",
+      "emoji": "🔪",
+      "tagLine": "Artisan steel · ¥8,000–¥25,000",
+      "story": "Hand-forged multi-purpose culinary knife with legendary sharpness and balance, crafted by master bladesmiths.",
+      "whereToBuy": "Kappabashi Kitchen Town (Kama-Asa or Tower Knives).",
+      "tip": "Many shops offer free custom Japanese kanji name engraving on the blade.",
+      "gradientColors": [
+        "#7c3aed",
+        "#4c1d95"
+      ],
+      "bought": false,
+      "order": 0
+    },
+    {
+      "id": "shop-jp-2",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Ceremonial Uji Matcha & Chasen",
+      "category": "Tea & Snacks",
+      "emoji": "🍵",
+      "tagLine": "Tea & whisk · ¥2,000–¥6,000",
+      "story": "First-harvest ceremonial grade stone-ground green tea powder from Kyoto, paired with a bamboo whisk.",
+      "whereToBuy": "Ippodo Tea Tokyo store in Marunouchi.",
+      "tip": "Store in the refrigerator after opening to preserve vibrant jade green color.",
+      "gradientColors": [
+        "#be185d",
+        "#831843"
+      ],
+      "bought": true,
+      "order": 1
+    },
+    {
+      "id": "shop-jp-3",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Sensu Handcrafted Folding Fan",
+      "category": "Traditional Crafts",
+      "emoji": "🪭",
+      "tagLine": "Washi paper & bamboo · ¥2,500–¥8,000",
+      "story": "Traditional folding fan crafted from scented bamboo and painted washi paper, depicting seasonal nature motifs.",
+      "whereToBuy": "Nakamise-dori in Asakusa.",
+      "tip": "Look for authentic 'Kyo-Sensu' mark indicating traditional production.",
+      "gradientColors": [
+        "#475569",
+        "#1e293b"
+      ],
+      "bought": false,
+      "order": 2
+    },
+    {
+      "id": "shop-jp-4",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Japanese Stationery & Washi Tape",
+      "category": "Stationery",
+      "emoji": "📓",
+      "tagLine": "Paper goods · ¥500–¥3,500",
+      "story": "World-renowned smooth fountain-pen friendly notebook paper, gel pens, and decorative MT washi tapes.",
+      "whereToBuy": "Itoya in Ginza (a 12-story stationery wonderland).",
+      "tip": "Visit the 7th floor for custom letterpress and paper tailoring.",
+      "gradientColors": [
+        "#0f766e",
+        "#134e4a"
+      ],
+      "bought": true,
+      "order": 3
+    },
+    {
+      "id": "shop-jp-5",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Mino-yaki Ceramic Tea Set",
+      "category": "Ceramics",
+      "emoji": "🍶",
+      "tagLine": "Handmade pottery · ¥3,000–¥12,000",
+      "story": "Earthy, rustic glazed ceramic mugs and sake carafes originating from Gifu prefecture.",
+      "whereToBuy": "Kappabashi pottery merchants.",
+      "tip": "Shop staff will pack ceramics in bubble wrap for safe flight transport.",
+      "gradientColors": [
+        "#b45309",
+        "#78350f"
+      ],
+      "bought": false,
+      "order": 4
+    },
+    {
+      "id": "shop-jp-6",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Regional Japanese KitKats & Tokyo Banana",
+      "category": "Tea & Snacks",
+      "emoji": "🍌",
+      "tagLine": "Confectionery · ¥800–¥2,000",
+      "story": "Unique regional souvenir sweets including Sake, Wasabi, and Hojicha KitKats, plus soft banana sponge cakes.",
+      "whereToBuy": "Tokyo Station First Avenue or Haneda duty-free shops.",
+      "tip": "Buy duty-free boxes at the airport after passing security.",
+      "gradientColors": [
+        "#1d4ed8",
+        "#1e3a8a"
+      ],
+      "bought": false,
+      "order": 5
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shopping & Food Guide</title>
+<style>
+:root{--nav-h:44px;--accent:#0f172a;--on-accent:#fff;--ink:#0f172a;--text2:#334155;--muted:#64748b;--faint:#94a3b8;--bg:#fff;--surface:#f8fafc;--card:#fff;--s2:#f1f5f9;--border:#e2e8f0;--border-card:rgba(226,232,240,.8);--blue:#334155;--green:#10b981;--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit;color:inherit}
+svg{flex-shrink:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:99px}::-webkit-scrollbar-thumb:hover{background:#94a3b8}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#fff;z-index:210}
+.nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:var(--nav-h);z-index:200;display:flex;align-items:center;justify-content:center;padding:0 12px;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--s2)}
+.tabs{position:relative;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.tabs::-webkit-scrollbar{display:none}
+.pill{position:absolute;top:50%;left:0;height:30px;background:var(--accent);border-radius:999px;transform:translateY(-50%);transition:left .3s cubic-bezier(.77,0,.175,1),width .3s cubic-bezier(.77,0,.175,1);pointer-events:none}
+.tab{position:relative;display:flex;align-items:center;gap:6px;padding:6px 14px;border:0;border-radius:999px;background:none;color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:color .2s}
+.tab:hover{color:var(--ink)}
+.tab.active{color:#fff;font-weight:600}
+.page{padding:calc(var(--nav-h) + 24px) 28px 56px}
+.head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--surface);border-radius:18px;padding:14px 22px;margin-bottom:16px}
+.head>div:first-child{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.head h1{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.head p{font-size:13px;color:var(--muted);padding-left:16px;border-left:1px solid var(--border)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.chip{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;background:#fff;border:1px solid var(--border);font-size:12.5px;font-weight:500;color:var(--muted)}
+.chip b{color:var(--ink);font-weight:700}
+.sec{background:var(--card);border:1px solid var(--border-card);border-radius:16px;padding:0;margin-bottom:16px;overflow:hidden}
+.sec-h{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--s2)}
+.sec-ico{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--s2);color:var(--ink)}
+.sec-h h2{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.sec-h .prog{margin-left:auto;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--s2);color:var(--muted);white-space:nowrap}
+.sub,.bar,.grid,.acc-row{margin-left:16px;margin-right:16px}
+.sub{font-size:13px;color:var(--muted);margin-top:14px;margin-bottom:10px}
+.bar{height:8px;border-radius:999px;background:var(--s2);overflow:hidden;margin-bottom:16px}
+.bar span{display:block;height:100%;border-radius:999px;background:var(--green);transition:width .5s ease-out}
+.grid{display:grid;gap:12px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g6{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tile{position:relative;aspect-ratio:4/3;border-radius:14px;border:0;overflow:hidden;cursor:pointer;text-align:left;padding:0;color:#fff;transition:transform .18s}
+.tile:hover{transform:translateY(-2px)}
+.tile .em{position:absolute;inset:0;display:grid;place-items:center;font-size:52px;padding-bottom:26px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.65));font-size:13.5px;font-weight:600}
+.tile .cap small{display:block;font-size:11.5px;font-weight:500;opacity:.85;margin-top:1px}
+.tile .got{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:8px;border:1.5px solid rgba(255,255,255,.85);background:rgba(0,0,0,.28);color:#fff;display:grid;place-items:center;cursor:pointer}
+.tile.done .got{background:var(--green);border-color:var(--green)}
+.tile.done::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.18);pointer-events:none}
+.tile .got svg{opacity:0}.tile.done .got svg{opacity:1}
+.acc-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;margin-bottom:16px;align-items:start}
+.acc{border:1px solid var(--border-card);border-radius:14px;background:var(--surface);overflow:hidden}
+.acc>button{width:100%;display:flex;align-items:center;gap:10px;padding:11px 14px;border:0;background:none;font-size:13.5px;font-weight:600;cursor:pointer;text-align:left}
+.acc>button:hover{background:var(--s2)}
+.acc>button .i{color:var(--muted);display:grid}
+.acc>button .sm{font-weight:400;font-size:12px;color:var(--faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acc>button .ch{margin-left:auto;transition:transform .25s;color:var(--faint);display:grid}
+.acc.open>button .ch{transform:rotate(180deg)}
+.pan{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s}
+.acc.open .pan{grid-template-rows:1fr}
+.pan>div{overflow:hidden}
+.pan ul{list-style:none;padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px}
+.pan li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:13px;line-height:1.5;color:var(--muted)}
+.pan li svg{color:var(--faint);margin-top:2px}
+.pan li b{color:var(--ink);font-weight:600}
+.pan li.k{grid-template-columns:78px 1fr}
+.note{font-size:12px;color:var(--faint);text-align:center;margin-top:6px}
+.backdrop{position:fixed;inset:0;z-index:1000;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:16px}
+.backdrop.show{display:flex}
+.modal{width:100%;max-width:460px;max-height:90vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 25px 50px -12px rgba(0,0,0,.25);animation:modalIn .2s cubic-bezier(.16,1,.3,1)}
+@keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(-8px)}to{opacity:1;transform:none}}
+.m-art{height:140px;display:grid;place-items:center;font-size:72px;position:relative}
+.m-x{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:50%;border:0;background:rgba(0,0,0,.3);color:#fff;display:grid;place-items:center;cursor:pointer}
+.m-b{padding:18px 20px 20px}
+.m-b h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.m-tag{display:inline-block;margin:8px 0 12px;padding:3px 10px;border-radius:999px;background:var(--s2);font-size:11.5px;font-weight:600;color:var(--muted)}
+.m-b p{font-size:14px;line-height:1.6;color:var(--muted)}
+.m-row{display:flex;gap:10px;margin-top:14px;font-size:13px;line-height:1.5;color:var(--muted)}
+.m-row svg{color:var(--faint);margin-top:2px}.m-row b{color:var(--ink)}
+.m-btn{margin-top:18px;width:100%;padding:10px;border-radius:12px;border:0;background:var(--accent);color:#fff;font-size:13px;font-weight:600;cursor:pointer}
+.m-btn:hover{opacity:.9}
+@media(max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.acc-row{grid-template-columns:1fr}.head p{border-left:0;padding-left:0}}
+@media(max-width:560px){.page{padding-left:16px;padding-right:16px}.g6{grid-template-columns:repeat(2,minmax(0,1fr))}.tile .em{font-size:44px}.chips{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="nav"><div class="tabs" id="tabs"><div class="pill" id="pill"></div>
+<button class="tab" data-i="map">Plan</button><button class="tab" data-i="bus">Transports</button><button class="tab" data-i="ticket">Book</button><button class="tab active" data-i="bag">Shop</button><button class="tab" data-i="box">Lists</button><button class="tab" data-i="wallet">Costs</button><button class="tab" data-i="folder">Files</button><button class="tab" data-i="users">Collab</button>
+</div></div>
+
+<main class="page">
+  <div class="head">
+    <div><h1>Food &amp; Shopping</h1><p>What to eat and what to bring home from Iceland.</p></div>
+    <div class="chips"><span class="chip" id="chipFood"></span><span class="chip" id="chipShop"></span><span class="chip">Shopping budget <b id="chipBudget"></b></span></div>
+  </div>
+
+  <section class="sec" id="food">
+    <div class="sec-h"><span class="sec-ico" data-ic="utensils"></span><h2>Food guide</h2><span class="prog" id="pFood"></span></div>
+    <p class="sub">Top 4 dishes to try. Tap a card for the story and where to find it.</p>
+    <div class="bar"><span id="bFood"></span></div>
+    <div class="grid g4" id="gFood"></div>
+    <div class="acc-row" id="aFood"></div>
+  </section>
+
+  <section class="sec" id="shop">
+    <div class="sec-h"><span class="sec-ico" data-ic="bag"></span><h2>Shopping guide</h2><span class="prog" id="pShop"></span></div>
+    <p class="sub">Top 6 things to buy. Mark each one as you collect it.</p>
+    <div class="bar"><span id="bShop"></span></div>
+    <div class="grid g6" id="gShop"></div>
+    <div class="acc-row" id="aShop"></div>
+  </section>
+  <p class="note">Prices are rough guides in ISK. Check hours and prices before you go.</p>
+</main>
+
+<div class="backdrop" id="modal"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="mT">
+  <div class="m-art" id="mArt"><button class="m-x" id="mX" aria-label="Close"></button></div>
+  <div class="m-b"><h3 id="mT"></h3><span class="m-tag" id="mTag"></span><p id="mStory"></p>
+    <div class="m-row" id="mWhere"></div><div class="m-row" id="mTip"></div>
+    <button class="m-btn" id="mBtn"></button></div>
+</div></div>
+
+<script>
+const IC={map:'M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z M9 3v15 M15 6v15',bus:'M6 3h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z M4 11h16 M8 19l-2 3 M16 19l2 3',ticket:'M2 9a3 3 0 0 1 0 6v3h20v-3a3 3 0 0 1 0-6V6H2z M13 6v12',box:'M12 3l8 4.5v9L12 21l-8-4.5v-9z M4 7.5l8 4.5 8-4.5 M12 12v9',wallet:'M20 7H5a2 2 0 0 1 0-4h13v4 M3 5v14a2 2 0 0 0 2 2h15V7 M16 14h2',folder:'M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H3z M3 10h18l-2 9H5z',users:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8 M22 21v-2a4 4 0 0 0-3-3.9 M16 3.1a4 4 0 0 1 0 7.8',bag:'M6 7h12l1 14H5z M9 7a3 3 0 0 1 6 0',utensils:'M5 3v8a2 2 0 0 0 4 0V3 M7 11v10 M17 21V3c-3 2-4 5-4 9h4',chev:'M6 9l6 6 6-6',pin:'M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z M12 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',info:'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z M12 11v5 M12 8h.01',check:'M5 13l4 4L19 7',x:'M18 6L6 18 M6 6l12 12',tip:'M9 18h6 M10 21h4 M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z'};
+const ic=(n,s=16,sw=2)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n].split(' M').map((d,i)=>`<path d="${i?'M':''}${d}"/>`).join('')}</svg>`;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const FOOD=[
+ {id:'f1',n:'Kjötsúpa',em:'🍲',g:['#c2410c','#7c2d12'],tag:'Lamb soup · ISK 2,500–3,500',story:'Icelandic lamb soup with root vegetables and herbs. Thick, warming, and the standard answer to cold, wet weather. Many cafés refill the bowl.',where:'Svarta Kaffið in Reykjavik serves it in a bread bowl.',tip:'Ask if refills are included.'},
+ {id:'f2',n:'Pylsur',em:'🌭',g:['#b45309','#78350f'],tag:'Hot dog · ISK 600–800',story:'Icelandic lamb-based hot dog. Order "eina með öllu" to get it with raw and crispy onions, ketchup, sweet mustard and remoulade.',where:'Bæjarins Beztu Pylsur, near Reykjavik harbour.',tip:'Gas stations sell good ones too.'},
+ {id:'f3',n:'Skyr',em:'🥛',g:['#0e7490','#164e63'],tag:'Dairy · ISK 300–500',story:'Thick, high-protein cultured dairy that has been made here for centuries. Plain with berries or in a flavoured tub, it works as a cheap breakfast.',where:'Any Bónus or Krónan supermarket.',tip:'Buy a few for road-trip breakfasts.'},
+ {id:'f4',n:'Plokkfiskur',em:'🐟',g:['#1d4ed8','#1e3a8a'],tag:'Fish stew · ISK 3,000–4,500',story:'Creamy mash of white fish, potato and onion, served with dark rye bread and butter. Classic home cooking that tastes better than it sounds.',where:'Harbour restaurants and small-town cafés along the coast.',tip:'Ask for the fish of the day.'}
+];
+const SHOP=[
+ {id:'s1',n:'Lopapeysa',em:'🧶',g:['#7c3aed','#4c1d95'],tag:'Wool sweater · ISK 18,000–35,000',story:'The patterned yoke sweater knitted from Icelandic wool. Hand-knit ones cost more than factory ones but are worth it.',where:'Handknitting Association of Iceland, Skólavörðustígur.',tip:'Look for a label that says Icelandic wool.'},
+ {id:'s2',n:'Wool accessories',em:'🧦',g:['#be185d','#831843'],tag:'Hats, socks, mittens · ISK 3,000–8,000',story:'Smaller, cheaper wool pieces that pack easily and make good gifts.',where:'Rammagerðin and Kolaportið flea market.',tip:'Kolaportið is open at weekends only.'},
+ {id:'s3',n:'Sea & lava salt',em:'🧂',g:['#475569','#1e293b'],tag:'Gourmet salt · ISK 1,200–2,500',story:'Salt made with geothermal heat, plus black lava salt. Light, easy to carry, and a favourite food souvenir.',where:'Hagkaup, Krónan and gift shops.',tip:'Check it is sealed for the flight.'},
+ {id:'s4',n:'Lava jewellery',em:'💎',g:['#0f766e','#134e4a'],tag:'Handmade · ISK 5,000–20,000',story:'Pendants and earrings set with lava rock, made by local craftspeople.',where:'Craft shops in Reykjavik and Vik.',tip:'Buy direct from makers when you can.'},
+ {id:'s5',n:'Chocolate & licorice',em:'🍫',g:['#92400e','#451a03'],tag:'Sweets · ISK 500–2,000',story:'Icelanders love licorice-filled chocolate. Omnom and Nói Síríus make the well-known bars.',where:'Fríhöfnin duty free at Keflavik airport, plus supermarkets.',tip:'Supermarkets are cheaper than airport prices.'},
+ {id:'s6',n:'Skincare',em:'🧴',g:['#0369a1','#0c4a6e'],tag:'Geothermal range · ISK 3,000–12,000',story:'Silica and algae based creams and masks from Blue Lagoon and smaller Icelandic brands.',where:'Blue Lagoon shop and Reykjavik pharmacies.',tip:'Travel sizes avoid cabin-bag limits.'}
+];
+const ACC={
+ food:[
+  {t:'Where to eat',i:'pin',s:'4 spots',items:[['Bæjarins Beztu Pylsur','Reykjavik harbour. The classic hot dog stand.'],['Svarta Kaffið','Reykjavik. Soup in a bread bowl.'],['Friðheimar','Golden Circle. Dine inside a tomato greenhouse.'],['Harbour cafés','Fresh fish in most fishing towns along the ring road.']],type:'list'},
+  {t:'Good to know',i:'info',s:'tips',items:[['Tap water','Safe and very good. Refill a bottle everywhere.'],['Tipping','Not expected. Prices already include service.'],['Alcohol','Sold in Vínbúðin stores, not supermarkets.'],['Budget','Restaurants are pricey. Self-catering with Bónus saves a lot.'],['Meals','Lunch is the cheaper meal. Kitchens in small towns close early.']],type:'kv'}],
+ shop:[
+  {t:'Where to buy',i:'pin',s:'4 places',items:[['Handknitting Association','Reykjavik. Hand-knit wool, fair makers.'],['Rammagerðin','Design and wool goods. Several branches.'],['Kolaportið','Reykjavik flea market. Weekends only.'],['Fríhöfnin','Keflavik airport. Chocolate and spirits.']],type:'list'},
+  {t:'Good to know',i:'info',s:'tips',items:[['Tax refund','Visitors can claim VAT back above a minimum per receipt. Ask for the form.'],['Payment','Cards and tap-to-pay work almost everywhere.'],['Authentic','Real Icelandic wool has a label. Cheap ones may be imported.'],['Hours','Shops close early on Sundays outside Reykjavik.'],['Packing','Keep wool and food in your carry-on to avoid crushing.']],type:'kv'}]
+};
+
+let done={};
+try{done=JSON.parse(localStorage.getItem('trip-shop')||'{}')||{}}catch(e){}
+const save=()=>{try{localStorage.setItem('trip-shop',JSON.stringify(done))}catch(e){}};
+const ALLI=[...FOOD,...SHOP];
+
+function tiles(list,el){
+  $(el).innerHTML=list.map(it=>`<button class="tile${done[it.id]?' done':''}" data-id="${it.id}" style="background:linear-gradient(135deg,${it.g[0]},${it.g[1]})" aria-label="${esc(it.n)}: open details"><span class="em">${it.em}</span><span class="cap">${esc(it.n)}<small>${esc(it.tag)}</small></span><span class="got" role="checkbox" aria-checked="${!!done[it.id]}" aria-label="Mark ${esc(it.n)} done" tabindex="0">${ic('check',15,3)}</span></button>`).join('');
+}
+function acc(key,el){
+  $(el).innerHTML=ACC[key].map((a,n)=>`<div class="acc" id="${key}${n}"><button aria-expanded="false" aria-controls="${key}${n}p"><span class="i">${ic(a.i,17)}</span>${a.t}<span class="sm">${a.s}</span><span class="ch">${ic('chev',16)}</span></button><div class="pan" id="${key}${n}p"><div><ul>${a.items.map(x=>a.type==='kv'?`<li class="k"><b>${x[0]}</b><span>${x[1]}</span></li>`:`<li>${ic('pin',15)}<span><b>${x[0]}</b><br>${x[1]}</span></li>`).join('')}</ul></div></div></div>`).join('');
+  $(el).querySelectorAll('.acc>button').forEach(b=>b.onclick=()=>{const a=b.parentElement,o=a.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+}
+function progress(){
+  const f=FOOD.filter(i=>done[i.id]).length,s=SHOP.filter(i=>done[i.id]).length;
+  $('pFood').textContent=`${f} of 4 tried`;$('pShop').textContent=`${s} of 6 bought`;
+  $('bFood').style.width=f/4*100+'%';$('bShop').style.width=s/6*100+'%';
+  $('chipFood').innerHTML=`${ic('utensils',14)}<b>${f}/4</b> dishes tried`;
+  $('chipShop').innerHTML=`${ic('bag',14)}<b>${s}/6</b> items bought`;
+  let tot=0;try{tot=+localStorage.getItem('trip-budget')||0}catch(e){}
+  $('chipBudget').textContent=tot?'ISK '+Math.round(tot*.075).toLocaleString('en-US'):'ISK 60,000';
+}
+function toggle(id){done[id]=!done[id];save();document.querySelectorAll(`.tile[data-id="${id}"]`).forEach(t=>{t.classList.toggle('done',!!done[id]);t.querySelector('.got').setAttribute('aria-checked',!!done[id])});progress()}
+function wire(el){
+  $(el).querySelectorAll('.tile').forEach(t=>{
+    t.onclick=e=>{if(e.target.closest('.got'))toggle(t.dataset.id);else openM(t.dataset.id)};
+    t.querySelector('.got').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();toggle(t.dataset.id)}};
+  });
+}
+let cur=null;
+function openM(id){
+  cur=ALLI.find(i=>i.id===id);const food=id[0]==='f';
+  $('mArt').style.background=`linear-gradient(135deg,${cur.g[0]},${cur.g[1]})`;
+  $('mArt').firstChild.insertAdjacentHTML('beforebegin',cur.em);
+  [...$('mArt').childNodes].forEach(n=>{if(n.nodeType===3&&n.textContent!==cur.em)n.remove()});
+  $('mT').textContent=cur.n;$('mTag').textContent=cur.tag;$('mStory').textContent=cur.story;
+  $('mWhere').innerHTML=ic('pin',16)+`<span><b>${food?'Find it':'Buy it'}:</b> ${esc(cur.where)}</span>`;
+  $('mTip').innerHTML=ic('tip',16)+`<span><b>Tip:</b> ${esc(cur.tip)}</span>`;
+  setBtn();$('modal').classList.add('show');$('mX').focus();
+}
+const setBtn=()=>{const food=cur.id[0]==='f';$('mBtn').textContent=done[cur.id]?(food?'Tried it ✓ (tap to undo)':'Bought ✓ (tap to undo)'):(food?'Mark as tried':'Mark as bought')};
+$('mBtn').onclick=()=>{toggle(cur.id);setBtn()};
+const closeM=()=>{$('modal').classList.remove('show');$('mArt').firstChild.nodeType===3&&$('mArt').firstChild.remove()};
+$('mX').onclick=closeM;$('modal').onclick=e=>{if(e.target===$('modal'))closeM()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+$('mX').innerHTML=ic('x',16);
+
+document.querySelectorAll('[data-ic]').forEach(e=>e.innerHTML=ic(e.dataset.ic,20));
+document.querySelectorAll('.tab').forEach(t=>t.insertAdjacentHTML('afterbegin',ic(t.dataset.i,15)));
+tiles(FOOD,'gFood');tiles(SHOP,'gShop');wire('gFood');wire('gShop');acc('food','aFood');acc('shop','aShop');progress();
+
+const tabs=$('tabs'),pill=$('pill'),btns=tabs.querySelectorAll('.tab');
+const move=b=>{pill.style.left=b.offsetLeft+'px';pill.style.width=b.offsetWidth+'px'};
+btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');move(b)}));
+setTimeout(()=>move(tabs.querySelector('.active')),60);addEventListener('load',()=>move(tabs.querySelector('.active')));
+</script>
+</body>
+</html>

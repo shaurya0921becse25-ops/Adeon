@@ -1,0 +1,24 @@
+{
+  "id": "guide-agam",
+  "name": "Agam",
+  "role": "Certified Himalayan Mountaineer & Local Culture Guide",
+  "bio": "Born and raised in the high valleys of Himachal Pradesh. Over 8 years curating offbeat trails, high-altitude alpine camps, and authentic indigenous Himachali culinary walks.",
+  "phone": "+91 98765 43210",
+  "email": "agam@abeon.travel",
+  "location": "Manali & Old Manali, Himachal Pradesh, India",
+  "hometown": "Manali & Shimla, Himachal Pradesh",
+  "avatar": "/agam-profile.jpg",
+  "cover": "/hero.jpg",
+  "experienceYears": 8,
+  "rating": 4.9,
+  "reviewCount": 48,
+  "responseTime": "Within 10 mins",
+  "languages": ["English", "Hindi", "Pahari", "Basic French"],
+  "verified": true,
+  "badges": [
+    "WHMI Certified Mountaineer",
+    "Himora Superhost",
+    "Wilderness First Responder",
+    "Local Culture Expert"
+  ]
+}

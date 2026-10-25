@@ -1,0 +1,243 @@
+import defaultGuide from "./guide.json";
+import { loadGuideProfile } from "./sharedDataBridge";
+
+export const getGuideProvider = () => {
+  const current = loadGuideProfile();
+  return {
+    id: "guide-agam",
+    name: current.name || "Agam",
+    type: "individual",
+    role: current.role || "Certified Himalayan Mountaineer & Local Culture Guide",
+    avatar: current.avatar || "/agam-profile.jpg",
+    cover: current.cover || "/hero.jpg",
+    rating: current.rating || 4.9,
+    reviewCount: current.reviewCount || 48,
+    experienceYears: current.experienceYears || 8,
+    languages: current.languages || ["English", "Hindi", "Pahari", "Basic French"],
+    responseTime: current.responseTime || "Within 10 mins",
+    verified: current.verified ?? true,
+    hometown: current.hometown || current.location || "Manali & Shimla, Himachal Pradesh",
+    bio: current.bio || "Born and raised in the high valleys of Himachal Pradesh. Over 8 years curating offbeat trails, high-altitude alpine camps, and authentic indigenous Himachali culinary walks.",
+    badges: current.badges || [
+      "WHMI Certified Mountaineer",
+      "Himora Superhost",
+      "Wilderness First Responder",
+      "Local Culture Expert"
+    ]
+  };
+};
+
+export const providers = [
+  getGuideProvider(),
+  {
+    id: "p1",
+    name: "Sunil Verma",
+    type: "individual", // individual | business
+    role: "Master Chef & Culinary Historian",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.96,
+    reviewCount: 88,
+    experienceYears: 14,
+    languages: ["Hindi", "English", "Pahari"],
+    responseTime: "Within 15 mins",
+    verified: true,
+    hometown: "Mashobra, Shimla",
+    bio: "Born into a family of royal 'Botis' (traditional Himachali chefs), Sunil has spent over 14 years preserving authentic hill-recipes. He hosts interactive cooking masterclasses in his ancestral orchard kitchen.",
+    badges: ["Top Rated Cook", "Superguide", "Local Native"]
+  },
+  {
+    id: "p2",
+    name: "Dr. Arvind Thakur",
+    type: "individual",
+    role: "Architectural Historian & Walk Leader",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.98,
+    reviewCount: 142,
+    experienceYears: 18,
+    languages: ["English", "Hindi"],
+    responseTime: "Within 30 mins",
+    verified: true,
+    hometown: "The Ridge, Shimla",
+    bio: "Author of three monographs on British Himalayan architecture, Arvind brings alive the secret tunnels, Viceregal ballrooms, and forgotten colonial diaries of Simla's golden age.",
+    badges: ["Historian", "Govt. Certified Guide", "Cultural Voice"]
+  },
+  {
+    id: "p3",
+    name: "Geeta Sharma",
+    type: "individual",
+    role: "Organic Homesteader & Folk Baker",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.92,
+    reviewCount: 64,
+    experienceYears: 9,
+    languages: ["Hindi", "Pahari", "English"],
+    responseTime: "Within 1 hour",
+    verified: true,
+    hometown: "Kotkhai, Upper Shimla",
+    bio: "Passionate about indigenous grain varieties and wood-fired baking. Geeta teaches the art of sourdough siddu, walnut chutneys, and fermented buckwheat rotis.",
+    badges: ["Artisan Baker", "Slow Food Advocate"]
+  },
+  {
+    id: "p4",
+    name: "Rohan Kashyap",
+    type: "individual",
+    role: "Himalayan Mountain Guide & Naturalist",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.94,
+    reviewCount: 110,
+    experienceYears: 11,
+    languages: ["English", "Hindi", "Punjabi"],
+    responseTime: "Within 20 mins",
+    verified: true,
+    hometown: "Narkanda, Shimla",
+    bio: "Certified mountaineer from WHMI Manali with hundreds of ridge ascents across the Shivalik and Greater Himalayan ranges. Enthusiast of native birdcalls and flora.",
+    badges: ["WHMI Certified", "Wilderness First Aid", "Eco Leader"]
+  },
+  {
+    id: "p5",
+    name: "Pooja Negi",
+    type: "individual",
+    role: "Tribal Weaver & Folklorist",
+    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.89,
+    reviewCount: 53,
+    experienceYears: 8,
+    languages: ["Hindi", "English", "Kinnauri", "Pahari"],
+    responseTime: "Within 45 mins",
+    verified: true,
+    hometown: "Sanjauli, Shimla",
+    bio: "Hailing from the high Kinnaur valleys, Pooja guides visitors through ancestral handloom traditions, geometric motif lore, and folk mountain ballads.",
+    badges: ["Master Artisan", "Community Host"]
+  },
+  {
+    id: "p6",
+    name: "Vikramjit Singh",
+    type: "individual",
+    role: "Street Food Chronicler & Tea Sommelier",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.91,
+    reviewCount: 79,
+    experienceYears: 10,
+    languages: ["English", "Hindi", "Punjabi"],
+    responseTime: "Within 10 mins",
+    verified: true,
+    hometown: "Lakkar Bazaar, Shimla",
+    bio: "A true Mall Road local who knows every hole-in-the-wall chaat vendor, seventy-year-old bakery, and secret spice blender across Shimla's bazaars.",
+    badges: ["Foodie Champion", "Top Storyteller"]
+  },
+  {
+    id: "p7",
+    name: "Meenakshi Chandel",
+    type: "individual",
+    role: "Botanist & Forest Therapy Practitioner",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.95,
+    reviewCount: 48,
+    experienceYears: 7,
+    languages: ["English", "Hindi", "Pahari"],
+    responseTime: "Within 25 mins",
+    verified: true,
+    hometown: "Chharabra, Shimla",
+    bio: "Specializing in Himalayan temperate forests, Meenakshi curates mindful forest bathing, edible pine foraging, and therapeutic moss identification walks.",
+    badges: ["Forest Therapy", "Eco Guide"]
+  },
+  {
+    id: "p8",
+    name: "Karan Dogra",
+    type: "individual",
+    role: "Heritage Photographer & Drone Specialist",
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.88,
+    reviewCount: 41,
+    experienceYears: 6,
+    languages: ["English", "Hindi"],
+    responseTime: "Within 30 mins",
+    verified: true,
+    hometown: "Jakhu, Shimla",
+    bio: "Karan leads golden-hour photography circuits around British manor houses and misty cedar glades, coaching both smartphone creators and DSLR photographers.",
+    badges: ["Pro Photographer", "Drone Certified"]
+  },
+  {
+    id: "p9",
+    name: "Cedar & Peaks Expeditions",
+    type: "business",
+    role: "Pioneer Mountain Outfitters",
+    avatar: "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.93,
+    reviewCount: 220,
+    experienceYears: 16,
+    languages: ["English", "Hindi", "Punjabi"],
+    responseTime: "Within 5 mins",
+    verified: true,
+    hometown: "Cart Road, Shimla",
+    bio: "Shimla's leading outdoor adventure outfit since 2008. Operating certified 4x4 safaris, high ridge basecamps, and safety-inspected alpine treks.",
+    badges: ["Licensed Operator", "Full Safety Fleet", "IMF Affiliate"]
+  },
+  {
+    id: "p10",
+    name: "Himalayan Ridge 4x4 Safaris",
+    type: "business",
+    role: "Off-Road Wilderness Safaris",
+    avatar: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.87,
+    reviewCount: 165,
+    experienceYears: 12,
+    languages: ["Hindi", "English"],
+    responseTime: "Within 10 mins",
+    verified: true,
+    hometown: "Dhalli, Shimla",
+    bio: "A fleet of custom-modified 4WD vehicles driven by high-altitude rally veterans traversing sanctuary boundaries, apple orchards, and secluded river basins.",
+    badges: ["Fleet Insured", "4x4 Certified", "Wilderness Permits"]
+  },
+  {
+    id: "p11",
+    name: "Shimla Heritage Wheels & Self-Drive",
+    type: "business",
+    role: "Boutique Vehicle Fleet",
+    avatar: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.84,
+    reviewCount: 130,
+    experienceYears: 10,
+    languages: ["Hindi", "English", "Punjabi"],
+    responseTime: "Within 15 mins",
+    verified: true,
+    hometown: "Victory Tunnel, Shimla",
+    bio: "Clean, serviced fleet of Royal Enfield Himalayans, lightweight mountain scooters, SUVs, and chauffered group vans with clear fuel and deposit policies.",
+    badges: ["RTO Approved", "24/7 Roadside Assist"]
+  },
+  {
+    id: "p12",
+    name: "Shimla Cultural Society",
+    type: "business",
+    role: "Community Arts & Folklore Guild",
+    avatar: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80",
+    cover: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+    rating: 4.96,
+    reviewCount: 94,
+    experienceYears: 15,
+    languages: ["English", "Hindi", "Pahari"],
+    responseTime: "Within 30 mins",
+    verified: true,
+    hometown: "Gaiety Theatre Complex, Shimla",
+    bio: "A grassroots non-profit collective uniting village dancers, musicians, and traditional craftspeople to present living Shimla folk arts to travellers.",
+    badges: ["Non-Profit Guild", "Heritage Partner"]
+  }
+];
+
+export const getProviderById = (id) => {
+  if (id === "guide-agam" || id === "agam") {
+    return getGuideProvider();
+  }
+  return providers.find((p) => p.id === id);
+};

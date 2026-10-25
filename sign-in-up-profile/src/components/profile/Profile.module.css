@@ -1,0 +1,38 @@
+.page {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 22px 4.2% 38px 4.2%;
+  min-height: 100vh;
+}
+
+.tabPanel {
+  display: none;
+  animation: fadeInTab 0.2s ease-in-out;
+}
+
+.tabPanelActive {
+  display: block;
+}
+
+@keyframes fadeInTab {
+  from {
+    opacity: 0.6;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 850px) {
+  .page {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 9px;
+  }
+}

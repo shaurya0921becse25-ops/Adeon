@@ -1,0 +1,119 @@
+[
+  {
+    "threadId": "thread-agam-sarah",
+    "bookingId": "HMR-882194",
+    "serviceId": "guide-trek-1",
+    "serviceTitle": "Himalayan Trek - 2 Days",
+    "providerId": "guide-agam",
+    "providerName": "Agam",
+    "providerRole": "Certified Himalayan Mountaineer & Local Culture Guide",
+    "providerAvatar": "/agam-profile.jpg",
+    "userName": "Sarah Johnson",
+    "userAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80",
+    "userEmail": "sarah.johnson@gmail.com",
+    "userPhone": "+91 98765 43210",
+    "lastMessageTimestamp": "2026-10-20T10:42:00.000Z",
+    "unreadCount": 0,
+    "messages": [
+      {
+        "id": "m-1",
+        "sender": "user",
+        "from": "them",
+        "text": "Hi Agam! Super excited about our trek starting this Friday!",
+        "timestamp": "2026-10-20T10:30:00.000Z",
+        "time": "10:30 AM",
+        "status": "read"
+      },
+      {
+        "id": "m-2",
+        "sender": "guide",
+        "from": "me",
+        "text": "Hey Sarah! We are all set. Weather looks gorgeous in Manali right now.",
+        "timestamp": "2026-10-20T10:35:00.000Z",
+        "time": "10:35 AM",
+        "status": "read"
+      },
+      {
+        "id": "m-3",
+        "sender": "user",
+        "from": "them",
+        "text": "Thank you so much! What should I pack for the night camp?",
+        "timestamp": "2026-10-20T10:42:00.000Z",
+        "time": "10:42 AM",
+        "status": "read"
+      }
+    ]
+  },
+  {
+    "threadId": "thread-agam-michael",
+    "bookingId": "HMR-552091",
+    "serviceId": "guide-cook-2",
+    "serviceTitle": "Local Cooking Class",
+    "providerId": "guide-agam",
+    "providerName": "Agam",
+    "providerRole": "Certified Himalayan Mountaineer & Local Culture Guide",
+    "providerAvatar": "/agam-profile.jpg",
+    "userName": "Michael Tan",
+    "userAvatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWbIkhbg5KqhccWJ6wk3a4KRSTjvkU-pgrgARZ1eHNug&s=10",
+    "userEmail": "michael.tan@gmail.com",
+    "userPhone": "+91 91234 56780",
+    "lastMessageTimestamp": "2026-10-19T14:20:00.000Z",
+    "unreadCount": 1,
+    "messages": [
+      {
+        "id": "m-10",
+        "sender": "user",
+        "from": "them",
+        "text": "Hello Agam, I registered for your cooking workshop.",
+        "timestamp": "2026-10-19T14:15:00.000Z",
+        "time": "Yesterday",
+        "status": "read"
+      },
+      {
+        "id": "m-11",
+        "sender": "user",
+        "from": "them",
+        "text": "Can we learn how to make traditional butter chicken or paneer?",
+        "timestamp": "2026-10-19T14:20:00.000Z",
+        "time": "Yesterday",
+        "status": "read"
+      }
+    ]
+  },
+  {
+    "threadId": "thread-agam-emma",
+    "bookingId": "HMR-773412",
+    "serviceId": "guide-jeep-3",
+    "serviceTitle": "Jeep Safari - 1 Day",
+    "providerId": "guide-agam",
+    "providerName": "Agam",
+    "providerRole": "Certified Himalayan Mountaineer & Local Culture Guide",
+    "providerAvatar": "/agam-profile.jpg",
+    "userName": "Emma Davis",
+    "userAvatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+    "userEmail": "emma.davis@gmail.com",
+    "userPhone": "+91 99887 76655",
+    "lastMessageTimestamp": "2026-10-12T07:20:00.000Z",
+    "unreadCount": 0,
+    "messages": [
+      {
+        "id": "m-20",
+        "sender": "guide",
+        "from": "me",
+        "text": "Hi Emma, pickup will be at your hotel at 7:30 AM sharp.",
+        "timestamp": "2026-10-12T07:10:00.000Z",
+        "time": "Oct 12",
+        "status": "read"
+      },
+      {
+        "id": "m-21",
+        "sender": "user",
+        "from": "them",
+        "text": "We will be waiting at the hotel lobby by 7:15 AM.",
+        "timestamp": "2026-10-12T07:20:00.000Z",
+        "time": "Oct 12",
+        "status": "read"
+      }
+    ]
+  }
+]

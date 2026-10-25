@@ -1,0 +1,50 @@
+.page {
+  --paper: #faf7f0;
+  --mist: #d9e7eb;
+  --blue: #91b8c7;
+  --stone: #d8bda6;
+  --taupe: #765f53;
+  --ink: #294657;
+  --muted: #78909d;
+  --line: #e6e8e6;
+  --white: #fffefa;
+
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 22px 4.2% 38px 4.2%;
+  min-height: 100vh;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.tabPanel {
+  display: none;
+  animation: fadeInTab 0.2s ease-in-out;
+}
+
+.tabPanelActive {
+  display: block;
+}
+
+@keyframes fadeInTab {
+  from {
+    opacity: 0.6;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 850px) {
+  .page {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 9px;
+  }
+}

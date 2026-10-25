@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADEON — Profile</title>
+<style>
+:root{--paper:#faf7f0;--mist:#d9e7eb;--blue:#91b8c7;--stone:#d8bda6;--taupe:#765f53;--ink:#294657;--muted:#78909d;--line:#e6e8e6;--white:#fffefa}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);font-size:13px}
+.page{max-width:1600px;margin:0 auto;padding:22px 4.2% 38px 4.2%}
+.cover{height:138px;border-radius:13px;background:linear-gradient(90deg,rgba(250,247,240,.25),rgba(250,247,240,.05)),url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85') center 48%/cover;position:relative;overflow:hidden;border:1px solid #dce3e3}
+.profile-head{display:flex;gap:22px;align-items:flex-start;padding:0 18px 22px;margin-top:-25px;position:relative;border-bottom:1px solid var(--line)}
+.avatar{width:116px;height:116px;border-radius:50%;border:5px solid var(--paper);object-fit:cover;background:var(--mist);flex-shrink:0}
+.profile-main{padding-top:35px;flex:1;min-width:0}.name-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.name{font-size:21px;font-weight:650;letter-spacing:-.4px;margin:0}.handle{color:var(--muted);margin-top:3px}.bio{margin:12px 0 5px}.quote{font-style:italic;color:#7e929a}
+.actions{margin-left:auto;padding-top:40px;display:flex;gap:9px}.btn{border:1px solid #d4e0e2;background:#fffefa;color:#426a7c;border-radius:11px;padding:10px 15px;font-size:12px;cursor:pointer;transition:.18s}.btn:hover{background:#eaf2f3;transform:translateY(-1px)}.btn.primary{background:#e4eff1;border-color:#d2e2e5}
+.stats{display:flex;gap:0;margin-top:17px}.stat{padding:0 22px;border-right:1px solid var(--line);color:var(--muted)}.stat:first-child{padding-left:0}.stat:last-child{border:0}.stat strong{display:block;color:var(--ink);font-size:15px;margin-bottom:2px}
+.tabs{display:flex;gap:12px;border-bottom:1px solid var(--line);margin-bottom:16px;padding:0 8px}.tab{border:0;background:none;color:#6d8794;padding:16px 14px 13px;cursor:pointer;border-bottom:2px solid transparent;font:inherit}.tab.active{color:#36758e;border-bottom-color:#4e96ae;font-weight:600}
+.content{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(350px,.92fr);gap:18px}.panel{background:rgba(255,254,250,.86);border:1px solid #e5e8e5;border-radius:13px;box-shadow:0 3px 15px rgba(66,91,99,.035);overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;padding:17px 18px 13px;border-bottom:1px solid #edf0ed}.panel-title{font-size:15px;font-weight:650;display:flex;align-items:center;gap:10px}.symbol{display:grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#eaf2f3;color:#3d8199;font-size:16px}.view{border:0;background:none;color:#528ba0;cursor:pointer;font-size:12px}.trip-list{padding:0 18px}.trip{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;padding:15px 0;border-bottom:1px solid #edf0ed}.trip:last-child{border-bottom:0}.trip img{width:110px;height:116px;border-radius:7px;object-fit:cover;background:var(--mist)}.trip h3{margin:5px 0 8px;font-size:13px;font-weight:650}.meta{font-size:10px;color:#7d95a0;display:flex;gap:13px;flex-wrap:wrap}.desc{font-size:11px;line-height:1.55;color:#5f7784;margin:13px 0 0;max-width:440px}.trip-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.pill{border-radius:20px;background:#e7f0f2;color:#4c8497;padding:6px 11px;font-size:10px;white-space:nowrap;cursor:pointer;border:0}.right-col{display:flex;flex-direction:column;gap:18px}.community-item{display:grid;grid-template-columns:52px minmax(0,1fr);gap:12px;padding:10px 17px;border-bottom:1px solid #edf0ed}.community-item:last-child{border-bottom:0}.community-item img{width:52px;height:52px;border-radius:7px;object-fit:cover}.subreddit{color:#8197a0;font-size:10px;margin-bottom:2px}.comment-title{font-size:11px;font-weight:650;margin-bottom:3px}.excerpt{color:#79909a;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.time{font-size:10px;color:#8ca0a8;margin-top:4px}.service{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 17px;border-bottom:1px solid #edf0ed}.service:last-child{border-bottom:0}.service img{width:52px;height:52px;border-radius:7px;object-fit:cover}.service-name{font-size:11px;font-weight:650;margin-bottom:4px}.service-meta,.service-date{font-size:10px;color:#8197a0}.service-date{margin-top:4px}.status{background:#e1f4e8;color:#47966b;border-radius:20px;padding:5px 8px;font-size:9px;white-space:nowrap}
+.tab-panel{display:none}.tab-panel.active{display:block}.empty-note{padding:28px;color:var(--muted)}
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(31,51,61,.36);z-index:10;align-items:center;justify-content:center;padding:20px}.modal-backdrop.open{display:flex}.modal{width:min(480px,100%);background:var(--paper);border-radius:16px;padding:24px;box-shadow:0 20px 70px #18313b30}.modal h2{margin:0 0 18px;font-size:20px}.field{display:block;margin:13px 0;color:#5f7784;font-size:12px}.field input,.field textarea{display:block;width:100%;margin-top:7px;padding:11px 12px;border:1px solid #d8e2e3;border-radius:9px;background:#fffefa;color:var(--ink);font:inherit}.field textarea{min-height:76px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+@media(max-width:850px){.page{padding:14px}.content{grid-template-columns:1fr}.profile-head{gap:12px;padding-left:6px;padding-right:6px;flex-wrap:wrap}.avatar{width:92px;height:92px}.profile-main{padding-top:34px}.actions{padding-top:0;margin-left:104px;width:100%;order:3}.trip{grid-template-columns:90px minmax(0,1fr)}.trip img{width:90px;height:100px}.cover{height:115px}.stats{gap:0}.stat{padding:0 13px}}@media(max-width:480px){.page{padding:9px}.name{font-size:18px}.profile-head{gap:8px}.avatar{width:78px;height:78px}.profile-main{padding-top:28px}.actions{margin-left:0}.trip{grid-template-columns:76px minmax(0,1fr);gap:10px}.trip img{width:76px;height:90px}.desc{margin-top:8px}.trip-bottom{align-items:flex-start;flex-direction:column}.tabs{gap:0;padding:0}.tab{padding:14px 9px;font-size:12px}.service{grid-template-columns:45px minmax(0,1fr);}.service img{width:45px;height:45px}.status{grid-column:2;justify-self:start}.stats{margin-top:12px}.stat{font-size:11px;padding:0 10px}.stat strong{font-size:14px}}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="cover" aria-label="Scenic coastal cover photo"></div>
+  <section class="profile-head">
+    <img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=85" alt="Profile avatar">
+    <div class="profile-main">
+      <div class="name-row"><h1 class="name" id="profileName">Shourya Jaiswal</h1></div>
+      <div class="handle" id="profileHandle">@shourya</div>
+      <p class="bio" id="profileBio">Travel. Learn. Build. 🌍</p>
+      <div class="quote" id="profileQuote">“Collect moments, not things.”</div>
+      <div class="stats">
+        <div class="stat"><strong>12</strong>Trips</div>
+        <div class="stat"><strong>28</strong>Comments</div>
+        <div class="stat"><strong>4</strong>Booked Services</div>
+      </div>
+    </div>
+    <div class="actions"><button class="btn primary" id="editBtn">Edit Profile</button></div>
+  </section>
+
+  <nav class="tabs" aria-label="Profile sections">
+    <button class="tab active" data-tab="trips">Trips</button>
+    <button class="tab" data-tab="comments">Comments</button>
+    <button class="tab" data-tab="services">Booked Services</button>
+  </nav>
+
+  <section class="tab-panel active" id="trips">
+    <div class="content">
+      <article class="panel">
+        <div class="panel-head"><div class="panel-title"><span class="symbol">⚑</span>Trip History</div><button class="view" data-tab-link="trips">View All</button></div>
+        <div class="trip-list">
+          <div class="trip"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=300&q=80" alt="Santorini coast"><div><h3>Santorini, Greece</h3><div class="meta">▢ &nbsp;12 – 18 Aug 2025　⌖ &nbsp;Santorini, Greece</div><div class="trip-bottom"><p class="desc">White cliffs, blue domes and the best sunsets I’ve ever seen. Truly magical.</p><button class="pill" onclick="showNotice('Santorini, Greece itinerary')">View Itinerary</button></div></div></div>
+          <div class="trip"><img src="https://images.unsplash.com/photo-151968 nuevo?auto=format&fit=crop&w=300&q=80" alt="Mountain lake" onerror="this.src='https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=300&q=80'"><div><h3>Ladakh, India</h3><div class="meta">▢ &nbsp;5 – 12 Jun 2025　⌖ &nbsp;Leh, India</div><div class="trip-bottom"><p class="desc">High mountains, clear skies and endless roads. An unforgettable experience.</p><button class="pill" onclick="showNotice('Ladakh, India itinerary')">View Itinerary</button></div></div></div>
+          <div class="trip"><img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=300&q=80" alt="European city"><div><h3>Prague, Czech Republic</h3><div class="meta">▢ &nbsp;21 – 27 Mar 2025　⌖ &nbsp;Prague, Czech Republic</div><div class="trip-bottom"><p class="desc">Beautiful architecture, great food and a perfect mix of history and modern vibes.</p><button class="pill" onclick="showNotice('Prague, Czech Republic itinerary')">View Itinerary</button></div></div></div>
+          <div class="trip"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=300&q=80" alt="Amalfi coast"><div><h3>Amalfi Coast, Italy</h3><div class="meta">▢ &nbsp;10 – 16 Sep 2024　⌖ &nbsp;Amalfi Coast, Italy</div><div class="trip-bottom"><p class="desc">Scenic drives, coastal towns and some of the best food I’ve had.</p><button class="pill" onclick="showNotice('Amalfi Coast, Italy itinerary')">View Itinerary</button></div></div></div>
+          <div class="trip"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=300&q=80" alt="Green mountain valley"><div><h3>Rishikesh, India</h3><div class="meta">▢ &nbsp;2 – 5 Nov 2023　⌖ &nbsp;Rishikesh, India</div><div class="trip-bottom"><p class="desc">River, mountains, peace. A perfect short getaway.</p><button class="pill" onclick="showNotice('Rishikesh, India itinerary')">View Itinerary</button></div></div></div>
+        </div>
+      </article>
+      <div class="right-col">
+        <article class="panel"><div class="panel-head"><div class="panel-title"><span class="symbol">☏</span>Comments</div><button class="view" data-tab-link="comments">View All</button></div>
+          <div class="community-item"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/TravelIndia</div><div class="comment-title">Best time to visit Spiti Valley?</div><div class="excerpt">In my experience, June to September is the best time...</div><div class="time">3 days ago</div></div></div>
+          <div class="community-item"><img src="https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/Backpacking</div><div class="comment-title">How to plan a 10 day Europe trip on a budget?</div><div class="excerpt">I would suggest focusing on 2–3 countries max...</div><div class="time">1 week ago</div></div></div>
+          <div class="community-item"><img src="https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/TravelTips</div><div class="comment-title">Is it safe to travel alone in Japan?</div><div class="excerpt">Yes, it’s generally very safe. Just follow basic...</div><div class="time">2 weeks ago</div></div></div>
+          <div class="community-item"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/IndiaTravel</div><div class="comment-title">Hidden gems in Himachal?</div><div class="excerpt">I recently visited Shoja and it was absolutely amazing...</div><div class="time">3 weeks ago</div></div></div>
+          <div class="community-item"><img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/TravelCommunity</div><div class="comment-title">Your favourite travel apps?</div><div class="excerpt">I use Google Maps, Rome2Rio and Notion for planning...</div><div class="time">1 month ago</div></div></div>
+        </article>
+        <article class="panel"><div class="panel-head"><div class="panel-title"><span class="symbol">♧</span>Booked Services</div><button class="view" data-tab-link="services">View All</button></div>
+          <div class="service"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Hotel Santorini View</div><div class="service-meta">Hotel · Santorini, Greece</div><div class="service-date">12 Aug – 15 Aug 2025</div></div><span class="status">Confirmed</span></div>
+          <div class="service"><img src="https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Athens City Tour</div><div class="service-meta">Activity · Athens, Greece</div><div class="service-date">16 Aug 2025</div></div><span class="status">Confirmed</span></div>
+          <div class="service"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Train Ticket – Bernina Express</div><div class="service-meta">Transport · Switzerland</div><div class="service-date">22 Jun 2025</div></div><span class="status">Confirmed</span></div>
+          <div class="service"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Adventure Camp</div><div class="service-meta">Activity · Rishikesh, India</div><div class="service-date">3 Nov 2023</div></div><span class="status">Confirmed</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="tab-panel" id="comments"><article class="panel"><div class="panel-head"><div class="panel-title"><span class="symbol">☏</span>Community comments</div><span class="muted">28 posts and replies</span></div>
+    <div class="community-item"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/TravelIndia · 3 days ago</div><div class="comment-title">Best time to visit Spiti Valley?</div><div class="excerpt">In my experience, June to September is the best time for clear roads and mountain views. Pack layers because evenings can get cold.</div></div></div>
+    <div class="community-item"><img src="https://images.unsplash.com/photo-1491557345352-5929e343eb89?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/Backpacking · 1 week ago</div><div class="comment-title">How to plan a 10 day Europe trip on a budget?</div><div class="excerpt">I would suggest focusing on 2–3 countries max, then comparing train passes and staying close to public transport.</div></div></div>
+    <div class="community-item"><img src="https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="subreddit">r/TravelTips · 2 weeks ago</div><div class="comment-title">Is it safe to travel alone in Japan?</div><div class="excerpt">Yes, it’s generally very safe. Plan your route ahead and keep local transport details handy.</div></div></div>
+  </article></section>
+  <section class="tab-panel" id="services"><article class="panel"><div class="panel-head"><div class="panel-title"><span class="symbol">♧</span>All booked services</div></div>
+    <div class="service"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Hotel Santorini View</div><div class="service-meta">Hotel · Santorini, Greece</div><div class="service-date">12 Aug – 15 Aug 2025</div></div><span class="status">Confirmed</span></div>
+    <div class="service"><img src="https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Athens City Tour</div><div class="service-meta">Activity · Athens, Greece</div><div class="service-date">16 Aug 2025</div></div><span class="status">Confirmed</span></div>
+    <div class="service"><img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Train Ticket – Bernina Express</div><div class="service-meta">Transport · Switzerland</div><div class="service-date">22 Jun 2025</div></div><span class="status">Confirmed</span></div>
+    <div class="service"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=120&q=80" alt=""><div><div class="service-name">Adventure Camp</div><div class="service-meta">Activity · Rishikesh, India</div><div class="service-date">3 Nov 2023</div></div><span class="status">Confirmed</span></div>
+  </article></section>
+</main>
+<div class="modal-backdrop" id="editModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <form class="modal" id="profileForm"><h2 id="modalTitle">Edit profile</h2>
+    <label class="field">Display name<input id="nameInput" maxlength="60" required></label>
+    <label class="field">Username<input id="handleInput" maxlength="30" required></label>
+    <label class="field">Bio<input id="bioInput" maxlength="120"></label>
+    <label class="field">Quote<textarea id="quoteInput" maxlength="180"></textarea></label>
+    <div class="modal-actions"><button class="btn" type="button" id="cancelBtn">Cancel</button><button class="btn primary" type="submit">Save changes</button></div>
+  </form>
+</div>
+<script>
+const modal=document.getElementById('editModal');
+document.getElementById('editBtn').addEventListener('click',()=>{
+ document.getElementById('nameInput').value=document.getElementById('profileName').textContent;
+ document.getElementById('handleInput').value=document.getElementById('profileHandle').textContent.replace(/^@/,'');
+ document.getElementById('bioInput').value=document.getElementById('profileBio').textContent;
+ document.getElementById('quoteInput').value=document.getElementById('profileQuote').textContent;
+ modal.classList.add('open');
+});
+document.getElementById('cancelBtn').addEventListener('click',()=>modal.classList.remove('open'));
+modal.addEventListener('click',e=>{if(e.target===modal)modal.classList.remove('open')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('open')});
+document.getElementById('profileForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ document.getElementById('profileName').textContent=document.getElementById('nameInput').value.trim();
+ document.getElementById('profileHandle').textContent='@'+document.getElementById('handleInput').value.trim().replace(/^@/,'');
+ document.getElementById('profileBio').textContent=document.getElementById('bioInput').value.trim();
+ document.getElementById('profileQuote').textContent=document.getElementById('quoteInput').value.trim();
+ modal.classList.remove('open');
+});
+function activateTab(id){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===id));}
+document.querySelectorAll('.tab[data-tab]').forEach(t=>t.addEventListener('click',()=>activateTab(t.dataset.tab)));
+document.querySelectorAll('[data-tab-link]').forEach(t=>t.addEventListener('click',()=>{activateTab(t.dataset.tabLink);window.scrollTo({top:document.querySelector('.tabs').offsetTop-10,behavior:'smooth'});}));
+function showNotice(title){alert(title+' — connect this button to your itinerary details page.');}
+</script>
+</body>
+</html>

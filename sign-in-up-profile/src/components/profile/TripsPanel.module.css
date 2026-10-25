@@ -1,0 +1,75 @@
+.content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(350px, 0.92fr);
+  gap: 18px;
+}
+
+.panel {
+  background: rgba(255, 254, 250, 0.86);
+  border: 1px solid #e5e8e5;
+  border-radius: 13px;
+  box-shadow: 0 3px 15px rgba(66, 91, 99, 0.035);
+  overflow: hidden;
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 18px 13px;
+  border-bottom: 1px solid #edf0ed;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+
+.symbol {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 9px;
+  background: #eaf2f3;
+  color: #3d8199;
+  font-size: 16px;
+  user-select: none;
+}
+
+.view {
+  border: 0;
+  background: none;
+  color: #528ba0;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: color 0.18s ease;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.view:hover {
+  color: #2e5c6e;
+  text-decoration: underline;
+}
+
+.tripList {
+  padding: 0 18px;
+}
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+@media (max-width: 850px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}

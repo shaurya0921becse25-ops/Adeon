@@ -1,0 +1,179 @@
+[
+  {
+    "id": "guide-trek-1",
+    "legacyId": 1,
+    "guideId": "guide-agam",
+    "providerId": "guide-agam",
+    "title": "Himalayan Trek - 2 Days",
+    "category": "Trekking & Hiking",
+    "categoryId": "trekking",
+    "price": 4500,
+    "priceUnit": "per person",
+    "unit": "person",
+    "spots": 12,
+    "status": "Active",
+    "image": "/himalayan-trek.jpg",
+    "coverImage": "/himalayan-trek.jpg",
+    "images": [
+      "/himalayan-trek.jpg",
+      "/hero.jpg"
+    ],
+    "duration": "2 Days / 1 Night",
+    "groupSize": "Max 12 guests",
+    "difficulty": "Moderate",
+    "rating": 4.95,
+    "reviewCount": 38,
+    "description": "Traverse lush deodar forests, alpine streams, and panoramic ridge camps with Agam. Includes campfire nights, stargazing, and traditional mountain cuisine cooked fresh at camp.",
+    "highlights": [
+      "2-day guided ridge traverse through secluded Himalayan trails",
+      "High-altitude alpine camping with four-season tents & sleeping bags",
+      "Freshly cooked local campfire meals, mountain tea, and stargazing sessions"
+    ],
+    "itinerary": [
+      { "time": "Day 1 - 07:00 AM", "title": "Basecamp Briefing & Ascent", "desc": "Meet at basecamp for gear check, acclimatization tea, and start ascent through pine trails." },
+      { "time": "Day 1 - 04:30 PM", "title": "Ridge Camp Setup & Sunset", "desc": "Pitch high ridge tents, capture panoramic sunset over peaks, followed by bonfire dinner." },
+      { "time": "Day 2 - 06:00 AM", "title": "Sunrise Summit & Return", "desc": "Early morning summit walk, warm breakfast, and scenic descent." }
+    ],
+    "includes": ["Professional mountain guide", "All camping equipment", "All meals on trek", "First-aid medical support"],
+    "excludes": ["Personal porter", "Travel insurance", "Personal trekking boots"],
+    "meetingPoint": "Agam Mountaineering Outpost, Old Manali / Shimla Ridge Point",
+    "cancellationPolicy": "Free cancellation up to 48 hours before departure.",
+    "availableTimeSlots": ["06:00 AM Departure", "07:30 AM Departure"],
+    "faqs": [
+      { "q": "Is previous trekking experience required?", "a": "Moderate physical fitness is recommended. Beginners in good health can comfortably participate." }
+    ]
+  },
+  {
+    "id": "guide-cook-2",
+    "legacyId": 2,
+    "guideId": "guide-agam",
+    "providerId": "guide-agam",
+    "title": "Local Cooking Class",
+    "category": "Food & Culture",
+    "categoryId": "cooking",
+    "price": 1200,
+    "priceUnit": "per person",
+    "unit": "person",
+    "spots": 8,
+    "status": "Active",
+    "image": "/cooking-class.jpg",
+    "coverImage": "/cooking-class.jpg",
+    "images": [
+      "/cooking-class.jpg",
+      "/images.jpg"
+    ],
+    "duration": "3 hours",
+    "groupSize": "Max 8 guests",
+    "difficulty": "Easy",
+    "rating": 4.92,
+    "reviewCount": 26,
+    "description": "Learn to prepare authentic Himachali delicacies using fresh farm ingredients, native mountain spices, and time-honored slow-cooking methods in an open-air orchard kitchen.",
+    "highlights": [
+      "Hands-on masterclass cooking traditional Siddu, Madra, and Babru",
+      "Organic valley herb identification and authentic spice blending",
+      "Enjoy the sit-down feast together in a rustic cottage dining room"
+    ],
+    "itinerary": [
+      { "time": "11:00 AM", "title": "Welcome & Herb Garden Walk", "desc": "Enjoy wild mint chai and pick fresh herbs." },
+      { "time": "11:45 AM", "title": "Cooking Workshop", "desc": "Cook step-by-step with guided instructions and brass degchis." },
+      { "time": "01:15 PM", "title": "Sit-down Feast", "desc": "Enjoy the delicious dishes you cooked with freshly made chutneys." }
+    ],
+    "includes": ["All ingredients & equipment", "Recipe booklet", "Multi-course feast", "Fresh beverages"],
+    "excludes": ["Transportation to farm"],
+    "meetingPoint": "Valley Orchard Kitchen, Manali / Mashobra Road",
+    "cancellationPolicy": "Free cancellation up to 24 hours in advance.",
+    "availableTimeSlots": ["11:00 AM Session", "04:30 PM Session"],
+    "faqs": [
+      { "q": "Are vegetarian options available?", "a": "Yes! All dishes are 100% vegetarian." }
+    ]
+  },
+  {
+    "id": "guide-jeep-3",
+    "legacyId": 3,
+    "guideId": "guide-agam",
+    "providerId": "guide-agam",
+    "title": "Jeep Safari - 1 Day",
+    "category": "Adventure",
+    "categoryId": "safari",
+    "price": 8000,
+    "priceUnit": "per group",
+    "unit": "group",
+    "spots": 6,
+    "status": "Active",
+    "image": "/jeep-safari.jpg",
+    "coverImage": "/jeep-safari.jpg",
+    "images": [
+      "/jeep-safari.jpg",
+      "/hero.jpg"
+    ],
+    "duration": "Full Day (8 hours)",
+    "groupSize": "Private Group (Up to 6 guests)",
+    "difficulty": "Easy",
+    "rating": 4.97,
+    "reviewCount": 44,
+    "description": "Experience thrilling off-road mountain trails, hidden waterfalls, and rugged high passes in a customized 4x4 expedition vehicle driven by expert mountain motorists.",
+    "highlights": [
+      "Private 4x4 rugged Jeep exploration across unpaved mountain trails",
+      "Visit untouched glacial streams, ancient apple orchards, and secluded viewpoints",
+      "Gourmet packed picnic lunch beside a pine forest meadow"
+    ],
+    "itinerary": [
+      { "time": "07:30 AM", "title": "Hotel Pickup", "desc": "Meet your driver and board the 4x4 expedition vehicle." },
+      { "time": "11:00 AM", "title": "Off-Road Wilderness Ascent", "desc": "Navigate thrilling terrain to scenic ridge viewpoints." },
+      { "time": "01:30 PM", "title": "Meadow Picnic", "desc": "Enjoy lunch in a peaceful alpine clearing." },
+      { "time": "04:30 PM", "title": "Scenic Return", "desc": "Return to town with memorable photo stops." }
+    ],
+    "includes": ["Private 4x4 vehicle & fuel", "Experienced driver-guide", "Picnic lunch & water", "Entry permits"],
+    "excludes": ["Personal tips"],
+    "meetingPoint": "Hotel Pickup within town limits",
+    "cancellationPolicy": "Free cancellation up to 48 hours before tour.",
+    "availableTimeSlots": ["07:30 AM Pickup"],
+    "faqs": [
+      { "q": "Is it suitable for children and seniors?", "a": "Yes, our vehicle is comfortable with seatbelts and shock-absorbing suspension." }
+    ]
+  },
+  {
+    "id": "guide-walk-4",
+    "legacyId": 4,
+    "guideId": "guide-agam",
+    "providerId": "guide-agam",
+    "title": "City Heritage Walk",
+    "category": "Culture & Heritage",
+    "categoryId": "heritage",
+    "price": 800,
+    "priceUnit": "per person",
+    "unit": "person",
+    "spots": 15,
+    "status": "Active",
+    "image": "/heritage-walk.jpg",
+    "coverImage": "/heritage-walk.jpg",
+    "images": [
+      "/heritage-walk.jpg",
+      "/images.jpg"
+    ],
+    "duration": "2.5 hours",
+    "groupSize": "Max 15 guests",
+    "difficulty": "Easy",
+    "rating": 4.88,
+    "reviewCount": 31,
+    "description": "Unravel centuries of architecture, local folklore, colonial secrets, and mountain traditions through a captivating guided walking tour.",
+    "highlights": [
+      "Stroll past iconic timber-framed buildings and historic landmarks",
+      "Hear fascinating insider stories and legends narrated by Agam",
+      "Sample fresh local street treats and artisanal mountain tea"
+    ],
+    "itinerary": [
+      { "time": "09:00 AM", "title": "Meeting at Heritage Square", "desc": "Introduction and overview of architectural styles." },
+      { "time": "10:15 AM", "title": "Bazaar & Old Alleys", "desc": "Explore historic stone alleyways and craft workshops." },
+      { "time": "11:30 AM", "title": "Tea & Discussion", "desc": "Conclude at a historic tea parlor with Q&A." }
+    ],
+    "includes": ["Expert local historian guide", "Tea and light refreshments", "Audio headsets for clear narration"],
+    "excludes": ["Hotel pickup"],
+    "meetingPoint": "Town Heritage Clock Tower Plaza",
+    "cancellationPolicy": "Free cancellation up to 24 hours prior.",
+    "availableTimeSlots": ["09:00 AM", "03:30 PM"],
+    "faqs": [
+      { "q": "How much walking is involved?", "a": "About 2.5 kilometers at an easy, relaxed pace with regular seated stops." }
+    ]
+  }
+]

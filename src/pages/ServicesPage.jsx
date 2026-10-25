@@ -1,19 +1,16 @@
 import React from 'react';
-import { useAuth } from '../context/AuthContext';
-import TravelerServicesDashboard from './TravelerServicesDashboard';
-import GuideServicesDashboard from './GuideServicesDashboard';
+import UserGuideWrapper from '../modules/user-guide/UserGuideWrapper';
+import { SearchPage } from '../modules/user-guide/pages/SearchPage';
 
 /**
- * Route /services switch:
- * If userRole is 'guide' -> teammate's guide page
- * Otherwise -> Traveler Services Dashboard
+ * Route /services:
+ * Directly connected to Abeon / User Guide
+ * Uses the WanderWise global navbar without iframes.
  */
 export default function ServicesPage() {
-  const { userRole } = useAuth();
-
-  if (userRole === 'guide') {
-    return <GuideServicesDashboard />;
-  }
-
-  return <TravelerServicesDashboard />;
+  return (
+    <UserGuideWrapper>
+      <SearchPage />
+    </UserGuideWrapper>
+  );
 }

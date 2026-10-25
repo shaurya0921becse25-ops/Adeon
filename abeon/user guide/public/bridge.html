@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Abeon Cross-Origin Data Bridge</title>
+</head>
+<body>
+<script>
+(function() {
+  const CHANNEL_NAME = "abeon_travel_bridge";
+  let bc = null;
+  try {
+    if ("BroadcastChannel" in window) {
+      bc = new BroadcastChannel(CHANNEL_NAME);
+    }
+  } catch (e) {}
+
+  window.addEventListener("message", function(event) {
+    if (!event.data || event.data.source !== "abeon_bridge_sync") return;
+    const { action, key, value, type, payload } = event.data;
+
+    if (action === "syncItem" && key) {
+      try {
+        const strVal = typeof value === "string" ? value : JSON.stringify(value);
+        localStorage.setItem(key, strVal);
+      } catch (err) {
+        console.warn("[Bridge] LocalStorage write failed:", err);
+      }
+      try {
+        if (bc) {
+          bc.postMessage({ type, payload, timestamp: Date.now(), fromBridge: true });
+        }
+      } catch (err) {}
+      try {
+        window.dispatchEvent(new CustomEvent("abeon_local_sync", { detail: { type, payload } }));
+      } catch (err) {}
+    } else if (action === "requestInitialData") {
+      const keys = ["abeon_profile", "abeon_services", "abeon_shared_chat_threads", "abeon_bookings"];
+      const dump = {};
+      keys.forEach(function(k) {
+        try {
+          const v = localStorage.getItem(k);
+          if (v) dump[k] = JSON.parse(v);
+        } catch (e) {}
+      });
+      if (event.source) {
+        event.source.postMessage({ source: "abeon_bridge_initial_reply", data: dump }, "*");
+      }
+    }
+  });
+
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ source: "abeon_bridge_ready" }, "*");
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,332 @@
+{
+  "japan": [
+    {
+      "id": "food-jp-1",
+      "name": "Tonkotsu Ramen",
+      "category": "Noodles & Soup",
+      "emoji": "🍜",
+      "tagLine": "Noodle soup · ¥900–¥1,400",
+      "story": "Rich, creamy pork bone broth simmered for 18+ hours, served with springy thin noodles, tender chashu pork, and seasoned soft-boiled egg.",
+      "whereToFind": "Ichiran Shibuya or Fuunji Shinjuku for rich dipping tsukemen.",
+      "tip": "Customise your noodle firmness to 'katame' (firm) for best texture.",
+      "gradientColors": [
+        "#c2410c",
+        "#7c2d12"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&auto=format&fit=crop&q=80",
+      "tried": true
+    },
+    {
+      "id": "food-jp-2",
+      "name": "Edomae Nigiri Sushi",
+      "category": "Seafood",
+      "emoji": "🍣",
+      "tagLine": "Fresh seafood · ¥2,500–¥8,000",
+      "story": "Tokyo's heritage sushi style featuring seasoned vinegared rice and pristine fresh fish from Toyosu and Tsukiji markets.",
+      "whereToFind": "Tsukiji Outer Market stalls or Ginza standing sushi bars.",
+      "tip": "Dip fish side down into soy sauce so the rice doesn't crumble.",
+      "gradientColors": [
+        "#b45309",
+        "#78350f"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600&auto=format&fit=crop&q=80",
+      "tried": false
+    },
+    {
+      "id": "food-jp-3",
+      "name": "Takoyaki & Yakitori",
+      "category": "Street Food",
+      "emoji": "🍢",
+      "tagLine": "Street snacks · ¥600–¥1,200",
+      "story": "Golden octopus balls drizzled with savory sauce and bonito flakes, paired with charcoal-grilled skewered chicken.",
+      "whereToFind": "Omoide Yokocho in Shinjuku or Asakusa market alleyways.",
+      "tip": "Extremely hot inside when freshly cooked—eat carefully!",
+      "gradientColors": [
+        "#0e7490",
+        "#164e63"
+      ],
+      "imageUrl": "https://tse1.mm.bing.net/th/id/OIP.6l3AnbOJrN1haQIfJe8MTAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "tried": true
+    },
+    {
+      "id": "food-jp-4",
+      "name": "Matcha Wagashi & Parfait",
+      "category": "Desserts & Tea",
+      "emoji": "🍵",
+      "tagLine": "Traditional sweet · ¥700–¥1,600",
+      "story": "Ceremonial Uji green tea paired with delicate handcrafted seasonal sweets made from sweet red bean paste and rice flour.",
+      "whereToFind": "Traditional teahouses near Asakusa and Uji matcha parlours.",
+      "tip": "Savor the subtle contrast between the bitter green tea and the sweet red bean.",
+      "gradientColors": [
+        "#1d4ed8",
+        "#1e3a8a"
+      ],
+      "imageUrl": "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1295,h_706/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/fuwfp5vilzxrir9kjgsr/Tokyo:MatchaTeaCeremonywithWagashiSweets.jpg",
+      "tried": false
+    }
+  ],
+  "shimla": [
+    {
+      "id": "food-sh-1",
+      "name": "Chana Madra",
+      "category": "Traditional Curry",
+      "emoji": "🍲",
+      "tagLine": "Himachali delicacy · ₹180–₹320",
+      "story": "Classic Himachali celebratory dish made of chickpeas slow-cooked in a rich yogurt and aromatic spice gravy.",
+      "whereToFind": "Himachali Rasoi on Mall Road, Shimla.",
+      "tip": "Pairs wonderfully with piping hot steamed basmati rice.",
+      "gradientColors": [
+        "#c2410c",
+        "#7c2d12"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80",
+      "tried": true
+    },
+    {
+      "id": "food-sh-2",
+      "name": "Siddu with Pure Ghee",
+      "category": "Steamed Bread",
+      "emoji": "🥟",
+      "tagLine": "Local bread · ₹80–₹150",
+      "story": "Traditional steamed wheat flour bread stuffed with spiced poppy seeds and walnut paste, drenched in pure desi ghee.",
+      "whereToFind": "Street food stalls near The Ridge and Lakkar Bazaar.",
+      "tip": "Eat it hot right out of the steamer during chilly evenings.",
+      "gradientColors": [
+        "#b45309",
+        "#78350f"
+      ],
+      "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.fmxcAv_Hb0S8XsztGUos9QHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "tried": false
+    },
+    {
+      "id": "food-sh-3",
+      "name": "Dham Festive Thali",
+      "category": "Royal Feast",
+      "emoji": "🍛",
+      "tagLine": "Multi-course feast · ₹250–₹450",
+      "story": "Heritage festive feast served during celebrations, featuring lentils, sweet rice (Meetha Bhaat), and sour curry (Khatta).",
+      "whereToFind": "Heritage restaurants in Lower Bazaar and Mall Road.",
+      "tip": "Cooked without onions or garlic by traditional Botis chefs.",
+      "gradientColors": [
+        "#0e7490",
+        "#164e63"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1613292443284-8d10ef9383fe?w=600&auto=format&fit=crop&q=80",
+      "tried": false
+    },
+    {
+      "id": "food-sh-4",
+      "name": "Babru & Mountain Herbal Tea",
+      "category": "Snacks & Chai",
+      "emoji": "☕",
+      "tagLine": "Stuffed snack · ₹50–₹120",
+      "story": "Deep-fried wheat flatbread stuffed with spiced black gram paste, served with tamarind chutney and mountain herbal tea.",
+      "whereToFind": "Teahouses overlooking the valley on Cart Road.",
+      "tip": "The perfect rainy or foggy day warm snack.",
+      "gradientColors": [
+        "#1d4ed8",
+        "#1e3a8a"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&auto=format&fit=crop&q=80",
+      "tried": false
+    }
+  ],
+  "jaipur": [
+    {
+      "id": "food-jp-1",
+      "name": "Dal Baati Churma",
+      "category": "Rajasthani Classic",
+      "emoji": "🍲",
+      "tagLine": "Iconic platter · ₹250–₹550",
+      "story": "Baked hard wheat balls (baati) soaked in pure ghee, served with spicy mixed lentil dal and sweet powdered wheat crumble (churma).",
+      "whereToFind": "Chokhi Dhani or Laxmi Mishthan Bhandar (LMB) in Johari Bazaar.",
+      "tip": "Crush the baati into pieces and ladle the hot dal and ghee generously.",
+      "gradientColors": [
+        "#c2410c",
+        "#7c2d12"
+      ],
+      "imageUrl": "https://www.mygingergarlickitchen.com/wp-content/rich-markup-images/1x1/1x1-dal-baati-churma.jpg",
+      "tried": true
+    },
+    {
+      "id": "food-jp-2",
+      "name": "Pyaaz Kachori & Mirchi Vada",
+      "category": "Street Snacks",
+      "emoji": "🥟",
+      "tagLine": "Flaky pastry · ₹40–₹90",
+      "story": "Flaky golden deep-fried pastry generously stuffed with spicy caramelized onion filling, served with tangy tamarind chutney.",
+      "whereToFind": "Rawat Mishthan Bhandar near Jaipur Railway Station.",
+      "tip": "Rawat sells over 10,000 fresh kachoris every single day—arrive early for hot batches.",
+      "gradientColors": [
+        "#b45309",
+        "#78350f"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80",
+      "tried": false
+    },
+    {
+      "id": "food-jp-3",
+      "name": "Laal Maas",
+      "category": "Royal Meat",
+      "emoji": "🍖",
+      "tagLine": "Smoked spicy curry · ₹400–₹750",
+      "story": "Royal warrior curry prepared with tender mutton cooked in fiery Mathania red chilies and garlic curd gravy.",
+      "whereToFind": "Handi Restaurant on MI Road or Spice Court, Civil Lines.",
+      "tip": "Ask for medium spice if you are sensitive to fiery chilies.",
+      "gradientColors": [
+        "#dc2626",
+        "#991b1b"
+      ],
+      "imageUrl": "https://www.licious.in/blog/wp-content/uploads/2019/11/Laal-Maas-1-e1574922038329.jpg",
+      "tried": false
+    },
+    {
+      "id": "food-jp-4",
+      "name": "Ghevar & Malpua",
+      "category": "Royal Sweets",
+      "emoji": "🍯",
+      "tagLine": "Festive sweet · ₹120–₹300",
+      "story": "Traditional disc-shaped honeycomb sweet soaked in cardamom saffron syrup and garnished with thick mawa and silver leaf.",
+      "whereToFind": "LMB (Laxmi Mishthan Bhandar) in Johari Bazaar.",
+      "tip": "Malai Ghevar topped with reduced thickened milk is the most decadent version.",
+      "gradientColors": [
+        "#d97706",
+        "#92400e"
+      ],
+      "imageUrl": "https://tse4.mm.bing.net/th/id/OIP.hq0s0Jr7_YTp4Co1SCGB8wHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "tried": false
+    }
+  ],
+  "dubai": [
+    {
+      "id": "food-db-1",
+      "name": "Emirati Chicken Machboos",
+      "category": "Rice & Spice",
+      "emoji": "🍗",
+      "tagLine": "National spiced rice · AED 45–AED 85",
+      "story": "Fragrant basmati rice slow-cooked with tender chicken, dried black limes (loomi), cardamom, cloves, and saffron.",
+      "whereToFind": "Al Fanar Restaurant in Festival City or Al Khayma Heritage in Al Fahidi.",
+      "tip": "The dried black lime imparts a distinctive zesty, earthy aroma.",
+      "gradientColors": [
+        "#c2410c",
+        "#7c2d12"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&auto=format&fit=crop&q=80",
+      "tried": true
+    },
+    {
+      "id": "food-db-2",
+      "name": "Shawarma & Garlic Toum",
+      "category": "Street Wrap",
+      "emoji": "🌯",
+      "tagLine": "Fresh pita roll · AED 12–AED 25",
+      "story": "Thinly sliced spit-roasted marinated chicken or lamb wrapped in soft warm pita with creamy garlic toum, pickles, and crispy fries.",
+      "whereToFind": "Al Mallah on 2nd December Street or Operation: Falafel.",
+      "tip": "Order with extra garlic toum for authentic flavor.",
+      "gradientColors": [
+        "#b45309",
+        "#78350f"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=600&auto=format&fit=crop&q=80",
+      "tried": false
+    },
+    {
+      "id": "food-db-3",
+      "name": "Luqaimat with Date Syrup",
+      "category": "Traditional Sweet",
+      "emoji": "🍯",
+      "tagLine": "Golden dumplings · AED 20–AED 35",
+      "story": "Golden crispy fried dough balls with a soft, airy center, drizzled generously with date molasses (dibs) and toasted sesame seeds.",
+      "whereToFind": "Arabian Tea House in Al Fahidi Historical Neighbourhood.",
+      "tip": "Best enjoyed warm alongside Arabic cardamom coffee (Gahwa).",
+      "gradientColors": [
+        "#0e7490",
+        "#164e63"
+      ],
+      "imageUrl": "https://thumbs.dreamstime.com/b/luqaimat-sweet-dumplings-date-syrup-sesame-seeds-served-traditional-arabic-coffee-dessert-ramadan-dallah-pot-413339414.jpg",
+      "tried": false
+    },
+    {
+      "id": "food-db-4",
+      "name": "Warm Cheese Kunafa",
+      "category": "Middle Eastern Dessert",
+      "emoji": "🧀",
+      "tagLine": "Baked dessert · AED 25–AED 45",
+      "story": "Shredded spun pastry soaked in sweet orange blossom syrup, layered with melted Akkawi cheese, and topped with crushed pistachios.",
+      "whereToFind": "Feras Aldiyafa Sweets or Bosporus Turkish Restaurant.",
+      "tip": "Eat it hot right as the cheese strings pull away from the dish.",
+      "gradientColors": [
+        "#1d4ed8",
+        "#1e3a8a"
+      ],
+      "imageUrl": "https://static.vecteezy.com/system/resources/previews/076/500/132/large_2x/stretching-cheese-kunafa-with-pistachios-and-syrup-hot-photo.jpg",
+      "tried": false
+    }
+  ],
+  "chandigarh": [
+    {
+      "id": "food-ch-1",
+      "name": "Butter Chicken & Garlic Naan",
+      "category": "Punjabi Legend",
+      "emoji": "🍗",
+      "tagLine": "Rich gravy classic · ₹320–₹550",
+      "story": "Charcoal-grilled chicken tikka simmered in a velvet tomato, butter, and cashew nut cream sauce with fenugreek.",
+      "whereToFind": "Pal Dhaba in Sector 28 or Baba Chicken in Sector 35.",
+      "tip": "Dip freshly baked butter-brushed garlic naan directly into the thick sauce.",
+      "gradientColors": [
+        "#c2410c",
+        "#7c2d12"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=600&auto=format&fit=crop&q=80",
+      "tried": true
+    },
+    {
+      "id": "food-ch-2",
+      "name": "Amritsari Kulcha with Chole",
+      "category": "Tandoori Breakfast",
+      "emoji": "🫓",
+      "tagLine": "Stuffed bread · ₹110–₹200",
+      "story": "Flaky layered bread stuffed with spiced mashed potatoes and onions, baked crisp in a clay tandoor and served with tangy chickpeas.",
+      "whereToFind": "Bansal Amritsari Kulcha in Sector 37 or Stu-C (Panjab University).",
+      "tip": "Crush the hot kulcha with your hands to release steam and let the butter melt in.",
+      "gradientColors": [
+        "#b45309",
+        "#78350f"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80",
+      "tried": false
+    },
+    {
+      "id": "food-ch-3",
+      "name": "Sarson Ka Saag & Makki Di Roti",
+      "category": "Heritage Winter Meal",
+      "emoji": "🥬",
+      "tagLine": "Rustic feast · ₹180–₹300",
+      "story": "Slow-cooked spiced winter mustard leaves topped with white home-churned butter (makkhan), served with golden cornmeal flatbread.",
+      "whereToFind": "Traditional Punjabi Dhabas across Sector 22 and 26.",
+      "tip": "Complement with a chunk of jaggery (gur) on the side.",
+      "gradientColors": [
+        "#15803d",
+        "#14532d"
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80",
+      "tried": false
+    },
+    {
+      "id": "food-ch-4",
+      "name": "Kulfi Falooda & Sweet Lassi",
+      "category": "Desserts & Drinks",
+      "emoji": "🍨",
+      "tagLine": "Chilled treat · ₹70–₹160",
+      "story": "Dense rabri kulfi cut into cubes and smothered with silky vermicelli falooda noodles, rose syrup, and sweet basil seeds.",
+      "whereToFind": "Shiv Mishthan Bhandar or Sindhi Sweets in Sector 17 Plaza.",
+      "tip": "The ultimate refreshing dessert on a warm afternoon stroll in Sector 17.",
+      "gradientColors": [
+        "#9333ea",
+        "#581c87"
+      ],
+      "imageUrl": "https://tse1.explicit.bing.net/th/id/OIP.d8dyVGD80QVHN9UUvZGo_gHaLH?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+      "tried": false
+    }
+  ]
+}

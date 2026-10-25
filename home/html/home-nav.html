@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABEON Navbar</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font: Instrument Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            instrument: ['"Instrument Sans"', 'sans-serif'],
+          },
+          colors: {
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            muted: {
+              foreground: 'hsl(var(--muted-foreground))',
+            },
+            ring: 'hsl(var(--ring))',
+            destructive: 'hsl(var(--destructive))',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      /* Soft white & light blue theme tokens */
+      --background: 210 100% 98%;
+      --foreground: 222 47% 11%;
+      --muted-foreground: 215 16% 47%;
+      --ring: 201 96% 32%;
+      --destructive: 0 84.2% 60.2%;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-sky-50 via-white to-sky-100/50 text-slate-900 font-sans antialiased min-h-screen">
+
+  <!-- Fixed Header Container -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+    <nav class="mx-auto max-w-[1400px]">
+      
+      <!-- Unscrolled State (State 1) -->
+      <div id="nav-container" class="flex items-center justify-between transition-all duration-500 px-6 lg:px-8 h-20">
+        
+        <!-- Logo: Instrument Sans, 24px, Sleek tracking & medium weight -->
+        <a href="#" class="flex items-center gap-2 group">
+          <span id="logo-text" class="font-instrument text-[24px] font-semibold tracking-[-0.03em] uppercase transition-all duration-500 text-slate-900 hover:opacity-80">
+            ABEON
+          </span>
+        </a>
+
+        <!-- Navigation Links -->
+        <div id="nav-links" class="hidden md:flex items-center gap-12">
+          <a href="#home" class="nav-item text-sm transition-colors duration-300 relative group text-slate-600 hover:text-sky-600">
+            Home
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-sky-600"></span>
+          </a>
+          <a href="#explore" class="nav-item text-sm transition-colors duration-300 relative group text-slate-600 hover:text-sky-600">
+            Explore
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-sky-600"></span>
+          </a>
+          <a href="#community" class="nav-item text-sm transition-colors duration-300 relative group text-slate-600 hover:text-sky-600">
+            Community
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-sky-600"></span>
+          </a>
+          <a href="#my-trips" class="nav-item text-sm transition-colors duration-300 relative group text-slate-600 hover:text-sky-600">
+            My Trips
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-sky-600"></span>
+          </a>
+          <a href="#trip-finder" class="nav-item text-sm transition-colors duration-300 relative group text-slate-600 hover:text-sky-600">
+            Trip Finder
+            <span class="nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-sky-600"></span>
+          </a>
+        </div>
+
+        <!-- Right Side Actions -->
+        <div class="hidden md:flex items-center gap-4">
+          <a id="signin-link" href="#" class="transition-all duration-500 text-sm text-slate-600 hover:text-sky-600 font-medium">Sign in</a>
+        </div>
+
+        <!-- Mobile Toggle Button -->
+        <button id="mobile-toggle" class="md:hidden p-2 transition-colors duration-500 text-slate-900" aria-label="Toggle menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-6 h-6">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+    </nav>
+  </header>
+
+  <!-- Main Content Sample -->
+  <main class="pt-40 px-6 max-w-[1400px] mx-auto min-h-[220vh] space-y-12">
+    <div class="text-center max-w-2xl mx-auto space-y-4">
+      <span class="px-3 py-1 text-xs font-semibold tracking-wide text-sky-700 bg-sky-100 rounded-full">ABEON Travel</span>
+      <h1 class="text-5xl font-extrabold text-slate-900 tracking-tight">Discover Your Next Journey</h1>
+      <p class="text-slate-600">Scroll down to see the navbar shift smoothly from its spacious state to its compact sticky state.</p>
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.getElementById('header');
+      const navContainer = document.getElementById('nav-container');
+      const logoText = document.getElementById('logo-text');
+      const navItems = document.querySelectorAll('.nav-item');
+      const navUnderlines = document.querySelectorAll('.nav-underline');
+      const signinLink = document.getElementById('signin-link');
+      const mobileToggle = document.getElementById('mobile-toggle');
+
+      let isScrolled = false;
+
+      window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY > 20;
+
+        if (scrolled !== isScrolled) {
+          isScrolled = scrolled;
+
+          if (isScrolled) {
+            // Light glassmorphism effect on scroll
+            header.classList.add('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-sky-200/60', 'shadow-sm');
+
+            // Scrolled State
+            navContainer.className = "flex items-center justify-between transition-all duration-500 px-6 lg:px-8 h-14";
+            logoText.className = "font-instrument text-[24px] font-semibold tracking-[-0.03em] uppercase transition-all duration-500 text-foreground hover:opacity-80";
+
+            navItems.forEach(item => {
+              item.className = "nav-item text-sm transition-colors duration-300 relative group text-foreground/70 hover:text-foreground";
+            });
+            navUnderlines.forEach(underline => {
+              underline.className = "nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-foreground";
+            });
+
+            signinLink.className = "transition-all duration-500 text-xs text-foreground/70 hover:text-foreground font-medium";
+            mobileToggle.className = "md:hidden p-2 transition-colors duration-500 text-foreground";
+
+          } else {
+            header.classList.remove('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-sky-200/60', 'shadow-sm');
+
+            // Unscrolled Top State
+            navContainer.className = "flex items-center justify-between transition-all duration-500 px-6 lg:px-8 h-20";
+            logoText.className = "font-instrument text-[24px] font-semibold tracking-[-0.03em] uppercase transition-all duration-500 text-slate-900 hover:opacity-80";
+
+            navItems.forEach(item => {
+              item.className = "nav-item text-sm transition-colors duration-300 relative group text-slate-600 hover:text-sky-600";
+            });
+            navUnderlines.forEach(underline => {
+              underline.className = "nav-underline absolute -bottom-1 left-0 w-0 h-px transition-all duration-300 group-hover:w-full bg-sky-600";
+            });
+
+            signinLink.className = "transition-all duration-500 text-sm text-slate-600 hover:text-sky-600 font-medium";
+            mobileToggle.className = "md:hidden p-2 transition-colors duration-500 text-slate-900";
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

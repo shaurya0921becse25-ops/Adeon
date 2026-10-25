@@ -1,0 +1,87 @@
+{
+  "shimla": {
+    "id": "shimla",
+    "name": "Shimla",
+    "title": "Queen of the Hills, Shimla",
+    "country": "India",
+    "region": "Himachal Pradesh",
+    "currency": "INR",
+    "currencySymbol": "₹",
+    "defaultBudget": 35000,
+    "coordinates": {
+      "lat": 31.1048,
+      "lng": 77.1734
+    },
+    "zoom": 13,
+    "heroImage": "https://media1.thrillophilia.com/filestore/anzgo2rvrlyun3nfcwndwia4v9jh_shutterstock_1439505056.jpg",
+    "description": "Breathtaking Himalayan hill station renowned for British colonial architecture, pine-covered ridges, and mountain vistas."
+  },
+  "jaipur": {
+    "id": "jaipur",
+    "name": "Jaipur",
+    "title": "The Pink City, Jaipur",
+    "country": "India",
+    "region": "Rajasthan",
+    "currency": "INR",
+    "currencySymbol": "₹",
+    "defaultBudget": 45000,
+    "coordinates": {
+      "lat": 26.9124,
+      "lng": 75.7873
+    },
+    "zoom": 12.5,
+    "heroImage": "https://wallpapers.com/images/hd/hawa-mahal-in-jaipur-q5ky7q0bhbrd9vbj.jpg",
+    "description": "Capital of Rajasthan, famous for opulent royal palaces, fortified hilltop citadels, and vibrant pink sandstone architecture."
+  },
+  "japan": {
+    "id": "japan",
+    "name": "Japan",
+    "title": "Japan (Tokyo & Kyoto)",
+    "country": "Japan",
+    "region": "Kanto & Kansai",
+    "currency": "JPY",
+    "currencySymbol": "¥",
+    "defaultBudget": 250000,
+    "coordinates": {
+      "lat": 35.6762,
+      "lng": 139.6503
+    },
+    "zoom": 11,
+    "heroImage": "https://th.bing.com/th/id/R.d136add1862f97e1e3e9c5e3c78dfe94?rik=uNfoHg1Hi0kZiw&riu=http%3a%2f%2fi.huffpost.com%2fgen%2f1065462%2fimages%2fo-CHERRY-BLOSSOM-TREE-JAPAN-facebook.jpg&ehk=2UdEI11R1kSuhoE1s0LCj0KHM46lugKEzPN3hNisT0k%3d&risl=&pid=ImgRaw&r=0",
+    "description": "A harmonious blend of ultra-modern neon-lit skyscrapers, ancient Shinto shrines, Zen gardens, and world-class culinary traditions."
+  },
+  "dubai": {
+    "id": "dubai",
+    "name": "Dubai",
+    "title": "Dubai & Beyond",
+    "country": "United Arab Emirates",
+    "region": "Emirate of Dubai",
+    "currency": "AED",
+    "currencySymbol": "AED ",
+    "defaultBudget": 7500,
+    "coordinates": {
+      "lat": 25.2048,
+      "lng": 55.2708
+    },
+    "zoom": 12,
+    "heroImage": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt2f5250be900bbe1a/652d8da111993234f5d29e53/1-BCC-2023-DUBAI-LANDMARKS.webp?fit=crop&disable=upscale&auto=webp&quality=60&crop=smart",
+    "description": "Futuristic desert metropolis celebrated for soaring skyscrapers, luxury shopping, artificial archipelagos, and vibrant marina lifestyle."
+  },
+  "chandigarh": {
+    "id": "chandigarh",
+    "name": "Chandigarh",
+    "title": "The City Beautiful, Chandigarh",
+    "country": "India",
+    "region": "Punjab & Haryana",
+    "currency": "INR",
+    "currencySymbol": "₹",
+    "defaultBudget": 28000,
+    "coordinates": {
+      "lat": 30.7333,
+      "lng": 76.7794
+    },
+    "zoom": 12.5,
+    "heroImage": "https://www.constructionworld.in/assets/uploads/79d4944d846f9fc1cffdb40ff7bb8ba3.jpg",
+    "description": "India’s first planned city masterminded by Le Corbusier, distinguished by extensive green parks, modernist concrete architecture, and Nek Chand’s Rock Garden."
+  }
+}

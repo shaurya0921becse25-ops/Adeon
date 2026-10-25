@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shimla Private Guided Walk Tour - Abeon</title>
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM: PORCELAIN & AEGEAN
+       ========================================================================== */
+    :root {
+      --porcelain: #FAF7F0;
+      --mist-blue: #D9E7EB;
+      --aegean: #91B8C7;
+      --aegean-deep: #4A7A8C;
+      --aegean-dark: #2B4E5B;
+      --limestone: #D8BDA6;
+      --taupe: #765F53;
+      --taupe-soft: #9A8478;
+      --white: #FFFFFF;
+      --success-green: #2E7D32;
+      --success-light: #E8F5E9;
+      --radius-sm: 8px;   /* Squarish with subtle rounded corners */
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(118, 95, 83, 0.08);
+      --shadow-md: 0 4px 16px rgba(118, 95, 83, 0.12);
+      --shadow-lg: 0 12px 32px rgba(43, 78, 91, 0.25);
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--porcelain);
+      color: var(--taupe);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: var(--mist-blue);
+      margin: 32px 0;
+      border: none;
+    }
+
+    /* ==========================================================================
+       SECTION 1: HERO & PRODUCT HEADER
+       ========================================================================== */
+    .hero-section {
+      padding-top: 32px;
+    }
+
+    .product-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .product-meta-bar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: var(--taupe-soft);
+      margin-bottom: 24px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rating-stars {
+      display: flex;
+      gap: 2px;
+      color: #F4A261;
+    }
+
+    .rating-text {
+      font-weight: 700;
+      color: var(--aegean-dark);
+    }
+
+    .meta-pipe {
+      color: var(--aegean);
+    }
+
+    .badge-excellence {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--mist-blue);
+      color: var(--aegean-dark);
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+    }
+
+    .price-guarantee {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(145, 184, 199, 0.15);
+      border: 1px solid var(--aegean);
+      color: var(--aegean-dark);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.825rem;
+      font-weight: 600;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .single-image-card {
+      position: relative;
+      width: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      background: var(--mist-blue);
+      aspect-ratio: 16 / 10;
+    }
+
+    .single-image-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-actions {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-btn {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--mist-blue);
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--aegean-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .attribute-pills {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 16px;
+      padding: 16px 20px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--mist-blue);
+    }
+
+    .pill-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--aegean-dark);
+    }
+
+    /* Booking Card with Squarish Buttons */
+    .booking-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--mist-blue);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      position: sticky;
+      top: 24px;
+    }
+
+    .price-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .price-value {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--aegean-dark);
+    }
+
+    .price-details-link {
+      font-size: 0.85rem;
+      color: var(--aegean-deep);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    .discount-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--porcelain);
+      border: 1px solid var(--limestone);
+      color: var(--taupe);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--taupe-soft);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--aegean);
+      border-radius: var(--radius-sm);
+      background: var(--porcelain);
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--aegean-dark);
+      font-weight: 600;
+      outline: none;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Squarish Button Style */
+    .btn-book {
+      width: 100%;
+      background: var(--aegean-deep);
+      color: var(--white);
+      padding: 14px;
+      border-radius: var(--radius-sm); /* Squarish corners */
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 12px;
+      margin-bottom: 16px;
+      transition: background 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-book:hover {
+      background: var(--aegean-dark);
+    }
+
+    .cancellation-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: rgba(217, 231, 235, 0.4);
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.825rem;
+      color: var(--aegean-dark);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .advance-notice-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--porcelain);
+      border: 1px solid var(--limestone);
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+
+    .advance-text h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--taupe);
+    }
+
+    .advance-text p {
+      font-size: 0.775rem;
+      color: var(--taupe-soft);
+    }
+
+    .solo-suitability {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.825rem;
+      color: var(--taupe);
+      padding: 8px 0;
+    }
+
+    /* ==========================================================================
+       SECTION 2 & 3: DETAILS, MEETUP & REVIEWS
+       ========================================================================== */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .detail-card-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--white);
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--mist-blue);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .detail-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: var(--mist-blue);
+      color: var(--aegean-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .detail-text h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      margin-bottom: 2px;
+    }
+
+    .detail-text p {
+      font-size: 0.825rem;
+      color: var(--taupe-soft);
+    }
+
+    .highlights-box {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid var(--mist-blue);
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 24px;
+    }
+
+    .highlights-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+    }
+
+    .highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .highlights-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 0.95rem;
+      color: var(--taupe);
+    }
+
+    .highlights-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--aegean-deep);
+      font-size: 1.4rem;
+      line-height: 1;
+      top: -2px;
+    }
+
+    .section-heading {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      margin-bottom: 20px;
+    }
+
+    .meetup-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--mist-blue);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+
+    .meetup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      position: relative;
+    }
+
+    .meetup-grid::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: var(--mist-blue);
+    }
+
+    .point-subhead {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      margin-bottom: 12px;
+    }
+
+    .point-address-title {
+      font-weight: 700;
+      color: var(--taupe);
+      font-size: 0.95rem;
+    }
+
+    .point-address-body {
+      font-size: 0.875rem;
+      color: var(--taupe-soft);
+      margin-top: 4px;
+      margin-bottom: 12px;
+    }
+
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--aegean-deep);
+      margin-bottom: 12px;
+    }
+
+    .point-instruction {
+      font-size: 0.85rem;
+      color: var(--taupe);
+      background: var(--porcelain);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      line-height: 1.4;
+    }
+
+    .reviews-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .review-tabs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      background: var(--white);
+      border: 1px solid var(--aegean);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--aegean-dark);
+    }
+
+    .btn-write-review {
+      background: var(--aegean-dark);
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .reviews-summary-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--mist-blue);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .score-box {
+      text-align: center;
+      border-right: 1px solid var(--mist-blue);
+      padding-right: 24px;
+    }
+
+    .score-number {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--aegean-dark);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--taupe);
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .score-bubbles {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      color: var(--aegean-deep);
+      margin-bottom: 6px;
+    }
+
+    .breakdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+
+    .label-col {
+      width: 70px;
+      font-weight: 600;
+      color: var(--taupe);
+    }
+
+    .bar-col {
+      flex: 1;
+      height: 8px;
+      background: var(--porcelain);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--aegean-deep);
+      border-radius: var(--radius-full);
+    }
+
+    .count-col {
+      width: 50px;
+      text-align: right;
+      color: var(--taupe-soft);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       MODAL OVERLAY & POPUP CARDS (BOOKING FLOW)
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(43, 78, 91, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 580px;
+      max-height: calc(100vh - 40px);
+      position: relative;
+      overflow-y: auto;
+      margin: auto;
+      animation: modalSlide 0.25s ease-out;
+    }
+
+    @keyframes modalSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--porcelain);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--taupe);
+      font-size: 1.2rem;
+      z-index: 10;
+      border: 1px solid var(--mist-blue);
+    }
+
+    /* Contact Details Modal Form */
+    .account-details-wrapper {
+      padding: 32px;
+    }
+
+    .account-title-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .account-title-container h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+    }
+
+    .subheading-text {
+      font-size: 0.875rem;
+      color: var(--taupe-soft);
+      margin-bottom: 20px;
+    }
+
+    .login-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--porcelain);
+      border: 1px solid var(--mist-blue);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--taupe);
+      margin-bottom: 24px;
+    }
+
+    .login-banner button {
+      color: var(--aegean-deep);
+      text-decoration: underline;
+    }
+
+    .input-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .modal-field {
+      margin-bottom: 16px;
+    }
+
+    .modal-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      margin-bottom: 6px;
+    }
+
+    .modal-field input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--aegean);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      background: var(--porcelain);
+    }
+
+    .modal-field input:focus {
+      background: var(--white);
+      border-color: var(--aegean-deep);
+    }
+
+    .helper-text {
+      font-size: 0.75rem;
+      color: var(--taupe-soft);
+      margin-top: 4px;
+    }
+
+    .phone-flex {
+      display: flex;
+      gap: 8px;
+    }
+
+    .country-code-btn {
+      padding: 10px 12px;
+      background: var(--porcelain);
+      border: 1px solid var(--aegean);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--aegean-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-submit-next {
+      width: 100%;
+      background: var(--aegean-deep);
+      color: var(--white);
+      padding: 12px;
+      border-radius: var(--radius-sm); /* Squarish corners */
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .btn-submit-next:hover {
+      background: var(--aegean-dark);
+    }
+
+    /* Celebration & Booking Success Summary Modal */
+    .success-card {
+      display: none;
+      padding: 32px;
+    }
+
+    .celebration-banner {
+      background: var(--success-light);
+      border: 1px solid var(--success-green);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .celebration-banner h3 {
+      color: var(--success-green);
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .holding-spot-msg {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--aegean-dark);
+      font-weight: 600;
+      margin-top: 8px;
+      background: var(--white);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cart-item-summary {
+      border: 1px solid var(--mist-blue);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      background: var(--porcelain);
+    }
+
+    .summary-photo-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .summary-photo-row img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+    }
+
+    .summary-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      line-height: 1.3;
+    }
+
+    .summary-details-list {
+      list-style: none;
+      font-size: 0.85rem;
+      color: var(--taupe);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-top: 1px solid var(--mist-blue);
+      padding-top: 12px;
+    }
+
+    .summary-details-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cancellation-free-tag {
+      font-size: 0.8rem;
+      color: var(--success-green);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .total-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 2px solid var(--mist-blue);
+      font-weight: 800;
+      color: var(--aegean-dark);
+      font-size: 1.1rem;
+    }
+
+    /* Confetti Animation Effect */
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      background: #f4a261;
+      top: 0;
+      opacity: 0;
+      animation: confettiFall 2.5s ease-out infinite;
+    }
+
+    @keyframes confettiFall {
+      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(180px) rotate(360deg); }
+    }
+
+    /* ==========================================================================
+       SECTION 4: FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: var(--aegean-dark);
+      color: var(--porcelain);
+      padding: 64px 0 32px;
+      margin-top: 64px;
+    }
+
+    .footer-top-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .brand-initial {
+      background: var(--aegean);
+      color: var(--aegean-dark);
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: var(--mist-blue);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-guarantee {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--limestone);
+    }
+
+    .footer-heading {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.875rem;
+      color: var(--mist-blue);
+      transition: color 0.2s ease;
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(217, 231, 235, 0.15);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--mist-blue);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .footer-top-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .details-grid, .highlights-box, .meetup-grid, .reviews-summary-card { grid-template-columns: 1fr; }
+      .meetup-grid::after { display: none; }
+      .input-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="container">
+
+    <!-- SECTION 1: HERO & PRODUCT HEADER -->
+    <section class="hero-section">
+      <h1 class="product-title">Shimla Private Guided Walk Tour exploring the colonial trails</h1>
+      
+      <div class="product-meta-bar">
+        <div class="meta-item">
+          <div class="rating-stars">★★★★★</div>
+          <span class="rating-text">5.0</span>
+          <span>(80 Reviews)</span>
+        </div>
+        <span class="meta-pipe">|</span>
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--aegean-deep)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span>Recommended by 100% of travelers</span>
+        </div>
+        <span class="meta-pipe">|</span>
+        <span class="badge-excellence">Badge of Excellence</span>
+        <span class="meta-pipe">|</span>
+        <span>Shimla, India</span>
+
+        <div class="price-guarantee">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Lowest Price Guarantee</span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="single-image-card">
+            <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/12/71/ff/10.jpg" alt="Christ Church Shimla Snow Trail">
+            <div class="image-actions">
+              <button class="action-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Share
+              </button>
+              <button class="action-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                Add to Wishlist
+              </button>
+            </div>
+          </div>
+
+          <div class="attribute-pills">
+            <div class="pill-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>2 hours (approx.)</span>
+            </div>
+            <div class="pill-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              <span>Mobile ticket</span>
+            </div>
+            <div class="pill-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+              <span>Offered in: English and 1 more</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Box -->
+        <div class="booking-card">
+          <div class="price-header">
+            <span class="price-value">₹1,490.00</span>
+            <a href="#" class="price-details-link">Price details</a>
+          </div>
+
+          <div class="discount-tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            <span>Discounted rates for children</span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Date</label>
+              <input type="text" class="form-control" value="Tue, Nov 3" readonly>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Traveler</label>
+              <input type="text" class="form-control" value="1 Adult" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Start time</label>
+            <select class="form-control">
+              <option>8:00 AM</option>
+              <option>9:00 AM</option>
+              <option>10:00 AM</option>
+            </select>
+          </div>
+
+          <!-- Squarish Book Now Button -->
+          <button class="btn-book" onclick="openBookingModal()">Book Now</button>
+
+          <div class="cancellation-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <div><strong>Free cancellation</strong> before 8:00 AM on Nov 2 (local time)</div>
+          </div>
+
+          <div class="advance-notice-banner">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <div class="advance-text">
+              <h5>Book ahead!</h5>
+              <p>On average, this is booked 9 days in advance.</p>
+            </div>
+          </div>
+
+          <div class="solo-suitability">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span>Great for <strong>solo travelers</strong> – ideal for meeting new people</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 2: HIGHLIGHTS & KEY DETAILS -->
+    <section>
+      <div class="details-grid">
+        <div class="detail-card-item">
+          <div class="detail-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="detail-text">
+            <h4>Free cancellation</h4>
+            <p>Cancel up to 24 hours in advance for a full refund</p>
+          </div>
+        </div>
+
+        <div class="detail-card-item">
+          <div class="detail-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div class="detail-text">
+            <h4>Reserve now and pay later</h4>
+            <p>Keep your travel plans flexible — book your spot and pay nothing today</p>
+          </div>
+        </div>
+
+        <div class="detail-card-item">
+          <div class="detail-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="detail-text">
+            <h4>Duration 2 hours</h4>
+            <p>Check availability to see starting times</p>
+          </div>
+        </div>
+
+        <div class="detail-card-item">
+          <div class="detail-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          </div>
+          <div class="detail-text">
+            <h4>Live tour guide</h4>
+            <p>English, Hindi</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlights-box">
+        <h2 class="highlights-title">Highlights</h2>
+        <ul class="highlights-list">
+          <li>Explore Shimla with a local guide from Himachal Pradesh</li>
+          <li>Discover heritage sites on a guided walking tour</li>
+          <li>Experience the charm of this historic hill station</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- SECTION 3: MEETUP POINT & REVIEWS -->
+    <section>
+      <h2 class="section-heading">Meeting and Pickup</h2>
+      <div class="meetup-card">
+        <div class="meetup-grid">
+          <div>
+            <div class="point-subhead">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Meeting point</span>
+            </div>
+            <div class="point-address-title">Christ Church, Shimla</div>
+            <div class="point-address-body">453G+P9F, Ridge To US Club, The Mall, Shimla, Himachal Pradesh 171001, India</div>
+            <a href="#" class="map-link">
+              <span>Open in Google Maps</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <p class="point-instruction">Guide will be meeting you outside the famous Christ Church in front of the main Entrance.</p>
+          </div>
+
+          <div>
+            <div class="point-subhead">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              <span>End point</span>
+            </div>
+            <div class="point-address-title">Indian Institute of Advanced Study (IIAS)</div>
+            <div style="height: 20px;"></div>
+            <a href="#" class="map-link">
+              <span>Open in Google Maps</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </a>
+            <p class="point-instruction">Guide will drop you outside the Main Entrance of the Indian Institute of Advanced Study.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews-header-flex">
+        <h2 class="section-heading" style="margin-bottom:0;">Reviews</h2>
+        <div class="review-tabs">
+          <button class="tab-btn">Tips/Q&amp;A (21)</button>
+          <button class="tab-btn">All reviews (2,102)</button>
+        </div>
+        <button class="btn-write-review">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Write a review
+        </button>
+      </div>
+
+      <div class="reviews-summary-card">
+        <div class="score-box">
+          <div class="score-number">4.4</div>
+          <div class="score-label">Very Good</div>
+          <div class="score-bubbles">●●●●◐</div>
+          <span style="font-size: 0.825rem; color: var(--taupe-soft);">(2,102 reviews)</span>
+        </div>
+
+        <div class="breakdown-list">
+          <div class="breakdown-row">
+            <span class="label-col">Excellent</span>
+            <div class="bar-col"><div class="bar-fill" style="width: 100%;"></div></div>
+            <span class="count-col">1,074</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label-col">Good</span>
+            <div class="bar-col"><div class="bar-fill" style="width: 71.3%;"></div></div>
+            <span class="count-col">766</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label-col">Average</span>
+            <div class="bar-col"><div class="bar-fill" style="width: 19.8%;"></div></div>
+            <span class="count-col">213</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label-col">Poor</span>
+            <div class="bar-col"><div class="bar-fill" style="width: 2.8%;"></div></div>
+            <span class="count-col">30</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label-col">Terrible</span>
+            <div class="bar-col"><div class="bar-fill" style="width: 1.7%;"></div></div>
+            <span class="count-col">19</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL POPUP BACKDROP (CENTERED CARDS) -->
+  <div id="bookingModalBackdrop" class="modal-backdrop">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeBookingModal()">&times;</button>
+
+      <!-- STEP 1: CONTACT DETAILS CARD -->
+      <div id="accountDetailsCard" class="account-details-wrapper">
+        <div class="account-title-container">
+          <h2>Contact details</h2>
+        </div>
+        <div class="subheading-text">We'll use this information to send you confirmation and updates about your booking</div>
+
+        <div class="login-banner">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2a6.3 6.3 0 0 0-5.93 4.31 5.8 5.8 0 0 0 .85 5.43.75.75 0 0 0 1.18-.92 4.3 4.3 0 0 1-.6-4.04A4.8 4.8 0 0 1 10 3.5a4.8 4.8 0 0 1 4.5 3.28c.5 1.5.25 2.94-.6 4.04a.75.75 0 1 0 1.18.92 5.8 5.8 0 0 0 .85-5.43A6.3 6.3 0 0 0 10 2"/></svg>
+          <span><button type="button"><strong>Log in or Sign-up</strong></button> for a faster checkout</span>
+        </div>
+
+        <form id="contactForm" onsubmit="handleFormSubmit(event)">
+          <div class="input-grid-2">
+            <div class="modal-field">
+              <label for="firstName">First name</label>
+              <input type="text" id="firstName" required placeholder="Jane">
+            </div>
+            <div class="modal-field">
+              <label for="lastName">Last name</label>
+              <input type="text" id="lastName" required placeholder="Doe">
+            </div>
+          </div>
+
+          <div class="modal-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" required placeholder="jane.doe@example.com">
+            <div class="helper-text">We'll send booking confirmation emails here</div>
+          </div>
+
+          <div class="modal-field">
+            <label for="confirmEmail">Confirm Email</label>
+            <input type="email" id="confirmEmail" required placeholder="jane.doe@example.com">
+            <div class="helper-text">Just to ensure we got the right email.</div>
+          </div>
+
+          <div class="modal-field">
+            <label>Phone number</label>
+            <div class="phone-flex">
+              <button type="button" class="country-code-btn">IN (+91) ▼</button>
+              <input type="tel" required placeholder="98765 43210" style="flex:1;">
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit-next">Next</button>
+        </form>
+      </div>
+
+      <!-- STEP 2: CELEBRATION & SUCCESS SUMMARY CARD -->
+      <div id="successCard" class="success-card">
+        <!-- Confetti Animation Elements -->
+        <div class="confetti-piece" style="left:10%; animation-delay:0s; background:#2E7D32;"></div>
+        <div class="confetti-piece" style="left:30%; animation-delay:0.3s; background:#91B8C7;"></div>
+        <div class="confetti-piece" style="left:50%; animation-delay:0.1s; background:#D8BDA6;"></div>
+        <div class="confetti-piece" style="left:70%; animation-delay:0.5s; background:#4A7A8C;"></div>
+        <div class="confetti-piece" style="left:90%; animation-delay:0.2s; background:#2E7D32;"></div>
+
+        <div class="celebration-banner">
+          <h3>🎉 Trip booked successfully!</h3>
+          <p style="font-size: 0.85rem; color: var(--taupe);">Your confirmation details have been sent to your email.</p>
+        </div>
+
+        <div class="cart-item-summary">
+          <div class="summary-photo-row">
+            <img src="https://dynamic-media.tacdn.com/media/photo-o/2f/11/aa/f1/caption.jpg?w=400&h=400&s=1" alt="Shimla Tour">
+            <div class="summary-title">Shimla Private Guided Walk Tour exploring the colonial trails</div>
+          </div>
+
+          <ul class="summary-details-list">
+            <li>
+              <span>Traveler:</span>
+              <strong>1 Adult</strong>
+            </li>
+            <li>
+              <span>Date &amp; Time:</span>
+              <strong>Tue, Nov 03, 2026 • 8:00 AM</strong>
+            </li>
+          </ul>
+
+          <div class="cancellation-free-tag">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16m3.53-9.47a.75.75 0 0 0-1.05-1.06l-2.62 2.6-.87.87-1.47-1.46a.75.75 0 1 0-1.05 1.06l1.99 1.99c.3.29.76.29 1.06 0l1.4-1.39z"/></svg>
+            <span>Free cancellation before 8:00 AM on Nov 02, 2026</span>
+          </div>
+
+          <div class="total-price-row">
+            <span>Total price (INR)</span>
+            <span>₹1,490.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a class="brand-logo" href="#">
+            <span class="brand-initial">A</span>
+            <span>Abeon</span>
+          </a>
+          <p class="footer-tagline">Connecting curious travellers with authentic local storytellers, master home-cooks, and certified mountain naturalists across Himachal Pradesh.</p>
+          <div class="footer-guarantee">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Verified local hosts &amp; transparent direct booking</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Shimla Experiences</h4>
+          <ul class="footer-links">
+            <li><a href="#">Cooking Classes &amp; Dham</a></li>
+            <li><a href="#">Colonial Heritage Walks</a></li>
+            <li><a href="#">Highland Hikes &amp; Summits</a></li>
+            <li><a href="#">Cedar Sanctuary 4x4 Safaris</a></li>
+            <li><a href="#">Street Food &amp; Orchard Trails</a></li>
+            <li><a href="#">Royal Enfield &amp; SUV Rentals</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Upcoming Destinations</h4>
+          <ul class="footer-links">
+            <li><a href="#">Manali &amp; Solang Valley</a></li>
+            <li><a href="#">Dharamshala &amp; McLeodganj</a></li>
+            <li><a href="#">Kasol &amp; Parvati Valley</a></li>
+            <li><a href="#">Leh Ladakh High Passes</a></li>
+            <li><a href="#">Rishikesh Himalayan Foothills</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Traveller Care</h4>
+          <ul class="footer-links">
+            <li><a href="#">Manage My Trips</a></li>
+            <li><a href="#">Guide Messenger</a></li>
+            <li><a href="mailto:hello@abeon.travel">Emergency Support</a></li>
+            <li style="margin-top: 16px;"><span style="color: var(--taupe-soft); font-size: 0.85rem;">Curated with love in the Himalayas</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>© 2026 Abeon Experiences. All rights reserved.</span>
+        <div>Traveller-Side Only Edition • Porcelain &amp; Aegean Design System • Shimla, Himachal Pradesh</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT FOR MODAL FLOW & CELEBRATION -->
+  <script>
+    function openBookingModal() {
+      document.getElementById('bookingModalBackdrop').classList.add('active');
+      document.getElementById('accountDetailsCard').style.display = 'block';
+      document.getElementById('successCard').style.display = 'none';
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModalBackdrop').classList.remove('active');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('accountDetailsCard').style.display = 'none';
+      document.getElementById('successCard').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

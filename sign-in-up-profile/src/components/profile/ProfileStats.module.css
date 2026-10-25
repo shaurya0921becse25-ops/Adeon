@@ -1,0 +1,48 @@
+.stats {
+  display: flex;
+  gap: 0;
+  margin-top: 17px;
+}
+
+.stat {
+  padding: 0 22px;
+  border-right: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.stat:first-child {
+  padding-left: 0;
+}
+
+.stat:last-child {
+  border: 0;
+}
+
+.stat strong {
+  display: block;
+  color: var(--ink);
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 850px) {
+  .stats {
+    gap: 0;
+  }
+  .stat {
+    padding: 0 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    margin-top: 12px;
+  }
+  .stat {
+    font-size: 11px;
+    padding: 0 10px;
+  }
+  .stat strong {
+    font-size: 14px;
+  }
+}

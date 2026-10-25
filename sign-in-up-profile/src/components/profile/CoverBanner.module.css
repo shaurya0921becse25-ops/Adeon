@@ -1,0 +1,16 @@
+.cover {
+  height: 138px;
+  border-radius: 13px;
+  background-position: center 48%;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #dce3e3;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 850px) {
+  .cover {
+    height: 115px;
+  }
+}

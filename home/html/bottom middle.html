@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planning & Good to Know</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: rgb(238, 242, 236);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: rgb(40, 40, 40);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 20px;
+      gap: 120px;
+    }
+
+    .section-container {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .two-col-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    @media (min-width: 900px) {
+      .two-col-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+      }
+    }
+
+    /* Left Side Content */
+    .left-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: rgb(40, 40, 40);
+      text-transform: uppercase;
+    }
+
+    .badge svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .heading {
+      font-size: 38px;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: rgb(40, 40, 40);
+    }
+
+    @media (min-width: 768px) {
+      .heading {
+        font-size: 48px;
+      }
+    }
+
+    .subheading {
+      font-size: 16px;
+      line-height: 1.5;
+      color: rgb(92, 92, 88);
+      max-width: 440px;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      background-color: rgb(26, 46, 28);
+      color: rgb(247, 249, 244);
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+      margin-top: 8px;
+    }
+
+    .cta-button:hover {
+      background-color: rgb(38, 66, 40);
+    }
+
+    /* Process Steps (From Planning to First Step) */
+    .steps-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .step-card {
+      position: sticky;
+      top: 80px;
+      background-color: rgb(247, 249, 244);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-card:nth-child(2) {
+      top: 104px;
+    }
+
+    .step-card:nth-child(3) {
+      top: 128px;
+    }
+
+    .step-card:nth-child(1) {
+      z-index: 1;
+    }
+
+    .step-card:nth-child(2) {
+      z-index: 2;
+    }
+
+    .step-card:nth-child(3) {
+      z-index: 3;
+    }
+
+    @media (min-width: 900px) {
+      .planning-section .left-content {
+        position: sticky;
+        top: 80px;
+      }
+    }
+
+    .step-number {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgb(92, 92, 88);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .step-title {
+      font-size: 22px;
+      font-weight: 500;
+      color: rgb(40, 40, 40);
+    }
+
+    .step-desc {
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgb(92, 92, 88);
+    }
+
+    /* FAQ List Accordion */
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background-color: rgb(247, 249, 244);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .question-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+    }
+
+    .question-text {
+      font-size: 18px;
+      font-weight: 500;
+      color: rgb(40, 40, 40);
+    }
+
+    /* Icon (+) with Framer Rotation animation */
+    .framer-icon-wrapper {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transform-origin: 50% 50% 0px;
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
+
+    .framer-icon-wrapper::before,
+    .framer-icon-wrapper::after {
+      content: '';
+      position: absolute;
+      background-color: rgb(40, 40, 40);
+    }
+
+    /* Horizontal line */
+    .framer-icon-wrapper::before {
+      width: 14px;
+      height: 2px;
+    }
+
+    /* Vertical line */
+    .framer-icon-wrapper::after {
+      width: 2px;
+      height: 14px;
+    }
+
+    /* Rotates icon 45deg to convert '+' into '×' on open */
+    .faq-item.open .framer-icon-wrapper {
+      transform: rotate(45deg);
+    }
+
+    .answer-wrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 24px;
+    }
+
+    .faq-item.open .answer-wrapper {
+      max-height: 150px;
+      padding-bottom: 20px;
+    }
+
+    .answer-text {
+      font-size: 15px;
+      line-height: 1.5;
+      color: rgb(92, 92, 88);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SECTION 1: From planning to first step -->
+  <section class="section-container planning-section">
+    <div class="two-col-layout">
+      <div class="left-content">
+        <div>
+          <div class="badge">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg>
+            HOW ABEON WORKS
+          </div>
+          <h2 class="heading">From your idea to your next adventure</h2>
+        </div>
+        <p class="subheading">Tell us what inspires you. We’ll help you turn it into a journey that fits your interests, budget, and travel style.</p>
+        <div>
+          <a href="./explore" class="cta-button">Find your way</a>
+        </div>
+      </div>
+
+      <div class="steps-container">
+        <div class="step-card">
+          <span class="step-number">Step 01</span>
+          <h3 class="step-title">Tell us what moves you</h3>
+          <p class="step-desc">Share your destination, travel dates, budget, and the experiences you’re looking for. ABEON starts with what matters most to you.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">Step 02</span>
+          <h3 class="step-title">Get your journey, thoughtfully planned</h3>
+          <p class="step-desc">Discover a personalized itinerary with places to explore, things to do, and practical recommendations tailored to your trip.</p>
+        </div>
+
+        <div class="step-card">
+          <span class="step-number">Step 03</span>
+          <h3 class="step-title">Make it yours. Then go.</h3>
+          <p class="step-desc">Refine your plans, keep everything organized, and head out with greater clarity and confidence. Your next adventure starts here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: Good to know before you go -->
+  <section class="section-container">
+    <div class="two-col-layout">
+      <div class="left-content">
+        <div>
+          <div class="badge">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg>
+            FAQ
+          </div>
+          <h2 class="heading">Everything you need to know</h2>
+        </div>
+        <p class="subheading">From planning your trip to making the most of every moment, find answers to your questions about travelling with ABEON.</p>
+        <div>
+          <a href="./contact" class="cta-button">Still have questions? Get in touch.</a>
+        </div>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item closed" onclick="toggleFaq(this)">
+          <div class="question-wrapper">
+            <h3 class="question-text">How does ABEON plan my trip?</h3>
+            <div data-framer-name="Icon" class="framer-icon-wrapper"></div>
+          </div>
+          <div class="answer-wrapper">
+            <p class="answer-text">Share your destination, travel dates, budget, and interests. ABEON helps you build a personalized itinerary with recommendations tailored to your travel style and plans.</p>
+          </div>
+        </div>
+
+        <div class="faq-item closed" onclick="toggleFaq(this)">
+          <div class="question-wrapper">
+            <h3 class="question-text">Can I customize my itinerary?</h3>
+            <div data-framer-name="Icon" class="framer-icon-wrapper"></div>
+          </div>
+          <div class="answer-wrapper">
+            <p class="answer-text">Absolutely. Your itinerary is a starting point, not a fixed schedule. Adjust destinations, activities, and plans to make the journey your own.</p>
+          </div>
+        </div>
+
+        <div class="faq-item closed" onclick="toggleFaq(this)">
+          <div class="question-wrapper">
+            <h3 class="question-text">Can I plan a trip within my budget?</h3>
+            <div data-framer-name="Icon" class="framer-icon-wrapper"></div>
+          </div>
+          <div class="answer-wrapper">
+            <p class="answer-text">Yes. Set your budget while planning, and ABEON helps you estimate trip costs and organize expenses so you can make informed travel decisions.</p>
+          </div>
+        </div>
+
+        <div class="faq-item closed" onclick="toggleFaq(this)">
+          <div class="question-wrapper">
+            <h3 class="question-text">Does ABEON provide real-time travel information?</h3>
+            <div data-framer-name="Icon" class="framer-icon-wrapper"></div>
+          </div>
+          <div class="answer-wrapper">
+            <p class="answer-text">ABEON can help you organize practical details such as weather, opening hours, and travel logistics. Availability and accuracy depend on the information sources and features supported.</p>
+          </div>
+        </div>
+
+        <div class="faq-item open" onclick="toggleFaq(this)">
+          <div class="question-wrapper">
+            <h3 class="question-text">Can I plan trips for multiple destinations or days?</h3>
+            <div data-framer-name="Icon" class="framer-icon-wrapper"></div>
+          </div>
+          <div class="answer-wrapper">
+            <p class="answer-text">Yes. Plan multi-day journeys, explore different destinations, and organize activities into a structured itinerary that you can review and refine before you leave.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleFaq(element) {
+      const isOpen = element.classList.contains('open');
+      
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('open');
+        item.classList.add('closed');
+      });
+      
+      if (!isOpen) {
+        element.classList.remove('closed');
+        element.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Himora Experiences - Shimla</title>
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM: PORCELAIN & AEGEAN
+       ========================================================================== */
+    :root {
+      --porcelain: #FAF7F0;
+      --mist-blue: #D9E7EB;
+      --aegean: #91B8C7;
+      --aegean-deep: #4A7A8C;
+      --aegean-dark: #2B4E5B;
+      --limestone: #D8BDA6;
+      --taupe: #765F53;
+      --taupe-soft: #9A8478;
+      --white: #FFFFFF;
+      --shadow-sm: 0 2px 8px rgba(118, 95, 83, 0.08);
+      --shadow-md: 0 4px 16px rgba(118, 95, 83, 0.12);
+      --shadow-lg: 0 12px 32px rgba(43, 78, 91, 0.18);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--porcelain);
+      color: var(--taupe);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       SECTION 1: HERO & SEARCH BAR
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      padding: 48px 0 32px;
+      border-bottom: 1px solid rgba(145, 184, 199, 0.2);
+    }
+
+    .hero-carousel {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      background: var(--mist-blue);
+    }
+
+    .hero-carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .hero-carousel-slide.active {
+      opacity: 1;
+    }
+
+    .hero-carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: heroZoom 8s ease-in-out both;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(250, 247, 240, 0.96) 0%, rgba(250, 247, 240, 0.88) 42%, rgba(250, 247, 240, 0.48) 100%);
+    }
+
+    .hero-flex {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-titles h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-titles p {
+      font-size: 1.125rem;
+      color: var(--taupe-soft);
+      margin-top: 6px;
+    }
+
+    /* Search Bar with Z-Index Layout Fix */
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      z-index: 100; /* Ensures dropdown overlays content correctly */
+    }
+
+    .search-input-box {
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border: 1.5px solid var(--aegean);
+      border-radius: var(--radius-full);
+      padding: 8px 16px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .search-input-box:focus-within {
+      border-color: var(--aegean-deep);
+      box-shadow: 0 0 0 3px rgba(145, 184, 199, 0.3);
+    }
+
+    .search-icon {
+      color: var(--aegean-deep);
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 0.95rem;
+      color: var(--taupe);
+      background: transparent;
+    }
+
+    .search-input::placeholder {
+      color: var(--taupe-soft);
+    }
+
+    /* Recent Search Dropdown Pop-up */
+    .search-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--mist-blue);
+      overflow: hidden;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .search-dropdown.active {
+      display: block;
+    }
+
+    .dropdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px 8px;
+    }
+
+    .dropdown-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+    }
+
+    .clear-btn {
+      font-size: 0.8rem;
+      color: var(--aegean-deep);
+      font-weight: 600;
+    }
+
+    .recent-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      cursor: pointer;
+      background: var(--porcelain);
+      transition: background 0.15s ease;
+      border-top: 1px solid rgba(217, 231, 235, 0.4);
+    }
+
+    .recent-item:hover {
+      background: var(--mist-blue);
+    }
+
+    .pin-icon {
+      color: var(--aegean-deep);
+    }
+
+    .recent-info h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--aegean-dark);
+      line-height: 1.2;
+    }
+
+    .recent-info span {
+      font-size: 0.75rem;
+      color: var(--taupe-soft);
+    }
+
+    /* Category List in Dropdown */
+    .category-group-title {
+      padding: 10px 18px 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--taupe-soft);
+    }
+
+    /* ==========================================================================
+       SECTION 2: THINGS TO DO & FILTERS
+       ========================================================================== */
+    .filter-section {
+      padding: 24px 0;
+    }
+
+    .section-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title-row h2 {
+      font-size: 1.75rem;
+      color: var(--aegean-dark);
+      font-weight: 700;
+    }
+
+    .see-all-link {
+      color: var(--aegean-deep);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-bottom: 1.5px solid var(--aegean-deep);
+    }
+
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+    }
+
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--white);
+      border: 1px solid var(--aegean);
+      border-radius: var(--radius-full);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--aegean-dark);
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .filter-chip:hover, .filter-chip.selected {
+      background: var(--mist-blue);
+      border-color: var(--aegean-deep);
+    }
+
+    .filter-chip-btn {
+      background: var(--aegean-dark);
+      color: var(--white);
+      border: none;
+    }
+
+    .filter-chip-btn:hover {
+      background: var(--aegean-deep);
+    }
+
+    .filter-divider {
+      height: 24px;
+      width: 1px;
+      background: var(--aegean);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       SECTION 3: CARDS & FEEDBACK
+       ========================================================================== */
+    .results-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 16px 0 24px;
+      font-size: 0.9rem;
+      color: var(--taupe-soft);
+    }
+
+    .sort-dropdown {
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      color: var(--aegean-dark);
+      cursor: pointer;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 1; /* Sits behind active search dropdown */
+    }
+
+    .product-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid rgba(217, 231, 235, 0.6);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-image-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 66.66%; /* 3:2 Aspect Ratio */
+      background: var(--mist-blue);
+      overflow: hidden;
+    }
+
+    .card-image-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .badge-bestseller {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--limestone);
+      color: var(--aegean-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--taupe);
+      transition: background 0.2s ease;
+    }
+
+    .wishlist-btn:hover {
+      background: var(--white);
+      color: #e63946;
+    }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 2.7em;
+    }
+
+    .card-details {
+      font-size: 0.825rem;
+      color: var(--taupe-soft);
+      margin-bottom: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .card-footer-row {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 12px;
+      border-top: 1px solid var(--porcelain);
+    }
+
+    .rating-badge {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+    }
+
+    .star-icon {
+      color: #f4a261;
+      fill: currentColor;
+    }
+
+    .review-count {
+      font-weight: 400;
+      color: var(--taupe-soft);
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 0.75rem;
+      color: var(--taupe-soft);
+      display: block;
+    }
+
+    .price-amount {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--aegean-dark);
+    }
+
+    /* Was This Helpful Bar */
+    .feedback-banner {
+      margin: 48px 0 24px;
+      background: var(--mist-blue);
+      border-radius: var(--radius-md);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .feedback-text {
+      font-size: 0.95rem;
+      color: var(--aegean-dark);
+      font-weight: 600;
+    }
+
+    .feedback-btns {
+      display: flex;
+      gap: 12px;
+    }
+
+    .feedback-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--aegean-deep);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease;
+    }
+
+    .feedback-btn:hover {
+      transform: scale(1.1);
+      background: var(--aegean);
+      color: var(--white);
+    }
+
+    /* ==========================================================================
+       SECTION 4: FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: var(--aegean-dark);
+      color: var(--porcelain);
+      padding: 64px 0 32px;
+      margin-top: 64px;
+    }
+
+    .footer-top-grid {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .brand-initial {
+      background: var(--aegean);
+      color: var(--aegean-dark);
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-tagline {
+      font-size: 0.9rem;
+      color: var(--mist-blue);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-guarantee {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--limestone);
+    }
+
+    .footer-heading {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.875rem;
+      color: var(--mist-blue);
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--limestone);
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(217, 231, 235, 0.15);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--mist-blue);
+    }
+
+    /* ==========================================================================
+       FILTER MODAL (POPUP)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(43, 78, 91, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--white);
+      width: 100%;
+      max-width: 540px;
+      max-height: 85vh;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalSlide 0.25s ease-out;
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--porcelain);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-size: 1.25rem;
+      color: var(--aegean-dark);
+      font-weight: 700;
+    }
+
+    .close-modal-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--porcelain);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--taupe);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .filter-group-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--aegean-dark);
+      margin-bottom: 12px;
+    }
+
+    .checkbox-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--taupe);
+      cursor: pointer;
+    }
+
+    .checkbox-item input {
+      accent-color: var(--aegean-deep);
+      width: 16px;
+      height: 16px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--porcelain);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--porcelain);
+    }
+
+    .apply-btn {
+      background: var(--aegean-dark);
+      color: var(--white);
+      padding: 10px 24px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    @keyframes modalSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .footer-top-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero-section::before {
+        background: rgba(250, 247, 240, 0.82);
+      }
+      .hero-flex {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .search-wrapper {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-top-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SECTION 1: HERO & SEARCH BAR -->
+  <section class="hero-section">
+    <div class="hero-carousel" aria-hidden="true">
+      <div class="hero-carousel-slide active"><img src="https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&amp;fit=crop&amp;w=1800&amp;q=85" alt=""></div>
+      <div class="hero-carousel-slide"><img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&amp;fit=crop&amp;w=1800&amp;q=85" alt=""></div>
+      <div class="hero-carousel-slide"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&amp;fit=crop&amp;w=1800&amp;q=85" alt=""></div>
+    </div>
+    <div class="container hero-flex">
+      <div class="hero-titles">
+        <h1>Essential Shimla</h1>
+        <p>Pick a category to filter your recs</p>
+      </div>
+
+      <!-- Search Bar with Recent Searches Dropdown -->
+      <div class="search-wrapper">
+        <div class="search-input-box">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search Shimla, Dubai, Tokyo..." autocomplete="off">
+        </div>
+
+        <!-- Pop-up Card Dropdown (Organized Layout) -->
+        <div id="searchDropdown" class="search-dropdown">
+          <div class="dropdown-header">
+            <span class="dropdown-title">Recent Searches</span>
+            <button class="clear-btn" onclick="clearRecent()">Clear</button>
+          </div>
+          
+          <!-- Default Recent Items from Requirements -->
+          <div class="recent-item" onclick="selectDestination('Shimla, India')">
+            <svg class="pin-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div class="recent-info">
+              <h4>Shimla</h4>
+              <span>Himachal Pradesh, India</span>
+            </div>
+          </div>
+
+          <div class="category-group-title">Popular Categories</div>
+          
+          <div class="recent-item" onclick="selectDestination('Dubai, UAE')">
+            <svg class="pin-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div class="recent-info">
+              <h4>Dubai</h4>
+              <span>United Arab Emirates</span>
+            </div>
+          </div>
+
+          <div class="recent-item" onclick="selectDestination('Chandigarh, India')">
+            <svg class="pin-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div class="recent-info">
+              <h4>Chandigarh</h4>
+              <span>India</span>
+            </div>
+          </div>
+
+          <div class="recent-item" onclick="selectDestination('Tokyo, Japan')">
+            <svg class="pin-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div class="recent-info">
+              <h4>Tokyo</h4>
+              <span>Japan</span>
+            </div>
+          </div>
+
+          <div class="recent-item" onclick="selectDestination('Jaipur, India')">
+            <svg class="pin-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <div class="recent-info">
+              <h4>Jaipur</h4>
+              <span>Rajasthan, India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THINGS TO DO & FILTER BAR -->
+  <section class="filter-section">
+    <div class="container">
+      <div class="section-title-row">
+        <h2>Things to do</h2>
+        <a href="#" class="see-all-link">See all</a>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Oct 29
+        </button>
+        <button class="filter-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          2 Adults
+        </button>
+        <button class="filter-chip filter-chip-btn" onclick="toggleModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+          Filters
+        </button>
+        
+        <div class="filter-divider"></div>
+
+        <button class="filter-chip">Half-day Tours</button>
+        <button class="filter-chip">Bus Tours</button>
+        <button class="filter-chip">Multi-day Tours</button>
+        <button class="filter-chip">Mountain Bike Tours</button>
+        <button class="filter-chip">Car Tours</button>
+        <button class="filter-chip">Sightseeing Tours</button>
+        <button class="filter-chip">Private &amp; Luxury</button>
+      </div>
+
+      <div class="results-meta">
+        <span>13 results</span>
+        <div>
+          Sort by: 
+          <select class="sort-dropdown">
+            <option>Featured</option>
+            <option>Traveler Rating</option>
+            <option>Price: Low to High</option>
+            <option>Duration: Short to Long</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CARDS & WAS THIS HELPFUL -->
+  <main class="container">
+    <div class="cards-grid">
+      
+      <!-- Card 1 -->
+      <article class="product-card">
+        <div class="card-image-wrap">
+          <span class="badge-bestseller">Best Seller</span>
+          <button class="wishlist-btn" aria-label="Add to Wishlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </button>
+          <img src="https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=600&q=80" alt="Guided Heritage Walk Tour in Shimla">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Guided Heritage Walk Tour in Shimla</h3>
+          <div class="card-details">
+            <span>3 hours</span>
+          </div>
+          <div class="card-footer-row">
+            <div class="rating-badge">
+              <svg class="star-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              4.8 <span class="review-count">(41)</span>
+            </div>
+            <div class="price-box">
+              <span class="price-label">from</span>
+              <span class="price-amount">₹2,895</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="product-card">
+        <div class="card-image-wrap">
+          <button class="wishlist-btn" aria-label="Add to Wishlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </button>
+          <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=600&q=80" alt="Shimla Private Guided Walk Tour">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Shimla Private Guided Walk Tour exploring the colonial trails</h3>
+          <div class="card-details">
+            <span>2 hours</span> • <span>Free Cancellation</span>
+          </div>
+          <div class="card-footer-row">
+            <div class="rating-badge">
+              <svg class="star-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              5.0 <span class="review-count">(80)</span>
+            </div>
+            <div class="price-box">
+              <span class="price-label">from</span>
+              <span class="price-amount">₹1,490</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="product-card">
+        <div class="card-image-wrap">
+          <button class="wishlist-btn" aria-label="Add to Wishlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </button>
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Shimla Private Custom Tour">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Shimla : Private Custom Tour with a Local Guide</h3>
+          <div class="card-details">
+            <span>3 hours</span> • <span>Free Cancellation</span>
+          </div>
+          <div class="card-footer-row">
+            <div class="rating-badge">
+              <svg class="star-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              5.0 <span class="review-count">(12)</span>
+            </div>
+            <div class="price-box">
+              <span class="price-label">from</span>
+              <span class="price-amount">₹4,584</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="product-card">
+        <div class="card-image-wrap">
+          <button class="wishlist-btn" aria-label="Add to Wishlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </button>
+          <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Heritage Cultural Walking Tour">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Heritage &amp; Cultural 2 Hour Shimla Walking Tour</h3>
+          <div class="card-details">
+            <span>2 hours</span> • <span>Free Cancellation</span>
+          </div>
+          <div class="card-footer-row">
+            <div class="rating-badge">
+              <svg class="star-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              5.0 <span class="review-count">(1)</span>
+            </div>
+            <div class="price-box">
+              <span class="price-label">from</span>
+              <span class="price-amount">₹1,069</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Feedback Bar -->
+    <div class="feedback-banner">
+      <span class="feedback-text">Were these results helpful?</span>
+      <div class="feedback-btns">
+        <button class="feedback-btn" aria-label="Thumbs Up">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+        </button>
+        <button class="feedback-btn" aria-label="Thumbs Down">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path></svg>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- SECTION 4: FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a class="brand-logo" href="#">
+            <span class="brand-initial">A</span>
+            <span>Abeon</span>
+          </a>
+          <p class="footer-tagline">Connecting curious travellers with authentic local storytellers, master home-cooks, and certified mountain naturalists across Himachal Pradesh.</p>
+          <div class="footer-guarantee">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span>Verified local hosts &amp; transparent direct booking</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Shimla Experiences</h4>
+          <ul class="footer-links">
+            <li><a href="#">Cooking Classes &amp; Dham</a></li>
+            <li><a href="#">Colonial Heritage Walks</a></li>
+            <li><a href="#">Highland Hikes &amp; Summits</a></li>
+            <li><a href="#">Cedar Sanctuary 4x4 Safaris</a></li>
+            <li><a href="#">Street Food &amp; Orchard Trails</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Upcoming Destinations</h4>
+          <ul class="footer-links">
+            <li><a href="#">Manali &amp; Solang Valley</a></li>
+            <li><a href="#">Dharamshala &amp; McLeodganj</a></li>
+            <li><a href="#">Kasol &amp; Parvati Valley</a></li>
+            <li><a href="#">Leh Ladakh High Passes</a></li>
+            <li><a href="#">Rishikesh Himalayan Foothills</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Traveller Care</h4>
+          <ul class="footer-links">
+            <li><a href="#">Manage My Trips</a></li>
+            <li><a href="#">Guide Messenger</a></li>
+            <li><a href="#">Emergency Support</a></li>
+            <li style="margin-top: 16px; font-size: 0.8rem; opacity: 0.7;">Curated with love in the Himalayas</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <span>© 2026 Abeon Experiences. All rights reserved.</span>
+        <div>Porcelain &amp; Aegean Design System • Shimla, Himachal Pradesh</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FILTER MODAL POPUP -->
+  <div id="filterModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Filter</h3>
+        <button class="close-modal-btn" onclick="toggleModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="filter-group-title">Time of Day</div>
+          <div class="checkbox-list">
+            <label class="checkbox-item"><input type="checkbox"> Morning (Starts before 12pm)</label>
+            <label class="checkbox-item"><input type="checkbox"> Afternoon (Starts after 12pm)</label>
+            <label class="checkbox-item"><input type="checkbox"> Evening (Starts after 5pm)</label>
+          </div>
+        </div>
+
+        <div>
+          <div class="filter-group-title">Duration</div>
+          <div class="checkbox-list">
+            <label class="checkbox-item"><input type="checkbox"> Up to 1 hour</label>
+            <label class="checkbox-item"><input type="checkbox"> 1 to 4 hours</label>
+            <label class="checkbox-item"><input type="checkbox"> 4 hours to 1 day</label>
+            <label class="checkbox-item"><input type="checkbox"> 1 to 3 days</label>
+          </div>
+        </div>
+
+        <div>
+          <div class="filter-group-title">Specials</div>
+          <div class="checkbox-list">
+            <label class="checkbox-item"><input type="checkbox"> Free Cancellation</label>
+            <label class="checkbox-item"><input type="checkbox"> Deals &amp; Discounts</label>
+            <label class="checkbox-item"><input type="checkbox"> Skip-The-Line</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="clear-btn" onclick="toggleModal()">Clear all</button>
+        <button class="apply-btn" onclick="toggleModal()">See 13 results</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT FOR INTERACTIVITY -->
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const searchDropdown = document.getElementById('searchDropdown');
+    const heroSlides = document.querySelectorAll('.hero-carousel-slide');
+    let currentHeroSlide = 0;
+
+    if (heroSlides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.setInterval(() => {
+        heroSlides[currentHeroSlide].classList.remove('active');
+        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+        heroSlides[currentHeroSlide].classList.add('active');
+      }, 6000);
+    }
+
+    // Show search dropdown on focus
+    searchInput.addEventListener('focus', () => {
+      searchDropdown.classList.add('active');
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search-wrapper')) {
+        searchDropdown.classList.remove('active');
+      }
+    });
+
+    // Function to handle destination selection
+    function selectDestination(name) {
+      searchInput.value = name;
+      searchDropdown.classList.remove('active');
+    }
+
+    // Function to clear dropdown items
+    function clearRecent() {
+      const items = searchDropdown.querySelectorAll('.recent-item');
+      items.forEach(item => item.style.display = 'none');
+    }
+
+    // Toggle Filter Modal
+    function toggleModal() {
+      const modal = document.getElementById('filterModal');
+      modal.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

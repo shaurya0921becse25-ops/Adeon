@@ -1,0 +1,345 @@
+================================================================================
+SEARCH COMPONENT - MAIN PAGE SPECIFICATION
+File: search.txt
+================================================================================
+
+1. COMPONENT OVERVIEW
+--------------------------------------------------------------------------------
+The main page features a central search component and an experience showcase. 
+The search component allows users to choose a destination from recent locations, 
+select a travel date from a calendar dropdown, and submit the search to navigate 
+to the trip results page. The page also features experience cards that navigate 
+directly to the service details page upon selection.
+
+
+2. HTML STRUCTURE REPRESENTATION
+--------------------------------------------------------------------------------
+
+<div class="search-container">
+  <!-- Search Bar Container -->
+  <form class="search-bar" action="/trip" method="GET">
+    
+    <!-- Destination Selection Field -->
+    <div class="search-field" id="whereToField" role="button" aria-haspopup="listbox" aria-expanded="false">
+      <div class="field-label">Where to?</div>
+      <input 
+        type="text" 
+        class="field-input" 
+        id="whereInput" 
+        name="destination" 
+        placeholder="Where will your next journey take you?" 
+        readonly 
+        aria-label="Destination"
+      />
+    </div>
+
+    <!-- Date Selection Field -->
+    <div class="search-field" id="whenField" role="button" aria-haspopup="dialog" aria-expanded="false">
+      <div class="field-label">When will you explore?</div>
+      <input 
+        type="text" 
+        class="field-input" 
+        id="whenInput" 
+        name="date" 
+        value="Oct 21" 
+        readonly 
+        aria-label="Travel Date"
+      />
+    </div>
+
+    <!-- Search / Next Navigation Button -->
+    <button type="submit" class="search-btn" aria-label="Search experiences and go to trip page">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </button>
+  </form>
+
+  <!-- Destination Dropdown Panel -->
+  <div class="recent-searches-dropdown" id="recentSearchesModal" role="listbox" aria-label="Recent Searches">
+    <div class="dropdown-header">
+      <h4>Recent Searches</h4>
+      <button type="button" class="clear-btn">Clear</button>
+    </div>
+    <div class="recent-searches-list">
+      <div class="recent-search-item" role="option" data-value="Shimla">
+        <div class="icon-box">
+          <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div class="details">
+          <strong>Shimla</strong>
+          <span>India</span>
+        </div>
+      </div>
+
+      <div class="recent-search-item" role="option" data-value="Chandigarh">
+        <div class="icon-box">
+          <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div class="details">
+          <strong>Chandigarh</strong>
+          <span>India</span>
+        </div>
+      </div>
+
+      <div class="recent-search-item" role="option" data-value="Japan">
+        <div class="icon-box">
+          <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div class="details">
+          <strong>Japan</strong>
+          <span>East Asia</span>
+        </div>
+      </div>
+
+      <div class="recent-search-item" role="option" data-value="Dubai">
+        <div class="icon-box">
+          <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div class="details">
+          <strong>Dubai</strong>
+          <span>United Arab Emirates</span>
+        </div>
+      </div>
+
+      <div class="recent-search-item" role="option" data-value="Jaipur">
+        <div class="icon-box">
+          <svg class="pin-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+        <div class="details">
+          <strong>Jaipur</strong>
+          <span>India</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Date Selection Dropdown Panel -->
+  <div class="datepicker-dropdown" id="datepickerModal" role="dialog" aria-label="Select Date">
+    <div class="calendar-header">
+      <span>October 2026</span>
+      <button type="button" class="next-month-btn" aria-label="Next Month">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+    <div class="calendar-grid">
+      <div class="calendar-day-head">Su</div>
+      <div class="calendar-day-head">Mo</div>
+      <div class="calendar-day-head">Tu</div>
+      <div class="calendar-day-head">We</div>
+      <div class="calendar-day-head">Th</div>
+      <div class="calendar-day-head">Fr</div>
+      <div class="calendar-day-head">Sa</div>
+      
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day" data-day="1">1</div>
+      <div class="calendar-day" data-day="2">2</div>
+      <div class="calendar-day" data-day="3">3</div>
+      <div class="calendar-day" data-day="4">4</div>
+      <div class="calendar-day" data-day="5">5</div>
+      <div class="calendar-day" data-day="6">6</div>
+      <div class="calendar-day" data-day="7">7</div>
+      <div class="calendar-day" data-day="8">8</div>
+      <div class="calendar-day" data-day="9">9</div>
+      <div class="calendar-day" data-day="10">10</div>
+      <div class="calendar-day" data-day="11">11</div>
+      <div class="calendar-day" data-day="12">12</div>
+      <div class="calendar-day" data-day="13">13</div>
+      <div class="calendar-day" data-day="14">14</div>
+      <div class="calendar-day" data-day="15">15</div>
+      <div class="calendar-day" data-day="16">16</div>
+      <div class="calendar-day" data-day="17">17</div>
+      <div class="calendar-day" data-day="18">18</div>
+      <div class="calendar-day" data-day="19">19</div>
+      <div class="calendar-day" data-day="20">20</div>
+      <div class="calendar-day selected" data-day="21" aria-selected="true">21</div>
+      <div class="calendar-day" data-day="22">22</div>
+      <div class="calendar-day" data-day="23">23</div>
+      <div class="calendar-day" data-day="24">24</div>
+      <div class="calendar-day" data-day="25">25</div>
+      <div class="calendar-day" data-day="26">26</div>
+      <div class="calendar-day" data-day="27">27</div>
+      <div class="calendar-day" data-day="28">28</div>
+      <div class="calendar-day" data-day="29">29</div>
+      <div class="calendar-day" data-day="30">30</div>
+      <div class="calendar-day" data-day="31">31</div>
+    </div>
+  </div>
+</div>
+
+<!-- Experience Cards Section (Navigates to Service Details) -->
+<section class="recently-viewed-section">
+  <div class="container">
+    <div class="section-header-flex">
+      <h2 class="section-title">Pick up where you left off</h2>
+      <a href="/trip" class="see-all-link">See all</a>
+    </div>
+
+    <div class="cards-grid">
+      <!-- Experience Card 1 -->
+      <a href="/service-details" class="experience-card" aria-label="Guided Heritage Walk Tour in Shimla">
+        <div class="card-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23" alt="Shimla Heritage Tour" />
+          <button type="button" class="wishlist-btn" aria-label="Add to wishlist">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-location">Shimla, Himachal Pradesh</div>
+          <h3 class="card-title">Guided Heritage Walk Tour in Shimla</h3>
+          <div class="card-rating">
+            <span class="rating-score">4.8</span>
+            <span class="rating-count">(41)</span>
+          </div>
+          <div class="card-price">from <span class="price-amount">₹2,895</span></div>
+        </div>
+      </a>
+
+      <!-- Experience Card 2 -->
+      <a href="/service-details" class="experience-card" aria-label="Shimla : Private Custom Tour with a Local Guide">
+        <div class="card-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1597074866923-dc0589150358" alt="Custom Shimla Tour" />
+          <button type="button" class="wishlist-btn" aria-label="Add to wishlist">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-location">Shimla, Himachal Pradesh</div>
+          <h3 class="card-title">Shimla : Private Custom Tour with a Local Guide</h3>
+          <div class="card-rating">
+            <span class="rating-score">4.9</span>
+            <span class="rating-count">(82)</span>
+          </div>
+          <div class="card-price">from <span class="price-amount">₹4,584</span></div>
+        </div>
+      </a>
+
+      <!-- Experience Card 3 -->
+      <a href="/service-details" class="experience-card" aria-label="Paris Big Bus Hop On Hop Off Tour">
+        <div class="card-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" alt="Paris Sightseeing" />
+          <button type="button" class="wishlist-btn" aria-label="Add to wishlist">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          </button>
+        </div>
+        <div class="card-content">
+          <div class="card-location">Paris, Île-de-France</div>
+          <h3 class="card-title">Paris Big Bus Hop On Hop Off Tour with Optional River Cruise</h3>
+          <div class="card-rating">
+            <span class="rating-score">3.9</span>
+            <span class="rating-count">(7,036)</span>
+          </div>
+          <div class="card-price">from <span class="price-amount">₹4,256</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Abeon Site Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top-grid">
+      <div class="footer-brand-col">
+        <a href="/" class="brand-logo">
+          <span class="brand-initial">A</span>
+          <span>Abeon</span>
+        </a>
+        <p class="footer-tagline">
+          Connecting curious travellers with authentic local storytellers, master home-cooks, and certified mountain naturalists across Himachal Pradesh.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Shimla Experiences</h4>
+        <ul class="footer-links">
+          <li><a href="/trip">Cooking Classes &amp; Dham</a></li>
+          <li><a href="/trip">Colonial Heritage Walks</a></li>
+          <li><a href="/trip">Highland Hikes &amp; Summits</a></li>
+          <li><a href="/trip">Cedar Sanctuary 4x4 Safaris</a></li>
+          <li><a href="/trip">Street Food &amp; Orchard Trails</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Upcoming Destinations</h4>
+        <ul class="footer-links">
+          <li><a href="/trip">Manali &amp; Solang Valley</a></li>
+          <li><a href="/trip">Dharamshala &amp; McLeodganj</a></li>
+          <li><a href="/trip">Kasol &amp; Parvati Valley</a></li>
+          <li><a href="/trip">Leh Ladakh High Passes</a></li>
+          <li><a href="/trip">Rishikesh Himalayan Foothills</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Traveller Care</h4>
+        <ul class="footer-links">
+          <li><a href="/trip">Manage My Trips</a></li>
+          <li><a href="/trip">Guide Messenger</a></li>
+          <li><a href="/trip">Emergency Support</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <span>© 2026 Abeon Experiences. All rights reserved.</span>
+      <div>Porcelain &amp; Aegean Design System • Shimla, Himachal Pradesh</div>
+    </div>
+  </div>
+</footer>
+
+
+3. TEXTUAL FUNCTIONAL SPECIFICATIONS
+--------------------------------------------------------------------------------
+
+A. Destination Selection:
+   - Clicking on the "Where to?" input field opens the Recent Searches dropdown modal.
+   - The dropdown displays five quick-select destinations (Shimla, Chandigarh, Japan, Dubai, Jaipur).
+   - Selecting any destination automatically fills the "whereInput" field with the chosen city name and dismisses the dropdown.
+   - A "Clear" action button inside the dropdown header empties the stored recent search entries.
+
+B. Exploration Date Selection:
+   - Clicking on the "When will you explore?" input field toggles the Datepicker calendar dropdown modal.
+   - The calendar displays month controls and a 7-column day grid (Sunday through Saturday).
+   - Selecting a date highlights that day and populates the "whenInput" field with the formatted date value (e.g., "Oct 21").
+   - Outside clicks dismiss open dropdown panels to maintain a clean interface.
+
+C. Navigation to Trip Page:
+   - Activating the search action button (`.search-btn`) initiates navigation.
+   - The user is transitioned directly from the search component to the trip results page (`/trip`) with the selected destination and date context applied.
+   - In the trip page, clicking on the "Abeon" header title directly returns the user to the search main page (`/`).
+   - The trip page header features text-only "Trips" (history) and "Chat" (Guide Messenger) buttons at the right.
+
+D. Navigation to Service Details Page & Booking Lifecycle:
+   - Each card rendered inside the experiences grid acts as a direct link target (`/service-details`).
+   - Clicking on any part of the card tile (image wrapper, title, rating, or price block) redirects the user directly to the service details page (`/service-details`) showcasing the full experience itinerary, host information, and reservation options.
+   - On the service details page, a top-left back button (`.btn-back`) allows immediate navigation back to the trip results page.
+   - Top-right action buttons provide access to "Trips" (text-only pill with active count) and "Chat" (guide conversations).
+   - If an experience is already booked, the reservation button changes to "Booked" and will not open the booking modal until the active booking is cancelled via the cancellation action.
+
+E. Back Navigation on Trips & Chat Pages:
+   - Both the Trips page and Chat page include a dedicated top-left back button allowing users to return effortlessly to the previous page.
+================================================================================
+

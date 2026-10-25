@@ -1,0 +1,204 @@
+{
+  "extraShopItems": [
+    {
+      "id": "shop-jp-7",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Hand-Dyed Tenugui Cotton Cloth",
+      "category": "Traditional Crafts",
+      "emoji": "🧣",
+      "tagLine": "Chusen textile · ¥1,200–¥2,800",
+      "story": "Versatile Japanese flat-woven cotton hand towels dyed using the traditional chusen stencil technique with Mt. Fuji and cherry blossom motifs.",
+      "whereToBuy": "Kamawanu in Daikanyama or Asakusa artisan stalls.",
+      "tip": "Edges are left unhemmed intentionally to dry rapidly and prevent bacteria growth.",
+      "gradientColors": ["#0284c7", "#0369a1"],
+      "estimatedPrice": 1800,
+      "tags": ["souvenir", "traditional", "lightweight", "textile", "cotton"],
+      "bought": false,
+      "order": 6
+    },
+    {
+      "id": "shop-jp-8",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Edo Kiriko Cut Glass Tumbler",
+      "category": "Glassware",
+      "emoji": "🥃",
+      "tagLine": "Hand-carved crystal · ¥8,500–¥26,000",
+      "story": "Tokyo's designated traditional craft: clear crystal layered with vivid cobalt or crimson glass and precision geometric cut patterns.",
+      "whereToBuy": "Edo Kiriko Cooperative Showroom in Kameido or Nihombashi Mitsukoshi.",
+      "tip": "Traditional 'nanako' fish-scale cuts catch and refract light like diamonds.",
+      "gradientColors": ["#4338ca", "#312e81"],
+      "estimatedPrice": 14000,
+      "tags": ["craft", "glassware", "artisan", "tokyo", "luxury"],
+      "bought": false,
+      "order": 7
+    },
+    {
+      "id": "shop-jp-9",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Echizen Washi Paper Letter Set",
+      "category": "Stationery",
+      "emoji": "📜",
+      "tagLine": "Mulberry paper · ¥1,400–¥4,200",
+      "story": "Handmade 1,500-year heritage washi crafted with kozo (mulberry) fibers with natural deckled edges and botanical pressings.",
+      "whereToBuy": "Haibara in Nihombashi (established 1806) or Itoya Ginza.",
+      "tip": "Smooth surface is optimized for fountain pens without ink bleed-through.",
+      "gradientColors": ["#059669", "#047857"],
+      "estimatedPrice": 2400,
+      "tags": ["stationery", "paper", "washi", "art", "calligraphy"],
+      "bought": false,
+      "order": 8
+    },
+    {
+      "id": "shop-jp-10",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Studio Ghibli & Anime Figures",
+      "category": "Pop Culture",
+      "emoji": "🧸",
+      "tagLine": "Limited editions · ¥1,800–¥9,500",
+      "story": "Authentic licensed figures, music boxes, and plushies from My Neighbor Totoro, Spirited Away, and modern anime series.",
+      "whereToBuy": "Donguri Kyowakoku Tokyo Station or Mandarake Nakano Broadway.",
+      "tip": "Bring your passport to Donguri Kyowakoku for immediate 10% tax-free refund.",
+      "gradientColors": ["#ea580c", "#c2410c"],
+      "estimatedPrice": 4200,
+      "tags": ["anime", "ghibli", "toys", "pop-culture", "collector"],
+      "bought": false,
+      "order": 9
+    },
+    {
+      "id": "shop-jp-11",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Kyoto Incense & Ceramic Burner",
+      "category": "Traditional Crafts",
+      "emoji": "🪵",
+      "tagLine": "Natural aromatics · ¥2,200–¥6,000",
+      "story": "Pure sandalwood and agarwood incense sticks handcrafted using centuries-old temple recipes, with a ceramic incense dish.",
+      "whereToBuy": "Shoyeido Incense Ginza branch or Kyoto main store.",
+      "tip": "Look for 'Horie' floral blends for modern living spaces.",
+      "gradientColors": ["#6d28d9", "#4c1d95"],
+      "estimatedPrice": 3200,
+      "tags": ["incense", "kyoto", "relaxation", "wellness", "craft"],
+      "bought": false,
+      "order": 10
+    },
+    {
+      "id": "shop-jp-12",
+      "tripId": "japan-demo-trip-2026",
+      "name": "Traditional Yukata & Geta Set",
+      "category": "Traditional Crafts",
+      "emoji": "👘",
+      "tagLine": "Cotton kimono · ¥6,000–¥18,000",
+      "story": "Lightweight unlined cotton summer kimono with matching woven obi sash and wooden geta clogs.",
+      "whereToBuy": "Kimono Yamato or Oriental Bazaar in Omotesando.",
+      "tip": "Pre-tied obi sash options are available for effortless self-dressing.",
+      "gradientColors": ["#db2777", "#9d174d"],
+      "estimatedPrice": 9500,
+      "tags": ["clothing", "kimono", "yukata", "fashion", "traditional"],
+      "bought": false,
+      "order": 11
+    }
+  ],
+  "accordionGuide": {
+    "food": [
+      {
+        "t": "Where to eat",
+        "i": "pin",
+        "s": "4 top spots",
+        "type": "list",
+        "items": [
+          ["Ichiran Shibuya & Fuunji Shinjuku", "Tokyo. Legendary solo-booth tonkotsu ramen and rich dipping tsukemen noodles."],
+          ["Tsukiji Outer Market", "Tokyo. Fresh morning sashimi bowls, grilled scallops, tamagoyaki skewers, and wagyu beef."],
+          ["Omoide Yokocho & Golden Gai", "Shinjuku. Atmospheric narrow lantern-lit alleyways packed with sizzling charcoal yakitori stands."],
+          ["Suzukien Asakusa", "Asakusa. Historic tea house famed for the world’s most intense Level 7 ceremonial matcha gelato."]
+        ]
+      },
+      {
+        "t": "Good to know",
+        "i": "info",
+        "s": "dining tips",
+        "type": "kv",
+        "items": [
+          ["Tap water", "Clean, refreshing, and served free in ice glasses at every restaurant."],
+          ["Tipping", "Not customary in Japan. Good service is standard and tips may be politely declined."],
+          ["Slurping", "Slurping ramen and soba noodles cools them down and is considered a compliment to the chef."],
+          ["Cash stalls", "Many traditional ticket vending ramen shops and street stalls only accept ¥1,000 bills and coins."],
+          ["Convenience", "7-Eleven, Lawson, and FamilyMart offer exceptional freshly-prepared onigiri, egg sandos, and hot fried chicken."]
+        ]
+      }
+    ],
+    "shop": [
+      {
+        "t": "Where to buy",
+        "i": "pin",
+        "s": "4 famous areas",
+        "type": "list",
+        "items": [
+          ["Kappabashi Kitchen Town", "Taito. 170+ shops specializing in hand-forged Japanese knives, ceramics, lacquerware, and cookware."],
+          ["Ginza Itoya", "Ginza. 12-story stationery wonderland with custom paper, fountain pens, traveler notebooks, and washi tapes."],
+          ["Nakamise-dori Asakusa", "Asakusa. Ancient market street selling sensu folding fans, yukata, wooden kokeshi dolls, and senbei crackers."],
+          ["Haneda & Narita Duty-Free", "Airport. Buy regional KitKats, Royce chocolate, and tax-free ceramics right before boarding."]
+        ]
+      },
+      {
+        "t": "Good to know",
+        "i": "info",
+        "s": "shopping tips",
+        "type": "kv",
+        "items": [
+          ["Tax refund", "Foreign tourists can claim 10% consumption tax refund on purchases over ¥5,000. Carry your physical passport."],
+          ["Payment", "Suica / Pasmo transit IC cards and credit cards are widely accepted at convenience stores and department stores."],
+          ["Authentic marks", "Look for 'Made in Japan' and prefecture marks like 'Mino-yaki' or 'Kyo-Sensu' to avoid cheap factory imports."],
+          ["Store hours", "Most department stores open at 10:00 or 11:00 AM and close around 8:00 PM."],
+          ["Luggage packing", "Knives must be packed inside checked baggage. Ask shops for protective bubble wrap for ceramics and glass."]
+        ]
+      }
+    ]
+  },
+  "initialPackingCategories": [
+    {
+      "id": "clothing",
+      "title": "CLOTHING",
+      "color": "#3b82f6",
+      "items": [
+        { "id": 101, "text": "Comfortable slip-on walking shoes (temple visits)", "qty": 1, "weight": "", "checked": true, "user": "Demo User" },
+        { "id": 102, "text": "Lightweight water-repellent windbreaker jacket", "qty": 1, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 103, "text": "Merino base layers and quick-dry t-shirts", "qty": 3, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 104, "text": "Breathable walking socks & thermal sleepwear", "qty": 5, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 105, "text": "Warm fleece jacket or packable down vest", "qty": 1, "weight": "", "checked": false, "user": "Demo User" }
+      ]
+    },
+    {
+      "id": "electronics",
+      "title": "ELECTRONICS",
+      "color": "#a855f7",
+      "items": [
+        { "id": 201, "text": "Pocket Wi-Fi / Japanese eSIM confirmation", "qty": 1, "weight": "", "checked": true, "user": "Demo User" },
+        { "id": 202, "text": "Type A 2-prong power adapters (Japan standard)", "qty": 2, "weight": "", "checked": true, "user": "Demo User" },
+        { "id": 203, "text": "10,000mAh portable power bank for day trips", "qty": 1, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 204, "text": "USB-C fast charging cables & noise-cancelling buds", "qty": 2, "weight": "", "checked": false, "user": "Demo User" }
+      ]
+    },
+    {
+      "id": "documents",
+      "title": "DOCUMENTS",
+      "color": "#22c55e",
+      "items": [
+        { "id": 301, "text": "Passport & Visit Japan Web QR Code", "qty": 1, "weight": "", "checked": true, "user": "Demo User" },
+        { "id": 302, "text": "Credit card with zero foreign transaction fees", "qty": 1, "weight": "", "checked": true, "user": "Demo User" },
+        { "id": 303, "text": "Physical passport color copies & travel insurance card", "qty": 1, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 304, "text": "Emergency contacts & accommodation confirmations", "qty": 1, "weight": "", "checked": false, "user": "Demo User" }
+      ]
+    },
+    {
+      "id": "other",
+      "title": "OTHER & ACCESSORIES",
+      "color": "#ec4899",
+      "items": [
+        { "id": 401, "text": "Compact coin purse (essential for ¥100 / ¥500 coins)", "qty": 1, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 402, "text": "Reusable tote bag for shopping & street snacks", "qty": 2, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 403, "text": "Compact travel umbrella (for sudden rain showers)", "qty": 1, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 404, "text": "Travel skincare set, lip balm & SPF 50 sunscreen", "qty": 1, "weight": "", "checked": false, "user": "Demo User" },
+        { "id": 405, "text": "Small hand towel (many public restrooms lack hand dryers)", "qty": 1, "weight": "", "checked": false, "user": "Demo User" }
+      ]
+    }
+  ]
+}

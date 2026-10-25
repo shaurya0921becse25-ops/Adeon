@@ -1,0 +1,136 @@
+.profileHead {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  padding: 0 18px 22px;
+  margin-top: -25px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+.avatar {
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  border: 5px solid var(--paper);
+  object-fit: cover;
+  background: var(--mist);
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(41, 70, 87, 0.08);
+}
+
+.profileMain {
+  padding-top: 35px;
+  flex: 1;
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 21px;
+  font-weight: 650;
+  letter-spacing: -0.4px;
+  margin: 0;
+  color: var(--ink);
+}
+
+.handle {
+  color: var(--muted);
+  margin-top: 3px;
+  font-weight: 450;
+}
+
+.bio {
+  margin: 12px 0 5px;
+  color: var(--ink);
+}
+
+.quote {
+  font-style: italic;
+  color: #7e929a;
+}
+
+.actions {
+  margin-left: auto;
+  padding-top: 40px;
+  display: flex;
+  gap: 9px;
+}
+
+.btn {
+  border: 1px solid #d4e0e2;
+  background: #fffefa;
+  color: #426a7c;
+  border-radius: 11px;
+  padding: 10px 15px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: #eaf2f3;
+  transform: translateY(-1px);
+}
+
+.btnPrimary {
+  background: #e4eff1;
+  border-color: #d2e2e5;
+  color: #2e5c6e;
+}
+
+.btnPrimary:hover {
+  background: #d6e7eb;
+}
+
+@media (max-width: 850px) {
+  .profileHead {
+    gap: 12px;
+    padding-left: 6px;
+    padding-right: 6px;
+    flex-wrap: wrap;
+  }
+  .avatar {
+    width: 92px;
+    height: 92px;
+  }
+  .profileMain {
+    padding-top: 34px;
+  }
+  .actions {
+    padding-top: 0;
+    margin-left: 104px;
+    width: 100%;
+    order: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .name {
+    font-size: 18px;
+  }
+  .profileHead {
+    gap: 8px;
+  }
+  .avatar {
+    width: 78px;
+    height: 78px;
+  }
+  .profileMain {
+    padding-top: 28px;
+  }
+  .actions {
+    margin-left: 0;
+  }
+}

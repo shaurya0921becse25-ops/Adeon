@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel & Transport Manager</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Inter Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --nav-h: 0px;
+      --bottom-nav-h: 0px;
+      --accent: #2563eb;
+      --accent-text: #ffffff;
+      --text-primary: #0f172a;
+      --bg-primary: #ffffff;
+      --text-muted: #64748b;
+      --text-faint: #94a3b8;
+      --border-faint: #f1f5f9;
+      --border-primary: #e2e8f0;
+      --bg-input: #f8fafc;
+      --fs-scale-subtitle: 1;
+      --fs-scale-body: 1;
+      --fs-scale-caption: 1;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: var(--text-primary);
+    }
+
+    /* Custom Color Utilities matching HTML structure */
+    .bg-surface-elevated { background-color: rgba(255, 255, 255, 0.85); }
+    .bg-surface-tertiary { background-color: #f1f5f9; }
+    .bg-surface-secondary { background-color: #f8fafc; }
+    .bg-surface-card { background-color: #ffffff; }
+    .bg-surface-input { background-color: #f8fafc; }
+    .border-edge-faint { border-color: #e2e8f0; }
+    .border-edge-secondary { border-color: #e2e8f0; }
+    .border-edge { border-color: #cbd5e1; }
+    .text-content { color: #0f172a; }
+    .text-content-muted { color: #64748b; }
+    .text-content-faint { color: #94a3b8; }
+    .bg-accent { background-color: #2563eb; }
+    .text-accent-text { color: #ffffff; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Modal Animation */
+    @keyframes modalEnter {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .trek-modal-enter {
+      animation: modalEnter 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased text-slate-800">
+
+  <!-- TOP APP NAV BAR -->
+  <header class="bg-surface-elevated border-b border-edge-faint sticky top-0 z-40 flex items-center justify-center px-3 backdrop-blur-md h-[52px]">
+    <div class="relative flex items-center gap-1 overflow-x-auto no-scrollbar py-1">
+      <!-- Animated Active Tab Pill Indicator -->
+      <div id="nav-pill" aria-hidden="true" class="absolute top-1/2 left-0 h-[32px] bg-blue-600 rounded-full -translate-y-1/2 transition-all duration-300 cubic-bezier(0.77, 0, 0.175, 1) pointer-events-none z-0"></div>
+
+      <button type="button" onclick="setActiveNav('plan', this)" aria-label="Plan" class="nav-btn relative z-10 px-3.5 py-1.5 rounded-full text-[13px] font-medium text-slate-500 hover:text-slate-800 transition-colors duration-200 flex items-center gap-1.5 justify-center whitespace-nowrap">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon><line x1="9" x2="9" y1="3" y2="18"></line><line x1="15" x2="15" y1="6" y2="21"></line></svg>
+        <span class="hidden sm:inline">Plan</span>
+      </button>
+
+      <button type="button" onclick="setActiveNav('transports', this)" aria-label="Transports" class="nav-btn relative z-10 px-3.5 py-1.5 rounded-full text-[13px] font-semibold text-white transition-colors duration-200 flex items-center gap-1.5 justify-center whitespace-nowrap">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="3" rx="2"></rect><path d="M4 11h16"></path><path d="M12 3v8"></path><path d="m8 19-2 3"></path><path d="m18 22-2-3"></path><path d="M8 15h0"></path><path d="M16 15h0"></path></svg>
+        <span class="hidden sm:inline">Transports</span>
+      </button>
+
+      <button type="button" onclick="setActiveNav('bookings', this)" aria-label="Bookings" class="nav-btn relative z-10 px-3.5 py-1.5 rounded-full text-[13px] font-medium text-slate-500 hover:text-slate-800 transition-colors duration-200 flex items-center gap-1.5 justify-center whitespace-nowrap">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>
+        <span class="hidden sm:inline">Book</span>
+      </button>
+
+      <button type="button" onclick="setActiveNav('lists', this)" aria-label="Lists" class="nav-btn relative z-10 px-3.5 py-1.5 rounded-full text-[13px] font-medium text-slate-500 hover:text-slate-800 transition-colors duration-200 flex items-center gap-1.5 justify-center whitespace-nowrap">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 2 2 4-4"></path><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"></path><path d="m7.5 4.27 9 5.15"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line></svg>
+        <span class="hidden sm:inline">Lists</span>
+      </button>
+
+      <button type="button" onclick="setActiveNav('costs', this)" aria-label="Costs" class="nav-btn relative z-10 px-3.5 py-1.5 rounded-full text-[13px] font-medium text-slate-500 hover:text-slate-800 transition-colors duration-200 flex items-center gap-1.5 justify-center whitespace-nowrap">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
+        <span class="hidden sm:inline">Costs</span>
+      </button>
+
+      <button type="button" onclick="setActiveNav('files', this)" aria-label="Files" class="nav-btn relative z-10 px-3.5 py-1.5 rounded-full text-[13px] font-medium text-slate-500 hover:text-slate-800 transition-colors duration-200 flex items-center gap-1.5 justify-center whitespace-nowrap">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path></svg>
+        <span class="hidden sm:inline">Files</span>
+      </button>
+
+      <button type="button" onclick="setActiveNav('collab', this)" aria-label="Collab" class="nav-btn relative z-10 px-3.5 py-1.5 rounded-full text-[13px] font-medium text-slate-500 hover:text-slate-800 transition-colors duration-200 flex items-center gap-1.5 justify-center whitespace-nowrap">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span class="hidden sm:inline">Collab</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto flex flex-col">
+    
+    <!-- HEADER SUB-MENU / ACTION TOOLBAR -->
+    <div class="px-4 pt-6 md:px-7">
+      <div class="bg-surface-tertiary rounded-[18px] p-3.5 px-5 flex items-center gap-4 flex-wrap">
+        <h2 class="text-content font-semibold text-lg tracking-tight shrink-0">Transports</h2>
+        
+        <div class="hidden md:block w-px h-5 bg-slate-300 shrink-0"></div>
+
+        <!-- Filter Pill Buttons -->
+        <div class="hidden md:inline-flex items-center gap-1 flex-wrap flex-1 min-w-0">
+          <button type="button" onclick="filterCategory('all', this)" class="filter-btn bg-surface-card text-content inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-medium shadow-sm transition-all duration-150">
+            All <span id="cnt-all" class="text-slate-400 bg-surface-tertiary text-[10px] font-semibold px-1.5 py-0.5 rounded-full min-w-[16px] text-center">3</span>
+          </button>
+          
+          <button type="button" onclick="filterCategory('flight', this)" class="filter-btn bg-transparent text-slate-500 hover:text-slate-800 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-normal transition-all duration-150">
+            <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+            Flight <span id="cnt-flight" class="text-slate-400 bg-slate-200/60 text-[10px] font-semibold px-1.5 py-0.5 rounded-full min-w-[16px] text-center">2</span>
+          </button>
+
+          <button type="button" onclick="filterCategory('car', this)" class="filter-btn bg-transparent text-slate-500 hover:text-slate-800 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-normal transition-all duration-150">
+            <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>
+            Car <span id="cnt-car" class="text-slate-400 bg-slate-200/60 text-[10px] font-semibold px-1.5 py-0.5 rounded-full min-w-[16px] text-center">1</span>
+          </button>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center gap-2 ml-auto shrink-0">
+          <button type="button" onclick="triggerImport()" title="Import booking confirmations" class="bg-surface-card text-content border border-slate-200 hover:bg-slate-50 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[13px] font-medium transition-all shadow-sm">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+            <span class="hidden sm:inline">Import from file</span>
+          </button>
+          
+          <button type="button" onclick="openAddModal()" class="bg-blue-600 hover:bg-blue-700 text-white inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[13px] font-medium transition-all shadow-sm">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            <span class="hidden sm:inline">Transport</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRANSPORT CARDS SECTION -->
+    <div class="p-4 md:p-7 pb-20 flex-1">
+      
+      <!-- Section Collapsible Header -->
+      <div class="mb-7">
+        <button type="button" onclick="toggleSection('confirmed-section')" class="flex items-center gap-2 w-full bg-none border-none cursor-pointer py-1 mb-3 user-select-none group">
+          <svg id="confirmed-chevron" class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+          <span class="text-slate-500 font-semibold text-xs uppercase tracking-wider">Confirmed</span>
+          <span id="confirmed-count" class="bg-surface-tertiary text-slate-400 font-semibold text-[11px] px-2 py-0.5 rounded-full min-w-[20px] text-center">3</span>
+        </button>
+
+        <!-- Dynamic Grid Container for Cards -->
+        <div id="cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 items-stretch transition-all duration-300">
+          <!-- Cards will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- TRANSPORT MODAL (ADD / EDIT) -->
+  <div id="transport-modal" class="fixed inset-0 z-[10000] hidden items-start sm:items-center justify-center px-4 bg-slate-900/50 backdrop-blur-sm pt-[70px] pb-6 overflow-hidden">
+    <div class="trek-modal-enter rounded-2xl overflow-hidden shadow-2xl w-full max-w-4xl flex flex-col max-h-[calc(100vh-100px)] bg-white border border-slate-100">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 shrink-0 border-b border-slate-100">
+        <h2 id="modal-title" class="text-lg font-semibold text-slate-900">Add transport</h2>
+        <button type="button" onclick="closeModal()" class="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="flex-1 overflow-y-auto p-6 min-h-0">
+        
+        <!-- Toggle Tabs for Manual / Automated -->
+        <div class="bg-slate-100 flex rounded-xl p-1 gap-0.5 mb-4">
+          <button type="button" id="tab-manual" onclick="toggleModalTab('manual')" class="flex-1 py-2 px-1.5 text-xs font-medium rounded-lg bg-white text-slate-900 shadow-sm border-0 cursor-pointer">Manual</button>
+          <button type="button" id="tab-auto" onclick="toggleModalTab('auto')" class="flex-1 py-2 px-1.5 text-xs font-medium rounded-lg text-slate-500 bg-transparent border-0 cursor-pointer">Automated</button>
+        </div>
+
+        <form id="transport-form" class="flex flex-col gap-3.5" onsubmit="handleFormSubmit(event)">
+          
+          <!-- Booking Type Selection -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Booking Type</label>
+            <div id="booking-type-selector" class="flex flex-wrap gap-1.5">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Title -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 mb-1.5 uppercase tracking-wider">Title *</label>
+            <input required id="form-title" placeholder="e.g. Lufthansa LH123, Hotel Adlon, ..." class="w-full border border-slate-200 rounded-xl px-3 py-2 text-[13px] outline-none text-slate-900 bg-slate-50 focus:bg-white focus:border-blue-500 transition-all" type="text">
+          </div>
+
+          <!-- Route Info -->
+          <div class="flex flex-col gap-2">
+            <label class="block text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Route</label>
+            
+            <!-- Departure Card -->
+            <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-wider shrink-0">From</span>
+                <div class="flex-1 min-w-0">
+                  <div class="bg-slate-100 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-slate-200">
+                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+                    <input id="form-from" placeholder="Airport code or city (e.g. FRA)" class="bg-transparent text-slate-900 flex-1 min-w-0 border-none outline-none text-[13px]" type="text">
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <div class="flex-1 min-w-0">
+                  <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Departure</label>
+                  <input id="form-dep-date" type="date" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] font-medium outline-none text-slate-800">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Dep. time</label>
+                  <input id="form-dep-time" type="time" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] font-medium outline-none text-slate-800">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-1">
+                <div>
+                  <label class="block text-[10px] font-semibold text-slate-400 mb-1 uppercase">Carrier</label>
+                  <input id="form-carrier" placeholder="Lufthansa" class="w-full border border-slate-200 rounded-lg px-2.5 py-1.5 text-[12px] outline-none text-slate-800 bg-slate-50" type="text">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-semibold text-slate-400 mb-1 uppercase">No.</label>
+                  <input id="form-flight-no" placeholder="LH 123" class="w-full border border-slate-200 rounded-lg px-2.5 py-1.5 text-[12px] outline-none text-slate-800 bg-slate-50" type="text">
+                </div>
+                <div>
+                  <label class="block text-[10px] font-semibold text-slate-400 mb-1 uppercase">Seat</label>
+                  <input id="form-seat" placeholder="12A" class="w-full border border-slate-200 rounded-lg px-2.5 py-1.5 text-[12px] outline-none text-slate-800 bg-slate-50" type="text">
+                </div>
+              </div>
+            </div>
+
+            <!-- Stop button -->
+            <button type="button" class="text-slate-400 hover:text-slate-600 w-full flex items-center justify-center gap-1.5 py-1.5 px-2.5 border border-dashed border-slate-300 rounded-lg bg-none text-[11px] cursor-pointer font-medium transition-colors">
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Add stop
+            </button>
+
+            <!-- Destination Card -->
+            <div class="bg-white border border-slate-200 rounded-xl p-3 flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-wider shrink-0">To</span>
+                <div class="flex-1 min-w-0">
+                  <div class="bg-slate-100 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-slate-200">
+                    <svg class="w-3.5 h-3.5 text-slate-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>
+                    <input id="form-to" placeholder="Airport code or city (e.g. KEF)" class="bg-transparent text-slate-900 flex-1 min-w-0 border-none outline-none text-[13px]" type="text">
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <div class="flex-1 min-w-0">
+                  <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Arrival</label>
+                  <input id="form-arr-date" type="date" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] font-medium outline-none text-slate-800">
+                </div>
+                <div class="flex-1 min-w-0">
+                  <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Arr. time</label>
+                  <input id="form-arr-time" type="time" class="w-full px-3 py-1.5 rounded-lg border border-slate-200 bg-slate-50 text-[13px] font-medium outline-none text-slate-800">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking Code & Status -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Booking Code</label>
+              <input id="form-code" placeholder="e.g. ABC12345" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-[13px] outline-none text-slate-900 bg-slate-50 uppercase font-mono" type="text">
+            </div>
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Status</label>
+              <select id="form-status" class="w-full border border-slate-200 rounded-xl px-3 py-2 text-[13px] outline-none text-slate-900 bg-slate-50 font-medium">
+                <option value="Confirmed">Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Notes</label>
+            <textarea id="form-notes" rows="2" placeholder="Additional notes..." class="w-full border border-slate-200 rounded-xl px-3 py-2 text-[13px] outline-none text-slate-900 bg-slate-50 resize-none leading-relaxed"></textarea>
+          </div>
+
+          <!-- Travelers -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Travelers</label>
+            <div class="flex flex-wrap gap-1.5">
+              <button type="button" class="text-slate-600 inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-slate-300 bg-white font-medium text-xs">
+                <span class="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center text-[9px] font-bold">D</span>
+                <span>Demo User</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- File Attachments -->
+          <div>
+            <label class="block text-[11px] font-semibold text-slate-400 mb-1 uppercase tracking-wider">Files</label>
+            <div class="flex gap-1.5 flex-wrap">
+              <button type="button" onclick="document.getElementById('file-input').click()" class="text-slate-500 hover:text-slate-700 flex items-center gap-1.5 px-2.5 py-1.5 border border-dashed border-slate-300 rounded-lg bg-none text-[11px] cursor-pointer font-medium">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg> Attach file
+              </button>
+              <input id="file-input" type="file" class="hidden" onchange="handleFileSelect(this)">
+              <span id="attached-file-name" class="text-xs text-slate-600 self-center"></span>
+            </div>
+          </div>
+
+          <!-- Costs Shortcut -->
+          <div>
+            <label class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Costs</label>
+            <button type="button" onclick="createExpenseShortcut()" class="w-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-[13.5px] font-semibold transition-colors">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg> Create expense
+            </button>
+            <div class="text-slate-400 text-[11px] mt-1">Saves the booking, then opens the Costs editor.</div>
+          </div>
+
+          <!-- Modal Footer Actions -->
+          <div class="pt-4 border-t border-slate-100 flex justify-end gap-2 mt-2">
+            <button type="button" onclick="closeModal()" class="text-slate-600 hover:bg-slate-100 px-4 py-2 rounded-xl border border-slate-200 bg-none text-xs font-medium transition-colors">Cancel</button>
+            <button type="submit" id="modal-submit-btn" class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all">Save</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HIDDEN IMPORT INPUT -->
+  <input type="file" id="import-file-input" class="hidden" accept=".json,.csv,.pdf" onchange="processImport(this)">
+
+  <script>
+    // --- Application State ---
+    let transports = [
+      {
+        id: '1',
+        type: 'Flight',
+        status: 'Confirmed',
+        title: 'FI 519 Frankfurt → Keflavik',
+        code: 'FI519KX',
+        notes: 'Hand luggage only, the car takes the rest.',
+        category: 'flight',
+        from: 'Frankfurt (FRA)',
+        to: 'Keflavik (KEF)',
+        carrier: 'Icelandair',
+        flightNo: 'FI 519',
+        seat: '14A'
+      },
+      {
+        id: '2',
+        type: 'Car',
+        status: 'Confirmed',
+        title: 'Dacia Duster 4x4, 10 days',
+        code: 'BCR-77120',
+        notes: 'Gravel and sand-and-ash insurance included. Photograph every panel before leaving the lot.',
+        category: 'car',
+        from: 'KEF Airport',
+        to: 'KEF Airport',
+        carrier: 'Blue Car Rental',
+        flightNo: '',
+        seat: ''
+      },
+      {
+        id: '3',
+        type: 'Flight',
+        status: 'Confirmed',
+        title: 'FI 518 Keflavik → Frankfurt',
+        code: 'FI518KX',
+        notes: '',
+        category: 'flight',
+        from: 'Keflavik (KEF)',
+        to: 'Frankfurt (FRA)',
+        carrier: 'Icelandair',
+        flightNo: 'FI 518',
+        seat: '14C'
+      }
+    ];
+
+    let currentCategoryFilter = 'all';
+    let currentEditId = null;
+    let selectedBookingType = 'Flight';
+
+    const bookingTypes = [
+      { name: 'Flight', icon: `<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path>` },
+      { name: 'Train', icon: `<rect width="16" height="16" x="4" y="3" rx="2"></rect><path d="M4 11h16"></path><path d="M12 3v8"></path><path d="m8 19-2 3"></path><path d="m18 22-2-3"></path><path d="M8 15h0"></path><path d="M16 15h0"></path>` },
+      { name: 'Bus', icon: `<path d="M8 6v6"></path><path d="M15 6v6"></path><path d="M2 12h19.6"></path><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 18h5"></path><circle cx="16" cy="18" r="2"></circle>` },
+      { name: 'Car', icon: `<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle>` },
+      { name: 'Taxi', icon: `<path d="M10 2h4"></path><path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8"></path><path d="M7 14h.01"></path><path d="M17 14h.01"></path><rect width="18" height="8" x="3" y="10" rx="2"></rect><path d="M5 18v2"></path><path d="M19 18v2"></path>` },
+      { name: 'Bicycle', icon: `<circle cx="18.5" cy="17.5" r="3.5"></circle><circle cx="5.5" cy="17.5" r="3.5"></circle><circle cx="15" cy="5" r="1"></circle><path d="M12 17.5V14l-3-3 4-3 2 3h2"></path>` },
+      { name: 'Cruise', icon: `<path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path><path d="M12 10v4"></path><path d="M12 2v3"></path>` },
+      { name: 'Ferry', icon: `<path d="M22 18H2a4 4 0 0 0 4 4h12a4 4 0 0 0 4-4Z"></path><path d="M21 14 10 2 3 14h18Z"></path><path d="M10 2v16"></path>` },
+      { name: 'Other', icon: `<circle cx="6" cy="19" r="3"></circle><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path><circle cx="18" cy="5" r="3"></circle>` }
+    ];
+
+    // --- DOM Init ---
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set initial position of top nav pill on 'Transports' tab
+      const initialNavBtn = document.querySelectorAll('.nav-btn')[1];
+      if (initialNavBtn) {
+        updateNavPill(initialNavBtn);
+      }
+      
+      renderTypeSelector();
+      renderCards();
+      updateCounts();
+    });
+
+    // --- Navigation Pill Logic ---
+    function setActiveNav(tabName, element) {
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('font-semibold', 'text-white');
+        btn.classList.add('font-medium', 'text-slate-500');
+      });
+      element.classList.remove('font-medium', 'text-slate-500');
+      element.classList.add('font-semibold', 'text-white');
+      updateNavPill(element);
+    }
+
+    function updateNavPill(element) {
+      const pill = document.getElementById('nav-pill');
+      if (!pill || !element) return;
+      pill.style.left = `${element.offsetLeft}px`;
+      pill.style.width = `${element.offsetWidth}px`;
+    }
+
+    // --- Render Cards ---
+    function renderCards() {
+      const container = document.getElementById('cards-container');
+      container.innerHTML = '';
+
+      const filtered = transports.filter(item => {
+        if (currentCategoryFilter === 'all') return true;
+        return item.category === currentCategoryFilter;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400 bg-white rounded-2xl border border-dashed border-slate-200">
+            <p class="text-sm font-medium">No transports found in this category.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const isFlight = item.type.toLowerCase() === 'flight';
+        const typeIconSvg = isFlight 
+          ? `<svg class="w-3 h-3 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path></svg>`
+          : `<svg class="w-3 h-3 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path><circle cx="7" cy="17" r="2"></circle><path d="M9 17h6"></path><circle cx="17" cy="17" r="2"></circle></svg>`;
+
+        const notesHtml = item.notes ? `
+          <div>
+            <div class="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 mb-1">Notes</div>
+            <div class="text-[13px] font-normal text-slate-800 px-2.5 py-2 bg-slate-100 rounded-xl leading-relaxed break-words">
+              <p>${escapeHtml(item.notes)}</p>
+            </div>
+          </div>
+        ` : '';
+
+        const cardEl = document.createElement('div');
+        cardEl.className = 'bg-surface-card rounded-xl overflow-hidden flex flex-col border border-emerald-600/25 transition-all duration-150 hover:shadow-md';
+        cardEl.innerHTML = `
+          <!-- Card Header -->
+          <div class="bg-emerald-500/10 flex items-center justify-between gap-3 flex-wrap p-3 px-3.5">
+            <div class="inline-flex items-center gap-2.5 min-w-0 flex-wrap">
+              <span class="text-emerald-600 inline-flex items-center gap-1.5 text-xs font-semibold">
+                <span class="bg-emerald-600 w-1.5 h-1.5 rounded-full shrink-0"></span>
+                ${item.status}
+              </span>
+              <span class="text-slate-600 bg-slate-100 inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-md font-medium">
+                ${typeIconSvg}
+                ${item.type}
+              </span>
+            </div>
+
+            <div class="flex items-center gap-0.5">
+              <span class="text-slate-900 text-[13px] font-semibold mr-1.5 max-w-[140px] whitespace-nowrap overflow-hidden text-ellipsis">${escapeHtml(item.title)}</span>
+              <button type="button" title="Edit" onclick="openEditModal('${item.id}')" class="w-6 h-6 rounded-md grid place-items-center cursor-pointer text-slate-400 hover:text-slate-700 hover:bg-slate-200/50 transition-colors">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>
+              </button>
+              <button type="button" title="Delete" onclick="deleteCard('${item.id}')" class="w-6 h-6 rounded-md grid place-items-center cursor-pointer text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card Body -->
+          <div class="p-3.5 flex flex-col gap-3 flex-1">
+            ${item.code ? `
+              <div>
+                <div class="text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400 mb-1">Booking Code</div>
+                <div class="text-[12.5px] font-medium text-slate-800 px-2.5 py-2 bg-slate-100 rounded-xl text-center font-mono cursor-default">
+                  ${escapeHtml(item.code)}
+                </div>
+              </div>
+            ` : ''}
+
+            ${notesHtml}
+          </div>
+        `;
+        container.appendChild(cardEl);
+      });
+    }
+
+    // --- Category Filter Logic ---
+    function filterCategory(category, btnElement) {
+      currentCategoryFilter = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.className = 'filter-btn bg-transparent text-slate-500 hover:text-slate-800 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-normal transition-all duration-150';
+      });
+      btnElement.className = 'filter-btn bg-surface-card text-content inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[13px] font-medium shadow-sm transition-all duration-150';
+      renderCards();
+    }
+
+    function updateCounts() {
+      const allCnt = transports.length;
+      const flightCnt = transports.filter(t => t.category === 'flight').length;
+      const carCnt = transports.filter(t => t.category === 'car').length;
+
+      document.getElementById('cnt-all').innerText = allCnt;
+      document.getElementById('cnt-flight').innerText = flightCnt;
+      document.getElementById('cnt-car').innerText = carCnt;
+      document.getElementById('confirmed-count').innerText = allCnt;
+    }
+
+    // --- Type Selector Builder ---
+    function renderTypeSelector() {
+      const container = document.getElementById('booking-type-selector');
+      container.innerHTML = '';
+      bookingTypes.forEach(t => {
+        const isSelected = selectedBookingType === t.name;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => selectBookingType(t.name);
+        btn.className = isSelected
+          ? 'bg-slate-900 text-white flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-900 text-[11px] font-medium transition-all'
+          : 'bg-white text-slate-600 flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-200 text-[11px] font-medium transition-all hover:bg-slate-50';
+        btn.innerHTML = `
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${t.icon}</svg>
+          ${t.name}
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    function selectBookingType(typeName) {
+      selectedBookingType = typeName;
+      renderTypeSelector();
+    }
+
+    // --- Modal Actions ---
+    function openAddModal() {
+      currentEditId = null;
+      document.getElementById('modal-title').innerText = 'Add transport';
+      document.getElementById('modal-submit-btn').innerText = 'Save';
+      document.getElementById('transport-form').reset();
+      selectedBookingType = 'Flight';
+      renderTypeSelector();
+      document.getElementById('attached-file-name').innerText = '';
+      
+      const modal = document.getElementById('transport-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function openEditModal(id) {
+      const item = transports.find(t => t.id === id);
+      if (!item) return;
+
+      currentEditId = id;
+      document.getElementById('modal-title').innerText = 'Edit transport';
+      document.getElementById('modal-submit-btn').innerText = 'Update';
+
+      selectedBookingType = item.type;
+      renderTypeSelector();
+
+      document.getElementById('form-title').value = item.title || '';
+      document.getElementById('form-code').value = item.code || '';
+      document.getElementById('form-notes').value = item.notes || '';
+      document.getElementById('form-status').value = item.status || 'Confirmed';
+      document.getElementById('form-from').value = item.from || '';
+      document.getElementById('form-to').value = item.to || '';
+      document.getElementById('form-carrier').value = item.carrier || '';
+      document.getElementById('form-flight-no').value = item.flightNo || '';
+      document.getElementById('form-seat').value = item.seat || '';
+
+      const modal = document.getElementById('transport-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('transport-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function toggleModalTab(mode) {
+      const tabManual = document.getElementById('tab-manual');
+      const tabAuto = document.getElementById('tab-auto');
+
+      if (mode === 'manual') {
+        tabManual.className = 'flex-1 py-2 px-1.5 text-xs font-medium rounded-lg bg-white text-slate-900 shadow-sm border-0 cursor-pointer';
+        tabAuto.className = 'flex-1 py-2 px-1.5 text-xs font-medium rounded-lg text-slate-500 bg-transparent border-0 cursor-pointer';
+      } else {
+        tabAuto.className = 'flex-1 py-2 px-1.5 text-xs font-medium rounded-lg bg-white text-slate-900 shadow-sm border-0 cursor-pointer';
+        tabManual.className = 'flex-1 py-2 px-1.5 text-xs font-medium rounded-lg text-slate-500 bg-transparent border-0 cursor-pointer';
+      }
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('form-title').value.trim();
+      const code = document.getElementById('form-code').value.trim();
+      const notes = document.getElementById('form-notes').value.trim();
+      const status = document.getElementById('form-status').value;
+      const from = document.getElementById('form-from').value.trim();
+      const to = document.getElementById('form-to').value.trim();
+      const carrier = document.getElementById('form-carrier').value.trim();
+      const flightNo = document.getElementById('form-flight-no').value.trim();
+      const seat = document.getElementById('form-seat').value.trim();
+
+      const cat = selectedBookingType.toLowerCase() === 'flight' ? 'flight' 
+                : selectedBookingType.toLowerCase() === 'car' ? 'car' 
+                : 'all';
+
+      if (currentEditId) {
+        // Update
+        const idx = transports.findIndex(t => t.id === currentEditId);
+        if (idx !== -1) {
+          transports[idx] = {
+            ...transports[idx],
+            type: selectedBookingType,
+            title,
+            code,
+            notes,
+            status,
+            category: cat,
+            from,
+            to,
+            carrier,
+            flightNo,
+            seat
+          };
+        }
+      } else {
+        // Create
+        const newItem = {
+          id: Date.now().toString(),
+          type: selectedBookingType,
+          status: status || 'Confirmed',
+          title: title || `${selectedBookingType} Booking`,
+          code,
+          notes,
+          category: cat,
+          from,
+          to,
+          carrier,
+          flightNo,
+          seat
+        };
+        transports.unshift(newItem);
+      }
+
+      updateCounts();
+      renderCards();
+      closeModal();
+    }
+
+    function deleteCard(id) {
+      transports = transports.filter(t => t.id !== id);
+      updateCounts();
+      renderCards();
+    }
+
+    function toggleSection(sectionId) {
+      const container = document.getElementById('cards-container');
+      const chevron = document.getElementById('confirmed-chevron');
+      if (container.classList.contains('hidden')) {
+        container.classList.remove('hidden');
+        chevron.style.transform = 'rotate(0deg)';
+      } else {
+        container.classList.add('hidden');
+        chevron.style.transform = 'rotate(-90deg)';
+      }
+    }
+
+    // --- Helpers & Extras ---
+    function triggerImport() {
+      document.getElementById('import-file-input').click();
+    }
+
+    function processImport(input) {
+      if (input.files && input.files[0]) {
+        alert('File imported: ' + input.files[0].name);
+        input.value = '';
+      }
+    }
+
+    function handleFileSelect(input) {
+      if (input.files && input.files[0]) {
+        document.getElementById('attached-file-name').innerText = input.files[0].name;
+      }
+    }
+
+    function createExpenseShortcut() {
+      alert('Saving booking and navigating to Costs manager...');
+      closeModal();
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+  </script>
+</body>
+</html>

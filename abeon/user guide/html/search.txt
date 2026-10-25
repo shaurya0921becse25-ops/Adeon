@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abeon - Go Beyond The Ordinary</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #008767;
+            --primary-hover: #006e54;
+            --primary-light: #e6f4f1;
+            --text-dark: #121212;
+            --text-muted: #6a6a6a;
+            --bg-gray: #f8faf9;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
+            --radius-pill: 9999px;
+            --radius-card: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* SECTION 1: HERO & CAROUSEL BG */
+        .hero-section {
+            position: relative;
+            height: 540px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        /* Image Carousel Background */
+        .hero-carousel-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: carouselFade 18s infinite ease-in-out;
+        }
+
+        /* Slide Images */
+        .slide-1 {
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), 
+                              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop');
+            animation-delay: 0s;
+        }
+
+        .slide-2 {
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), 
+                              url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1920&auto=format&fit=crop');
+            animation-delay: 6s;
+        }
+
+        .slide-3 {
+            background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), 
+                              url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1920&auto=format&fit=crop');
+            animation-delay: 12s;
+        }
+
+        @keyframes carouselFade {
+            0% { opacity: 0; transform: scale(1); }
+            5% { opacity: 1; }
+            33.33% { opacity: 1; }
+            38.33% { opacity: 0; transform: scale(1.04); }
+            100% { opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin-bottom: 32px;
+        }
+
+        .hero-section.dropdown-open {
+            height: auto;
+            min-height: 720px;
+            justify-content: flex-start;
+            padding-top: 80px;
+        }
+
+        .hero-title {
+            font-size: 3.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.95;
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 780px;
+        }
+
+        .search-bar {
+            background: white;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            padding: 6px 8px 6px 24px;
+            box-shadow: var(--shadow-lg);
+            color: var(--text-dark);
+            text-align: left;
+        }
+
+        .search-field {
+            flex: 1;
+            padding: 6px 12px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .search-field:first-child {
+            border-right: 1px solid var(--border-color);
+        }
+
+        .field-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+
+        .field-input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .search-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Recent Searches Dropdown Modal */
+        .recent-searches-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 0;
+            width: min(420px, 100%);
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 20px;
+            display: none;
+            z-index: 100;
+            color: var(--text-dark);
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .recent-searches-list {
+            display: grid;
+            gap: 4px;
+        }
+
+        .recent-search-item {
+            min-height: 56px;
+        }
+
+        .recent-search-item .icon-box {
+            width: 36px;
+            height: 36px;
+            flex: 0 0 36px;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--primary-light);
+        }
+
+        .recent-search-item .details {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .recent-search-item .details strong,
+        .recent-search-item .details span {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .recent-searches-dropdown.active {
+            display: block;
+        }
+
+        .dropdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .dropdown-header h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .clear-btn {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .recent-search-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .recent-search-item:hover {
+            background-color: var(--bg-gray);
+        }
+
+        .recent-search-item .icon-box {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .recent-search-item .details strong {
+            display: block;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        .recent-search-item .details span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Datepicker Modal Mock */
+        .datepicker-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 20px;
+            display: none;
+            z-index: 100;
+            color: var(--text-dark);
+        }
+
+        .datepicker-dropdown.active {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        .calendar-day-head {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.75rem;
+            padding-bottom: 6px;
+        }
+
+        .calendar-day {
+            padding: 8px 0;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .calendar-day:hover:not(.empty) {
+            background-color: var(--bg-gray);
+        }
+
+        .calendar-day.selected {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* SECTION 2: WHY TRAVEL WITH ABEON */
+        .why-section {
+            padding: 80px 0;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 48px;
+            letter-spacing: -0.01em;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .benefit-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+        .benefit-card:hover .icon-wrapper {
+            transform: translateY(-4px);
+        }
+
+        .bg-headset { background-color: #ffebee; color: #e53935; }
+        .bg-gift { background-color: #e0f2f1; color: #00897b; }
+        .bg-star { background-color: #fff8e1; color: #fbc02d; }
+        .bg-calendar { background-color: #e8eaf6; color: #3f51b5; }
+
+        .benefit-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .benefit-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* SECTION 3: RECENTLY VIEWED */
+        .recently-viewed-section {
+            padding: 40px 0 80px 0;
+            background-color: #ffffff;
+        }
+
+        .section-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .see-all-link {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .see-all-link:hover {
+            text-decoration: underline;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .experience-card {
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .card-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .card-location {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .rating-score {
+            font-weight: 700;
+        }
+
+        .rating-count {
+            color: var(--text-muted);
+        }
+
+        .card-price {
+            margin-top: auto;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .price-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* SECTION 4: FLEXIBLE PLANNING */
+        .flexible-section {
+            background-color: var(--primary-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .flexible-content {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .flexible-content h2 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .flexible-content p {
+            font-size: 1rem;
+            color: #2e4e46;
+            line-height: 1.6;
+        }
+
+        /* Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title { font-size: 2.25rem; }
+            .search-bar { flex-direction: column; border-radius: 16px; padding: 12px; gap: 12px; }
+            .search-field:first-child { border-right: none; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+            .search-btn { width: 100%; border-radius: 8px; }
+            .benefits-grid, .cards-grid { grid-template-columns: 1fr; }
+            .recent-searches-dropdown { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HERO & CAROUSEL SECTION -->
+    <section class="hero-section">
+        <!-- Background Image Carousel -->
+        <div class="hero-carousel-bg">
+            <div class="carousel-slide slide-1"></div>
+            <div class="carousel-slide slide-2"></div>
+            <div class="carousel-slide slide-3"></div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">Go beyond the ordinary.</h1>
+            <p class="hero-subtitle">Discover places. Create memories. Travel your way.</p>
+        </div>
+
+        <div class="search-container">
+            <div class="search-bar">
+                <div class="search-field" id="whereToField">
+                    <div class="field-label">Where to?</div>
+                    <input type="text" class="field-input" placeholder="Where will your next journey take you?" id="whereInput" readonly>
+                </div>
+                <div class="search-field" id="whenField">
+                    <div class="field-label">When will you explore?</div>
+                    <input type="text" class="field-input" value="Oct 21" id="whenInput" readonly>
+                </div>
+                <button class="search-btn" aria-label="Search">
+                    <i data-lucide="search"></i>
+                </button>
+            </div>
+
+            <!-- Recent Searches Dropdown -->
+            <div class="recent-searches-dropdown" id="recentSearchesModal">
+                <div class="dropdown-header">
+                    <h4>Recent Searches</h4>
+                    <button class="clear-btn">Clear</button>
+                </div>
+                <div class="recent-searches-list">
+                    <div class="recent-search-item">
+                        <div class="icon-box"><i data-lucide="map-pin"></i></div>
+                        <div class="details"><strong>Shimla</strong><span>India</span></div>
+                    </div>
+                    <div class="recent-search-item">
+                        <div class="icon-box"><i data-lucide="map-pin"></i></div>
+                        <div class="details"><strong>Chandigarh</strong><span>India</span></div>
+                    </div>
+                    <div class="recent-search-item">
+                        <div class="icon-box"><i data-lucide="map-pin"></i></div>
+                        <div class="details"><strong>Japan</strong><span>East Asia</span></div>
+                    </div>
+                    <div class="recent-search-item">
+                        <div class="icon-box"><i data-lucide="map-pin"></i></div>
+                        <div class="details"><strong>Dubai</strong><span>United Arab Emirates</span></div>
+                    </div>
+                    <div class="recent-search-item">
+                        <div class="icon-box"><i data-lucide="map-pin"></i></div>
+                        <div class="details"><strong>Jaipur</strong><span>India</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Picker Dropdown Mock -->
+            <div class="datepicker-dropdown" id="datepickerModal">
+                <div class="calendar-header">
+                    <span>October 2026</span>
+                    <i data-lucide="chevron-right" style="cursor: pointer;"></i>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day-head">Su</div><div class="calendar-day-head">Mo</div><div class="calendar-day-head">Tu</div>
+                    <div class="calendar-day-head">We</div><div class="calendar-day-head">Th</div><div class="calendar-day-head">Fr</div>
+                    <div class="calendar-day-head">Sa</div>
+                    
+                    <div class="calendar-day empty"></div><div class="calendar-day empty"></div><div class="calendar-day empty"></div>
+                    <div class="calendar-day empty"></div><div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div>
+                    <div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div>
+                    <div class="calendar-day">16</div><div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div>
+                    <div class="calendar-day">20</div><div class="calendar-day selected">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div>
+                    <div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day">26</div><div class="calendar-day">27</div>
+                    <div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div><div class="calendar-day">31</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. WHY TRAVEL WITH ABEON SECTION -->
+    <section class="why-section">
+        <div class="container">
+            <h2 class="section-title">Why travel with Abeon?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon-wrapper bg-headset">
+                        <i data-lucide="headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>We’re here whenever your journey needs us.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-wrapper bg-gift">
+                        <i data-lucide="gift"></i>
+                    </div>
+                    <h3>Travel Rewards</h3>
+                    <p>Every journey brings something special.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-wrapper bg-star">
+                        <i data-lucide="star"></i>
+                    </div>
+                    <h3>Trusted Reviews</h3>
+                    <p>Make confident choices with traveler insights.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon-wrapper bg-calendar">
+                        <i data-lucide="calendar-check"></i>
+                    </div>
+                    <h3>Travel Your Way</h3>
+                    <p>Flexible plans, effortless changes, more freedom.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. RECENTLY VIEWED SECTION -->
+    <section class="recently-viewed-section">
+        <div class="container">
+            <div class="section-header-flex">
+                <h2 class="section-title" style="margin-bottom: 0;">Pick up where you left off</h2>
+                <a href="#" class="see-all-link">See all <i data-lucide="chevron-right" size="16"></i></a>
+            </div>
+            
+            <div class="cards-grid">
+                <!-- Card 1 -->
+                <a href="#" class="experience-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=600&auto=format&fit=crop" alt="Shimla Heritage Tour">
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i data-lucide="heart" size="18"></i></button>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i data-lucide="globe" size="14"></i> Shimla, Himachal Pradesh</div>
+                        <h3 class="card-title">Guided Heritage Walk Tour in Shimla</h3>
+                        <div class="card-rating">
+                            <i data-lucide="star" size="14" fill="#008767" color="#008767"></i>
+                            <span class="rating-score">4.8</span>
+                            <span class="rating-count">(41)</span>
+                        </div>
+                        <div class="card-price">from <span class="price-amount">₹2,895</span></div>
+                    </div>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#" class="experience-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1597074866923-dc0589150358?q=80&w=600&auto=format&fit=crop" alt="Custom Shimla Tour">
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i data-lucide="heart" size="18"></i></button>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i data-lucide="globe" size="14"></i> Shimla, Himachal Pradesh</div>
+                        <h3 class="card-title">Shimla : Private Custom Tour with a Local Guide</h3>
+                        <div class="card-rating">
+                            <i data-lucide="star" size="14" fill="#008767" color="#008767"></i>
+                            <span class="rating-score">4.9</span>
+                            <span class="rating-count">(82)</span>
+                        </div>
+                        <div class="card-price">from <span class="price-amount">₹4,584</span></div>
+                    </div>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="experience-card">
+                    <div class="card-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop" alt="Paris Sightseeing">
+                        <button class="wishlist-btn" aria-label="Add to wishlist"><i data-lucide="heart" size="18"></i></button>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i data-lucide="globe" size="14"></i> Paris, Île-de-France</div>
+                        <h3 class="card-title">Paris Big Bus Hop On Hop Off Tour with Optional River Cruise</h3>
+                        <div class="card-rating">
+                            <i data-lucide="star" size="14" fill="#008767" color="#008767"></i>
+                            <span class="rating-score">3.9</span>
+                            <span class="rating-count">(7,036)</span>
+                        </div>
+                        <div class="card-price">from <span class="price-amount">₹4,256</span></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FLEXIBLE PLANNING SECTION -->
+    <section class="flexible-section">
+        <div class="container">
+            <div class="flexible-content">
+                <h2>Travel without the stress</h2>
+                <p>Use Reserve Now & Pay Later to secure the activities you don't want to miss without being locked in.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Dropdown Toggle Handlers
+        const whereToField = document.getElementById('whereToField');
+        const whenField = document.getElementById('whenField');
+        const recentSearchesModal = document.getElementById('recentSearchesModal');
+        const datepickerModal = document.getElementById('datepickerModal');
+        const whereInput = document.getElementById('whereInput');
+        const heroSection = document.querySelector('.hero-section');
+        const updateDropdownState = () => {
+            heroSection.classList.toggle(
+                'dropdown-open',
+                recentSearchesModal.classList.contains('active') || datepickerModal.classList.contains('active')
+            );
+        };
+
+        whereToField.addEventListener('click', (e) => {
+            e.stopPropagation();
+            datepickerModal.classList.remove('active');
+            recentSearchesModal.classList.toggle('active');
+            updateDropdownState();
+        });
+
+        whenField.addEventListener('click', (e) => {
+            e.stopPropagation();
+            recentSearchesModal.classList.remove('active');
+            datepickerModal.classList.toggle('active');
+            updateDropdownState();
+        });
+
+        // Close modals when clicking outside
+        document.addEventListener('click', () => {
+            recentSearchesModal.classList.remove('active');
+            datepickerModal.classList.remove('active');
+            updateDropdownState();
+        });
+
+        recentSearchesModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        datepickerModal.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Set search field input when selecting a recent destination
+        const recentItems = document.querySelectorAll('.recent-search-item');
+        recentItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const cityName = item.querySelector('strong').innerText;
+                whereInput.value = cityName;
+                recentSearchesModal.classList.remove('active');
+                updateDropdownState();
+            });
+        });
+    </script>
+</body>
+</html>

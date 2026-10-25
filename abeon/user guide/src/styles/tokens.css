@@ -1,0 +1,65 @@
+:root {
+  /* Core Brand Tokens */
+  --porcelain: #FAF7F0; /* page background */
+  --mist: #D9E7EB;      /* soft surfaces, chips, section bands */
+  --aegean: #91B8C7;    /* primary accent, buttons, active states */
+  --limestone: #D8BDA6; /* secondary accent, badges, dividers */
+  --taupe: #765F53;     /* text, headings, dark buttons */
+
+  /* Derived Tints & Contrast-Safe Shades */
+  --aegean-deep: #2F6174;    /* text-safe primary brand blue, buttons hover */
+  --aegean-dark: #224755;    /* deep navy tone for high contrast text */
+  --aegean-surface: #EAF2F5; /* subtle tinted background */
+  --aegean-glow: rgba(145, 184, 199, 0.35);
+
+  --taupe-deep: #4A3A32;     /* high contrast primary heading text */
+  --taupe-soft: #8C766A;     /* secondary text, muted metadata */
+  --taupe-muted: #A8968B;    /* placeholder & subtle icon colors */
+  --taupe-light: #F4EFEA;    /* warm card surface */
+
+  --limestone-warm: #EAD9CC; /* lighter warm badge */
+  --limestone-dark: #A58266; /* darker badge text */
+
+  --mist-light: #EEF5F7;    /* very soft card background */
+  --mist-border: #C2D8DE;   /* clean subtle border */
+
+  --white: #FFFFFF;
+  --white-warm: #FCFAF6;
+  --black: #1E1B19;
+
+  /* Feedback Colors (tuned to palette) */
+  --success: #3D7D5D;
+  --success-bg: #E8F4ED;
+  --warning: #B37424;
+  --warning-bg: #FDF4E7;
+  --danger: #A84138;
+  --danger-bg: #FCEEEC;
+
+  /* Typography */
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Elevation Shadows */
+  --shadow-xs: 0 1px 3px rgba(118, 95, 83, 0.05);
+  --shadow-sm: 0 3px 8px rgba(118, 95, 83, 0.08);
+  --shadow-md: 0 8px 24px rgba(118, 95, 83, 0.10);
+  --shadow-lg: 0 16px 36px rgba(118, 95, 83, 0.14);
+  --shadow-hover: 0 12px 28px rgba(47, 97, 116, 0.16);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Max widths */
+  --max-width: 1240px;
+  --header-height: 74px;
+}

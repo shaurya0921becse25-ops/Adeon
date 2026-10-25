@@ -1,0 +1,225 @@
+.circle-gallery-root {
+  position: relative;
+  width: min(100%, 1200px);
+  height: clamp(440px, 55vw, 640px);
+  margin-inline: auto;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.circle-gallery-root:active {
+  cursor: grabbing;
+}
+
+.circle-gallery-wheel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  will-change: transform;
+}
+
+.circle-gallery-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(30, 41, 34, 0.2);
+  pointer-events: auto;
+  cursor: pointer;
+  transition: opacity 0.4s ease,
+              filter 0.4s ease,
+              border 0.4s ease,
+              box-shadow 0.4s ease;
+  border: 2px solid transparent;
+}
+
+/* Smooth zoom transition specifically when selected */
+.circle-gallery-item.is-selected {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease,
+              filter 0.4s ease,
+              border 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.circle-gallery-item:hover {
+  filter: brightness(1.05);
+}
+
+/* Focused / Selected Card Zoomed in Center */
+.circle-gallery-item.is-selected {
+  z-index: 1000 !important;
+  border: 3.5px solid rgba(220, 225, 235, 0.95);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25), 0 25px 55px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+
+/* Dim & blur unselected sibling cards while a card is focused */
+.circle-gallery-item.is-dimmed {
+  opacity: 0.35;
+  filter: blur(1.5px) brightness(0.65);
+}
+
+.circle-gallery-svg,
+.circle-gallery-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* Sleek gradient label with place name and location */
+.circle-gallery-card-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 14px 14px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.45) 55%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: none;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.circle-gallery-card-badge .badge-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.circle-gallery-card-badge .badge-loc {
+  font-size: 11px;
+  color: #cbd5e1;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Enhanced larger name & location when card is clicked/zoomed */
+.circle-gallery-card-badge.is-selected-badge {
+  padding: 36px 16px 16px;
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 10, 0.92) 0%,
+    rgba(5, 5, 10, 0.5) 60%,
+    transparent 100%
+  );
+}
+
+.circle-gallery-card-badge.is-selected-badge .badge-title {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.circle-gallery-card-badge.is-selected-badge .badge-loc {
+  font-size: 12px;
+  color: #38bdf8;
+}
+
+/* Rich focused modal/overlay on selected card */
+.circle-gallery-selected-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 15, 0.95) 0%,
+    rgba(15, 15, 25, 0.75) 45%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 22px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  animation: fadeInOverlay 0.35s ease forwards;
+  box-sizing: border-box;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.selected-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #38bdf8;
+  margin-bottom: 4px;
+}
+
+.selected-title {
+  margin: 0 0 2px 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.selected-location {
+  margin: 0 0 8px 0;
+  font-size: 11.5px;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+.selected-desc {
+  margin: 0 0 12px 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #94a3b8;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.selected-tap-hint {
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 680px) {
+  .circle-gallery-root {
+    height: 440px;
+  }
+}

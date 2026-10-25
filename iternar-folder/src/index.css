@@ -1,0 +1,56 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #18202d;
+  background: #f3f4f4;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: 14px;
+  --surface: #ffffff;
+  --surface-soft: #f6f7f7;
+  --ink: #18202d;
+  --muted: #76808d;
+  --faint: #a5adb6;
+  --line: #e5e8e9;
+  --accent: #151c2a;
+  --accent-text: #fff;
+
+  /* Official WanderWise Porcelain & Aegean Design System Tokens */
+  --ww-porcelain: #FAF7F0;
+  --ww-mist-blue: #D9E7EB;
+  --ww-aegean: #91B8C7;
+  --ww-limestone: #D8BDA6;
+  --ww-taupe: #765F53;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #8b9bac;
+  outline-offset: 2px;
+}
+
+#root {
+  min-height: 100vh;
+}

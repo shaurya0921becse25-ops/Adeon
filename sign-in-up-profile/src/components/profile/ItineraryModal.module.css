@@ -1,0 +1,132 @@
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 51, 61, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  width: min(520px, 100%);
+  background: var(--paper);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(24, 49, 59, 0.25);
+  border: 1px solid #e1e7e7;
+  animation: scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modalCover {
+  height: 140px;
+  object-fit: cover;
+  width: 100%;
+  background: var(--mist);
+}
+
+.modalBody {
+  padding: 20px 24px;
+}
+
+.title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.meta {
+  font-size: 11px;
+  color: #7d95a0;
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #5f7784;
+  margin: 0 0 16px;
+}
+
+.timeline {
+  border-left: 2px solid #d9e7eb;
+  margin-left: 8px;
+  padding-left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dayItem {
+  position: relative;
+  font-size: 11px;
+  color: var(--ink);
+}
+
+.dayItem::before {
+  content: '';
+  position: absolute;
+  left: -19px;
+  top: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #36758e;
+}
+
+.dayTitle {
+  font-weight: 600;
+  color: #294657;
+}
+
+.dayDesc {
+  color: #78909d;
+  margin-top: 2px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  border: 1px solid #d4e0e2;
+  background: #fffefa;
+  color: #426a7c;
+  border-radius: 11px;
+  padding: 9px 16px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  font-weight: 500;
+}
+
+.btn:hover {
+  background: #eaf2f3;
+}
+
+.btnPrimary {
+  background: #e4eff1;
+  border-color: #d2e2e5;
+  color: #2e5c6e;
+}

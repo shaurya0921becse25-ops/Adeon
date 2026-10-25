@@ -438,7 +438,15 @@ export default function AbeonHero() {
             <span className="abeon-hero__stat-lbl">destinations</span>
           </div>
           <span className="abeon-hero__stat-sep" aria-hidden="true" />
-          <div className="abeon-hero__stat">
+          <div
+            className="abeon-hero__stat"
+            onClick={() => navigate('/services')}
+            style={{ cursor: 'pointer' }}
+            title="Explore Guide Services"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === 'Enter' && navigate('/services')}
+          >
             <span className="abeon-hero__stat-num">36+</span>
             <span className="abeon-hero__stat-lbl">guide services</span>
           </div>

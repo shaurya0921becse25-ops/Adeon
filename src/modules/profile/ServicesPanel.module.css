@@ -1,0 +1,36 @@
+.panel {
+  background: rgba(255, 254, 250, 0.86);
+  border: 1px solid #e5e8e5;
+  border-radius: 13px;
+  box-shadow: 0 3px 15px rgba(66, 91, 99, 0.035);
+  overflow: hidden;
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 18px 13px;
+  border-bottom: 1px solid #edf0ed;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 650;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+
+.symbol {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 9px;
+  background: #eaf2f3;
+  color: #3d8199;
+  font-size: 16px;
+  user-select: none;
+}
