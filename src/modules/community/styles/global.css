@@ -1,13 +1,13 @@
 /* ============================================================
    Abeon — Global Design System
    Font: Inter (body) + Playfair Display (headings)
-   Theme: Porcelain & Aegean (Airy · International · Refined)
+   Theme: White, Mist & Slate (Clean · Refined · Modern)
    Palette:
-     Porcelain:  #FAF7F0
-     Mist blue:  #D9E7EB
-     Aegean:     #91B8C7
-     Limestone:  #D8BDA6
-     Taupe:      #765F53
+     Main page background: #FFFFFF
+     Mist blue-grey:       #E7EFF3
+     Dusty slate blue:     #647F91
+     Soft sandstone:       #D6C7B5
+     Deep slate:           #475569
    ============================================================ */
 
 /* --- Reset --- */
@@ -20,38 +20,38 @@ ul, ol { list-style: none; }
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Porcelain & Aegean Theme Colours */
-  --color-porcelain:      #FAF7F0;
-  --color-mist-blue:      #D9E7EB;
-  --color-aegean:         #91B8C7;
-  --color-aegean-dark:    #4D7A8C;
-  --color-limestone:      #D8BDA6;
-  --color-taupe:          #765F53;
-  --color-taupe-dark:     #4A3B34;
+  /* White, Mist & Slate Theme Colours */
+  --color-porcelain:      rgb(238, 242, 236);
+  --color-mist-blue:      #E7EFF3;
+  --color-aegean:         #647F91;
+  --color-aegean-dark:    #475E70;
+  --color-limestone:      #D6C7B5;
+  --color-taupe:          #475569;
+  --color-taupe-dark:     #334155;
 
-  --color-bg:             #FAF7F0; /* Porcelain */
-  --color-bg-alt:         #F3EFE7;
+  --color-bg:             rgb(238, 242, 236); /* rgb(238, 242, 236) traveler background */
+  --color-bg-alt:         #F8FAFC;
   --color-bg-card:        #FFFFFF;
-  --color-surface:        #D9E7EB; /* Mist blue */
-  --color-surface-subtle: rgba(217, 231, 235, 0.45);
-  --color-border:         #D8BDA6; /* Limestone */
-  --color-border-light:   rgba(216, 189, 166, 0.35);
+  --color-surface:        #E7EFF3; /* Mist blue-grey */
+  --color-surface-subtle: rgba(231, 239, 243, 0.55);
+  --color-border:         #D6C7B5; /* Soft sandstone */
+  --color-border-light:   rgba(214, 199, 181, 0.45);
 
-  --color-text-primary:   #2C221D;
-  --color-text-secondary: #5C4B42; /* Taupe slate */
-  --color-text-muted:     #8C7C72;
-  --color-text-inverted:  #FAF7F0;
+  --color-text-primary:   #475569; /* Deep slate */
+  --color-text-secondary: #64748B;
+  --color-text-muted:     #94A3B8;
+  --color-text-inverted:  #FFFFFF;
 
-  --color-accent:         #91B8C7; /* Aegean */
-  --color-accent-dark:    #4D7A8C; /* Deep Aegean for text & active borders */
-  --color-accent-light:   #D9E7EB; /* Mist blue */
-  --color-chocolate:      #765F53; /* Taupe */
-  --color-chocolate-dark: #4A3B34;
+  --color-accent:         #647F91; /* Dusty slate blue */
+  --color-accent-dark:    #475E70; /* Deep slate for text & active borders */
+  --color-accent-light:   #E7EFF3; /* Mist blue-grey */
+  --color-chocolate:      #475569; /* Deep slate */
+  --color-chocolate-dark: #334155;
 
   --color-success:        #5A8B73;
   --color-error:          #B85450;
   --color-like:           #E06A53;
-  --color-save:           #4D7A8C;
+  --color-save:           #647F91;
 
   /* Typography */
   --font-body:    'Inter', system-ui, sans-serif;
@@ -98,10 +98,10 @@ ul, ol { list-style: none; }
   --radius-full:9999px;
 
   /* Shadows */
-  --shadow-xs: 0 1px 3px rgba(44,31,20,0.06);
-  --shadow-sm: 0 2px 8px rgba(44,31,20,0.08);
-  --shadow-md: 0 6px 20px rgba(44,31,20,0.10);
-  --shadow-lg: 0 12px 40px rgba(44,31,20,0.14);
+  --shadow-xs: 0 1px 3px rgba(71, 85, 105, 0.08);
+  --shadow-sm: 0 4px 12px rgba(71, 85, 105, 0.09);
+  --shadow-md: 0 8px 24px rgba(71, 85, 105, 0.11);
+  --shadow-lg: 0 16px 40px rgba(71, 85, 105, 0.15);
 
   /* Transitions */
   --transition-fast:   150ms ease;

@@ -15,7 +15,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { useCommunity } from '../context/CommunityContext.jsx';
-import { CATEGORIES, AVATAR_COLORS } from '../data/samplePosts.js';
+import { CATEGORIES } from '../data/samplePosts.js';
 import '../styles/community.css';
 
 function formatDate(dateString) {
@@ -73,21 +73,7 @@ export default function PostDetailModal() {
     return CATEGORIES.find((c) => c.id === detailPost.category);
   }, [detailPost]);
 
-  const avatarBg = useMemo(() => {
-    if (!detailPost) return '#C8923A';
-    let hash = 0;
-    const authorName = detailPost.author || 'Traveller';
-    for (let i = 0; i < authorName.length; i++) {
-      hash = authorName.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
-  }, [detailPost]);
-
   if (!detailPost) return null;
-
-  const initials =
-    detailPost.authorInitials ||
-    (detailPost.author ? detailPost.author.slice(0, 2).toUpperCase() : 'TR');
 
   const isFollowed = followedUsers.has(detailPost.author);
   const commentsList = detailPost.comments || [];
@@ -234,18 +220,6 @@ export default function PostDetailModal() {
           {/* Author Header Row */}
           <div className="details-modal__author-row">
             <div className="post-card__author">
-              <div
-                className="post-card__avatar"
-                style={{
-                  backgroundColor: avatarBg,
-                  width: '42px',
-                  height: '42px',
-                  fontSize: 'var(--text-sm)',
-                }}
-                aria-hidden="true"
-              >
-                {initials}
-              </div>
               <div>
                 <div className="details-modal__author-name">
                   <strong>{detailPost.author}</strong>

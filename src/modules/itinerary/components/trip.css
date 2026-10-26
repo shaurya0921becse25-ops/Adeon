@@ -1,21 +1,21 @@
 .trek-app {
-  --ww-porcelain: #f8fafc;
-  --ww-mist-blue: #f1f5f9;
-  --ww-aegean: #0f172a;
-  --ww-limestone: #e2e8f0;
+  --ww-porcelain: rgb(238, 242, 236);
+  --ww-mist-blue: #E7EFF3;
+  --ww-aegean: #647F91;
+  --ww-limestone: #D6C7B5;
   --ww-taupe: #475569;
   --surface: #ffffff;
-  --surface-soft: #f1f5f9;
-  --ink: #0f172a;
+  --surface-soft: #E7EFF3;
+  --ink: #475569;
   --muted: #64748b;
   --faint: #94a3b8;
-  --line: #e2e8f0;
-  --accent: #0f172a;
+  --line: #D6C7B5;
+  --accent: #647F91;
   --accent-text: #ffffff;
 
   min-height: 100vh;
   color: var(--ink);
-  background: var(--ww-porcelain);
+  background: #ffffff;
 }
 
 .trip-tabs {
@@ -43,7 +43,7 @@
   height: 48px;
   padding: 0 16px;
   border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -95,7 +95,7 @@
   width: 100%;
   height: 100vh;
   border: 0;
-  background: var(--ww-porcelain);
+  background: #ffffff;
 }
 
 .trip-tabs::-webkit-scrollbar {
@@ -108,7 +108,7 @@
   z-index: 0;
   height: 30px;
   border-radius: 20px;
-  background: var(--accent);
+  background: #000000;
   pointer-events: none;
   transform: translateY(-50%);
   transition:
@@ -130,7 +130,7 @@
   padding: 0 14px;
   border: 0;
   border-radius: 22px;
-  color: var(--muted);
+  color: #000000;
   background: transparent;
   cursor: pointer;
   font-family: inherit;
@@ -141,7 +141,7 @@
 }
 
 .trip-tab:hover {
-  color: var(--ink);
+  color: #111111;
 }
 
 .trip-tab.is-active {
@@ -156,7 +156,7 @@
   height: calc(100vh - 44px);
   min-height: 580px;
   overflow: hidden;
-  background: #c7ccce;
+  background: #ffffff;
 }
 
 .plan-panel {

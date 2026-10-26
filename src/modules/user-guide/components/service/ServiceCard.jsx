@@ -21,13 +21,12 @@ export const ServiceCard = ({ service, layout = "grid" }) => {
         {/* Thumbnail Area */}
         <div className="service-card-media">
           <img
-            src={service.coverImage}
+            src={service.coverImage || service.image || "/himalayan-trek.jpg"}
             alt={service.title}
             className="service-card-img"
             loading="lazy"
             onError={(e) => {
-              e.currentTarget.src =
-                "https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=800&q=80";
+              e.currentTarget.src = "/himalayan-trek.jpg";
             }}
           />
 
@@ -44,11 +43,10 @@ export const ServiceCard = ({ service, layout = "grid" }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={provider.avatar}
+                src={provider.avatar || "/agam-profile.jpg"}
                 alt={provider.name}
                 onError={(e) => {
-                  e.currentTarget.src =
-                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80";
+                  e.currentTarget.src = "/agam-profile.jpg";
                 }}
               />
             </div>

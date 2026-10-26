@@ -148,23 +148,6 @@
   transition: opacity 1s ease;
 }
 
-.globe-caption {
-  margin-top: -12px;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--ink-muted);
-  text-align: center;
-  background: rgba(255, 255, 255, 0.7);
-  padding: 3px 12px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-light);
-}
-
-.globe-caption span {
-  font-weight: 700;
-  color: var(--brand);
-}
-
 /* ==========================================================================
    2. INFINITE IMAGE MARQUEE STRIP
    ========================================================================== */
@@ -604,105 +587,6 @@
 /* ==========================================================================
    5. HOST PROFILE PREVIEW CARD (Warm Earthy Styling)
    ========================================================================== */
-
-.host-card-preview {
-  padding: 0;
-  overflow: hidden;
-  background: #ffffff;
-}
-
-.host-banner-strip {
-  height: 48px;
-  background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f59e0b 100%);
-}
-
-.host-card-content {
-  padding: 16px 20px 20px;
-  margin-top: -24px;
-}
-
-.host-preview-top {
-  display: flex;
-  align-items: flex-end;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-
-.host-avatar-wrapper {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.host-profile-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #ffffff;
-  box-shadow: var(--shadow-sm);
-}
-
-.host-verified-icon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--brand);
-  color: #ffffff;
-  display: grid;
-  place-items: center;
-  border: 2px solid #ffffff;
-}
-
-.host-text {
-  flex: 1;
-}
-
-.host-name-row h4 {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--ink);
-}
-
-.host-role-text {
-  font-size: 12px;
-  color: var(--ink-muted);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 2px;
-}
-
-.pin-icon {
-  color: var(--brand);
-}
-
-.host-badges-row {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 12px;
-}
-
-.host-stat-pill {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--ink-secondary);
-  background: var(--surface);
-  border: 1px solid var(--border-light);
-  padding: 3px 9px;
-  border-radius: var(--radius-pill);
-}
-
-.host-bio-snippet {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--ink-secondary);
-  font-style: italic;
-  margin-bottom: 12px;
-}
 
 /* ==========================================================================
    6. QUICK ACTIONS PANEL
@@ -2930,6 +2814,10 @@
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
 }
 
+.convo-bubble-wrap.sent .convo-bubble p {
+  color: #ffffff;
+}
+
 .convo-bubble-wrap.received .convo-bubble {
   background: #ffffff;
   color: var(--ink);
@@ -3212,40 +3100,6 @@
   padding: 28px 32px 64px;
 }
 
-.host-card-preview {
-  overflow: hidden !important;
-  padding: 0 !important;
-}
-
-.host-banner-strip {
-  height: 100px;
-  background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%);
-  position: relative;
-}
-
-.host-preview-top {
-  padding: 0 24px 20px;
-  position: relative;
-}
-
-.host-avatar-wrapper {
-  width: 84px;
-  height: 84px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid #ffffff;
-  box-shadow: var(--shadow-sm);
-  margin-top: -42px;
-  position: relative;
-  background: var(--surface);
-}
-
-.host-profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .avatar-lg {
   width: 84px;
   height: 84px;
@@ -3253,82 +3107,6 @@
   object-fit: cover;
   border: 3px solid var(--border);
   box-shadow: var(--shadow-sm);
-}
-
-.host-verified-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #0284c7;
-  color: #fff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  border: 2px solid #ffffff;
-}
-
-.host-card-content {
-  padding: 16px 24px 24px;
-}
-
-.host-name-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 4px;
-  margin-top: 12px;
-}
-
-.host-name-row h3 {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--ink);
-}
-
-.host-role-text {
-  font-size: 13px;
-  color: var(--ink-muted);
-  margin-bottom: 12px;
-}
-
-.host-bio-snippet {
-  font-size: 13px;
-  color: var(--ink-secondary);
-  line-height: 1.6;
-  font-style: italic;
-  border-left: 3px solid #bfdbfe;
-  padding-left: 12px;
-  margin-bottom: 16px;
-}
-
-.host-badges-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.host-stat-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-secondary);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-}
-
-.host-text {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 16px;
 }
 
 .profile-name {
@@ -3588,10 +3366,6 @@
 
 .home-container {
   padding: 0;
-}
-
-.host-card-preview .badge-confirmed {
-  margin-top: 6px;
 }
 
 /* ==========================================================================

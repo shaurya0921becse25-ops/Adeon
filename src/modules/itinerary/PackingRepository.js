@@ -6,40 +6,6 @@ import { generateId } from './ids.js'
 import { readTripStore, writeTripStore } from './storage.js'
 import { packingProgress } from './calculations.js'
 
-const DEFAULT_PACKING_ITEMS = [
-  { id: 'pack-101', text: 'Comfortable slip-on walking shoes (temple visits)', category: 'CLOTHING', quantity: 1, checked: true },
-  { id: 'pack-102', text: 'Lightweight water-repellent windbreaker jacket', category: 'CLOTHING', quantity: 1, checked: false },
-  { id: 'pack-103', text: 'Merino base layers and quick-dry t-shirts', category: 'CLOTHING', quantity: 3, checked: false },
-  { id: 'pack-104', text: 'Breathable walking socks & thermal sleepwear', category: 'CLOTHING', quantity: 5, checked: false },
-  { id: 'pack-105', text: 'Warm fleece jacket or packable down vest', category: 'CLOTHING', quantity: 1, checked: false },
-  { id: 'pack-201', text: 'Pocket Wi-Fi / Japanese eSIM confirmation', category: 'ELECTRONICS', quantity: 1, checked: true },
-  { id: 'pack-202', text: 'Type A 2-prong power adapters (Japan standard)', category: 'ELECTRONICS', quantity: 2, checked: true },
-  { id: 'pack-203', text: '10,000mAh portable power bank for day trips', category: 'ELECTRONICS', quantity: 1, checked: false },
-  { id: 'pack-204', text: 'USB-C fast charging cables & noise-cancelling buds', category: 'ELECTRONICS', quantity: 2, checked: false },
-  { id: 'pack-301', text: 'Passport & Visit Japan Web QR Code', category: 'DOCUMENTS', quantity: 1, checked: true },
-  { id: 'pack-302', text: 'Credit card with zero foreign transaction fees', category: 'DOCUMENTS', quantity: 1, checked: true },
-  { id: 'pack-303', text: 'Physical passport color copies & travel insurance card', category: 'DOCUMENTS', quantity: 1, checked: false },
-  { id: 'pack-304', text: 'Emergency contacts & accommodation confirmations', category: 'DOCUMENTS', quantity: 1, checked: false },
-  { id: 'pack-401', text: 'Compact coin purse (essential for ¥100 / ¥500 coins)', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false },
-  { id: 'pack-402', text: 'Reusable tote bag for shopping & street snacks', category: 'OTHER & ACCESSORIES', quantity: 2, checked: false },
-  { id: 'pack-403', text: 'Compact travel umbrella (for sudden rain showers)', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false },
-  { id: 'pack-404', text: 'Travel skincare set, lip balm & SPF 50 sunscreen', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false },
-  { id: 'pack-405', text: 'Small hand towel (many public restrooms lack hand dryers)', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false },
-]
-
-function getInitialPacking(tripId) {
-  return DEFAULT_PACKING_ITEMS.map((it, idx) => ({
-    id: it.id,
-    tripId: tripId || 'japan-demo-trip-2026',
-    text: it.text,
-    category: it.category,
-    quantity: it.quantity,
-    checked: Boolean(it.checked),
-    order: idx,
-    createdAt: new Date().toISOString(),
-  }))
-}
-
 export const PackingRepository = {
   /**
    * Returns all packing items for a trip
@@ -48,13 +14,7 @@ export const PackingRepository = {
    */
   listItems(tripId) {
     const store = readTripStore(tripId)
-    if (!store) return []
-    if (!Array.isArray(store.packingItems) || store.packingItems.length === 0) {
-      store.packingItems = getInitialPacking(tripId)
-      writeTripStore(tripId, store)
-      return store.packingItems
-    }
-    return (store.packingItems || []).sort((a, b) => a.order - b.order)
+    return (store?.packingItems || []).sort((a, b) => a.order - b.order)
   },
 
   /**
@@ -74,19 +34,15 @@ export const PackingRepository = {
       throw { code: 'VALIDATION_ERROR', field: 'text', message: 'Item text is required' }
     }
 
-    if (!Array.isArray(store.packingItems) || store.packingItems.length === 0) {
-      store.packingItems = getInitialPacking(tripId)
-    }
-
     const currentItems = store.packingItems || []
-    const nextOrder = currentItems.length > 0 ? Math.max(...currentItems.map(i => i.order || 0)) + 1 : 0
+    const nextOrder = currentItems.length > 0 ? Math.max(...currentItems.map(i => i.order)) + 1 : 0
 
     /** @type {import('./types.js').PackingItem} */
     const item = {
       id: generateId(),
       tripId,
       text: input.text.trim().slice(0, 200),
-      category: (input.category || 'OTHER & ACCESSORIES').trim().slice(0, 50),
+      category: (input.category || 'General').trim().slice(0, 50),
       quantity: Math.max(1, Number(input.quantity) || 1),
       checked: false,
       order: nextOrder,
@@ -94,7 +50,7 @@ export const PackingRepository = {
     }
 
     store.packingItems = [...currentItems, item]
-    if (store.trip) store.trip.updatedAt = new Date().toISOString()
+    store.trip.updatedAt = new Date().toISOString()
     writeTripStore(tripId, store)
     return item
   },
@@ -107,53 +63,24 @@ export const PackingRepository = {
    */
   toggleItem(tripId, itemId) {
     const store = readTripStore(tripId)
-    if (!store) throw { code: 'TRIP_NOT_FOUND', id: tripId }
+    if (!store) return null
 
-    if (!Array.isArray(store.packingItems) || store.packingItems.length === 0) {
-      store.packingItems = getInitialPacking(tripId)
-    }
-
-    let index = (store.packingItems || []).findIndex(
-      i => i.id === itemId ||
-           i.id === `pack-${itemId}` ||
-           `pack-${i.id}` === itemId ||
-           String(i.id).replace('pack-', '') === String(itemId).replace('pack-', '')
-    )
-
+    const index = (store.packingItems || []).findIndex(i => i.id === itemId)
     if (index === -1) {
-      const match = DEFAULT_PACKING_ITEMS.find(
-        d => d.id === itemId ||
-             d.id === `pack-${itemId}` ||
-             `pack-${d.id}` === itemId ||
-             String(d.id).replace('pack-', '') === String(itemId).replace('pack-', '')
-      )
-      if (match) {
-        const newItem = {
-          id: itemId,
-          tripId,
-          text: match.text,
-          category: match.category,
-          quantity: match.quantity,
-          checked: !match.checked,
-          order: store.packingItems.length,
-          createdAt: new Date().toISOString(),
-        }
-        store.packingItems.push(newItem)
-        index = store.packingItems.length - 1
-      } else {
-        const newItem = {
-          id: itemId,
-          tripId,
-          text: String(itemId),
-          category: 'OTHER & ACCESSORIES',
-          quantity: 1,
-          checked: true,
-          order: store.packingItems.length,
-          createdAt: new Date().toISOString(),
-        }
-        store.packingItems.push(newItem)
-        index = store.packingItems.length - 1
+      const newItem = {
+        id: itemId,
+        tripId,
+        text: 'Item',
+        category: 'General',
+        quantity: 1,
+        checked: true,
+        order: (store.packingItems || []).length,
+        createdAt: new Date().toISOString(),
       }
+      store.packingItems = [...(store.packingItems || []), newItem]
+      store.trip.updatedAt = new Date().toISOString()
+      writeTripStore(tripId, store)
+      return newItem
     }
 
     const updated = {
@@ -162,7 +89,7 @@ export const PackingRepository = {
     }
 
     store.packingItems[index] = updated
-    if (store.trip) store.trip.updatedAt = new Date().toISOString()
+    store.trip.updatedAt = new Date().toISOString()
     writeTripStore(tripId, store)
     return updated
   },
@@ -179,7 +106,23 @@ export const PackingRepository = {
     if (!store) throw { code: 'TRIP_NOT_FOUND', id: tripId }
 
     const index = (store.packingItems || []).findIndex(i => i.id === itemId)
-    if (index === -1) throw { code: 'ITEM_NOT_FOUND', id: itemId }
+    if (index === -1) {
+      const newItem = {
+        id: itemId,
+        tripId,
+        text: patch.text || 'Item',
+        category: patch.category || 'General',
+        quantity: patch.quantity || 1,
+        checked: Boolean(patch.checked),
+        order: (store.packingItems || []).length,
+        createdAt: new Date().toISOString(),
+        ...patch,
+      }
+      store.packingItems = [...(store.packingItems || []), newItem]
+      store.trip.updatedAt = new Date().toISOString()
+      writeTripStore(tripId, store)
+      return newItem
+    }
 
     const updated = {
       ...store.packingItems[index],

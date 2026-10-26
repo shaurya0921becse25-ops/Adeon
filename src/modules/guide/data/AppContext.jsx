@@ -159,20 +159,20 @@ export function AppProvider({ children }) {
 
   const updateService = (id, updatedFields) => {
     setServices((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, ...updatedFields } : s))
+      prev.map((s) => (String(s.id) === String(id) ? { ...s, ...updatedFields } : s))
     );
     showToast("Service listing updated");
   };
 
   const deleteService = (id) => {
-    setServices((prev) => prev.filter((s) => s.id !== id));
+    setServices((prev) => prev.filter((s) => String(s.id) !== String(id)));
     showToast("Listing deleted", "info");
   };
 
   // Booking actions
   const updateBookingStatus = (id, newStatus) => {
     setBookings((prev) =>
-      prev.map((b) => (b.id === id ? { ...b, status: newStatus } : b))
+      prev.map((b) => (String(b.id) === String(id) ? { ...b, status: newStatus } : b))
     );
     showToast(`Booking marked as ${newStatus}`);
   };

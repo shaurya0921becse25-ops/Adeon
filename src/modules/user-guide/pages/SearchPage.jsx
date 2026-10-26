@@ -100,6 +100,7 @@ export const SearchPage = () => {
                 setWhereOpen(true);
               }}
             >
+              <span className="field-label">Where to?</span>
               <Search className="search-field-icon" size={19} aria-hidden="true" />
               <input
                 type="text"

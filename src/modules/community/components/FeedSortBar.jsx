@@ -38,7 +38,7 @@ export default function FeedSortBar() {
               <button
                 key={tab.id}
                 type="button"
-                className={`feed-sort-tab${isActive ? ' active' : ''}`}
+                className={`feed-sort-tab feed-sort-tab--${tab.id}${isActive ? ' active' : ''}`}
                 onClick={() => setSortMode(tab.id)}
                 role="tab"
                 aria-selected={isActive}

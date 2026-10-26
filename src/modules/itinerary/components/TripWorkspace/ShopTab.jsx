@@ -544,7 +544,7 @@ export default function ShopTab({ store, toggleFoodTried, toggleShopBought }) {
               </button>
             ))}
 
-            <span style={{ width: 1, height: 16, background: '#D8BDA6', margin: '0 4px' }} />
+            <span style={{ width: 1, height: 16, background: '#D6C7B5', margin: '0 4px' }} />
 
             <button
               type="button"
@@ -559,7 +559,7 @@ export default function ShopTab({ store, toggleFoodTried, toggleShopBought }) {
 
         {/* Souvenir Cards Grid */}
         {filteredShopItems.length === 0 ? (
-          <div style={{ padding: '36px 18px', textAlign: 'center', color: '#765F53' }}>
+          <div style={{ padding: '36px 18px', textAlign: 'center', color: '#475569' }}>
             <p style={{ margin: '0 0 6px', fontWeight: 600 }}>No souvenirs matched your filter.</p>
             <button
               type="button"

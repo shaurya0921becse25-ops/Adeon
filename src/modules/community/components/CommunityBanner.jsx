@@ -1,4 +1,4 @@
-import { Compass, Users, UserPlus, Check, Sparkles, MapPin } from 'lucide-react';
+import { Users, UserPlus, Check, Sparkles, MapPin } from 'lucide-react';
 import { useCommunity } from '../context/CommunityContext.jsx';
 import SearchBar from './SearchBar.jsx';
 import '../styles/community.css';
@@ -22,13 +22,6 @@ export default function CommunityBanner() {
 
       <div className="reddit-banner__container">
         <div className="reddit-banner__main">
-          {/* Community Avatar / Icon (Compass preserved, fake online badge removed) */}
-          <div className="reddit-banner__avatar-wrap">
-            <div className="reddit-banner__avatar">
-              <Compass size={36} strokeWidth={2.2} />
-            </div>
-          </div>
-
           {/* Title & Metadata (Abeon branding, no w/ prefix, Est. 2026) */}
           <div className="reddit-banner__info">
             <div className="reddit-banner__title-row">

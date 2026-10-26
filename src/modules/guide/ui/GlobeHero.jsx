@@ -12,6 +12,11 @@ const travelMarkers = [
   { id: "paris", location: [48.8566, 2.3522], label: "Paris" },
 ];
 
+const markerColor = [0.85, 0.36, 0.12];
+const baseColor = [0.28, 0.43, 0.52];
+const arcColor = [0.85, 0.45, 0.15];
+const glowColor = [0.98, 0.9, 0.8];
+
 const travelArcs = [
   {
     id: "london-manali",
@@ -52,10 +57,10 @@ export default function GlobeHero({
         </p>
 
         <div className="hero-actions">
-          <Link to="/services/new" className="btn btn-primary btn-hero">
+          <Link to="/guide/services/new" className="btn btn-primary btn-hero">
             + Add New Experience
           </Link>
-          <Link to="/bookings" className="btn btn-hero-outline">
+          <Link to="/guide/bookings" className="btn btn-hero-outline">
             Review Bookings ({pendingBookingsCount} pending)
           </Link>
         </div>
@@ -65,10 +70,10 @@ export default function GlobeHero({
         <Globe
           markers={travelMarkers}
           arcs={travelArcs}
-          markerColor={[0.85, 0.36, 0.12]}
-          baseColor={[0.98, 0.96, 0.93]}
-          arcColor={[0.85, 0.45, 0.15]}
-          glowColor={[0.98, 0.90, 0.80]}
+          markerColor={markerColor}
+          baseColor={baseColor}
+          arcColor={arcColor}
+          glowColor={glowColor}
           dark={0}
           mapBrightness={8}
           markerSize={0.03}
@@ -78,9 +83,6 @@ export default function GlobeHero({
           speed={0.003}
           className="hero-cobe-globe"
         />
-        <div className="globe-caption">
-          <span>Interactive 3D Globe</span> · Drag to explore flight arcs
-        </div>
       </div>
     </section>
   );

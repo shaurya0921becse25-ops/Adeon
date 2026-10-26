@@ -3,13 +3,13 @@
 :root,
 .costs-page-wrapper {
   --c-nav-h: 44px;
-  --c-accent: #0f172a;
-  --c-accent-hover: #1e293b;
+  --c-accent: #2563EB;
+  --c-accent-hover: #1d4ed8;
   --c-accent-text: #ffffff;
   --c-text-primary: #0f172a;
   --c-text-muted: #64748b;
   --c-text-faint: #94a3b8;
-  --c-bg: #f8fafc;
+  --c-bg: rgb(238, 242, 236);
   --c-card: #ffffff;
   --c-surface2: #f1f5f9;
   --c-border: #e2e8f0;
@@ -98,17 +98,17 @@
   padding: 10px 18px;
   border-radius: 12px;
   border: 0;
-  background: var(--c-accent);
+  background: #2563EB;
   color: #fff;
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
 }
 
 .costs-btn:hover {
-  background: var(--c-accent-hover);
-  box-shadow: 0 2px 8px rgba(145, 184, 199, 0.35);
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
 .costs-btn.ghost {
@@ -692,4 +692,10 @@
   background: var(--c-accent);
   border-color: var(--c-accent);
   color: #fff;
+  transition: all 0.15s ease;
+}
+
+.cost-modal footer .ok:hover {
+  background: var(--c-accent-hover);
+  border-color: var(--c-accent-hover);
 }

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
   Search,
   MapPin,
   SlidersHorizontal,
   Star,
-  Heart,
   ThumbsUp,
   ThumbsDown,
   X,
@@ -27,9 +26,11 @@ export const TripPage = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [filterModalOpen, setFilterModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedFilters, setSelectedFilters] = useState([]);
 
   const [guideProfile, setGuideProfile] = useState(() => loadGuideProfile());
   const [servicesList, setServicesList] = useState(() => getAllAvailableServices());
+  const searchWrapperRef = useRef(null);
 
   const handleCardClick = (card) => {
     // Notify guide dashboard in real-time that traveler is exploring this experience
@@ -58,6 +59,26 @@ export const TripPage = () => {
     return () => unsub();
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchWrapperRef.current && !searchWrapperRef.current.contains(event.target)) {
+        setSearchDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    if (!filterModalOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setFilterModalOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [filterModalOpen]);
+
   const heroImages = [
     "https://images.unsplash.com/photo-1597074866923-dc0589150358?auto=format&fit=crop&w=1800&q=85",
     "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1800&q=85",
@@ -81,9 +102,36 @@ export const TripPage = () => {
     "Motorcycle Fleet"
   ];
 
+  const filterGroups = [
+    {
+      title: "Time of Day",
+      options: [
+        "Morning (Starts before 12pm)",
+        "Afternoon (Starts after 12pm)",
+        "Evening (Starts after 5pm)"
+      ]
+    },
+    {
+      title: "Duration",
+      options: ["Up to 1 hour", "1 to 4 hours", "4 hours to 1 day", "1 to 3 days"]
+    },
+    {
+      title: "Specials",
+      options: ["Free Cancellation", "Deals & Discounts", "Skip-The-Line"]
+    }
+  ];
+
   const handleSelectDestination = (name) => {
     setSearchInput(name);
     setSearchDropdownOpen(false);
+  };
+
+  const toggleFilter = (filter) => {
+    setSelectedFilters((currentFilters) =>
+      currentFilters.includes(filter)
+        ? currentFilters.filter((currentFilter) => currentFilter !== filter)
+        : [...currentFilters, filter]
+    );
   };
 
   const displayedServices = servicesList.filter((s) => {
@@ -123,7 +171,7 @@ export const TripPage = () => {
           </div>
 
           {/* Search Bar with Dropdown */}
-          <div className="search-wrapper">
+          <div className="search-wrapper" ref={searchWrapperRef}>
             <div className="search-input-box">
               <Search className="search-icon" size={20} />
               <input
@@ -241,19 +289,8 @@ export const TripPage = () => {
                       Featured Guide
                     </span>
                   )}
-                  <button
-                    type="button"
-                    className="wishlist-btn"
-                    aria-label="Add to Wishlist"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                  >
-                    <Heart size={18} />
-                  </button>
                   <img
-                    src={card.image || card.coverImage}
+                    src={card.image || card.coverImage || "/himalayan-trek.jpg"}
                     alt={card.title}
                     onError={(e) => {
                       e.currentTarget.src = "/himalayan-trek.jpg";
@@ -266,7 +303,7 @@ export const TripPage = () => {
                       {card.category}
                     </span>
                     {isGuideService && (
-                      <span style={{ fontSize: "0.72rem", color: "#2B4E5B", fontWeight: 700, background: "#D9E7EB", padding: "2px 8px", borderRadius: "10px" }}>
+                      <span style={{ fontSize: "0.72rem", color: "#2B4E5B", fontWeight: 700, background: "#E7EFF3", padding: "2px 8px", borderRadius: "10px" }}>
                         Host: {guideProfile.name}
                       </span>
                     )}
@@ -303,6 +340,68 @@ export const TripPage = () => {
           </div>
         </div>
       </main>
+
+      {filterModalOpen && (
+        <div
+          className="modal-overlay"
+          onClick={() => setFilterModalOpen(false)}
+        >
+          <section
+            className="modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="filterModalTitle"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="modal-header">
+              <h3 id="filterModalTitle">Filter</h3>
+              <button
+                type="button"
+                className="close-modal-btn"
+                onClick={() => setFilterModalOpen(false)}
+                aria-label="Close filters"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="modal-body">
+              {filterGroups.map((group) => (
+                <div key={group.title}>
+                  <div className="filter-group-title">{group.title}</div>
+                  <div className="checkbox-list">
+                    {group.options.map((option) => (
+                      <label className="checkbox-item" key={option}>
+                        <input
+                          type="checkbox"
+                          checked={selectedFilters.includes(option)}
+                          onChange={() => toggleFilter(option)}
+                        />
+                        {option}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="clear-btn"
+                onClick={() => setSelectedFilters([])}
+              >
+                Clear all
+              </button>
+              <button
+                type="button"
+                className="apply-btn"
+                onClick={() => setFilterModalOpen(false)}
+              >
+                See {displayedServices.length} results
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 };

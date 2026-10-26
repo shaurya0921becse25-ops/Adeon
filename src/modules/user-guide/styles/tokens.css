@@ -1,27 +1,27 @@
 :root {
   /* Core Brand Tokens */
-  --porcelain: #FAF7F0; /* page background */
-  --mist: #D9E7EB;      /* soft surfaces, chips, section bands */
-  --aegean: #91B8C7;    /* primary accent, buttons, active states */
-  --limestone: #D8BDA6; /* secondary accent, badges, dividers */
-  --taupe: #765F53;     /* text, headings, dark buttons */
+  --porcelain: rgb(238, 242, 236); /* page background */
+  --mist: #E7EFF3;      /* soft surfaces, chips, section bands */
+  --aegean: #647F91;    /* secondary accent, icons, muted highlights */
+  --limestone: #D6C7B5; /* borders and dividers */
+  --taupe: #475569;     /* text, headings, dark buttons */
 
   /* Derived Tints & Contrast-Safe Shades */
-  --aegean-deep: #2F6174;    /* text-safe primary brand blue, buttons hover */
-  --aegean-dark: #224755;    /* deep navy tone for high contrast text */
-  --aegean-surface: #EAF2F5; /* subtle tinted background */
-  --aegean-glow: rgba(145, 184, 199, 0.35);
+  --aegean-deep: #475E70;    /* text-safe secondary slate blue, buttons hover */
+  --aegean-dark: #334155;    /* deep navy tone for high contrast text */
+  --aegean-surface: #E7EFF3; /* subtle tinted background */
+  --aegean-glow: rgba(100, 127, 145, 0.35);
 
-  --taupe-deep: #4A3A32;     /* high contrast primary heading text */
-  --taupe-soft: #8C766A;     /* secondary text, muted metadata */
-  --taupe-muted: #A8968B;    /* placeholder & subtle icon colors */
-  --taupe-light: #F4EFEA;    /* warm card surface */
+  --taupe-deep: #334155;     /* high contrast primary heading text */
+  --taupe-soft: #64748B;     /* secondary text, muted metadata */
+  --taupe-muted: #94A3B8;    /* placeholder & subtle icon colors */
+  --taupe-light: #F8FAFC;    /* clean panel surface */
 
-  --limestone-warm: #EAD9CC; /* lighter warm badge */
-  --limestone-dark: #A58266; /* darker badge text */
+  --limestone-warm: #E2D6C7; /* lighter warm badge */
+  --limestone-dark: #8C7662; /* darker badge text */
 
-  --mist-light: #EEF5F7;    /* very soft card background */
-  --mist-border: #C2D8DE;   /* clean subtle border */
+  --mist-light: #F1F6F9;    /* very soft card background */
+  --mist-border: #D6C7B5;   /* clean subtle border */
 
   --white: #FFFFFF;
   --white-warm: #FCFAF6;
@@ -48,11 +48,11 @@
   --radius-pill: 9999px;
 
   /* Elevation Shadows */
-  --shadow-xs: 0 1px 3px rgba(118, 95, 83, 0.05);
-  --shadow-sm: 0 3px 8px rgba(118, 95, 83, 0.08);
-  --shadow-md: 0 8px 24px rgba(118, 95, 83, 0.10);
-  --shadow-lg: 0 16px 36px rgba(118, 95, 83, 0.14);
-  --shadow-hover: 0 12px 28px rgba(47, 97, 116, 0.16);
+  --shadow-xs: 0 1px 3px rgba(71, 85, 105, 0.05);
+  --shadow-sm: 0 3px 8px rgba(71, 85, 105, 0.08);
+  --shadow-md: 0 8px 24px rgba(71, 85, 105, 0.10);
+  --shadow-lg: 0 16px 36px rgba(71, 85, 105, 0.14);
+  --shadow-hover: 0 12px 28px rgba(71, 85, 105, 0.16);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);

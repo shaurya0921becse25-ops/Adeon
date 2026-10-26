@@ -9,6 +9,7 @@ import { addBooking, updateBookingStatus } from '../../store/servicesSlice';
 import { useToast } from '../../context/ToastContext';
 import { useAuth } from '../../context/AuthContext';
 import Button from '../common/Button';
+import { broadcastDataChange } from '../../modules/user-guide/data/sharedDataBridge';
 import './BookingFlowModal.css';
 
 export default function BookingFlowModal({
@@ -110,13 +111,14 @@ export default function BookingFlowModal({
   // Submit Booking
   const handleFinalSubmit = () => {
     const bookingId = `bk-${Date.now()}`;
+    const bookingImage = service.coverImage || service.image || guide.photo || '/himalayan-trek.jpg';
     const newBooking = {
       id: bookingId,
       serviceId: service.id,
       serviceTitle: service.title,
       guideId: service.guideId,
       guideName: guide.name,
-      guidePhoto: guide.photo,
+      guidePhoto: guide.photo || '/agam-profile.jpg',
       city: service.city,
       date: selectedDate,
       partySize,
@@ -125,10 +127,38 @@ export default function BookingFlowModal({
       notes: notes.trim(),
       status: 'requested',
       total: partyTotal,
+      image: bookingImage,
+      coverImage: bookingImage,
       createdAt: new Date().toISOString()
     };
 
     dispatch(addBooking(newBooking));
+
+    // Sync to guide store
+    try {
+      const savedGuideBookings = localStorage.getItem('abeon_bookings');
+      const guideBookings = savedGuideBookings ? JSON.parse(savedGuideBookings) : [];
+      const mappedGuideBooking = {
+        id: bookingId,
+        service: service.title,
+        traveler: name.trim() || 'Traveler',
+        email: user?.email || `${name.trim().toLowerCase().replace(/\s+/g, '') || 'traveler'}@gmail.com`,
+        phone: phone.trim() || '+91 98765 43210',
+        travelers: partySize,
+        date: selectedDate,
+        time: '09:00 AM',
+        amount: partyTotal,
+        status: 'Incoming',
+        requests: notes.trim() || 'None.',
+        image: bookingImage
+      };
+      const updatedGuideList = [mappedGuideBooking, ...guideBookings];
+      localStorage.setItem('abeon_bookings', JSON.stringify(updatedGuideList));
+      broadcastDataChange('bookings', updatedGuideList);
+    } catch (err) {
+      console.warn('Could not sync booking to guide store:', err);
+    }
+
     showToast('Booking requested! Guide has been notified.', 'success');
 
     // 5-second automatic progression timer (status: requested -> accepted)
@@ -139,6 +169,16 @@ export default function BookingFlowModal({
           status: 'accepted'
         })
       );
+      try {
+        const saved = localStorage.getItem('abeon_bookings');
+        if (saved) {
+          const list = JSON.parse(saved).map((gb) =>
+            String(gb.id) === String(bookingId) ? { ...gb, status: 'Confirmed' } : gb
+          );
+          localStorage.setItem('abeon_bookings', JSON.stringify(list));
+          broadcastDataChange('bookings', list);
+        }
+      } catch (e) {}
       showToast(`Guide ${guide.name || ''} accepted your booking for ${selectedDate}!`, 'success');
     }, 5000);
 

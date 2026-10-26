@@ -363,7 +363,7 @@ export default function CostTab({ store, createExpense, deleteExpense, updateTri
           {/* Card 1: Total Budget */}
           <div className="cost-card" id="cBudget">
             <div className="stat-top">
-              <span className="ico" style={{ background: 'rgba(145, 184, 199, 0.2)', color: '#91B8C7' }}>
+              <span className="ico" style={{ background: 'rgba(100, 127, 145, 0.2)', color: '#647F91' }}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="12" cy="12" r="10" />
                   <circle cx="12" cy="12" r="6" />
@@ -526,7 +526,7 @@ export default function CostTab({ store, createExpense, deleteExpense, updateTri
                         x2={W - m.r}
                         y1={yy}
                         y2={yy}
-                        stroke="#D8BDA6"
+                        stroke="#D6C7B5"
                         strokeDasharray={k > 0 ? '3 4' : undefined}
                       />
                       <text x={m.l - 10} y={yy + 4} textAnchor="end">
@@ -779,7 +779,7 @@ export default function CostTab({ store, createExpense, deleteExpense, updateTri
 
             <div className="exp-list">
               {expenses.length === 0 ? (
-                <p style={{ color: '#765F53', fontSize: 13.5, margin: '16px 0' }}>
+                <p style={{ color: '#475569', fontSize: 13.5, margin: '16px 0' }}>
                   No expenses logged yet. Tap &ldquo;Add expense&rdquo; to start tracking.
                 </p>
               ) : (
@@ -803,7 +803,7 @@ export default function CostTab({ store, createExpense, deleteExpense, updateTri
                             alignItems: 'center',
                             borderRadius: '18px',
                             padding: '20px 20px 16px',
-                            border: '1px solid #D8BDA6',
+                            border: '1px solid #D6C7B5',
                           }}
                         >
                           {/* Corner Category Ribbon */}
@@ -900,7 +900,7 @@ export default function CostTab({ store, createExpense, deleteExpense, updateTri
                           </div>
 
                           {/* Details / Day */}
-                          <span style={{ fontSize: '13px', color: '#765F53' }}>
+                          <span style={{ fontSize: '13px', color: '#475569' }}>
                             {exp.days.length === daysCount
                               ? 'Whole trip'
                               : exp.days.length > 1
@@ -921,7 +921,7 @@ export default function CostTab({ store, createExpense, deleteExpense, updateTri
                                   fontSize: 'calc(15px * var(--fs-scale-subtitle, 1))',
                                   fontWeight: 700,
                                   fontVariantNumeric: 'tabular-nums',
-                                  border: '1px solid #D8BDA6',
+                                  border: '1px solid #D6C7B5',
                                 }}
                               >
                                 {curFmt(exp.amount)}
@@ -941,7 +941,7 @@ export default function CostTab({ store, createExpense, deleteExpense, updateTri
                             flexShrink: 0,
                             borderRadius: '999px',
                             padding: '5px',
-                            border: '1px solid #D8BDA6',
+                            border: '1px solid #D6C7B5',
                           }}
                         >
                           <button

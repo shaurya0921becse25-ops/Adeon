@@ -25,7 +25,13 @@ export default function Profile() {
         {/* Profile card */}
         <Card>
           <div className="profile-top">
-            <img src={formData.avatar || "/agam-profile.jpg"} alt={formData.name} className="avatar-lg" style={{ objectFit: "cover" }} />
+            <img
+              src={formData.avatar || "/agam-profile.jpg"}
+              alt={formData.name}
+              className="avatar-lg"
+              style={{ objectFit: "cover" }}
+              onError={(e) => { e.currentTarget.src = "/agam-profile.jpg"; }}
+            />
             <div style={{ flex: 1 }}>
               <div className="flex items-center gap-2">
                 <p className="profile-name">{formData.name}</p>

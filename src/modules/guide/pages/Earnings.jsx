@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Wallet, Percent, IndianRupee, Download, CheckCircle2 } from "lucide-react";
+import { Wallet, Percent, IndianRupee } from "lucide-react";
 import StatCard from "../ui/StatCard";
 import Card from "../ui/card";
 import Badge from "../ui/badge";
 import Tabs from "../ui/tabs";
 import { earnings, payouts } from "../data/mock";
-import { useApp } from "../data/AppContext";
 
 const COMMISSION_RATE = 0.15;
 const fmt = n => "₹" + n.toLocaleString("en-IN");
@@ -192,7 +191,6 @@ function EarningsAreaChart({ data }) {
 }
 
 export default function Earnings() {
-  const { showToast } = useApp();
   const [tab, setTab] = useState("Overview");
   const [range, setRange] = useState(6);
 
@@ -201,30 +199,13 @@ export default function Earnings() {
   const commission = Math.round(total * COMMISSION_RATE);
   const net = total - commission;
 
-  const downloadStatement = () => {
-    const csvContent = "data:text/csv;charset=utf-8," +
-      "Date,Amount,Status\n" +
-      payouts.map(p => `${p.date},₹${p.amount},${p.status}`).join("\n");
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `Abeon_Earnings_Statement_${Date.now()}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    showToast("Earnings statement CSV downloaded successfully!");
-  };
-
   return (
     <>
-      <div className="page-head" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+      <div className="page-head" style={{ marginBottom: 20 }}>
         <div>
           <h1 className="page-title">Host Earnings & Payouts</h1>
           <p className="page-sub">Direct transfers and transparent commission records.</p>
         </div>
-        <button className="btn btn-primary" onClick={downloadStatement}>
-          <Download size={15} /> Download Statement (CSV)
-        </button>
       </div>
 
       <Tabs tabs={["Overview", "Payout History"]} value={tab} onChange={setTab} />

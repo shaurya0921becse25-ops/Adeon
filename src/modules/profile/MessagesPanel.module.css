@@ -1,9 +1,9 @@
 .panel {
-  background: var(--paper, #faf7f0);
-  border: 1px solid var(--line, #e6e8e6);
+  background: var(--paper, #ffffff);
+  border: 1px solid var(--line, #d6c7b5);
   border-radius: 14px;
   padding: 22px;
-  box-shadow: 0 2px 10px rgba(41, 70, 87, 0.04);
+  box-shadow: 0 4px 16px rgba(71, 85, 105, 0.08);
 }
 
 .panelHead {
@@ -12,20 +12,20 @@
   align-items: center;
   margin-bottom: 18px;
   padding-bottom: 14px;
-  border-bottom: 1px solid var(--line, #e6e8e6);
+  border-bottom: 1px solid var(--line, #d6c7b5);
 }
 
 .panelTitle {
   font-size: 16px;
   font-weight: 650;
-  color: var(--ink, #294657);
+  color: var(--ink, #475569);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .symbol {
-  color: var(--blue, #91b8c7);
+  color: var(--blue, #647f91);
   font-size: 16px;
 }
 
@@ -40,15 +40,15 @@
   align-items: center;
   gap: 16px;
   padding: 16px;
-  background: var(--white, #fffefa);
-  border: 1px solid var(--line, #e6e8e6);
+  background: var(--white, #ffffff);
+  border: 1px solid var(--line, #d6c7b5);
   border-radius: 12px;
   transition: all 0.2s ease;
 }
 
 .threadCard:hover {
-  border-color: var(--blue, #91b8c7);
-  box-shadow: 0 4px 14px rgba(41, 70, 87, 0.06);
+  border-color: var(--blue, #647f91);
+  box-shadow: 0 4px 14px rgba(71, 85, 105, 0.08);
 }
 
 .avatar {
@@ -56,7 +56,7 @@
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--paper, #faf7f0);
+  border: 2px solid var(--paper, #ffffff);
   flex-shrink: 0;
 }
 
@@ -76,18 +76,18 @@
 .providerName {
   font-size: 14px;
   font-weight: 650;
-  color: var(--ink, #294657);
+  color: var(--ink, #475569);
 }
 
 .time {
   font-size: 11px;
-  color: var(--muted, #78909d);
+  color: var(--muted, #64748b);
 }
 
 .serviceTitle {
   font-size: 12px;
   font-weight: 500;
-  color: var(--taupe, #765f53);
+  color: var(--taupe, #475569);
   margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
@@ -96,7 +96,7 @@
 
 .lastMessage {
   font-size: 12px;
-  color: var(--muted, #78909d);
+  color: var(--muted, #64748b);
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
@@ -111,7 +111,7 @@
 }
 
 .unreadBadge {
-  background: var(--blue, #91b8c7);
+  background: var(--blue, #647f91);
   color: #ffffff;
   font-size: 11px;
   font-weight: 700;
@@ -125,7 +125,7 @@
   gap: 6px;
   padding: 8px 16px;
   border-radius: 20px;
-  background: var(--blue, #91b8c7);
+  background: var(--blue, #647f91);
   color: #ffffff;
   font-size: 12px;
   font-weight: 600;
@@ -136,7 +136,7 @@
 }
 
 .openChatBtn:hover {
-  background: var(--ink, #294657);
+  background: var(--ink, #334155);
   transform: translateY(-1px);
 }
 

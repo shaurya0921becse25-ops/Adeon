@@ -4,8 +4,6 @@ import {
   IndianRupee,
   Star,
   Clock,
-  ShieldCheck,
-  MapPin,
   Check,
   X,
   ArrowUpRight,
@@ -88,7 +86,7 @@ export default function Home() {
                   Confirmed traveler arrivals and pending requests
                 </p>
               </div>
-              <Link to="/bookings" className="link-btn-pill">
+              <Link to="/guide/bookings" className="link-btn-pill">
                 View all ({bookings.length}) <ArrowUpRight size={14} />
               </Link>
             </div>
@@ -97,7 +95,12 @@ export default function Home() {
               {upcomingBookings.map((b) => (
                 <div className="row-item-modern" key={b.id}>
                   <div className="row-thumb-wrap">
-                    <img src={b.image} alt={b.service} className="row-thumb" />
+                    <img
+                      src={b.image || "/himalayan-trek.jpg"}
+                      alt={b.service}
+                      className="row-thumb"
+                      onError={(e) => { e.currentTarget.src = "/himalayan-trek.jpg"; }}
+                    />
                     <span className="row-thumb-badge">₹{b.amount.toLocaleString("en-IN")}</span>
                   </div>
 
@@ -111,7 +114,7 @@ export default function Home() {
                       <span>{b.travelers} traveler(s)</span>
                     </p>
                     <Link
-                      to={`/bookings/${b.id}`}
+                      to={`/guide/bookings/${b.id}`}
                       className="link-details"
                     >
                       Booking Details <ArrowUpRight size={13} />
@@ -154,7 +157,7 @@ export default function Home() {
                   Active listings available for booking across Himachal
                 </p>
               </div>
-              <Link to="/services" className="link-btn-pill">
+              <Link to="/guide/services" className="link-btn-pill">
                 Manage listings <ArrowUpRight size={14} />
               </Link>
             </div>
@@ -226,7 +229,12 @@ export default function Home() {
                     }
                   >
                     <div className="service-img-wrapper">
-                      <img src={s.image} alt={s.title} loading="lazy" />
+                      <img
+                        src={s.image || s.coverImage || "/himalayan-trek.jpg"}
+                        alt={s.title}
+                        loading="lazy"
+                        onError={(e) => { e.currentTarget.src = "/himalayan-trek.jpg"; }}
+                      />
                       <div className="service-top-badges">
                         <span className="service-category-tag">{s.category}</span>
                         {isSelected ? (
@@ -290,47 +298,6 @@ export default function Home() {
 
         {/* Right Stack */}
         <div className="right-stack">
-          {/* Host Profile Preview Card */}
-          <Card className="host-card-preview">
-            <div className="host-banner-strip"></div>
-            <div className="host-card-content">
-              <div className="host-preview-top">
-                <div className="host-avatar-wrapper">
-                  <img
-                    src={profile.avatar || "/agam-profile.jpg"}
-                    alt={profile.name}
-                    className="host-profile-img"
-                  />
-                  <div className="host-verified-icon" title="Verified Host">
-                    <ShieldCheck size={14} />
-                  </div>
-                </div>
-
-                <div className="host-text">
-                  <div className="host-name-row">
-                    <h4>{profile.name}</h4>
-                  </div>
-                  <p className="host-role-text">
-                    <MapPin size={13} className="pin-icon" />
-                    <span>{profile.location ? profile.location.split(",")[0] : "Himachal"}</span>
-                  </p>
-                </div>
-              </div>
-
-              <div className="host-badges-row">
-                <span className="host-stat-pill">★ 4.9 Rating</span>
-                <span className="host-stat-pill">{profile.experienceYears || 8} yrs exp</span>
-                <span className="host-stat-pill">Himachal Native</span>
-              </div>
-
-              <p className="host-bio-snippet">"{profile.bio}"</p>
-
-              <Link to="/profile" className="btn btn-outline btn-block mt-sm">
-                Edit Host Profile
-              </Link>
-            </div>
-          </Card>
-
           {/* Quick Actions Panel */}
           <Card className="quick-actions-card mt">
             <div className="card-head">
@@ -339,7 +306,7 @@ export default function Home() {
             </div>
 
             <div className="quick-list">
-              <Link to="/services/new" className="quick-action-link primary-action">
+              <Link to="/guide/services/new" className="quick-action-link primary-action">
                 <span className="action-icon-pill">+</span>
                 <div className="action-text-wrap">
                   <span className="action-main-text">Add New Experience</span>
@@ -347,7 +314,7 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link to="/calendar" className="quick-action-link">
+              <Link to="/guide/calendar" className="quick-action-link">
                 <span className="action-icon-pill">📅</span>
                 <div className="action-text-wrap">
                   <span className="action-main-text">Availability Calendar</span>
@@ -355,7 +322,7 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link to="/bookings" className="quick-action-link">
+              <Link to="/guide/bookings" className="quick-action-link">
                 <span className="action-icon-pill">📋</span>
                 <div className="action-text-wrap">
                   <span className="action-main-text">Manage Bookings</span>
@@ -363,7 +330,7 @@ export default function Home() {
                 </div>
               </Link>
 
-              <Link to="/messages" className="quick-action-link">
+              <Link to="/guide/messages" className="quick-action-link">
                 <span className="action-icon-pill">💬</span>
                 <div className="action-text-wrap">
                   <span className="action-main-text">Traveler Inquiries</span>

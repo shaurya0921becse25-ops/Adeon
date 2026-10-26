@@ -231,8 +231,7 @@
   color: #1a2e1c;
 }
 
-.destinations-heading p,
-.gallery-hint {
+.destinations-heading p {
   color: #686b63;
   font-size: 15px;
   line-height: 1.55;
@@ -240,12 +239,6 @@
 
 .destinations-section .circle-gallery-root {
   margin-top: 12px;
-}
-
-.gallery-hint {
-  margin: -6px 0 0;
-  font-size: 12px;
-  letter-spacing: 0.025em;
 }
 
 /* ─── Planning Section with Scroll Stack Animation ───────────────────────── */
@@ -307,8 +300,8 @@
   justify-content: center;
   padding: 0 26px;
   border-radius: 8px;
-  background: #1a2e1c;
-  color: #f7f9f4;
+  background: #111827;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
@@ -316,7 +309,7 @@
 }
 
 .green-button:hover {
-  background: #264228;
+  background: #000000;
   color: #ffffff;
   transform: translateY(-1px);
 }

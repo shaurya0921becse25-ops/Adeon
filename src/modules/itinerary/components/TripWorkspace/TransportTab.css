@@ -1,7 +1,7 @@
 /* TransportTab.css - Faithful recreation of final/transport-tab.txt */
 
 .transport-page-wrapper {
-  --trans-bg-primary: #f8fafc;
+  --trans-bg-primary: rgb(238, 242, 236);
   --trans-bg-card: #ffffff;
   --trans-bg-tertiary: #f1f5f9;
   --trans-text-primary: #0f172a;

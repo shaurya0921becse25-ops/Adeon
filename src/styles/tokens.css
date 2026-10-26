@@ -1,22 +1,22 @@
 /* ==========================================================================
-   ABEON Design Tokens — Porcelain & Aegean Palette
-   Porcelain #FAF7F0 · Mist #D9E7EB · Aegean #91B8C7
-   Limestone #D8BDA6 · Taupe #765F53 · Deep Taupe #3B2E27 · Deep Aegean #3F6E80
+   ABEON Design Tokens — White, Mist & Slate Palette
+   White #FFFFFF · Mist Blue #E7EFF3 · Dusty Slate Blue #647F91
+   Sandstone #D6C7B5 · Deep Slate #475569 · Slate Navy #334155
    ========================================================================== */
 
 :root {
-  --color-porcelain: #FAF7F0;
-  --color-mist: #D9E7EB;
-  --color-mist-hover: #C4D8DE;
-  --color-mist-subtle: rgba(217, 231, 235, 0.45);
-  --color-aegean: #91B8C7;
-  --color-aegean-deep: #3F6E80;
-  --color-aegean-subtle: rgba(145, 184, 199, 0.22);
-  --color-limestone: #D8BDA6;
-  --color-limestone-hover: #C8A98E;
-  --color-limestone-subtle: rgba(216, 189, 166, 0.38);
-  --color-taupe: #765F53;
-  --color-taupe-deep: #3B2E27;
+  --color-porcelain: rgb(238, 242, 236);
+  --color-mist: #E7EFF3;
+  --color-mist-hover: #D8E5EC;
+  --color-mist-subtle: rgba(231, 239, 243, 0.5);
+  --color-aegean: #647F91;
+  --color-aegean-deep: #475E70;
+  --color-aegean-subtle: rgba(100, 127, 145, 0.22);
+  --color-limestone: #D6C7B5;
+  --color-limestone-hover: #C5B29E;
+  --color-limestone-subtle: rgba(214, 199, 181, 0.38);
+  --color-taupe: #475569;
+  --color-taupe-deep: #334155;
   --color-brick: #A2543F;
   --color-brick-subtle: rgba(162, 84, 63, 0.14);
 
@@ -26,14 +26,14 @@
   --color-clay-hover: var(--color-mist-hover);
   --color-clay-subtle: var(--color-mist-subtle);
   --color-chocolate: var(--color-taupe-deep);
-  --color-chocolate-deep: #2A211C;
+  --color-chocolate-deep: #1E293B;
   --color-ink: var(--color-taupe-deep);
-  --color-ink-mid: #4A3D35;
+  --color-ink-mid: #334155;
   --color-terracotta: var(--color-aegean-deep);
-  --color-terracotta-hover: #355F6E;
-  --color-terracotta-subtle: rgba(63, 110, 128, 0.14);
+  --color-terracotta-hover: #374B5A;
+  --color-terracotta-subtle: rgba(71, 94, 112, 0.14);
   --color-brass: var(--color-taupe);
-  --color-brass-subtle: rgba(118, 95, 83, 0.16);
+  --color-brass-subtle: rgba(71, 85, 105, 0.16);
   --color-rani: var(--color-aegean-deep);
   --color-rani-pink: var(--color-aegean-deep);
   --color-rani-subtle: var(--color-aegean-subtle);
@@ -44,45 +44,45 @@
   --color-taupe-alias: var(--color-taupe);
   --color-ink-green: #141C1A;
   --bg-footer: #141C1A;
-  --color-warm-paper: #FAF7F0;
+  --color-warm-paper: #FFFFFF;
 
   --color-success: var(--color-aegean-deep);
-  --color-success-bg: rgba(63, 110, 128, 0.1);
-  --color-success-border: rgba(63, 110, 128, 0.35);
+  --color-success-bg: rgba(71, 94, 112, 0.1);
+  --color-success-border: rgba(71, 94, 112, 0.35);
   --color-warning: var(--color-taupe);
-  --color-warning-bg: rgba(118, 95, 83, 0.1);
-  --color-warning-border: rgba(118, 95, 83, 0.35);
+  --color-warning-bg: rgba(71, 85, 105, 0.1);
+  --color-warning-border: rgba(71, 85, 105, 0.35);
   --color-danger: var(--color-brick);
   --color-danger-bg: var(--color-brick-subtle);
   --color-danger-border: rgba(162, 84, 63, 0.35);
 
-  --bg-page: #FAF7F0;
-  --bg-surface: #F3EEE4;
-  --bg-surface-clay: #D9E7EB;
-  --bg-surface-dark: #3B2E27;
-  --bg-surface-fig: #3B2E27;
-  --bg-surface-tint: #F0EBE1;
-  --bg-nav: rgba(250, 247, 240, 0.88);
-  --bg-modal-backdrop: rgba(59, 46, 39, 0.72);
+  --bg-page: rgb(238, 242, 236);
+  --bg-surface: #E7EFF3;
+  --bg-surface-clay: #E7EFF3;
+  --bg-surface-dark: #334155;
+  --bg-surface-fig: #334155;
+  --bg-surface-tint: #F1F6F9;
+  --bg-nav: rgba(238, 242, 236, 0.94);
+  --bg-modal-backdrop: rgba(30, 41, 59, 0.72);
 
-  --text-primary: #3B2E27;
-  --text-secondary: #5A4A42;
-  --text-muted: #765F53;
-  --text-inverse: #FAF7F0;
-  --text-accent: #3F6E80;
+  --text-primary: #475569;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+  --text-inverse: #FFFFFF;
+  --text-accent: #647F91;
 
-  --border-color: rgba(59, 46, 39, 0.12);
+  --border-color: #D6C7B5;
   --border-hairline: 1px solid var(--border-color);
-  --border-strong: rgba(59, 46, 39, 0.26);
-  --border-dashed: 1.5px dashed rgba(59, 46, 39, 0.22);
-  --border-focus: #3F6E80;
+  --border-strong: rgba(71, 85, 105, 0.26);
+  --border-dashed: 1.5px dashed rgba(214, 199, 181, 0.6);
+  --border-focus: #2563EB;
   --notch-bg: var(--bg-page);
 
-  --shadow-xs: 0 1px 2px rgba(59, 46, 39, 0.05);
-  --shadow-sm: 0 2px 6px rgba(59, 46, 39, 0.07);
-  --shadow-card: 0 4px 16px rgba(59, 46, 39, 0.08);
-  --shadow-hover: 0 8px 24px rgba(59, 46, 39, 0.1);
-  --shadow-modal: 0 20px 60px rgba(59, 46, 39, 0.22);
+  --shadow-xs: 0 1px 3px rgba(71, 85, 105, 0.05);
+  --shadow-sm: 0 2px 8px rgba(71, 85, 105, 0.07);
+  --shadow-card: 0 4px 16px rgba(71, 85, 105, 0.08);
+  --shadow-hover: 0 8px 24px rgba(71, 85, 105, 0.12);
+  --shadow-modal: 0 20px 60px rgba(30, 41, 59, 0.22);
 
   --font-heading: 'Instrument Serif', Georgia, serif;
   --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;

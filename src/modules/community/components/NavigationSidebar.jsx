@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  Compass,
   MapPin,
   Flame,
   Check,
@@ -127,9 +126,6 @@ export default function NavigationSidebar() {
             aria-pressed={isAllActive}
           >
             <div className="nav-all-posts-left">
-              <span className="nav-all-icon">
-                <Compass size={18} />
-              </span>
               <span className="nav-all-label">All Travel Stories</span>
             </div>
             <span className="nav-all-count">{allPostsCount}</span>

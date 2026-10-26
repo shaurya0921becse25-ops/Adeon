@@ -1,17 +1,17 @@
 /* TripPage.css - Replicating html/trip.txt design system without iframe */
 .trip-page-wrapper {
-  --porcelain: #FAF7F0;
-  --mist-blue: #D9E7EB;
-  --aegean: #91B8C7;
-  --aegean-deep: #4A7A8C;
-  --aegean-dark: #2B4E5B;
-  --limestone: #D8BDA6;
-  --taupe: #765F53;
-  --taupe-soft: #9A8478;
+  --porcelain: rgb(238, 242, 236);
+  --mist-blue: #E7EFF3;
+  --aegean: #647F91;
+  --aegean-deep: #475E70;
+  --aegean-dark: #334155;
+  --limestone: #D6C7B5;
+  --taupe: #475569;
+  --taupe-soft: #64748B;
   --white: #FFFFFF;
-  --shadow-sm: 0 2px 8px rgba(118, 95, 83, 0.08);
-  --shadow-md: 0 4px 16px rgba(118, 95, 83, 0.12);
-  --shadow-lg: 0 12px 32px rgba(43, 78, 91, 0.18);
+  --shadow-sm: 0 2px 8px rgba(71, 85, 105, 0.08);
+  --shadow-md: 0 4px 16px rgba(71, 85, 105, 0.12);
+  --shadow-lg: 0 12px 32px rgba(71, 85, 105, 0.18);
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
@@ -93,10 +93,14 @@
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 40px;
   flex-wrap: wrap;
+}
+
+.trip-page-wrapper .hero-titles {
+  flex: 1 1 320px;
 }
 
 .trip-page-wrapper .hero-titles h1 {
@@ -130,6 +134,7 @@
   position: relative;
   width: 100%;
   max-width: 440px;
+  flex: 0 1 440px;
   z-index: 100;
 }
 
@@ -200,16 +205,24 @@
 }
 
 .trip-page-wrapper .search-icon {
+  position: static;
+  top: auto;
+  left: auto;
+  transform: none;
   color: var(--aegean-deep);
   margin-right: 10px;
   flex-shrink: 0;
 }
 
 .trip-page-wrapper .search-input {
+  flex: 1;
   border: none;
   outline: none;
-  width: 100%;
+  width: auto;
+  min-width: 0;
+  padding: 0;
   font-size: 0.95rem;
+  line-height: 1.5;
   color: var(--taupe);
   background: transparent;
 }
@@ -232,6 +245,8 @@
   display: block;
   animation: fadeIn 0.2s ease;
   z-index: 110;
+  max-height: min(60vh, 360px);
+  overflow-y: auto;
 }
 
 .trip-page-wrapper .dropdown-header {
@@ -330,6 +345,7 @@
 
 .trip-page-wrapper .filter-chip {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
@@ -442,27 +458,6 @@
   border-radius: var(--radius-sm);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 2;
-}
-
-.trip-page-wrapper .wishlist-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--taupe);
-  transition: background 0.2s ease, color 0.2s ease;
-  z-index: 2;
-}
-
-.trip-page-wrapper .wishlist-btn:hover {
-  background: var(--white);
-  color: #e63946;
 }
 
 .trip-page-wrapper .card-body {
@@ -679,6 +674,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 16px;
 }
 
 .trip-page-wrapper .modal-content {
@@ -810,9 +806,18 @@
   .trip-page-wrapper .hero-flex {
     flex-direction: column;
     align-items: flex-start;
+    gap: 24px;
+  }
+  .trip-page-wrapper .hero-titles {
+    flex: 0 1 auto;
+    width: 100%;
   }
   .trip-page-wrapper .search-wrapper {
     max-width: 100%;
+    flex-basis: 100%;
+  }
+  .trip-page-wrapper .filter-bar {
+    overscroll-behavior-x: contain;
   }
 }
 
@@ -826,6 +831,17 @@
   .trip-page-wrapper .footer-bottom-bar {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .trip-page-wrapper .modal-content {
+    max-height: 90vh;
+  }
+  .trip-page-wrapper .modal-header,
+  .trip-page-wrapper .modal-footer {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .trip-page-wrapper .modal-body {
+    padding: 20px 18px;
   }
 }
 
@@ -864,7 +880,7 @@
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #FAF7F0;
+  border: 3px solid #FFFFFF;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -899,7 +915,7 @@
   padding: 3px 10px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.2);
-  color: #FAF7F0;
+  color: #FFFFFF;
 }
 
 .trip-page-wrapper .guide-spotlight-name {
@@ -911,7 +927,7 @@
 
 .trip-page-wrapper .guide-spotlight-role {
   font-size: 0.9rem;
-  color: #D9E7EB;
+  color: #E7EFF3;
   margin: 0;
 }
 
@@ -920,7 +936,7 @@
   align-items: center;
   gap: 10px;
   font-size: 0.85rem;
-  color: #FAF7F0;
+  color: #FFFFFF;
   margin-top: 4px;
   flex-wrap: wrap;
 }
@@ -969,4 +985,3 @@
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
-

@@ -55,7 +55,7 @@ export default function TripApp({
 
   if (isLoading) {
     return (
-      <div className="trek-app" style={{ display: 'grid', placeItems: 'center', minHeight: '100vh', background: '#f8fafc' }}>
+      <div className="trek-app" style={{ display: 'grid', placeItems: 'center', minHeight: '100vh', background: 'rgb(238, 242, 236)' }}>
         <p style={{ fontSize: 16, fontWeight: 600, color: '#64748b' }}>Loading your itinerary...</p>
       </div>
     )

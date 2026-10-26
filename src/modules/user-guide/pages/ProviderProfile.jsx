@@ -63,15 +63,15 @@ export const ProviderProfile = ({ defaultId }) => {
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <span style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "-0.5px" }}>
-            ABEON <span style={{ color: "#91B8C7", fontWeight: 400 }}>| Guide Portal</span>
+            ABEON <span style={{ color: "#647F91", fontWeight: 400 }}>| Guide Portal</span>
           </span>
           <span
             style={{
               fontSize: "11px",
               padding: "2px 8px",
               borderRadius: "10px",
-              background: "rgba(145, 184, 199, 0.2)",
-              color: "#91B8C7",
+              background: "rgba(100, 127, 145, 0.2)",
+              color: "#647F91",
               fontWeight: 600
             }}
           >
@@ -121,11 +121,11 @@ export const ProviderProfile = ({ defaultId }) => {
             padding: "8px 18px",
             borderRadius: "9999px",
             background: "#FFFFFF",
-            border: "1.5px solid #91B8C7",
+            border: "1.5px solid #647F91",
             color: "#2B4E5B",
             fontSize: "0.9rem",
             fontWeight: 600,
-            boxShadow: "0 2px 8px rgba(118, 95, 83, 0.08)",
+            boxShadow: "0 2px 8px rgba(71, 85, 105, 0.08)",
             cursor: "pointer"
           }}
         >
@@ -143,7 +143,12 @@ export const ProviderProfile = ({ defaultId }) => {
         {/* Profile Card Header */}
         <div className="provider-identity-card">
           <div className="identity-avatar-wrap">
-            <img src={provider.avatar} alt={provider.name} className="identity-avatar" />
+            <img
+              src={provider.avatar || "/agam-profile.jpg"}
+              alt={provider.name}
+              className="identity-avatar"
+              onError={(e) => { e.currentTarget.src = "/agam-profile.jpg"; }}
+            />
             {provider.verified && (
               <span className="verified-check-pill" title="Certified and Verified Guide">
                 <ShieldCheck size={14} />

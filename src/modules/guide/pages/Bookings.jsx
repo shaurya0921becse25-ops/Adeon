@@ -45,7 +45,12 @@ export default function Bookings() {
         {visible.map((b) => (
           <div className="booking-card-row" key={b.id}>
             <div className="booking-thumb-container">
-              <img src={b.image} alt={b.service} className="booking-thumb-img" />
+              <img
+                src={b.image || "/himalayan-trek.jpg"}
+                alt={b.service}
+                className="booking-thumb-img"
+                onError={(e) => { e.currentTarget.src = "/himalayan-trek.jpg"; }}
+              />
               <span className="booking-id-tag">#{b.id}</span>
             </div>
 
@@ -77,7 +82,7 @@ export default function Bookings() {
 
               <div className="booking-card-footer">
                 <Link
-                  to={`/bookings/${b.id}`}
+                  to={`/guide/bookings/${b.id}`}
                   className="link-btn-pill"
                 >
                   <Eye size={13} /> View Full Traveler Dossier

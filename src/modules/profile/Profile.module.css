@@ -1,19 +1,19 @@
 .page {
-  --paper: #faf7f0;
-  --mist: #d9e7eb;
-  --blue: #91b8c7;
-  --stone: #d8bda6;
-  --taupe: #765f53;
-  --ink: #294657;
-  --muted: #78909d;
-  --line: #e6e8e6;
-  --white: #fffefa;
+  --paper: rgb(238, 242, 236);
+  --mist: #e7eff3;
+  --blue: #647f91;
+  --stone: #d6c7b5;
+  --taupe: #475569;
+  --ink: #475569;
+  --muted: #64748b;
+  --line: #d6c7b5;
+  --white: #ffffff;
 
   max-width: 1600px;
   margin: 0 auto;
   padding: 22px 4.2% 38px 4.2%;
   min-height: 100vh;
-  background-color: var(--paper);
+  background-color: #ffffff;
   color: var(--ink);
 }
 

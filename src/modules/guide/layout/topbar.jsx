@@ -99,6 +99,7 @@ export default function Topbar() {
             src={profile.avatar || "/agam-profile.jpg"}
             alt={profile.name}
             className="avatar"
+            onError={(e) => { e.currentTarget.src = "/agam-profile.jpg"; }}
           />
           <div className="user-info-text">
             <span className="user-name">{profile.name}</span>

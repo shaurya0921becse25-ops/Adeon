@@ -9,7 +9,6 @@ export default function PopularDestinations({ children }) {
         <p>Find a place that speaks to you. Your next story starts out there.</p>
       </div>
       {children}
-      <p className="gallery-hint">Drag to explore · Select a place to discover more</p>
     </section>
   );
 }

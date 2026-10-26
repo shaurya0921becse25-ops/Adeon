@@ -48,7 +48,62 @@ export const TripRepository = {
    */
   getTrip(id) {
     if (!id) return null
-    return readTripStore(id)
+    const store = readTripStore(id)
+    if (!store) return null
+
+    let dirty = false
+    if (!Array.isArray(store.packingItems) || store.packingItems.length < 18) {
+      const defaultPacking = [
+        { id: 'pack-101', tripId: id, text: 'Comfortable slip-on walking shoes (temple visits)', category: 'CLOTHING', quantity: 1, checked: true, user: 'Demo User', order: 0 },
+        { id: 'pack-102', tripId: id, text: 'Lightweight water-repellent windbreaker jacket', category: 'CLOTHING', quantity: 1, checked: false, user: 'Demo User', order: 1 },
+        { id: 'pack-103', tripId: id, text: 'Merino base layers and quick-dry t-shirts', category: 'CLOTHING', quantity: 3, checked: false, user: 'Demo User', order: 2 },
+        { id: 'pack-104', tripId: id, text: 'Breathable walking socks & thermal sleepwear', category: 'CLOTHING', quantity: 5, checked: false, user: 'Demo User', order: 3 },
+        { id: 'pack-105', tripId: id, text: 'Warm fleece jacket or packable down vest', category: 'CLOTHING', quantity: 1, checked: false, user: 'Demo User', order: 4 },
+        { id: 'pack-201', tripId: id, text: 'Pocket Wi-Fi / Japanese eSIM confirmation', category: 'ELECTRONICS', quantity: 1, checked: true, user: 'Demo User', order: 5 },
+        { id: 'pack-202', tripId: id, text: 'Type A 2-prong power adapters (Japan standard)', category: 'ELECTRONICS', quantity: 2, checked: true, user: 'Demo User', order: 6 },
+        { id: 'pack-203', tripId: id, text: '10,000mAh portable power bank for day trips', category: 'ELECTRONICS', quantity: 1, checked: false, user: 'Demo User', order: 7 },
+        { id: 'pack-204', tripId: id, text: 'USB-C fast charging cables & noise-cancelling buds', category: 'ELECTRONICS', quantity: 2, checked: false, user: 'Demo User', order: 8 },
+        { id: 'pack-301', tripId: id, text: 'Passport & Visit Japan Web QR Code', category: 'DOCUMENTS', quantity: 1, checked: true, user: 'Demo User', order: 9 },
+        { id: 'pack-302', tripId: id, text: 'Credit card with zero foreign transaction fees', category: 'DOCUMENTS', quantity: 1, checked: true, user: 'Demo User', order: 10 },
+        { id: 'pack-303', tripId: id, text: 'Physical passport color copies & travel insurance card', category: 'DOCUMENTS', quantity: 1, checked: false, user: 'Demo User', order: 11 },
+        { id: 'pack-304', tripId: id, text: 'Emergency contacts & accommodation confirmations', category: 'DOCUMENTS', quantity: 1, checked: false, user: 'Demo User', order: 12 },
+        { id: 'pack-401', tripId: id, text: 'Compact coin purse (essential for ¥100 / ¥500 coins)', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false, user: 'Demo User', order: 13 },
+        { id: 'pack-402', tripId: id, text: 'Reusable tote bag for shopping & street snacks', category: 'OTHER & ACCESSORIES', quantity: 2, checked: false, user: 'Demo User', order: 14 },
+        { id: 'pack-403', tripId: id, text: 'Compact travel umbrella (for sudden rain showers)', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false, user: 'Demo User', order: 15 },
+        { id: 'pack-404', tripId: id, text: 'Travel skincare set, lip balm & SPF 50 sunscreen', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false, user: 'Demo User', order: 16 },
+        { id: 'pack-405', tripId: id, text: 'Small hand towel (many public restrooms lack hand dryers)', category: 'OTHER & ACCESSORIES', quantity: 1, checked: false, user: 'Demo User', order: 17 },
+      ]
+      const existingMap = new Map((store.packingItems || []).map(i => [i.id, i]))
+      const merged = defaultPacking.map(def => existingMap.get(def.id) || def)
+      const defIds = new Set(defaultPacking.map(d => d.id))
+      const customs = (store.packingItems || []).filter(i => !defIds.has(i.id))
+      store.packingItems = [...merged, ...customs]
+      dirty = true
+    }
+
+    if (!Array.isArray(store.todoItems) || store.todoItems.length < 5) {
+      const defaultTodos = [
+        { id: 'demo-todo-1', tripId: id, title: 'Book the rental car with gravel protection', description: 'Ensure comprehensive insurance coverage and GPS navigation included.', done: true, priority: 'p1', dueDate: '2027-03-05', assignee: 'Jonas Weber', order: 0 },
+        { id: 'demo-todo-2', tripId: id, title: 'Add digital Suica / Pasmo transit card to phone wallet', description: 'Enables contactless tapping on all Tokyo subways, buses, and convenience stores.', done: true, priority: 'p1', dueDate: '2026-10-15', assignee: 'Jonas Weber', order: 1 },
+        { id: 'demo-todo-3', tripId: id, title: 'Confirm teamLab Planets timed entry reservation', description: 'Pre-booked for Day 5 at 14:00. Save ticket barcodes.', done: false, priority: 'p1', dueDate: '2026-10-16', assignee: 'Jonas Weber', order: 2 },
+        { id: 'demo-todo-4', tripId: id, title: 'Notify bank of international travel and withdraw initial Yen cash', description: 'Many traditional food stalls in Asakusa and Tsukiji remain cash-only.', done: false, priority: 'p2', dueDate: '2026-10-17', assignee: 'Jonas Weber', order: 3 },
+        { id: 'demo-todo-5', tripId: id, title: 'Download Tokyo offline maps on phone', description: 'Save offline area in Google Maps for Central Tokyo, Asakusa, and Shibuya.', done: false, priority: 'p3', dueDate: '2026-10-18', assignee: 'Jonas Weber', order: 4 },
+      ]
+      const existingTodoMap = new Map((store.todoItems || []).map(t => [t.id, t]))
+      const mergedTodos = defaultTodos.map(def => existingTodoMap.get(def.id) || def)
+      const defTodoIds = new Set(defaultTodos.map(d => d.id))
+      const customTodos = (store.todoItems || []).filter(t => !defTodoIds.has(t.id))
+      store.todoItems = [...mergedTodos, ...customTodos]
+      dirty = true
+    }
+
+    if (dirty) {
+      try {
+        writeTripStore(id, store)
+      } catch {}
+    }
+
+    return store
   },
 
   /**

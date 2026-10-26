@@ -27,7 +27,7 @@ export default function MyServices() {
           <h1 className="page-title">My Experiences & Services</h1>
           <p className="page-sub">Create, edit, and curate your offerings for travelers.</p>
         </div>
-        <Link to="/services/new" className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
+        <Link to="/guide/services/new" className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
           <Plus size={16} /> Add New Experience
         </Link>
       </div>
@@ -62,7 +62,11 @@ export default function MyServices() {
               }
             >
               <div className="service-card-thumb">
-                <img src={s.image} alt={s.title} />
+                <img
+                  src={s.image || s.coverImage || "/himalayan-trek.jpg"}
+                  alt={s.title}
+                  onError={(e) => { e.currentTarget.src = "/himalayan-trek.jpg"; }}
+                />
                 <div className="service-card-badges">
                   <Badge status={s.status} />
                   <span className="category-pill">{s.category}</span>
@@ -105,7 +109,7 @@ export default function MyServices() {
                     <Eye size={13} /> Preview
                   </button>
                   <Link
-                    to="/services/new"
+                    to="/guide/services/new"
                     state={{ edit: s }}
                     className="btn btn-outline btn-sm"
                     title="Edit Service"
@@ -138,7 +142,7 @@ export default function MyServices() {
             <p className="empty" style={{ fontSize: 16, marginBottom: 8 }}>
               No experiences found matching your filters.
             </p>
-            <Link to="/services/new" className="btn btn-primary" style={{ marginTop: 12 }}>
+            <Link to="/guide/services/new" className="btn btn-primary" style={{ marginTop: 12 }}>
               Create Your First Service
             </Link>
           </div>

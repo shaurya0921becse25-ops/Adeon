@@ -1,13 +1,13 @@
 /* ServiceDetailsPage.css - Replicating html/service-details.txt design system without iframe */
 .service-details-wrapper {
-  --porcelain: #FAF7F0;
-  --mist-blue: #D9E7EB;
-  --aegean: #91B8C7;
-  --aegean-deep: #4A7A8C;
-  --aegean-dark: #2B4E5B;
-  --limestone: #D8BDA6;
-  --taupe: #765F53;
-  --taupe-soft: #9A8478;
+  --porcelain: rgb(238, 242, 236);
+  --mist-blue: #E7EFF3;
+  --aegean: #647F91;
+  --aegean-deep: #475E70;
+  --aegean-dark: #334155;
+  --limestone: #D6C7B5;
+  --taupe: #475569;
+  --taupe-soft: #64748B;
   --white: #FFFFFF;
   --success-green: #2E7D32;
   --success-light: #E8F5E9;
@@ -15,9 +15,9 @@
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-full: 9999px;
-  --shadow-sm: 0 2px 8px rgba(118, 95, 83, 0.08);
-  --shadow-md: 0 4px 16px rgba(118, 95, 83, 0.12);
-  --shadow-lg: 0 12px 32px rgba(43, 78, 91, 0.25);
+  --shadow-sm: 0 2px 8px rgba(71, 85, 105, 0.08);
+  --shadow-md: 0 4px 16px rgba(71, 85, 105, 0.12);
+  --shadow-lg: 0 12px 32px rgba(71, 85, 105, 0.20);
 
   background-color: var(--porcelain);
   color: var(--taupe);

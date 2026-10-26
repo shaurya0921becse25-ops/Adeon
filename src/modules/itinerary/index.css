@@ -19,10 +19,10 @@
   --accent-text: #fff;
 
   /* Official WanderWise Slate Design System Tokens */
-  --ww-porcelain: #f8fafc;
-  --ww-mist-blue: #f1f5f9;
-  --ww-aegean: #0f172a;
-  --ww-limestone: #e2e8f0;
+  --ww-porcelain: rgb(238, 242, 236);
+  --ww-mist-blue: #E7EFF3;
+  --ww-aegean: #647F91;
+  --ww-limestone: #D6C7B5;
   --ww-taupe: #475569;
 }
 

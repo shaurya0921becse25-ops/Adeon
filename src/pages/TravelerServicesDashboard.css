@@ -5,14 +5,14 @@
 
 .traveler-services-page {
   min-height: 100vh;
-  background-color: var(--color-porcelain);
+  background-color: var(--color-porcelain, rgb(238, 242, 236));
   color: var(--color-taupe-deep);
   padding-bottom: 80px;
 }
 
 [data-theme="dark"] .traveler-services-page {
   background-color: var(--color-taupe-deep);
-  color: #FAF7F0;
+  color: #FFFFFF;
 }
 
 /* Page Header */
@@ -235,10 +235,10 @@
   gap: 16px;
   padding: 10px 18px;
   background-color: var(--color-taupe-deep);
-  color: #FAF7F0;
+  color: #FFFFFF;
   border-radius: var(--radius-pill);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
-  border: 1px solid rgba(250, 247, 240, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .compare-tray-label {

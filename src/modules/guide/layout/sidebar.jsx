@@ -9,9 +9,7 @@ import {
   Star,
   Wallet,
   User,
-  Settings,
   ShieldCheck,
-  Compass,
 } from "lucide-react";
 import { useApp } from "../data/AppContext";
 
@@ -25,7 +23,6 @@ const links = [
   { to: "/guide/earnings", label: "Earnings", icon: Wallet },
   { to: "/guide/profile", label: "Profile", icon: User },
   { to: "/guide/verification", label: "Verification", icon: ShieldCheck },
-  { to: "/guide/settings", label: "Settings", icon: Settings },
 ];
 
 export default function Sidebar() {
@@ -35,9 +32,6 @@ export default function Sidebar() {
     <aside className="sidebar guide-sidebar">
       {/* Brand Header */}
       <Link to="/guide" className="sidebar-brand-block" style={{ textDecoration: 'none', color: 'inherit' }}>
-        <div className="logo-icon-wrap">
-          <Compass size={22} className="logo-compass" />
-        </div>
         <div>
           <div className="logo">Abeon</div>
           <div className="logo-sub">Himachal Host Hub</div>
@@ -68,6 +62,7 @@ export default function Sidebar() {
           src={profile?.avatar || "/agam-profile.jpg"}
           alt={profile?.name || "Host"}
           className="sidebar-avatar"
+          onError={(e) => { e.currentTarget.src = "/agam-profile.jpg"; }}
         />
         <div className="sidebar-user-info">
           <span className="sidebar-user-name">{profile?.name || "Agam Sharma"}</span>

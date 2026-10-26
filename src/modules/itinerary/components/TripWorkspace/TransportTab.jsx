@@ -405,8 +405,8 @@ export default function TransportTab({
                     textAlign: 'center',
                     background: 'var(--trans-bg-card, #ffffff)',
                     borderRadius: 16,
-                    border: '1px dashed var(--trans-border, #D8BDA6)',
-                    color: 'var(--trans-text-muted, #765F53)',
+                    border: '1px dashed var(--trans-border, #D6C7B5)',
+                    color: 'var(--trans-text-muted, #475569)',
                     fontSize: 13,
                   }}
                 >
@@ -797,7 +797,7 @@ export default function TransportTab({
                   <div>
                     <label className="trans-field-label">Traveler</label>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '4px 10px', background: 'var(--trans-bg-tertiary, #EBF2F4)', borderRadius: 999, fontSize: 12, fontWeight: 600, color: 'var(--trans-text-primary, #4A3B32)' }}>
-                      <span style={{ width: 18, height: 18, borderRadius: '50%', background: 'var(--trans-accent, #91B8C7)', color: '#fff', fontSize: 10, display: 'grid', placeItems: 'center' }}>
+                      <span style={{ width: 18, height: 18, borderRadius: '50%', background: 'var(--trans-accent, #647F91)', color: '#fff', fontSize: 10, display: 'grid', placeItems: 'center' }}>
                         1
                       </span>
                       {trip.destination ? `${trip.destination} Traveler` : 'Solo Traveler'}
@@ -806,7 +806,7 @@ export default function TransportTab({
 
                   <div>
                     <label className="trans-field-label">File</label>
-                    <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', border: '1px dashed var(--trans-border, #D8BDA6)', borderRadius: 8, fontSize: 12, cursor: 'pointer', background: 'var(--trans-bg-card, #ffffff)', color: 'var(--trans-text-muted, #765F53)' }}>
+                    <label style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '6px 12px', border: '1px dashed var(--trans-border, #D6C7B5)', borderRadius: 8, fontSize: 12, cursor: 'pointer', background: 'var(--trans-bg-card, #ffffff)', color: 'var(--trans-text-muted, #475569)' }}>
                       <input
                         type="file"
                         hidden
@@ -825,14 +825,14 @@ export default function TransportTab({
                 <div className="trans-modal-foot">
                   <button
                     type="button"
-                    style={{ padding: '8px 16px', borderRadius: 10, border: '1px solid var(--trans-border, #D8BDA6)', background: 'var(--trans-bg-card, #ffffff)', color: 'var(--trans-text-muted, #765F53)', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}
+                    style={{ padding: '8px 16px', borderRadius: 10, border: '1px solid var(--trans-border, #D6C7B5)', background: 'var(--trans-bg-card, #ffffff)', color: 'var(--trans-text-muted, #475569)', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}
                     onClick={() => setIsModalOpen(false)}
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    style={{ padding: '8px 20px', borderRadius: 10, border: 0, background: 'var(--trans-accent, #91B8C7)', color: '#ffffff', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}
+                    style={{ padding: '8px 20px', borderRadius: 10, border: 0, background: 'var(--trans-accent, #647F91)', color: '#ffffff', fontWeight: 600, fontSize: 13, cursor: 'pointer' }}
                   >
                     {editBookingId ? 'Update' : 'Save'}
                   </button>

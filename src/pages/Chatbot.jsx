@@ -8,7 +8,6 @@ import {
   ArrowRight, 
   Check, 
   MapPin, 
-  Compass,
   SlidersHorizontal,
   Layers,
   AlertCircle,
@@ -56,13 +55,6 @@ const MOMENT_OPTIONS = [
   { id: 'night_ramen', icon: '🍜', title: 'Late-Night Alley Eats', desc: 'A steaming bowl of fresh noodles under glowing paper lanterns' },
   { id: 'palace_twilight', icon: '🕌', title: 'Palace Courtyard Dusk', desc: 'Walking quiet sandstone courtyards as lamps flicker to life' },
   { id: 'alpine_train', icon: '🚂', title: 'Scenic Mountain Railway', desc: 'Leaning out the window of a historic train curving through peaks' }
-];
-
-const STEPS = [
-  { id: 'scenery', label: '1. Scenery' },
-  { id: 'vibe', label: '2. Mood' },
-  { id: 'travelers', label: '3. Company' },
-  { id: 'moment', label: '4. Dream Moment' }
 ];
 
 export default function Chatbot() {
@@ -165,47 +157,6 @@ export default function Chatbot() {
   return (
     <main id="main-content" className="trip-quiz-page">
       <div className="container quiz-container">
-
-        {/* Minimal sleek top bar */}
-        <header className="quiz-header">
-          <div className="quiz-brand">
-            <span className="quiz-compass-icon"><Compass size={20} /></span>
-            <div>
-              <h1 className="quiz-title">Trip Match Engine</h1>
-              <p className="quiz-sub">Logistics-first matching based on honest budgets & preferred landscapes.</p>
-            </div>
-          </div>
-
-          <div className="quiz-header-nav">
-            {currentStep !== 'result' ? (
-              <div className="quiz-step-dots" aria-label="Quiz progress">
-                {STEPS.map((s) => (
-                  <span
-                    key={s.id}
-                    className={`step-dot ${s.id === currentStep ? 'is-active' : ''}`}
-                    title={s.label}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="quiz-header-actions">
-                <button
-                  type="button"
-                  className="quiz-reset-btn"
-                  onClick={() => {
-                    setFilterRegion('all');
-                    setFilterBudget('all');
-                    dispatch(restartChat());
-                  }}
-                >
-                  <RotateCcw size={14} />
-                  <span>Retake Quiz</span>
-                </button>
-              </div>
-            )}
-          </div>
-        </header>
-
         {/* LOADING SPINNER STATE */}
         {isCalculating && (
           <div className="quiz-loading-card animate-fade-in" aria-live="polite">

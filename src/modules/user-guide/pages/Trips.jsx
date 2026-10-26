@@ -88,11 +88,11 @@ export const Trips = () => {
               padding: "8px 18px",
               borderRadius: "9999px",
               background: "#FFFFFF",
-              border: "1.5px solid #91B8C7",
+              border: "1.5px solid #647F91",
               color: "#2B4E5B",
               fontSize: "0.9rem",
               fontWeight: 600,
-              boxShadow: "0 2px 8px rgba(118, 95, 83, 0.08)",
+              boxShadow: "0 2px 8px rgba(71, 85, 105, 0.08)",
               cursor: "pointer",
               transition: "all 0.2s ease"
             }}
@@ -121,7 +121,11 @@ export const Trips = () => {
             currentList.map((booking) => (
               <div key={booking.id} className="trip-booking-card">
                 <div className="trip-card-media">
-                  <img src={booking.coverImage} alt={booking.serviceTitle} />
+                  <img
+                    src={booking.coverImage || booking.image || "/himalayan-trek.jpg"}
+                    alt={booking.serviceTitle}
+                    onError={(e) => { e.currentTarget.src = "/himalayan-trek.jpg"; }}
+                  />
                   <span className={`status-tag status-${booking.status.toLowerCase()}`}>
                     {booking.status}
                   </span>

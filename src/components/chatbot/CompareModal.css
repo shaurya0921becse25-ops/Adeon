@@ -79,7 +79,7 @@
 .compare-bar-track {
   flex: 1;
   height: 6px;
-  background-color: var(--bg-surface-tint);
+  background-color: #e5e7eb;
   border-radius: var(--radius-pill);
   overflow: hidden;
   border: 1px solid var(--border-color);
@@ -87,8 +87,20 @@
 
 .compare-bar-fill {
   height: 100%;
-  background-color: var(--color-aegean);
+  background-color: #0f766e;
   border-radius: var(--radius-pill);
+}
+
+.compare-table tbody tr td:nth-child(2) .compare-bar-fill {
+  background-color: #2563eb;
+}
+
+.compare-table tbody tr td:nth-child(3) .compare-bar-fill {
+  background-color: #7c3aed;
+}
+
+.compare-table tbody tr td:nth-child(4) .compare-bar-fill {
+  background-color: #0f766e;
 }
 
 .compare-watch-val {

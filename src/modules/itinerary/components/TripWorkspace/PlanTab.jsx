@@ -8,6 +8,7 @@ import * as maplibregl from 'maplibre-gl'
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import PlanIcon from './PlanIcon.jsx'
+import SatelliteToggle from './SatelliteToggle.jsx'
 import { getDestinationById } from '../../data/destinations.js'
 import './PlanTab.css'
 
@@ -125,26 +126,22 @@ export default function PlanTab({
     return []
   }, [store?.visits, places, days])
 
-  // Panel sizing: exactly 340px as specified by user
+  // Panel sizing and collapse states
   const [leftOpen, setLeftOpen] = useState(true)
   const [rightOpen, setRightOpen] = useState(true)
   const [leftWidth, setLeftWidth] = useState(340)
-  const [rightWidth, setRightWidth] = useState(340)
-  const [showDayCard, setShowDayCard] = useState(true)
-  const [dayCardCollapsed, setDayCardCollapsed] = useState(false)
+  const [rightWidth, setRightWidth] = useState(300)
   const [isMobile, setIsMobile] = useState(
     typeof window !== 'undefined' ? window.innerWidth <= 768 : false
   )
-
-  // Drag and drop state (hold & drop from right tab to left tab)
-  const [draggedPlaceId, setDraggedPlaceId] = useState(null)
-  const [dragOverDayIndex, setDragOverDayIndex] = useState(null)
 
   // Selected Day & Place states
   const [selDayIndex, setSelDayIndex] = useState(0)
   const [openDays, setOpenDays] = useState(new Set([0]))
   const [selPlaceId, setSelPlaceId] = useState(null)
   const [showInfoBar, setShowInfoBar] = useState(false)
+  const [dragOverDayIndex, setDragOverDayIndex] = useState(null)
+  const [draggedPlaceId, setDraggedPlaceId] = useState(null)
 
   // Filters & Search
   const [activeCats, setActiveCats] = useState(new Set())
@@ -178,6 +175,7 @@ export default function PlanTab({
   const mapContainerRef = useRef(null)
   const mapRef = useRef(null)
   const markersRef = useRef({})
+  const routeCoordsRef = useRef([])
   const [activeMapStyle, setActiveMapStyle] = useState('positron')
   const [showStyleMenu, setShowStyleMenu] = useState(false)
   const [isSatellite, setIsSatellite] = useState(false)
@@ -282,31 +280,55 @@ export default function PlanTab({
         }
       })
 
-      map.on('load', () => {
+      const setupRouteLayer = () => {
         setMapLoadError(false)
-        // Add source and layer for connected stops route
+        const coords = routeCoordsRef.current || []
         if (!map.getSource('route-line')) {
-          map.addSource('route-line', {
-            type: 'geojson',
-            data: {
+          try {
+            map.addSource('route-line', {
+              type: 'geojson',
+              data: {
+                type: 'Feature',
+                properties: {},
+                geometry: { type: 'LineString', coordinates: coords },
+              },
+            })
+          } catch (e) {
+            // ignore
+          }
+        } else {
+          try {
+            map.getSource('route-line').setData({
               type: 'Feature',
               properties: {},
-              geometry: { type: 'LineString', coordinates: [] },
-            },
-          })
-          map.addLayer({
-            id: 'route-line-layer',
-            type: 'line',
-            source: 'route-line',
-            layout: { 'line-join': 'round', 'line-cap': 'round' },
-            paint: {
-              'line-color': '#91B8C7',
-              'line-width': 4,
-              'line-dasharray': [2, 2],
-            },
-          })
+              geometry: { type: 'LineString', coordinates: coords },
+            })
+          } catch (e) {
+            // ignore
+          }
         }
-      })
+
+        if (!map.getLayer('route-line-layer') && map.getSource('route-line')) {
+          try {
+            map.addLayer({
+              id: 'route-line-layer',
+              type: 'line',
+              source: 'route-line',
+              layout: { 'line-join': 'round', 'line-cap': 'round' },
+              paint: {
+                'line-color': '#91B8C7',
+                'line-width': 4,
+                'line-dasharray': [2, 2],
+              },
+            })
+          } catch (e) {
+            // ignore
+          }
+        }
+      }
+
+      map.on('load', setupRouteLayer)
+      map.on('style.load', setupRouteLayer)
 
       map.on('click', () => {
         setSelPlaceId(null)
@@ -341,17 +363,16 @@ export default function PlanTab({
     }
   }
 
-  const toggleSatellite = () => {
-    if (isSatellite) {
-      setIsSatellite(false)
-      setActiveMapStyle('positron')
-      if (mapRef.current) mapRef.current.setStyle(POSITRON)
-    } else {
-      setIsSatellite(true)
-      setActiveMapStyle('satellite')
-      if (mapRef.current) mapRef.current.setStyle(SAT_STYLE)
-    }
-  }
+  const toggleSatellite = useCallback(() => {
+    setIsSatellite((prev) => {
+      const nextMode = !prev
+      setActiveMapStyle(nextMode ? 'satellite' : 'positron')
+      if (mapRef.current) {
+        mapRef.current.setStyle(nextMode ? SAT_STYLE : POSITRON)
+      }
+      return nextMode
+    })
+  }, [])
 
   // Auto-fit bounds or pan to destination places when destination/places change
   useEffect(() => {
@@ -477,47 +498,41 @@ export default function PlanTab({
   // Update Route Polyline on Map for Selected Day
   useEffect(() => {
     const map = mapRef.current
-    if (!map) return
-
     const curDay = days[selDayIndex]
-    if (!curDay || !isRouteActive) {
-      if (map.getSource('route-line')) {
+
+    let coordinates = []
+    if (curDay && isRouteActive) {
+      const dayVisits = getDayVisits(curDay.id)
+      coordinates = dayVisits
+        .map((v) => {
+          const pl = places.find((p) => p.id === v.placeId)
+          return pl && typeof pl.longitude === 'number' && typeof pl.latitude === 'number'
+            ? [pl.longitude, pl.latitude]
+            : null
+        })
+        .filter(Boolean)
+    }
+
+    routeCoordsRef.current = coordinates
+
+    if (map && map.getSource('route-line')) {
+      try {
         map.getSource('route-line').setData({
           type: 'Feature',
           properties: {},
-          geometry: { type: 'LineString', coordinates: [] },
+          geometry: {
+            type: 'LineString',
+            coordinates,
+          },
         })
+      } catch (err) {
+        // ignore
       }
-      return
-    }
-
-    const dayVisits = getDayVisits(curDay.id)
-    const coordinates = dayVisits
-      .map((v) => {
-        const pl = places.find((p) => p.id === v.placeId)
-        return pl && typeof pl.longitude === 'number' && typeof pl.latitude === 'number'
-          ? [pl.longitude, pl.latitude]
-          : null
-      })
-      .filter(Boolean)
-
-    if (map.getSource('route-line')) {
-      map.getSource('route-line').setData({
-        type: 'Feature',
-        properties: {},
-        geometry: {
-          type: 'LineString',
-          coordinates,
-        },
-      })
     }
   }, [selDayIndex, days, visits, places, isRouteActive, getDayVisits])
 
   // Toggle Day accordion
   const handleToggleDay = (dayIndex, keepSel = false) => {
-    // Explicitly enforce user requirement: the left and right tab should have 340px when clicked on day-h
-    setLeftWidth(340)
-    setRightWidth(340)
     setOpenDays((prev) => {
       const next = new Set(prev)
       if (next.has(dayIndex) && !(keepSel && selDayIndex !== dayIndex)) {
@@ -529,7 +544,6 @@ export default function PlanTab({
     })
     if (!keepSel) {
       setSelDayIndex(dayIndex)
-      setShowDayCard(true)
     }
   }
 
@@ -611,17 +625,16 @@ export default function PlanTab({
     }
   }
 
-  // Add place to day (used by button click & drag-and-drop)
+  // Add place to day
   const handleAddToDay = (placeId, dayIdx = selDayIndex) => {
     const targetDay = days[dayIdx]
-    if (!targetDay) return
-
+    if (!targetDay) {
+      alert('Please select a valid day.')
+      return
+    }
     const existing = visits.find((v) => v.dayId === targetDay.id && v.placeId === placeId)
     if (existing) {
-      setOpenDays((prev) => new Set([...prev, dayIdx]))
-      setSelDayIndex(dayIdx)
-      setSelPlaceId(placeId)
-      setShowInfoBar(true)
+      alert('This place is already in your selected day.')
       return
     }
 
@@ -638,9 +651,6 @@ export default function PlanTab({
       })
     }
     setOpenDays((prev) => new Set([...prev, dayIdx]))
-    setSelDayIndex(dayIdx)
-    setSelPlaceId(placeId)
-    setShowInfoBar(true)
   }
 
   // Remove place from day
@@ -797,10 +807,10 @@ export default function PlanTab({
 
     const onPointerMove = (ev) => {
       if (side === 'left') {
-        const nextW = Math.max(300, Math.min(640, startW + (ev.clientX - startX)))
+        const nextW = Math.max(260, Math.min(520, startW + (ev.clientX - startX)))
         setLeftWidth(nextW)
       } else {
-        const nextW = Math.max(260, Math.min(560, startW - (ev.clientX - startX)))
+        const nextW = Math.max(240, Math.min(460, startW - (ev.clientX - startX)))
         setRightWidth(nextW)
       }
     }
@@ -848,24 +858,6 @@ export default function PlanTab({
     return null
   }, [selPlaceId, days, visits])
 
-  // Selected Day object & first stop name for Day Overview card
-  const selectedDay = useMemo(() => {
-    return days[selDayIndex] || days[0] || null
-  }, [days, selDayIndex])
-
-  const selectedDayVisits = useMemo(() => {
-    if (!selectedDay) return []
-    return getDayVisits(selectedDay.id)
-  }, [selectedDay, getDayVisits])
-
-  const firstStopName = useMemo(() => {
-    if (selectedDayVisits.length > 0) {
-      const pl = places.find((p) => p.id === selectedDayVisits[0].placeId)
-      if (pl) return pl.name
-    }
-    return ''
-  }, [selectedDayVisits, places])
-
   return (
     <div
       className="plan-workspace"
@@ -885,7 +877,7 @@ export default function PlanTab({
           <p style={{ margin: '0 0 6px', fontSize: 13.5, fontWeight: 700, color: '#4A3B32' }}>
             Map Tiles Loading Warning
           </p>
-          <p style={{ margin: 0, fontSize: 11.5, color: '#765F53' }}>
+          <p style={{ margin: 0, fontSize: 11.5, color: '#475569' }}>
             Tiles could not load immediately, but your full itinerary, activities, markers, and plans are active.
           </p>
         </div>
@@ -934,23 +926,7 @@ export default function PlanTab({
           <PlanIcon name="panel-left-close" size={16} />
         </button>
 
-        <div
-          className="panel"
-          style={{
-            width: 340,
-            height: '100%',
-            background: 'var(--sidebar-bg)',
-            backdropFilter: 'blur(24px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-            boxShadow: 'var(--sidebar-shadow)',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-            transition: 'width 0.25s',
-            opacity: 1,
-          }}
-        >
+        <div className="panel">
           <div className="p-head">
             <button
               type="button"
@@ -965,17 +941,15 @@ export default function PlanTab({
               type="button"
               className="sq"
               id="expandAll"
-              aria-label="Collapse all days"
               title="Expand / collapse all days"
               onClick={handleToggleExpandAll}
             >
-              <PlanIcon name={openDays.size === days.length ? 'chevrons-down-up' : 'chevrons-up-down'} size={14} />
+              <PlanIcon name="chevrons-up-down" size={14} />
             </button>
             <button
               type="button"
               className="sq"
               title="Undo"
-              aria-label="Undo"
               onClick={() => alert('Undo action is recorded.')}
             >
               <PlanIcon name="undo-2" size={14} />
@@ -984,22 +958,9 @@ export default function PlanTab({
               type="button"
               className="sq"
               title="Reorder days"
-              aria-label="Reorder days"
               onClick={() => alert('Day reorder mode ready.')}
             >
               <PlanIcon name="arrow-up-down" size={14} />
-            </button>
-            <button
-              type="button"
-              className="sq"
-              aria-label="Show all booking routes"
-              title="Show all booking routes"
-              onClick={() => {
-                setIsRouteActive((prev) => !prev)
-                if (selDayIndex !== null) handleFitDay(selDayIndex)
-              }}
-            >
-              <PlanIcon name="route" size={14} />
             </button>
           </div>
 
@@ -1009,28 +970,31 @@ export default function PlanTab({
               const isSelected = selDayIndex === idx
               const dayCost = getDayCost(day)
               const dayVisits = getDayVisits(day.id)
-              const hotelName = day.hotelName || (idx === 0 ? 'Hotel Klettur' : idx === 1 ? 'Hotel Hvolsvollur' : idx === 2 ? 'Hotel Skogafoss' : idx === 3 ? 'Basar, Thorsmork' : idx === 4 ? 'Hotel Klaustur' : idx === 5 ? 'Hotel Skaftafell' : 'Hotel Hofn')
 
               return (
                 <div
                   key={day.id}
-                  className={`day ${isOpen ? 'open' : ''} ${isSelected ? 'sel' : ''} ${dragOverDayIndex === idx ? 'drag-over' : ''}`}
+                  className={`day ${isOpen ? 'open' : ''} ${isSelected ? 'sel' : ''} ${dragOverDayIndex === idx ? 'is-drag-over' : ''}`}
                   data-day={idx}
                   onDragOver={(e) => {
                     e.preventDefault()
                     e.dataTransfer.dropEffect = 'copy'
-                    if (dragOverDayIndex !== idx) setDragOverDayIndex(idx)
+                    if (dragOverDayIndex !== idx) {
+                      setDragOverDayIndex(idx)
+                    }
                   }}
                   onDragLeave={(e) => {
-                    if (!e.currentTarget.contains(e.relatedTarget)) {
-                      setDragOverDayIndex(null)
-                    }
+                    if (e.currentTarget.contains(e.relatedTarget)) return
+                    setDragOverDayIndex(null)
                   }}
                   onDrop={(e) => {
                     e.preventDefault()
                     setDragOverDayIndex(null)
-                    const pId = e.dataTransfer.getData('text/plain') || draggedPlaceId
-                    if (pId) handleAddToDay(pId, idx)
+                    const placeId = e.dataTransfer.getData('text/plain')
+                    if (placeId) {
+                      handleAddToDay(placeId, idx)
+                      setOpenDays((prev) => new Set([...prev, idx]))
+                    }
                   }}
                 >
                   <div className="day-h" onClick={() => handleToggleDay(idx)}>
@@ -1038,8 +1002,8 @@ export default function PlanTab({
                       <div className="n">{idx + 1}</div>
                       <hr />
                       <div className="t">
-                        <PlanIcon name={day.weatherIcon || 'cloud-drizzle'} size={13} />
-                        <span>Ø{day.weatherTemp ? day.weatherTemp.replace('C', '') : '11°'}</span>
+                        <PlanIcon name={day.weatherIcon || 'sun'} size={13} />
+                        <span>Ø{day.weatherTemp ? day.weatherTemp.replace('C', '') : '20°'}</span>
                       </div>
                     </div>
 
@@ -1049,40 +1013,12 @@ export default function PlanTab({
                         <span className="vsep" />
                         <span className="d-date">{day.date}</span>
                       </div>
-                      <div className="d-sep" />
-                      <div className="d-pills-row">
-                        <button
-                          type="button"
-                          className="day-pill hotel-pill"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setSelDayIndex(idx)
-                            setShowDayCard(true)
-                          }}
-                        >
-                          <PlanIcon name="hotel" size={11} style={{ color: '#22c55e' }} />
-                          <span>{hotelName}</span>
-                        </button>
-                        <button
-                          type="button"
-                          className="day-pill car-pill"
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setSelDayIndex(idx)
-                            setShowDayCard(true)
-                          }}
-                        >
-                          <PlanIcon name="car" size={11} style={{ color: '#64748b' }} />
-                          <span>Dacia Duster 4x4 rental</span>
-                        </button>
-                      </div>
                       {dayCost > 0 && <div className="d-cost">{formatMoney(dayCost)}</div>}
                     </div>
 
-                    <div className="dp-day-actions" onClick={(e) => e.stopPropagation()}>
+                    <div className="d-actions" onClick={(e) => e.stopPropagation()}>
                       <button
                         type="button"
-                        aria-label="Public transit"
                         title="Public transit"
                         onClick={() => handleAddDayNote(idx, 'transport')}
                       >
@@ -1090,7 +1026,6 @@ export default function PlanTab({
                       </button>
                       <button
                         type="button"
-                        aria-label="Add transport"
                         title="Add transport details"
                         onClick={() => handleAddDayNote(idx, 'transport')}
                       >
@@ -1098,7 +1033,6 @@ export default function PlanTab({
                       </button>
                       <button
                         type="button"
-                        aria-label="Add Note"
                         title="Add day note"
                         onClick={() => handleAddDayNote(idx, 'note')}
                       >
@@ -1106,7 +1040,6 @@ export default function PlanTab({
                       </button>
                       <button
                         type="button"
-                        aria-label={isOpen ? 'Collapse' : 'Expand'}
                         title={isOpen ? 'Collapse' : 'Expand'}
                         onClick={() => handleToggleDay(idx, true)}
                       >
@@ -1119,148 +1052,28 @@ export default function PlanTab({
                   </div>
 
                   <div className="day-body">
-                    {dragOverDayIndex === idx && (
-                      <div className="day-drop-hint">
-                        <PlanIcon name="plus" size={14} />
-                        <span>Drop place to add to {day.title || `Day ${idx + 1}`}</span>
-                      </div>
-                    )}
-
-                    {/* Pre-configured / sample Day Transports */}
-                    {idx === 0 && (
-                      <>
-                        <div className="dp-transport-row" draggable={true}>
-                          <div className="dp-grip">
-                            <PlanIcon name="grip-vertical" size={13} />
-                          </div>
-                          <div className="dp-transport-icon">
-                            <PlanIcon name="plane" size={14} style={{ color: '#3b82f6' }} />
-                          </div>
-                          <div className="dp-transport-info">
-                            <div className="dp-trans-title-row">
-                              <span className="dp-trans-title">Frankfurt to Keflavik</span>
-                              <span className="dp-trans-time">
-                                <PlanIcon name="clock" size={9} />
-                                08:00 – 09:30
-                              </span>
-                            </div>
-                            <div className="dp-trans-sub">Icelandair · FI 529 · FRA → KEF</div>
-                          </div>
-                          <button
-                            type="button"
-                            className="dp-trans-route-btn"
-                            aria-label="Show booking routes"
-                            title="Show route"
-                            onClick={() => handleFitDay(idx)}
-                          >
-                            <PlanIcon name="route" size={13} />
-                          </button>
-                        </div>
-
-                        <div className="dp-transport-row" draggable={true}>
-                          <div className="dp-grip">
-                            <PlanIcon name="grip-vertical" size={13} />
-                          </div>
-                          <div className="dp-transport-icon">
-                            <PlanIcon name="car" size={14} style={{ color: '#3b82f6' }} />
-                          </div>
-                          <div className="dp-transport-info">
-                            <div className="dp-trans-title-row">
-                              <span className="dp-trans-badge">Pickup</span>
-                              <span className="dp-trans-title">Dacia Duster 4x4 rental</span>
-                              <span className="dp-trans-time">
-                                <PlanIcon name="clock" size={9} />
-                                11:00
-                              </span>
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            className="dp-trans-route-btn"
-                            aria-label="Show booking routes"
-                            title="Show route"
-                            onClick={() => handleFitDay(idx)}
-                          >
-                            <PlanIcon name="route" size={13} />
-                          </button>
-                        </div>
-                      </>
-                    )}
-
-                    {idx === 4 && (
-                      <div className="dp-transport-row" draggable={true}>
-                        <div className="dp-grip">
-                          <PlanIcon name="grip-vertical" size={13} />
-                        </div>
-                        <div className="dp-transport-icon">
-                          <PlanIcon name="bus" size={14} style={{ color: '#3b82f6' }} />
-                        </div>
-                        <div className="dp-transport-info">
-                          <div className="dp-trans-title-row">
-                            <span className="dp-trans-title">Bus Basar to Skogar</span>
-                            <span className="dp-trans-time">
-                              <PlanIcon name="clock" size={9} />
-                              09:00 – 11:30
-                            </span>
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          className="dp-trans-route-btn"
-                          aria-label="Show booking routes"
-                          title="Show route"
-                          onClick={() => handleFitDay(idx)}
-                        >
-                          <PlanIcon name="route" size={13} />
-                        </button>
-                      </div>
-                    )}
-
-                    {/* Pre-configured / user Notes */}
-                    {(day.dayNotesList || (idx === 0 ? ['Pick up the car, a hot dog, the church tower.'] : idx === 1 ? ['Thingvellir, Fridheimar, Geysir, Gullfoss.'] : idx === 2 ? ['Seljalandsfoss, Skogafoss, early to bed.'] : idx === 3 ? ['23 km, start at 7:30 sharp.', 'Check the weather and trail conditions on the Safe Travel website at 6 am. Pack 3 L of water, there is a river for refill at the start only.'] : idx === 4 ? ['Bus to Skogar, Reynisfjara, Dyrholaey, Vik, Fjadrargljufur.', 'Reynisfjara has sneaker waves. Tom stays above the high water line.'] : idx === 5 ? ['Glacier walk at Svinafell.'] : [])).map((noteTxt, nIdx) => (
-                      <div key={nIdx} className="dp-note-row" draggable={true}>
-                        <div className="dp-grip">
-                          <PlanIcon name="grip-vertical" size={13} />
-                        </div>
-                        <div className="dp-note-icon">
-                          <PlanIcon name={nIdx % 2 === 1 ? 'info' : 'file-text'} size={13} style={{ color: 'var(--text-muted)' }} />
-                        </div>
-                        <div className="dp-note-text">
-                          <span>{noteTxt}</span>
-                        </div>
-                        <div className="reorder-buttons" onClick={(e) => e.stopPropagation()}>
-                          <button type="button" aria-label="Move up"><PlanIcon name="chevron-up" size={12} /></button>
-                          <button type="button" aria-label="Move down"><PlanIcon name="chevron-down" size={12} /></button>
-                        </div>
-                      </div>
-                    ))}
-
-                    {/* Places & Stops */}
                     {dayVisits.length === 0 ? (
-                      <div className="empty">No places yet &mdash; drag from right panel or click +</div>
+                      <div className="empty">No places yet &mdash; add one from the right panel.</div>
                     ) : (
                       dayVisits.map((visit, k) => {
                         const p = places.find((pl) => pl.id === visit.placeId)
                         if (!p) return null
                         const cat = CATS[p.category] || CATS.sight
                         const isStopSel = selPlaceId === p.id
-                        const hasReservation = (idx === 1 && k === 1) || (idx === 5 && k === 1)
 
                         return (
                           <div
                             key={visit.id}
-                            className={`dp-row stop ${isStopSel ? 'sel' : ''}`}
+                            className={`stop ${isStopSel ? 'sel' : ''}`}
                             onClick={() => handleSelectPlace(p.id)}
-                            title={p.name}
-                            draggable={true}
                           >
-                            <div className="dp-grip">
+                            <div className="grip">
                               <PlanIcon name="grip-vertical" size={13} />
                             </div>
 
                             <div
-                              className="dp-place-avatar"
-                              style={{ backgroundColor: cat.color }}
+                              className="avatar"
+                              style={{ background: cat.color }}
                             >
                               <img
                                 alt={p.name}
@@ -1274,32 +1087,23 @@ export default function PlanTab({
                               />
                             </div>
 
-                            <div className="dp-place-main">
-                              <div className="dp-place-name-row">
-                                <span className="dp-place-name" title={p.name}>{p.name}</span>
-                                <span className="dp-place-time">
+                            <div className="s-main">
+                              <div className="s-top">
+                                <PlanIcon
+                                  name={cat.icon}
+                                  size={10}
+                                  style={{ color: cat.color }}
+                                />
+                                <span className="s-name">{p.name}</span>
+                                <span className="s-time">
                                   <PlanIcon name="clock" size={9} />
-                                  {visit.scheduledTime || (k === 0 ? '10:00' : k === 1 ? '12:30' : k === 2 ? '15:00' : '16:30')}
+                                  {visit.scheduledTime || '10:00'}
                                 </span>
                               </div>
-                              <div className="dp-place-address" title={p.note || p.description || p.address || p.name}>
-                                {p.note || p.description || p.address || p.name}
-                              </div>
-                              {hasReservation && (
-                                <div className="dp-reservation-tag">
-                                  <div className="dp-res-pill">
-                                    <PlanIcon name="utensils" size={8} />
-                                    <span>Reservation confirmed</span>
-                                  </div>
-                                  <span className="dp-res-time-pill">12:30 – 14:00</span>
-                                  <button type="button" className="dp-res-edit" aria-label="Edit">
-                                    <PlanIcon name="pencil" size={11} />
-                                  </button>
-                                </div>
-                              )}
+                              <div className="s-sub">{p.note || p.name}</div>
                             </div>
 
-                            <div className="reorder-buttons" onClick={(e) => e.stopPropagation()}>
+                            <div className="reorder" onClick={(e) => e.stopPropagation()}>
                               <button
                                 type="button"
                                 disabled={k === 0}
@@ -1320,6 +1124,32 @@ export default function PlanTab({
                           </div>
                         )
                       })
+                    )}
+
+                    {/* Day note card */}
+                    {day.dayNote && (
+                      <div className="note">
+                        <div className="ic">
+                          <PlanIcon name="info" size={13} />
+                        </div>
+                        <div>
+                          <b>Day Focus</b>
+                          <p>{day.dayNote}</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Transport note card */}
+                    {day.transportNote && (
+                      <div className="note" style={{ borderColor: 'rgba(5,150,105,.38)', background: 'rgba(5,150,105,.11)' }}>
+                        <div className="ic" style={{ background: 'rgba(5,150,105,.22)', color: '#059669' }}>
+                          <PlanIcon name="tram-front" size={13} />
+                        </div>
+                        <div>
+                          <b>Transport</b>
+                          <p>{day.transportNote}</p>
+                        </div>
+                      </div>
                     )}
 
                     {/* Route control bar for selected day */}
@@ -1343,13 +1173,6 @@ export default function PlanTab({
                         </button>
                         <button
                           type="button"
-                          title="Directions Compass"
-                          onClick={() => alert('Compass heading re-centered.')}
-                        >
-                          <PlanIcon name="compass" size={13} />
-                        </button>
-                        <button
-                          type="button"
                           title="Optimize route sequence"
                           onClick={() => alert('Route sequence optimized for geographic efficiency.')}
                         >
@@ -1364,24 +1187,12 @@ export default function PlanTab({
                         </button>
                         <button
                           type="button"
-                          title="Transit route"
+                          title="Walking route"
                         >
-                          <PlanIcon name="tram-front" size={13} />
+                          <PlanIcon name="footprints" size={13} />
                         </button>
                       </div>
                     )}
-
-                    {/* Bottom dashed Add Place button */}
-                    <div className="add-place-dashed-wrap">
-                      <button
-                        type="button"
-                        className="add-place-dashed-btn"
-                        onClick={() => setIsNewPlaceModalOpen(true)}
-                      >
-                        <PlanIcon name="plus" size={14} />
-                        Add Place
-                      </button>
-                    </div>
                   </div>
                 </div>
               )
@@ -1433,23 +1244,7 @@ export default function PlanTab({
           <PlanIcon name="panel-right-close" size={16} />
         </button>
 
-        <div
-          className="panel"
-          style={{
-            width: 340,
-            height: '100%',
-            background: 'var(--sidebar-bg)',
-            backdropFilter: 'blur(24px) saturate(180%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-            boxShadow: 'var(--sidebar-shadow)',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            display: 'flex',
-            flexDirection: 'column',
-            transition: 'width 0.25s',
-            opacity: 1,
-          }}
-        >
+        <div className="panel">
           <div className="r-top">
             <div className="r-btns">
               <button
@@ -1604,20 +1399,19 @@ export default function PlanTab({
                 return (
                   <div
                     key={p.id}
-                    className={`place ${isSelected ? 'sel' : ''} ${draggedPlaceId === p.id ? 'dragging' : ''}`}
+                    className={`place ${isSelected ? 'sel' : ''} ${draggedPlaceId === p.id ? 'is-dragging' : ''}`}
                     draggable={true}
                     onDragStart={(e) => {
-                      setDraggedPlaceId(p.id)
                       e.dataTransfer.setData('text/plain', p.id)
-                      e.dataTransfer.setData('application/json', JSON.stringify({ placeId: p.id, name: p.name }))
+                      e.dataTransfer.setData('application/json', JSON.stringify({ placeId: p.id }))
                       e.dataTransfer.effectAllowed = 'copy'
+                      setDraggedPlaceId(p.id)
                     }}
                     onDragEnd={() => {
                       setDraggedPlaceId(null)
-                      setDragOverDayIndex(null)
                     }}
                     onClick={() => handleSelectPlace(p.id)}
-                    title="Click for details, or drag and drop to any day on the left"
+                    title="Drag and drop to any day on the left to add"
                   >
                     <div
                       className="avatar"
@@ -1637,16 +1431,14 @@ export default function PlanTab({
 
                     <div className="s-main">
                       <div className="s-top">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0, overflow: 'hidden' }}>
-                          <PlanIcon
-                            name={c.icon}
-                            size={12}
-                            style={{ color: c.color }}
-                          />
-                          <span className="s-name" title={p.name}>{p.name}</span>
-                        </div>
+                        <PlanIcon
+                          name={c.icon}
+                          size={11}
+                          style={{ color: c.color }}
+                        />
+                        <span className="s-name">{p.name}</span>
                       </div>
-                      <div className="s-sub" title={p.note || p.name}>{p.note || p.name}</div>
+                      <div className="s-sub">{p.note || p.name}</div>
                     </div>
 
                     {!isPlaced && (
@@ -1659,7 +1451,7 @@ export default function PlanTab({
                           handleAddToDay(p.id)
                         }}
                       >
-                        <PlanIcon name="plus" size={13} />
+                        <PlanIcon name="plus" size={12} />
                       </button>
                     )}
                   </div>
@@ -1692,280 +1484,12 @@ export default function PlanTab({
         <PlanIcon name="panel-right-open" size={16} />
       </button>
 
-      {/* Center Day Overview & Forecast Card (Modal) */}
-      {showDayCard && selectedDay && (
-        <div className="day-center-card">
-          <div className="day-center-card-head">
-            <div className="dcc-title-row">
-              <div className="dcc-title-left">
-                <PlanIcon name="calendar" size={18} style={{ color: '#0f172a' }} />
-                <h3>{selectedDay.title || `Day ${selDayIndex + 1}`}</h3>
-                <button
-                  type="button"
-                  className="dcc-edit-btn"
-                  title="Edit day title"
-                  onClick={() => {
-                    const newT = window.prompt('Edit Day title:', selectedDay.title || '')
-                    if (newT !== null && newT.trim() && updateTrip) {
-                      const updated = days.map((d, i) => (i === selDayIndex ? { ...d, title: newT.trim() } : d))
-                      updateTrip({ days: updated })
-                    }
-                  }}
-                >
-                  <PlanIcon name="pencil" size={13} />
-                </button>
-              </div>
-              <div className="dcc-head-actions">
-                <button
-                  type="button"
-                  className="dcc-sq"
-                  title={dayCardCollapsed ? 'Expand' : 'Collapse'}
-                  onClick={() => setDayCardCollapsed(!dayCardCollapsed)}
-                >
-                  <PlanIcon name={dayCardCollapsed ? 'chevron-down' : 'chevrons-up-down'} size={14} />
-                </button>
-                <button
-                  type="button"
-                  className="dcc-sq"
-                  title="Close"
-                  onClick={() => setShowDayCard(false)}
-                >
-                  <PlanIcon name="x" size={14} />
-                </button>
-              </div>
-            </div>
-            <div className="dcc-date">{selectedDay.date || 'Saturday, July 10'}</div>
-          </div>
-
-          {!dayCardCollapsed && (
-            <div className="day-center-card-body">
-              {/* Weather Forecast Section */}
-              <div className="dcc-section">
-                <div className="dcc-sec-title">
-                  FORECAST FOR {firstStopName ? firstStopName.toUpperCase() : (selectedDay.title || `DAY ${selDayIndex + 1}`).toUpperCase()}
-                </div>
-                <div className="dcc-weather-row">
-                  <PlanIcon name={selectedDay.weatherIcon || 'cloud-drizzle'} size={24} style={{ color: '#0f172a' }} />
-                  <div className="dcc-temp-main">
-                    <strong>Ø {selectedDay.weatherTemp ? selectedDay.weatherTemp.replace('C', '') : '10°C'}</strong>
-                    <span>8° / 13° Heavy Drizzle</span>
-                  </div>
-                </div>
-
-                <div className="dcc-weather-stats">
-                  <span>
-                    <PlanIcon name="cloud-rain" size={11} /> 7.4 mm
-                  </span>
-                  <span>
-                    <PlanIcon name="wind" size={11} /> 21 km/h
-                  </span>
-                  <span>
-                    <PlanIcon name="sunrise" size={11} /> 03:28
-                  </span>
-                  <span>
-                    <PlanIcon name="sunset" size={11} /> 23:36
-                  </span>
-                </div>
-
-                <div className="dcc-hourly-bar">
-                  {[
-                    { h: '00', t: '8°', ic: 'cloud-drizzle' },
-                    { h: '02', t: '9°', ic: 'cloud-drizzle' },
-                    { h: '04', t: '8°', ic: 'cloud-drizzle' },
-                    { h: '06', t: '8°', ic: 'cloud-drizzle' },
-                    { h: '08', t: '9°', ic: 'cloud-drizzle' },
-                    { h: '10', t: '11°', ic: 'cloud-drizzle' },
-                    { h: '12', t: '11°', ic: 'cloud-drizzle' },
-                    { h: '14', t: '11°', ic: 'cloud-drizzle' },
-                    { h: '16', t: '13°', ic: 'cloud' },
-                    { h: '18', t: '11°', ic: 'cloud' },
-                    { h: '20', t: '11°', ic: 'cloud' },
-                    { h: '22', t: '10°', ic: 'cloud' },
-                  ].map((item, hIdx) => (
-                    <div key={hIdx} className="dcc-hour-cell">
-                      <span className="dcc-h-time">{item.h}</span>
-                      <PlanIcon name={item.ic} size={13} />
-                      <span className="dcc-h-temp">{item.t}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="dcc-weather-footnote">
-                  Historical averages — real forecast available within 16 days of this date.
-                </div>
-              </div>
-
-              {/* Reservations Section */}
-              <div className="dcc-section">
-                <div className="dcc-sec-title">RESERVATIONS</div>
-                <div className="dcc-reservation-list">
-                  <div className="dcc-res-card flight">
-                    <div className="dcc-res-left">
-                      <PlanIcon name="plane" size={14} style={{ color: '#3b82f6' }} />
-                      <span className="dcc-res-name">Frankfurt to Keflavik</span>
-                    </div>
-                    <span className="dcc-res-time">08:00 – 09:30</span>
-                  </div>
-                  <div className="dcc-res-card rental">
-                    <div className="dcc-res-left">
-                      <PlanIcon name="car" size={14} style={{ color: '#3b82f6' }} />
-                      <span className="dcc-res-name">Dacia Duster 4x4 rental</span>
-                    </div>
-                    <span className="dcc-res-time">11:00 – 12:30</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Accommodation Section */}
-              <div className="dcc-section">
-                <div className="dcc-sec-title">ACCOMMODATION</div>
-                <div className="dcc-hotel-row">
-                  <span className="dcc-checkin-badge">CHECK-IN</span>
-                  <span className="dcc-hotel-name">
-                    {selectedDay.hotelName ||
-                      (selDayIndex === 0
-                        ? 'Hotel Klettur'
-                        : selDayIndex === 1
-                        ? 'Hotel Hvolsvollur'
-                        : selDayIndex === 2
-                        ? 'Hotel Skogafoss'
-                        : selDayIndex === 3
-                        ? 'Basar, Thorsmork'
-                        : selDayIndex === 4
-                        ? 'Hotel Klaustur'
-                        : selDayIndex === 5
-                        ? 'Hotel Skaftafell'
-                        : 'Hotel Hofn')}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Map Style Selector & Satellite Toggle at BOTTOM RIGHT */}
-      <div
-        className="sat-wrap"
-        style={{
-          position: 'absolute',
-          bottom: 24,
-          right: rightOpen ? `calc(${rightWidth}px + 20px)` : 24,
-          left: 'auto',
-          zIndex: 70,
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 6,
-        }}
-      >
-        {/* Style selector dropdown button */}
-        <div style={{ position: 'relative' }}>
-          <button
-            type="button"
-            className="sat-btn"
-            style={{ width: 'auto', padding: '0 12px', height: 36, fontSize: 12.5, fontWeight: 600, gap: 5, borderRadius: 999 }}
-            title="Choose Map Style"
-            aria-label="Choose Map Style"
-            onClick={() => setShowStyleMenu((prev) => !prev)}
-          >
-            <PlanIcon name="map" size={15} />
-            <span style={{ textTransform: 'capitalize' }}>
-              {isSatellite ? 'Satellite' : activeMapStyle}
-            </span>
-            <PlanIcon name="chevrons-up-down" size={12} />
-          </button>
-
-          {showStyleMenu && (
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '100%',
-                right: 0,
-                marginBottom: 8,
-                background: 'rgba(255, 255, 255, 0.96)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
-                borderRadius: 12,
-                padding: '6px',
-                boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-                minWidth: 140,
-                zIndex: 100,
-                border: '1px solid rgba(0,0,0,0.08)',
-              }}
-            >
-              {[
-                { key: 'positron', label: 'Positron' },
-                { key: 'bright', label: 'Bright' },
-                { key: 'liberty', label: 'Liberty' },
-                { key: 'dark', label: 'Dark' },
-                { key: 'fiord', label: 'Fiord' },
-                { key: 'satellite', label: 'Satellite (3D)' },
-              ].map((s) => (
-                <button
-                  key={s.key}
-                  type="button"
-                  onClick={() => handleSelectStyle(s.key)}
-                  style={{
-                    padding: '7px 12px',
-                    borderRadius: 8,
-                    border: 0,
-                    background:
-                      (s.key === 'satellite' && isSatellite) ||
-                      (s.key === activeMapStyle && !isSatellite)
-                        ? '#0f172a'
-                        : 'transparent',
-                    color:
-                      (s.key === 'satellite' && isSatellite) ||
-                      (s.key === activeMapStyle && !isSatellite)
-                        ? '#ffffff'
-                        : '#334155',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <span>{s.label}</span>
-                  {((s.key === 'satellite' && isSatellite) ||
-                    (s.key === activeMapStyle && !isSatellite)) && (
-                    <span style={{ fontSize: 10 }}>✓</span>
-                  )}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Quick Satellite Toggle Button */}
-        <button
-          type="button"
-          className={`sat-btn ${isSatellite ? 'active' : ''}`}
-          id="satBtn"
-          aria-label={isSatellite ? 'Switch to standard map' : 'Switch to satellite view'}
-          aria-pressed={isSatellite}
-          title={isSatellite ? 'Switch to Standard Map' : 'Switch to Satellite View'}
-          onClick={toggleSatellite}
-          style={{
-            width: 'auto',
-            padding: '0 14px',
-            height: 36,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 6,
-            borderRadius: 999,
-            fontWeight: 600,
-            fontSize: 12.5,
-          }}
-        >
-          <PlanIcon name="satellite" size={16} />
-          <span>Satellite</span>
-        </button>
-      </div>
+      {/* Floating Satellite Toggle Button (bottom right from plan-tab.html) */}
+      <SatelliteToggle
+        map={mapRef.current}
+        isSatellite={isSatellite}
+        onToggle={toggleSatellite}
+      />
 
       {/* Floating Info Drawer Bar (Place Details) */}
       {selectedPlace && (
@@ -2125,6 +1649,7 @@ export default function PlanTab({
             ) : (
               <button
                 type="button"
+                className="i-foot-add"
                 onClick={() => handleAddToDay(selectedPlace.id)}
               >
                 <PlanIcon name="calendar-plus" size={13} />
@@ -2240,25 +1765,25 @@ export default function PlanTab({
             <h3 style={{ marginBottom: 14 }}>Add New Place</h3>
             <form onSubmit={handleSaveNewPlace} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div>
-                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#765F53', textTransform: 'uppercase', marginBottom: 4 }}>
+                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
                   Place Name *
                 </label>
                 <input
                   required
                   type="text"
                   placeholder="e.g. Senso-ji Temple"
-                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D8BDA6', fontSize: 13 }}
+                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D6C7B5', fontSize: 13 }}
                   value={newPlaceForm.name}
                   onChange={(e) => setNewPlaceForm({ ...newPlaceForm, name: e.target.value })}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#765F53', textTransform: 'uppercase', marginBottom: 4 }}>
+                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
                   Category
                 </label>
                 <select
-                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D8BDA6', fontSize: 13 }}
+                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D6C7B5', fontSize: 13 }}
                   value={newPlaceForm.category}
                   onChange={(e) => setNewPlaceForm({ ...newPlaceForm, category: e.target.value })}
                 >
@@ -2272,27 +1797,27 @@ export default function PlanTab({
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#765F53', textTransform: 'uppercase', marginBottom: 4 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
                     Latitude
                   </label>
                   <input
                     type="number"
                     step="any"
                     placeholder="e.g. 35.7148"
-                    style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D8BDA6', fontSize: 13 }}
+                    style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D6C7B5', fontSize: 13 }}
                     value={newPlaceForm.latitude}
                     onChange={(e) => setNewPlaceForm({ ...newPlaceForm, latitude: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#765F53', textTransform: 'uppercase', marginBottom: 4 }}>
+                  <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
                     Longitude
                   </label>
                   <input
                     type="number"
                     step="any"
                     placeholder="e.g. 139.7967"
-                    style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D8BDA6', fontSize: 13 }}
+                    style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D6C7B5', fontSize: 13 }}
                     value={newPlaceForm.longitude}
                     onChange={(e) => setNewPlaceForm({ ...newPlaceForm, longitude: e.target.value })}
                   />
@@ -2300,39 +1825,39 @@ export default function PlanTab({
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#765F53', textTransform: 'uppercase', marginBottom: 4 }}>
+                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
                   Estimated Cost ({trip.currency || 'JPY'})
                 </label>
                 <input
                   type="number"
                   placeholder="0"
-                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D8BDA6', fontSize: 13 }}
+                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D6C7B5', fontSize: 13 }}
                   value={newPlaceForm.cost}
                   onChange={(e) => setNewPlaceForm({ ...newPlaceForm, cost: e.target.value })}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#765F53', textTransform: 'uppercase', marginBottom: 4 }}>
+                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
                   Image URL
                 </label>
                 <input
                   type="url"
                   placeholder="https://images.unsplash.com/..."
-                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D8BDA6', fontSize: 13 }}
+                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D6C7B5', fontSize: 13 }}
                   value={newPlaceForm.imageUrl}
                   onChange={(e) => setNewPlaceForm({ ...newPlaceForm, imageUrl: e.target.value })}
                 />
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#765F53', textTransform: 'uppercase', marginBottom: 4 }}>
+                <label style={{ display: 'block', fontSize: 11, fontWeight: 700, color: '#475569', textTransform: 'uppercase', marginBottom: 4 }}>
                   Description &amp; Note
                 </label>
                 <textarea
                   rows={2}
                   placeholder="Brief description of the place..."
-                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D8BDA6', fontSize: 13, resize: 'none' }}
+                  style={{ width: '100%', padding: '7px 10px', borderRadius: 8, border: '1px solid #D6C7B5', fontSize: 13, resize: 'none' }}
                   value={newPlaceForm.note}
                   onChange={(e) => setNewPlaceForm({ ...newPlaceForm, note: e.target.value })}
                 />
@@ -2347,7 +1872,7 @@ export default function PlanTab({
                 </button>
                 <button
                   type="submit"
-                  style={{ background: '#91B8C7', borderColor: '#91B8C7', color: '#fff' }}
+                  style={{ background: '#2563EB', borderColor: '#2563EB', color: '#fff' }}
                 >
                   Save Place
                 </button>

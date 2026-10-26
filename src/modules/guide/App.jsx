@@ -12,7 +12,6 @@ import Earnings from "./pages/Earnings";
 import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
 import Verification from "./pages/Verification";
-import Settings from "./pages/Settings";
 
 /**
  * GuideApp:
@@ -38,7 +37,6 @@ export default function GuideApp() {
           <Route path="earnings" element={<Earnings />} />
           <Route path="profile" element={<Profile />} />
           <Route path="verification" element={<Verification />} />
-          <Route path="settings" element={<Settings />} />
           <Route path="*" element={<Navigate to="/guide" replace />} />
         </Route>
       </Routes>

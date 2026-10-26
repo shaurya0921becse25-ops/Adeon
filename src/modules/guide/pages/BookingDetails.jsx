@@ -7,7 +7,7 @@ import { useApp } from "../data/AppContext";
 export default function BookingDetails() {
   const { id } = useParams();
   const { bookings, updateBookingStatus } = useApp();
-  const booking = bookings.find((b) => b.id === Number(id));
+  const booking = bookings.find((b) => String(b.id) === String(id));
 
   const [msgs, setMsgs] = useState([
     { from: "them", text: "Hi Agam! Looking forward to the trip. Any specific gear recommendations for the trail?" },
@@ -24,7 +24,7 @@ export default function BookingDetails() {
   if (!booking) {
     return (
       <>
-        <Link to="/bookings" className="back-link">← Back to bookings</Link>
+        <Link to="/guide/bookings" className="back-link">← Back to bookings</Link>
         <Card><p className="empty">Booking record not found.</p></Card>
       </>
     );
@@ -38,11 +38,17 @@ export default function BookingDetails() {
 
   return (
     <>
-      <Link to="/bookings" className="back-link">← Back to bookings</Link>
+      <Link to="/guide/bookings" className="back-link">← Back to bookings</Link>
 
       <Card>
         <div className="detail-header">
-          <img src={booking.image || "/himalayan-trek.jpg"} alt={booking.service} className="row-thumb" style={{ width: 100, height: 72, objectFit: "cover", borderRadius: 10 }} />
+          <img
+            src={booking.image || "/himalayan-trek.jpg"}
+            alt={booking.service}
+            className="row-thumb"
+            style={{ width: 100, height: 72, objectFit: "cover", borderRadius: 10 }}
+            onError={(e) => { e.currentTarget.src = "/himalayan-trek.jpg"; }}
+          />
           <div className="row-info">
             <p className="row-title" style={{ fontSize: 18 }}>{booking.service}</p>
             <p className="row-meta">

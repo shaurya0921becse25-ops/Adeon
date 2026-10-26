@@ -164,17 +164,6 @@ input, select, textarea {
   margin-bottom: 18px;
 }
 
-.logo-icon-wrap {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
-  display: grid;
-  place-items: center;
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28);
-}
-
 .logo {
   font-size: 22px;
   font-weight: 800;

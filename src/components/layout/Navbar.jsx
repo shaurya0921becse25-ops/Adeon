@@ -14,7 +14,7 @@ const NAV_ITEMS = [
   { label: 'Explore', path: '/services' },
   { label: 'Community', path: '/community' },
   { label: 'My Trips', path: '/itinerary' },
-  { label: 'Trip Finder', path: '/trip-match' },
+  { label: 'Trip Match', path: '/trip-match' },
 ];
 
 export default function Navbar() {

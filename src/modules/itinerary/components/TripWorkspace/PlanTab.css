@@ -2,10 +2,11 @@
 
 .plan-workspace {
   --lw: 340px;
-  --rw: 340px;
+  --rw: 300px;
   --left-w: 360px;
-  --right-w: 360px;
-  --accent: #0f172a;
+  --right-w: 320px;
+  --accent: #2563EB;
+  --accent-hover: #1d4ed8;
   --accent-text: #fff;
   --text-primary: #0f172a;
   --text-muted: #64748b;
@@ -27,7 +28,7 @@
   width: 100%;
   overflow: hidden;
   font-family: var(--font-system);
-  background: #cbd5e1;
+  background: #ffffff;
   color: var(--text-primary);
   box-sizing: border-box;
 }
@@ -79,19 +80,17 @@
   bottom: 10px;
   z-index: 100;
   isolation: isolate;
-  transition: opacity 0.15s ease, width 0.25s ease;
+  transition: opacity 0.15s ease;
 }
 
 .plan-workspace .side.left {
   left: 10px;
-  width: var(--lw, 340px);
-  transition: width 0.25s ease;
+  width: var(--lw);
 }
 
 .plan-workspace .side.right {
   right: 10px;
-  width: var(--rw, 340px);
-  transition: width 0.25s ease;
+  width: var(--rw);
 }
 
 .plan-workspace .side.collapsed {
@@ -110,8 +109,6 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: width 0.25s ease;
-  opacity: 1;
 }
 
 /* Collapse Tab Handles */
@@ -190,6 +187,7 @@
   top: 0;
   bottom: 0;
   width: 6px;
+  background: #d1d5db;
   z-index: 5;
   cursor: col-resize;
   transition: background 0.12s;
@@ -205,7 +203,7 @@
 
 .plan-workspace .resizer:hover,
 .plan-workspace .resizer.drag {
-  background: rgba(0, 120, 255, 0.35);
+  background: #9ca3af;
 }
 
 /* ---------- LEFT PANEL ---------- */
@@ -226,16 +224,17 @@
   padding: 5px 10px;
   border: 0;
   border-radius: 8px;
-  background: var(--accent);
+  background: #2563EB;
   color: #fff;
   font-size: 11px;
   font-weight: 500;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: all 0.15s ease;
 }
 
 .plan-workspace .export-btn:hover {
-  opacity: 0.9;
+  background: #1d4ed8;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
 }
 
 .plan-workspace .sq {
@@ -272,13 +271,8 @@
   gap: 10px;
   padding: 11px 14px 11px 16px;
   cursor: pointer;
-  background: transparent;
-  transition: background 0.12s;
   user-select: none;
-  outline: none;
-  outline-offset: -2px;
-  border-radius: 0px;
-  touch-action: manipulation;
+  transition: background 0.12s;
 }
 
 .plan-workspace .day-h:hover {
@@ -287,26 +281,6 @@
 
 .plan-workspace .day.sel > .day-h {
   background: var(--bg-selected);
-}
-
-.plan-workspace .day.drag-over {
-  border: 2px dashed var(--accent) !important;
-  background: rgba(15, 23, 42, 0.04) !important;
-}
-
-.plan-workspace .day-drop-hint {
-  margin: 4px 8px 6px;
-  padding: 8px 12px;
-  border: 1.5px dashed var(--accent);
-  border-radius: 8px;
-  background: rgba(15, 23, 42, 0.04);
-  color: var(--accent);
-  font-size: 11.5px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
 }
 
 .plan-workspace .badge {
@@ -328,133 +302,76 @@
 }
 
 .plan-workspace .badge .n {
-  width: 100%;
   height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
   font-weight: 700;
-  line-height: 1;
 }
 
 .plan-workspace .badge hr {
   width: 64%;
+  border: 0;
   height: 1px;
   background: currentColor;
   opacity: 0.25;
-  border: 0;
 }
 
 .plan-workspace .badge .t {
-  padding: 3px 0px 4px;
+  padding: 3px 0 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1px;
   font-size: 9.5px;
   font-weight: 600;
-  line-height: 1;
-  color: inherit;
-  font-family: var(--font-system);
 }
 
 .plan-workspace .d-info {
-  flex: 1 1 0%;
-  min-width: 0px;
+  flex: 1;
+  min-width: 0;
 }
 
 .plan-workspace .d-row {
   display: flex;
   align-items: center;
   gap: 7px;
-  min-width: 0px;
+  min-width: 0;
 }
 
 .plan-workspace .d-title {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex-shrink: 1;
-  min-width: 0px;
+  min-width: 0;
 }
 
 .plan-workspace .vsep {
-  flex-shrink: 0;
   width: 1px;
   height: 11px;
   background: var(--border-primary);
+  flex-shrink: 0;
 }
 
 .plan-workspace .d-date {
-  flex-shrink: 0;
   font-size: 11px;
-  font-weight: 400;
   color: var(--text-faint);
   white-space: nowrap;
-}
-
-.plan-workspace .d-sep {
-  height: 1px;
-  background: var(--border-faint);
-  margin: 5px 0px;
-}
-
-.plan-workspace .d-pills-row {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-wrap: nowrap;
-  min-width: 0px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.plan-workspace .d-pills-row::-webkit-scrollbar {
-  display: none;
-}
-
-.plan-workspace .day-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 1;
-  min-width: 0px;
-  cursor: pointer;
-  border-radius: 7px;
-  padding: 2px 7px 2px 6px;
-  border: none;
-  font: inherit;
-  text-align: left;
-  background: #f1f5f9;
-  font-size: 10.5px;
-  font-weight: 400;
-  color: var(--text-muted);
-  white-space: nowrap;
-  transition: background 0.12s;
-}
-.plan-workspace .day-pill:hover {
-  background: #e2e8f0;
-}
-.plan-workspace .day-pill span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .plan-workspace .d-cost {
   margin-top: 2px;
   font-size: 11px;
   color: var(--green);
-  font-weight: 600;
+  font-weight: 500;
 }
 
-.plan-workspace .dp-day-actions,
 .plan-workspace .d-actions {
   align-self: flex-start;
-  flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   border: 1px solid var(--border-faint);
@@ -463,30 +380,26 @@
   background: #fff;
 }
 
-.plan-workspace .dp-day-actions button,
 .plan-workspace .d-actions button {
-  padding: 7px;
-  cursor: pointer;
   display: grid;
   place-items: center;
+  padding: 7px;
   border: 0;
   background: none;
   color: var(--text-muted);
-  transition: background 0.1s, color 0.1s;
+  cursor: pointer;
 }
-.plan-workspace .dp-day-actions button:hover,
+
 .plan-workspace .d-actions button:hover {
   background: var(--bg-hover);
   color: var(--text-primary);
 }
-.plan-workspace .dp-day-actions button:nth-child(1),
-.plan-workspace .dp-day-actions button:nth-child(3),
+
 .plan-workspace .d-actions button:nth-child(1),
 .plan-workspace .d-actions button:nth-child(3) {
   border-right: 1px solid var(--border-faint);
 }
-.plan-workspace .dp-day-actions button:nth-child(1),
-.plan-workspace .dp-day-actions button:nth-child(2),
+
 .plan-workspace .d-actions button:nth-child(1),
 .plan-workspace .d-actions button:nth-child(2) {
   border-bottom: 1px solid var(--border-faint);
@@ -494,7 +407,7 @@
 
 .plan-workspace .day-body {
   background: var(--bg-hover);
-  padding: 6px 0 10px;
+  padding-top: 6px;
   display: none;
 }
 
@@ -502,201 +415,53 @@
   display: block;
 }
 
-/* Blue Transport row */
-.plan-workspace .dp-transport-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 8px 7px 10px;
-  margin: 1px 8px;
-  border-radius: 6px;
-  border-right: 1px solid rgba(59, 130, 246, 0.2);
-  border-left: 1px solid rgba(59, 130, 246, 0.2);
-  background: rgba(59, 130, 246, 0.03);
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.1s;
-}
-.plan-workspace .dp-transport-row:hover {
-  background: rgba(59, 130, 246, 0.06);
-}
-.plan-workspace .dp-transport-icon {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: rgba(59, 130, 246, 0.094);
-}
-.plan-workspace .dp-transport-info {
-  flex: 1 1 0%;
-  min-width: 0px;
-}
-.plan-workspace .dp-trans-title-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.plan-workspace .dp-trans-badge {
-  font-size: 9px;
-  font-weight: 700;
-  padding: 1px 5px;
-  border-radius: 4px;
-  flex-shrink: 0;
-  background: rgba(59, 130, 246, 0.125);
-  color: rgb(59, 130, 246);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-.plan-workspace .dp-trans-title {
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--text-primary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  min-width: 0px;
-}
-.plan-workspace .dp-trans-time {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  flex-shrink: 0;
-  font-size: 10px;
-  color: var(--text-faint);
-  font-weight: 400;
-  margin-left: 6px;
-}
-.plan-workspace .dp-trans-sub {
-  font-size: 10px;
-  color: var(--text-faint);
-  margin-top: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.plan-workspace .dp-trans-route-btn {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  color: var(--text-faint);
-  transition: color 120ms ease, background 120ms ease;
-}
-.plan-workspace .dp-trans-route-btn:hover {
-  background: rgba(59, 130, 246, 0.1);
-  color: #3b82f6;
-}
-
-/* Note row */
-.plan-workspace .dp-note-row {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 8px 7px 2px;
-  margin: 1px 8px;
-  border-radius: 6px;
-  background: var(--bg-hover);
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.1s;
-}
-.plan-workspace .dp-note-icon {
-  width: 28px;
-  height: 28px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--bg-hover);
-  overflow: hidden;
-}
-.plan-workspace .dp-note-text {
-  flex: 1 1 0%;
-  min-width: 0px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--text-primary);
-  word-break: break-word;
-  line-height: 1.3;
-}
-
-/* Stop Row */
-.plan-workspace .dp-row.stop,
 .plan-workspace .stop {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 7px 8px 7px 10px;
-  margin: 1px 8px;
   cursor: pointer;
-  background: transparent;
   border-left: 3px solid transparent;
-  border-radius: 6px;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s;
 }
-.plan-workspace .dp-row.stop:hover,
+
 .plan-workspace .stop:hover {
   background: rgba(0, 0, 0, 0.03);
 }
-.plan-workspace .dp-row.stop.sel,
+
 .plan-workspace .stop.sel {
   background: var(--bg-selected);
   border-left-color: var(--accent);
 }
 
-.plan-workspace .dp-grip,
 .plan-workspace .grip {
-  flex-shrink: 0;
   color: var(--text-faint);
+  opacity: 0.35;
   display: flex;
-  align-items: center;
-  opacity: 0.3;
-  transition: opacity 0.15s;
-  cursor: grab;
-}
-.plan-workspace .stop:hover .dp-grip,
-.plan-workspace .stop:hover .grip {
-  opacity: 0.7;
 }
 
-.plan-workspace .dp-place-avatar,
 .plan-workspace .avatar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  background-color: rgb(99, 102, 241);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.plan-workspace .dp-place-avatar img,
+
 .plan-workspace .avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.plan-workspace .dp-place-main,
 .plan-workspace .s-main {
-  flex: 1 1 0%;
-  min-width: 0px;
-  display: flex;
-  flex-direction: column;
+  flex: 1;
+  min-width: 0;
 }
 
-.plan-workspace .dp-place-name-row,
 .plan-workspace .s-top {
   display: flex;
   align-items: center;
@@ -704,30 +469,24 @@
   overflow: hidden;
 }
 
-.plan-workspace .dp-place-name,
 .plan-workspace .s-name {
   font-size: 12.5px;
   font-weight: 500;
-  color: var(--text-primary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  line-height: 1.2;
 }
 
-.plan-workspace .dp-place-time,
 .plan-workspace .s-time {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  flex-shrink: 0;
+  margin-left: 6px;
   font-size: 10px;
   color: var(--text-faint);
-  font-weight: 400;
-  margin-left: 6px;
+  flex-shrink: 0;
 }
 
-.plan-workspace .dp-place-address,
 .plan-workspace .s-sub {
   margin-top: 2px;
   font-size: 10px;
@@ -735,365 +494,66 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  line-height: 1.2;
 }
 
-.plan-workspace .dp-reservation-tag {
-  margin-top: 3px;
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  flex-wrap: nowrap;
-}
-.plan-workspace .dp-res-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 1px 6px;
-  border-radius: 5px;
-  font-size: 9px;
-  font-weight: 600;
-  white-space: nowrap;
-  background: rgba(22, 163, 74, 0.1);
-  color: #16a34a;
-}
-.plan-workspace .dp-res-time-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 1px 6px;
-  border-radius: 5px;
-  font-size: 9px;
-  font-weight: 500;
-  white-space: nowrap;
-  background: rgba(22, 163, 74, 0.1);
-  color: #16a34a;
-}
-.plan-workspace .dp-res-edit {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  color: var(--text-faint);
-}
-
-.plan-workspace .reorder-buttons,
 .plan-workspace .reorder {
-  flex-shrink: 0;
   display: flex;
   gap: 1px;
-  transition: opacity 0.15s;
+  flex-shrink: 0;
 }
-.plan-workspace .reorder-buttons button,
+
 .plan-workspace .reorder button {
+  border: 0;
   background: none;
-  border: none;
-  padding: 1px 2px;
+  color: var(--text-faint);
   cursor: pointer;
   display: flex;
-  line-height: 1;
-  color: var(--text-faint);
+  padding: 1px 2px;
 }
-.plan-workspace .reorder-buttons button:disabled,
+
 .plan-workspace .reorder button:disabled {
   opacity: 0.3;
   cursor: default;
 }
 
-.plan-workspace .add-place-dashed-wrap {
-  padding: 8px 12px 12px;
-}
-.plan-workspace .add-place-dashed-btn {
-  width: 100%;
+.plan-workspace .note {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 0px;
-  border-radius: 12px;
-  border: 1.5px dashed var(--border-primary);
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 12px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.14s ease;
-}
-.plan-workspace .add-place-dashed-btn:hover {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: var(--accent);
-  color: var(--text-primary);
-}
-
-/* Center Day Overview & Forecast Card (Modal) */
-.plan-workspace .day-center-card {
-  position: absolute;
-  top: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 480px;
-  max-width: calc(100vw - 720px);
-  max-height: calc(100% - 80px);
-  overflow-y: auto;
-  z-index: 85;
-  background: var(--sidebar-bg);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  border-radius: 18px;
-  padding: 22px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  animation: fadeInPop 0.22s ease-out;
-}
-
-@keyframes fadeInPop {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
-}
-
-.plan-workspace .day-center-card-head {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-bottom: 1px solid var(--border-faint);
-  padding-bottom: 14px;
-}
-
-.plan-workspace .dcc-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.plan-workspace .dcc-title-left {
-  display: flex;
-  align-items: center;
   gap: 8px;
+  margin: 1px 8px 6px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(145, 184, 199, 0.45);
+  background: rgba(217, 231, 235, 0.4);
 }
 
-.plan-workspace .dcc-title-left h3 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.plan-workspace .dcc-edit-btn {
-  background: none;
-  border: none;
-  color: var(--text-faint);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  padding: 2px;
-}
-.plan-workspace .dcc-edit-btn:hover {
-  color: var(--text-primary);
-}
-
-.plan-workspace .dcc-head-actions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.plan-workspace .dcc-sq {
+.plan-workspace .note .ic {
   width: 28px;
   height: 28px;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
+  border-radius: 50%;
+  background: rgba(145, 184, 199, 0.25);
+  color: #4A3B32;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.12s, color 0.12s;
-}
-.plan-workspace .dcc-sq:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
+  flex-shrink: 0;
 }
 
-.plan-workspace .dcc-date {
-  font-size: 12px;
-  color: var(--text-muted);
-  padding-left: 26px;
-}
-
-.plan-workspace .day-center-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.plan-workspace .dcc-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.plan-workspace .dcc-sec-title {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text-faint);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.plan-workspace .dcc-weather-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.plan-workspace .dcc-temp-main {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-.plan-workspace .dcc-temp-main strong {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.plan-workspace .dcc-temp-main span {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.plan-workspace .dcc-weather-stats {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-  padding: 4px 0;
-}
-.plan-workspace .dcc-weather-stats span {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.plan-workspace .dcc-hourly-bar {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 4px;
-  background: var(--bg-hover);
-  border-radius: 10px;
-  padding: 8px 6px;
-  text-align: center;
-}
-
-.plan-workspace .dcc-hour-cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-.plan-workspace .dcc-h-time {
-  font-size: 9px;
-  color: var(--text-faint);
-}
-.plan-workspace .dcc-h-temp {
-  font-size: 9.5px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.plan-workspace .dcc-weather-footnote {
-  font-size: 10px;
-  color: var(--text-faint);
-  font-style: italic;
-  margin-top: 2px;
-}
-
-.plan-workspace .dcc-reservation-list {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.plan-workspace .dcc-res-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  background: rgba(59, 130, 246, 0.05);
-  border: 1px solid rgba(59, 130, 246, 0.15);
-}
-.plan-workspace .dcc-res-card.rental {
-  background: rgba(34, 197, 94, 0.05);
-  border-color: rgba(34, 197, 94, 0.15);
-}
-
-.plan-workspace .dcc-res-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.plan-workspace .dcc-res-name {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-.plan-workspace .dcc-res-time {
-  color: var(--text-muted);
-  font-size: 11px;
-}
-
-.plan-workspace .dcc-hotel-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 12px;
-  border-radius: 8px;
-  background: var(--bg-hover);
-}
-.plan-workspace .dcc-checkin-badge {
-  font-size: 9px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: rgba(34, 197, 94, 0.15);
-  color: #16a34a;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-.plan-workspace .dcc-hotel-name {
+.plan-workspace .note b {
   font-size: 12.5px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 500;
 }
 
 .plan-workspace .note p {
-  margin-top: 3px;
-  font-size: 11.5px;
+  margin-top: 2px;
+  font-size: 10.5px;
   color: var(--text-muted);
-  line-height: 1.45;
+  line-height: 1.4;
 }
 
 .plan-workspace .route-bar {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 14px;
+  gap: 6px;
+  padding: 10px 16px 12px;
   border-top: 1px solid var(--border-faint);
   margin-top: 8px;
 }
@@ -1102,23 +562,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 14px;
+  gap: 5px;
+  padding: 6px 10px;
   border: 1px solid var(--border-faint);
-  border-radius: 10px;
-  background: #ffffff;
-  color: var(--text-secondary);
-  font-size: 12.5px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 11px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.plan-workspace .route-bar button:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-  border-color: var(--border-secondary);
+  transition: background 0.12s, color 0.12s;
 }
 
 .plan-workspace .route-bar .grow {
@@ -1126,40 +579,34 @@
 }
 
 .plan-workspace .route-bar .on {
-  background: var(--accent) !important;
-  color: #fff !important;
-  border-color: var(--accent) !important;
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .plan-workspace .empty {
-  padding: 12px 16px;
-  font-size: 12.5px;
+  padding: 6px 16px 10px;
+  font-size: 11px;
   color: var(--text-faint);
-  text-align: center;
 }
 
 .plan-workspace .p-foot {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 20px;
+  padding: 10px 16px;
   border-top: 1px solid var(--border-faint);
-  background: #ffffff;
   flex-shrink: 0;
 }
 
 .plan-workspace .p-foot span:first-child {
-  font-size: 12.5px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: var(--text-faint);
 }
 
 .plan-workspace .p-foot span:last-child {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 /* ---------- RIGHT PANEL ---------- */
@@ -1175,7 +622,9 @@
   margin-bottom: 10px;
 }
 
-.plan-workspace .r-btns button {
+.plan-workspace .r-btns button,
+.plan-workspace #newPlace,
+.plan-workspace #toDay {
   flex: 1;
   display: flex;
   align-items: center;
@@ -1184,12 +633,20 @@
   padding: 8px 12px;
   border: 0;
   border-radius: 12px;
-  background: var(--accent);
+  background: #2563EB;
   color: #fff;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.plan-workspace .r-btns button:hover,
+.plan-workspace #newPlace:hover,
+.plan-workspace #toDay:hover {
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
 .plan-workspace .r-imp {
@@ -1341,99 +798,58 @@
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  background: #f3f4f6;
 }
 
 .plan-workspace .place {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 16px;
-  cursor: grab;
-  user-select: none;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px 9px 16px;
+  cursor: pointer;
   border-bottom: 1px solid var(--border-faint);
-  transition: all 0.12s;
+  transition: background 0.1s;
 }
 
 .plan-workspace .place:hover {
-  background: rgba(0, 0, 0, 0.035);
-}
-
-.plan-workspace .place:active {
-  cursor: grabbing;
-}
-
-.plan-workspace .place.dragging {
-  opacity: 0.5;
-  background: #e2e8f0;
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .plan-workspace .place.sel {
-  background: #f1f5f9;
+  background: var(--border-faint);
 }
 
 .plan-workspace .place .avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-.plan-workspace .place .s-main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.plan-workspace .place .s-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
+  width: 34px;
+  height: 34px;
 }
 
 .plan-workspace .place .s-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 13px;
 }
 
 .plan-workspace .place .s-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
+  font-size: 11px;
 }
 
 .plan-workspace .add-mini {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--border-faint);
-  border-radius: 8px;
-  background: #ffffff;
-  color: var(--text-muted);
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--bg-hover);
+  color: var(--text-faint);
   cursor: pointer;
   flex-shrink: 0;
-  transition: all 0.15s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: background 0.12s, color 0.12s;
 }
 
 .plan-workspace .add-mini:hover {
   background: var(--accent);
   color: #fff;
-  border-color: var(--accent);
 }
 
 /* ---------- CATEGORY FILTER PILL ---------- */
@@ -1486,55 +902,112 @@
   color: #fff;
 }
 
-/* ---------- SATELLITE TOGGLE AT BOTTOM RIGHT ---------- */
+/* ---------- SATELLITE TOGGLE ---------- */
+.satellite-control,
+.plan-workspace .satellite-control,
 .plan-workspace .sat-wrap {
-  position: absolute;
+  position: fixed;
   bottom: 24px;
-  right: calc(var(--right-w, 360px) + 20px);
+  right: calc(var(--right-w, 0px) + 24px);
   left: auto;
-  z-index: 70;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 8px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.14);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: right 0.2s ease;
-}
-
-.plan-workspace .sat-btn {
-  position: relative;
+  z-index: 150;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  padding: 4px;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+  transition: right 0.22s cubic-bezier(0.16, 1, 0.3, 1), bottom 0.22s ease, transform 0.15s ease;
+}
+
+.satellite-control:hover,
+.plan-workspace .satellite-control:hover,
+.plan-workspace .sat-wrap:hover {
+  transform: scale(1.04);
+}
+
+.satellite-button,
+.plan-workspace .satellite-button,
+.plan-workspace .sat-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
   padding: 0;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: #64748b;
-  cursor: pointer;
-  overflow: hidden;
-  transition: background 0.14s, color 0.14s;
-}
-
-.plan-workspace .sat-btn svg {
-  width: 17px;
-  height: 17px;
-  display: block;
-  flex: none;
   margin: 0;
-  position: static;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
+.satellite-button svg,
+.plan-workspace .satellite-button svg,
+.plan-workspace .sat-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.satellite-button:hover,
+.plan-workspace .satellite-button:hover,
+.plan-workspace .sat-btn:hover {
+  background: #e8eefc;
+  color: #0f172a;
+}
+
+.satellite-button.active,
+.plan-workspace .satellite-button.active,
 .plan-workspace .sat-btn.active {
-  background: var(--accent);
-  color: #fff;
+  background: #0f172a;
+  color: #ffffff;
+}
+
+.satellite-button:focus-visible,
+.plan-workspace .satellite-button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 3px;
+}
+
+/* Drag and Drop Feedback */
+.plan-workspace .day.is-drag-over {
+  border: 2px dashed #0f172a !important;
+  background: rgba(15, 23, 42, 0.05) !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08) !important;
+  transform: scale(1.01);
+  transition: all 0.15s ease;
+}
+
+.plan-workspace .place {
+  cursor: grab;
+  user-select: none;
+}
+
+.plan-workspace .place:active {
+  cursor: grabbing;
+}
+
+.plan-workspace .place.is-dragging {
+  opacity: 0.45;
+  border-style: dashed;
 }
 
 /* ---------- MAP MARKERS ---------- */
@@ -1823,6 +1296,18 @@
   background: #e2e8f0;
 }
 
+.plan-workspace .i-foot .i-foot-add {
+  background: #2563EB !important;
+  color: #fff !important;
+  transition: all 0.15s ease;
+}
+
+.plan-workspace .i-foot .i-foot-add:hover {
+  background: #1d4ed8 !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
 .plan-workspace .i-foot .danger {
   background: rgba(239, 68, 68, 0.08);
   color: #dc2626;
@@ -1959,7 +1444,11 @@
     left: 12px !important;
     right: 12px !important;
   }
-  .plan-workspace .sat-wrap {
-    left: 16px !important;
+  .plan-workspace .sat-wrap,
+  .plan-workspace .satellite-control,
+  .satellite-control {
+    right: 16px !important;
+    left: auto !important;
+    bottom: 20px !important;
   }
 }

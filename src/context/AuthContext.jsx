@@ -63,23 +63,10 @@ export function AuthProvider({ children }) {
   }, [accounts]);
 
   // 2. Authenticated user session
-  const [user, setUser] = useState(() => {
-    try {
-      const savedUser = localStorage.getItem('wanderwise_user');
-      return savedUser ? JSON.parse(savedUser) : null;
-    } catch {
-      return null;
-    }
-  });
+  const [user, setUser] = useState(null);
 
   // 3. User role ('traveler' | 'guide')
-  const [userRole, setUserRole] = useState(() => {
-    try {
-      return localStorage.getItem('wanderwise_role') || (user ? user.role : 'traveler');
-    } catch {
-      return 'traveler';
-    }
-  });
+  const [userRole, setUserRole] = useState('traveler');
 
   useEffect(() => {
     try {
@@ -151,6 +138,13 @@ export function AuthProvider({ children }) {
     setUser(authPayload);
     setUserRole(existing.role || 'traveler');
 
+    if ((existing.role || 'traveler') !== 'guide') {
+      try {
+        sessionStorage.removeItem('abeon_traveler_gate_passed');
+        window.dispatchEvent(new CustomEvent('trigger_traveler_preloader'));
+      } catch (e) {}
+    }
+
     return {
       success: true,
       role: existing.role || 'traveler',
@@ -192,6 +186,13 @@ export function AuthProvider({ children }) {
     setAccounts((prev) => [newAccount, ...prev]);
     setUser(newAccount);
     setUserRole(newAccount.role);
+
+    if (newAccount.role !== 'guide') {
+      try {
+        sessionStorage.removeItem('abeon_traveler_gate_passed');
+        window.dispatchEvent(new CustomEvent('trigger_traveler_preloader'));
+      } catch (e) {}
+    }
 
     return {
       success: true,
@@ -239,6 +240,13 @@ export function AuthProvider({ children }) {
 
     setUser(authUser);
     setUserRole(authUser.role || 'traveler');
+
+    if ((authUser.role || 'traveler') !== 'guide') {
+      try {
+        sessionStorage.removeItem('abeon_traveler_gate_passed');
+        window.dispatchEvent(new CustomEvent('trigger_traveler_preloader'));
+      } catch (e) {}
+    }
 
     return {
       success: true,

@@ -1,7 +1,7 @@
 /* OverviewTab.css - Full visual fidelity restoration matching final/overview-tab.txt */
 
 .overview-page-wrapper {
-  --ov-bg-main: #f8fafc;
+  --ov-bg-main: rgb(238, 242, 236);
   --ov-bg-card: #ffffff;
   --ov-bg-dark: #0f172a;
   --ov-bg-input: #f1f5f9;

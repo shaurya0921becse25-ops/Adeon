@@ -138,7 +138,7 @@
 .fb-step-val {
   font-size: 12px;
   font-weight: 700;
-  color: #FAF7F0;
+  color: #FFFFFF;
   padding: 0 10px;
   min-width: 36px;
   text-align: center;
@@ -179,7 +179,7 @@
   height: 15px;
   border-radius: 50%;
   background: var(--color-terracotta);
-  border: 2px solid #FAF7F0;
+  border: 2px solid #FFFFFF;
   box-shadow: 0 0 6px rgba(188, 90, 60, 0.5);
   cursor: pointer;
   transition: transform 120ms;
@@ -194,7 +194,7 @@
   height: 15px;
   border-radius: 50%;
   background: var(--color-terracotta);
-  border: 2px solid #FAF7F0;
+  border: 2px solid #FFFFFF;
   cursor: pointer;
 }
 

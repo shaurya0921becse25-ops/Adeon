@@ -2,8 +2,8 @@
 
 :root,
 .lists-page-wrapper {
-  --list-bg-primary: #f8fafc;
-  --list-bg-surface: #f8fafc;
+  --list-bg-primary: rgb(238, 242, 236);
+  --list-bg-surface: rgb(238, 242, 236);
   --list-bg-tertiary: #f1f5f9;
   --list-bg-card: #FFFFFF;
   --list-bg-hover: #f1f5f9;
@@ -15,13 +15,34 @@
   --list-border-primary: #e2e8f0;
   --list-border-secondary: #cbd5e1;
   --list-border-faint: #f1f5f9;
-  --list-accent: #0f172a;
-  --list-accent-hover: #1e293b;
+  --list-accent: #2563EB;
+  --list-accent-hover: #1d4ed8;
   --list-accent-text: #FFFFFF;
+
+  /* Standard CSS Variables for Lists and Todos */
+  --bg-primary: #ffffff;
+  --bg-surface: rgb(238, 242, 236);
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-hover: #f1f5f9;
+  --bg-input: #f8fafc;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --border-primary: #e2e8f0;
+  --border-secondary: #cbd5e1;
+  --border-faint: #f1f5f9;
+  --accent: #2563EB;
+  --accent-text: #ffffff;
+  --fs-scale-title: 1;
+  --fs-scale-subtitle: 1;
+  --fs-scale-body: 1;
+  --fs-scale-caption: 1;
 }
 
 .lists-page-wrapper {
-  background: var(--list-bg-primary);
+  background: #ffffff;
   color: var(--list-text-primary);
   min-height: calc(100vh - 44px);
   padding: calc(44px + 24px) 28px 56px;
@@ -30,9 +51,6 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  max-width: 1560px;
-  margin: 0 auto;
-  width: 100%;
 }
 
 @media (max-width: 640px) {
@@ -113,7 +131,13 @@
   font-weight: 600;
   background: var(--list-accent);
   color: #ffffff;
-  box-shadow: 0 2px 6px rgba(145, 184, 199, 0.35);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+  transition: all 0.15s ease;
+}
+
+.lists-mode-btn.is-active:hover {
+  background: var(--list-accent-hover);
+  color: #ffffff;
 }
 
 .lists-mode-badge {
@@ -153,12 +177,12 @@
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.15s ease;
 }
 
 .lists-main-action-btn:hover {
   background: var(--list-accent-hover);
-  box-shadow: 0 2px 8px rgba(145, 184, 199, 0.35);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
 /* =========================================================
@@ -230,7 +254,7 @@
 .packing-track-fill {
   height: 100%;
   border-radius: 999px;
-  background: var(--list-accent);
+  background: #22a447;
   transition: width 0.4s ease-out;
   position: relative;
 }
@@ -296,9 +320,16 @@
 }
 
 .packing-filter-pill.is-active {
-  border-color: var(--list-accent);
-  background: var(--list-accent);
+  border-color: #111827;
+  background: #111827;
   color: #ffffff;
+  box-shadow: 0 2px 6px rgba(17, 24, 39, 0.25);
+}
+
+.packing-filter-pill.is-active:hover {
+  border-color: #000000;
+  background: #000000;
+  box-shadow: 0 4px 10px rgba(17, 24, 39, 0.35);
 }
 
 .packing-filter-pill .pill-badge {
@@ -311,7 +342,7 @@
 }
 
 .packing-filter-pill.is-active .pill-badge {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 
@@ -737,9 +768,15 @@
 }
 
 .todo-nav-btn.is-active {
-  background: var(--list-bg-tertiary);
+  background: var(--list-accent);
   font-weight: 600;
-  color: var(--list-text-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+.todo-nav-btn.is-active:hover {
+  background: var(--list-accent-hover);
+  color: #ffffff;
 }
 
 .todo-nav-btn .nav-count {
@@ -751,6 +788,11 @@
   padding: 1px 6px;
   min-width: 18px;
   text-align: center;
+}
+
+.todo-nav-btn.is-active .nav-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
 }
 
 /* Center Pane: Task Items List */
@@ -1137,6 +1179,7 @@
 
 .lists-modal-submit-btn:hover:not(:disabled) {
   background: var(--list-accent-hover);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
 }
 
 .lists-modal-submit-btn:disabled {

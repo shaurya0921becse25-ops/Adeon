@@ -3,7 +3,7 @@
  * Faithfully restored from final/lists-tab.html
  */
 
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { packingProgress, todoProgress } from '../../../itinerary/index.js'
 import { INITIAL_PACKING_CATEGORIES } from '../../data/japanShopAndListsData.js'
 import './ListsTab.css'
@@ -53,15 +53,83 @@ function SvgIcon({ name, size = 16, strokeWidth = 2, className = '' }) {
 
 // Category color mappings
 const CATEGORY_COLORS = {
+  CLOTHING: '#3b82f6',
   Clothing: '#3b82f6',
+  ELECTRONICS: '#a855f7',
   Electronics: '#a855f7',
+  DOCUMENTS: '#22c55e',
   Documents: '#22c55e',
+  'OTHER & ACCESSORIES': '#ec4899',
   'Other & Accessories': '#ec4899',
-  Accessories: '#ec4899',
+  OTHER: '#ec4899',
   Other: '#ec4899',
+  ACCESSORIES: '#ec4899',
+  Accessories: '#ec4899',
+  TOILETRIES: '#06b6d4',
   Toiletries: '#06b6d4',
+  GENERAL: '#64748b',
   General: '#64748b',
 }
+
+const DEFAULT_DEMO_TODOS = [
+  {
+    id: 'demo-todo-1',
+    title: 'Book the rental car with gravel protection',
+    description: 'Ensure comprehensive insurance coverage and GPS navigation included.',
+    done: true,
+    priority: 'p1',
+    dueDate: '2027-03-05',
+    assignee: 'Jonas Weber',
+  },
+  {
+    id: 'demo-todo-2',
+    title: 'Add digital Suica / Pasmo transit card to phone wallet',
+    description: 'Enables contactless tapping on all Tokyo subways, buses, and convenience stores.',
+    done: true,
+    priority: 'p1',
+    dueDate: '2026-10-15',
+    assignee: 'Jonas Weber',
+  },
+  {
+    id: 'demo-todo-3',
+    title: 'Confirm teamLab Planets timed entry reservation',
+    description: 'Pre-booked for Day 5 at 14:00. Save ticket barcodes.',
+    done: false,
+    priority: 'p1',
+    dueDate: '2026-10-16',
+    assignee: 'Jonas Weber',
+  },
+  {
+    id: 'demo-todo-4',
+    title: 'Notify bank of international travel and withdraw initial Yen cash',
+    description: 'Many traditional food stalls in Asakusa and Tsukiji remain cash-only.',
+    done: false,
+    priority: 'p2',
+    dueDate: '2026-10-17',
+    assignee: 'Jonas Weber',
+  },
+  {
+    id: 'demo-todo-5',
+    title: 'Download Tokyo offline maps on phone',
+    description: 'Save offline area in Google Maps for Central Tokyo, Asakusa, and Shibuya.',
+    done: false,
+    priority: 'p3',
+    dueDate: '2026-10-18',
+    assignee: 'Jonas Weber',
+  },
+]
+
+const INITIAL_PACKING_ITEMS = INITIAL_PACKING_CATEGORIES.flatMap((c) =>
+  c.items.map((it) => ({
+    id: `pack-${it.id}`,
+    tripId: 'japan-demo-trip-2026',
+    text: it.text,
+    category: c.title,
+    quantity: it.qty || 1,
+    checked: Boolean(it.checked),
+    user: it.user || 'Demo User',
+  }))
+)
 
 export default function ListsTab({
   store,
@@ -105,6 +173,83 @@ export default function ListsTab({
     }
   })
 
+  // List addition input state
+  const [isAddingCategory, setIsAddingCategory] = useState(false)
+  const [newCategoryName, setNewCategoryName] = useState('')
+
+  // Unified Packing Items State (synced to localStorage)
+  const [packingItems, setPackingItems] = useState(() => {
+    try {
+      const stored = localStorage.getItem(`trip-packing-items-${tripId}`)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed) && parsed.length >= INITIAL_PACKING_ITEMS.length) {
+          return parsed
+        }
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const existingIds = new Set(parsed.map((p) => p.id))
+          const missing = INITIAL_PACKING_ITEMS.filter((p) => !existingIds.has(p.id))
+          return [...parsed, ...missing]
+        }
+      }
+    } catch {}
+
+    if (rawPackingItems && rawPackingItems.length >= INITIAL_PACKING_ITEMS.length) {
+      return rawPackingItems
+    }
+    return INITIAL_PACKING_ITEMS
+  })
+
+  // Synchronize packing items to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(`trip-packing-items-${tripId}`, JSON.stringify(packingItems))
+    } catch {}
+  }, [packingItems, tripId])
+
+  // Unified To-Do Tasks State (synced to localStorage)
+  const [todoTasks, setTodoTasks] = useState(() => {
+    try {
+      const stored = localStorage.getItem(`trip-todo-items-${tripId}`)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed) && parsed.length >= DEFAULT_DEMO_TODOS.length) {
+          return parsed
+        }
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const existingIds = new Set(parsed.map((t) => t.id))
+          const missing = DEFAULT_DEMO_TODOS.filter((t) => !existingIds.has(t.id))
+          return [...parsed, ...missing]
+        }
+      }
+    } catch {}
+
+    if (rawTodoItems && rawTodoItems.length >= DEFAULT_DEMO_TODOS.length) {
+      return rawTodoItems
+    }
+    return DEFAULT_DEMO_TODOS
+  })
+
+  // Synchronize todo tasks to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(`trip-todo-items-${tripId}`, JSON.stringify(todoTasks))
+    } catch {}
+  }, [todoTasks, tripId])
+
+  // Reactively synchronize local state when store updates
+  useEffect(() => {
+    if (rawPackingItems && rawPackingItems.length > 0) {
+      setPackingItems(rawPackingItems)
+    }
+  }, [rawPackingItems])
+
+  useEffect(() => {
+    if (rawTodoItems && rawTodoItems.length > 0) {
+      setTodoTasks(rawTodoItems)
+    }
+  }, [rawTodoItems])
+
   // To-Do Sidebar Filter: 'all' | 'my' | 'overdue' | 'done'
   const [todoFilter, setTodoFilter] = useState('all')
   // To-Do Sort: 'priority' | 'date' | 'default'
@@ -128,92 +273,124 @@ export default function ListsTab({
   // Import Dialog State
   const [isImportModalOpen, setIsImportModalOpen] = useState(false)
 
-  // Local optimistic state for instant zero-latency toggles
-  const [localCheckedOverrides, setLocalCheckedOverrides] = useState({})
-  const [localTodoDoneOverrides, setLocalTodoDoneOverrides] = useState({})
-
-  // Prepare full packing items (ensuring demo coverage across categories)
-  const effectivePackingItems = useMemo(() => {
-    const base = rawPackingItems.length > 0
-      ? rawPackingItems
-      : INITIAL_PACKING_CATEGORIES.flatMap((c) =>
-          c.items.map((it) => ({
-            id: `pack-${it.id}`,
-            tripId,
-            text: it.text,
-            category: c.title,
-            quantity: it.qty || 1,
-            checked: Boolean(it.checked),
-          }))
-        )
-
-    return base.map((item) => ({
-      ...item,
-      checked: localCheckedOverrides[item.id] !== undefined
-        ? localCheckedOverrides[item.id]
-        : Boolean(item.checked),
-    }))
-  }, [rawPackingItems, tripId, localCheckedOverrides])
-
-  // Fallback to-do tasks
-  const effectiveTodoItems = useMemo(() => {
-    const base = rawTodoItems.length > 0
-      ? rawTodoItems
-      : [
-          { id: 'todo-jp-1', title: 'Pick up Pocket Wi-Fi at Haneda Airport terminal 3 counter', description: 'Show reservation voucher and passport at the Global WiFi counter.', priority: 'p1', dueDate: '2026-10-18', done: true },
-          { id: 'todo-jp-2', title: 'Book Shinkansen bullet train tickets (Tokyo → Kyoto)', description: 'Reserve oversized luggage seat on Nozomi express using SmartEX.', priority: 'p1', dueDate: '2026-10-19', done: false },
-          { id: 'todo-jp-3', title: 'Purchase teamLab Planets Tokyo admission pass', description: 'Timed morning entry slot; remember shorts for shallow water exhibits.', priority: 'p1', dueDate: '2026-10-18', done: true },
-          { id: 'todo-jp-4', title: 'Exchange Japan Rail (JR) Pass physical voucher', description: 'JR East Travel Service Center at Tokyo Station Marunouchi North.', priority: 'p2', dueDate: '2026-10-19', done: false },
-          { id: 'todo-jp-5', title: 'Reserve dinner table at Omoide Yokocho Yakitori alley', description: 'Authentic smoky Izakaya experience in Shinjuku.', priority: 'p2', dueDate: '2026-10-21', done: false },
-          { id: 'todo-jp-6', title: 'Notify bank & credit cards of Japan travel dates', description: 'Prevent fraud alert lockouts for foreign ATM yen withdrawals.', priority: 'p3', dueDate: '2026-10-16', done: true },
-          { id: 'todo-jp-7', title: 'Download offline Google Maps of Tokyo & Kyoto', description: 'Save Greater Tokyo transit and temple areas for offline navigating.', priority: 'p2', dueDate: '2026-10-17', done: true },
-        ]
-
-    return base.map((task) => ({
-      ...task,
-      done: localTodoDoneOverrides[task.id] !== undefined
-        ? localTodoDoneOverrides[task.id]
-        : Boolean(task.done),
-    }))
-  }, [rawTodoItems, localTodoDoneOverrides])
-
+  // Helper: toggle packing item
   const handleTogglePacking = (itemId) => {
-    const item = effectivePackingItems.find((i) => i.id === itemId)
-    const nextVal = item ? !item.checked : true
-    setLocalCheckedOverrides((prev) => ({ ...prev, [itemId]: nextVal }))
+    setPackingItems((prev) =>
+      prev.map((item) =>
+        item.id === itemId ? { ...item, checked: !item.checked } : item
+      )
+    )
     if (togglePackingItem) {
       try {
         togglePackingItem(itemId)
-      } catch (err) {
-        console.warn('Packing toggle note:', err)
-      }
+      } catch {}
     }
   }
 
+  // Helper: update packing item quantity
+  const handleQtyChange = (itemId, newQty) => {
+    const val = parseInt(newQty, 10)
+    if (isNaN(val) || val < 1) return
+    setPackingItems((prev) =>
+      prev.map((item) =>
+        item.id === itemId ? { ...item, quantity: val } : item
+      )
+    )
+    if (updatePackingItem) {
+      try {
+        updatePackingItem(itemId, { quantity: val })
+      } catch {}
+    }
+  }
+
+  // Helper: delete packing item
+  const handleDeletePacking = (itemId) => {
+    setPackingItems((prev) => prev.filter((item) => item.id !== itemId))
+    if (deletePackingItem) {
+      try {
+        deletePackingItem(itemId)
+      } catch {}
+    }
+  }
+
+  // Helper: submit inline packing item
+  const handleInlineItemSubmit = (catName) => {
+    if (!inlineItemText.trim()) return
+    const newItem = {
+      id: `pack-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      tripId,
+      text: inlineItemText.trim(),
+      category: catName,
+      quantity: 1,
+      checked: false,
+      user: 'Demo User',
+    }
+    setPackingItems((prev) => [...prev, newItem])
+    setInlineItemText('')
+    setActiveInlineCat(null)
+    if (createPackingItem) {
+      try {
+        createPackingItem(newItem)
+      } catch {}
+    }
+  }
+
+  // Helper: toggle todo task
   const handleToggleTodo = (taskId) => {
-    const task = effectiveTodoItems.find((t) => t.id === taskId)
-    const nextVal = task ? !task.done : true
-    setLocalTodoDoneOverrides((prev) => ({ ...prev, [taskId]: nextVal }))
+    setTodoTasks((prev) =>
+      prev.map((t) => (t.id === taskId ? { ...t, done: !t.done } : t))
+    )
     if (toggleTodoItem) {
       try {
         toggleTodoItem(taskId)
-      } catch (err) {
-        console.warn('Todo toggle note:', err)
-      }
+      } catch {}
     }
+  }
+
+  // Helper: format due date
+  const formatTaskDate = (dateStr) => {
+    if (!dateStr) return ''
+    try {
+      const d = new Date(dateStr.includes('T') ? dateStr : `${dateStr}T00:00:00`)
+      if (isNaN(d.getTime())) return dateStr
+      return d.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    } catch {
+      return dateStr
+    }
+  }
+
+  // Handle adding new list category
+  const handleAddCategorySubmit = (e) => {
+    if (e && e.preventDefault) e.preventDefault()
+    if (!newCategoryName || !newCategoryName.trim()) return
+    const formatted = newCategoryName.trim().toUpperCase()
+    if (!customCategories.includes(formatted)) {
+      const next = [...customCategories, formatted]
+      setCustomCategories(next)
+      try {
+        localStorage.setItem(`trip-custom-categories-${tripId}`, JSON.stringify(next))
+      } catch {}
+    }
+    setNewCategoryName('')
+    setIsAddingCategory(false)
   }
 
   // Group items into categories
   const categoriesMap = useMemo(() => {
     const map = {}
 
-    // Initialize with standard categories
+    // Initialize with standard categories + user custom categories
     const baseNames = ['CLOTHING', 'ELECTRONICS', 'DOCUMENTS', 'OTHER & ACCESSORIES', ...customCategories]
     baseNames.forEach((cat) => {
       map[cat] = []
     })
 
-    effectivePackingItems.forEach((item) => {
+    packingItems.forEach((item) => {
       let cat = (item.category || 'OTHER & ACCESSORIES').toUpperCase()
       if (cat === 'OTHER' || cat === 'ACCESSORIES') cat = 'OTHER & ACCESSORIES'
       if (!map[cat]) {
@@ -223,27 +400,27 @@ export default function ListsTab({
     })
 
     return map
-  }, [effectivePackingItems, customCategories])
+  }, [packingItems, customCategories])
 
   // Progress metrics for Packing
   const packingStats = useMemo(() => {
-    const total = effectivePackingItems.length
-    const completed = effectivePackingItems.filter((i) => i.checked).length
+    const total = packingItems.length
+    const completed = packingItems.filter((i) => i.checked).length
     const pct = total > 0 ? Math.round((completed / total) * 100) : 0
     return { completed, total, pct }
-  }, [effectivePackingItems])
+  }, [packingItems])
 
   // Progress metrics for To-Do
   const todoStats = useMemo(() => {
-    const total = effectiveTodoItems.length
-    const completed = effectiveTodoItems.filter((t) => t.done).length
+    const total = todoTasks.length
+    const completed = todoTasks.filter((t) => t.done).length
     const pct = total > 0 ? Math.round((completed / total) * 100) : 0
     return { completed, total, pct }
-  }, [effectiveTodoItems])
+  }, [todoTasks])
 
   // Filtered & Sorted To-Do Tasks
   const filteredTodoTasks = useMemo(() => {
-    let tasks = [...effectiveTodoItems]
+    let tasks = [...todoTasks]
 
     if (todoFilter === 'done') {
       tasks = tasks.filter((t) => t.done)
@@ -262,12 +439,12 @@ export default function ListsTab({
     }
 
     return tasks
-  }, [effectiveTodoItems, todoFilter, todoSort])
+  }, [todoTasks, todoFilter, todoSort])
 
   // Selected task object
   const selectedTask = useMemo(() => {
-    return effectiveTodoItems.find((t) => t.id === selectedTaskId) || null
-  }, [effectiveTodoItems, selectedTaskId])
+    return todoTasks.find((t) => t.id === selectedTaskId) || null
+  }, [todoTasks, selectedTaskId])
 
   // Handle task selection
   const handleSelectTask = (task) => {
@@ -285,75 +462,73 @@ export default function ListsTab({
 
   // Handle saving task detail changes
   const handleSaveTaskDetail = () => {
-    if (!selectedTaskId || !updateTodoItem) return
-    updateTodoItem(selectedTaskId, {
-      title: detailTitle.trim() || selectedTask.title,
-      description: detailDesc.trim(),
-      priority: detailPriority,
-      dueDate: detailDueDate,
-    })
+    if (!selectedTaskId) return
+    setTodoTasks((prev) =>
+      prev.map((t) =>
+        t.id === selectedTaskId
+          ? {
+              ...t,
+              title: detailTitle.trim() || t.title,
+              description: detailDesc.trim(),
+              priority: detailPriority,
+              dueDate: detailDueDate,
+            }
+          : t
+      )
+    )
+    if (updateTodoItem) {
+      try {
+        updateTodoItem(selectedTaskId, {
+          title: detailTitle.trim() || selectedTask.title,
+          description: detailDesc.trim(),
+          priority: detailPriority,
+          dueDate: detailDueDate,
+        })
+      } catch {}
+    }
     setIsDetailDirty(false)
   }
 
   // Handle task deletion
   const handleDeleteSelectedTask = () => {
-    if (!selectedTaskId || !deleteTodoItem) return
-    deleteTodoItem(selectedTaskId)
+    if (!selectedTaskId) return
+    setTodoTasks((prev) => prev.filter((t) => t.id !== selectedTaskId))
+    if (deleteTodoItem) {
+      try {
+        deleteTodoItem(selectedTaskId)
+      } catch {}
+    }
     setSelectedTaskId(null)
   }
 
   // Handle new task modal creation
   const handleCreateNewTask = (e) => {
     e.preventDefault()
-    if (!newTaskTitle.trim() || !createTodoItem) return
+    if (!newTaskTitle.trim()) return
 
-    createTodoItem({
+    const newTask = {
+      id: `todo-${Date.now()}`,
+      tripId,
       title: newTaskTitle.trim(),
       description: newTaskDesc.trim(),
       priority: newTaskPriority,
       dueDate: newTaskDueDate,
-    })
+      done: false,
+      assignee: 'Jonas Weber',
+    }
+
+    setTodoTasks((prev) => [newTask, ...prev])
+    if (createTodoItem) {
+      try {
+        createTodoItem(newTask)
+      } catch {}
+    }
 
     setNewTaskTitle('')
     setNewTaskDesc('')
     setNewTaskPriority('none')
     setNewTaskDueDate('')
     setIsNewTaskModalOpen(false)
-  }
-
-  // Handle adding new list category
-  const handleAddCategoryPrompt = () => {
-    const title = window.prompt('Enter new packing category name (e.g. TOILETRIES, SNACKS):')
-    if (title && title.trim()) {
-      const formatted = title.trim().toUpperCase()
-      if (!customCategories.includes(formatted)) {
-        const next = [...customCategories, formatted]
-        setCustomCategories(next)
-        try {
-          localStorage.setItem(`trip-custom-categories-${tripId}`, JSON.stringify(next))
-        } catch {}
-      }
-    }
-  }
-
-  // Handle submitting inline packing item
-  const handleInlineItemSubmit = (cat) => {
-    if (!inlineItemText.trim() || !createPackingItem) return
-    createPackingItem({
-      text: inlineItemText.trim(),
-      category: cat,
-      quantity: 1,
-    })
-    setInlineItemText('')
-    setActiveInlineCat(null)
-  }
-
-  // Handle updating packing item quantity
-  const handleQtyChange = (item, newQty) => {
-    const val = parseInt(newQty, 10)
-    if (!isNaN(val) && val > 0 && updatePackingItem) {
-      updatePackingItem(item.id, { quantity: val })
-    }
   }
 
   return (
@@ -430,14 +605,65 @@ export default function ListsTab({
               </div>
             </div>
 
-            <button
-              type="button"
-              className="packing-add-category-btn"
-              onClick={handleAddCategoryPrompt}
-            >
-              <SvgIcon name="plus" size={14} />
-              <span>Add list</span>
-            </button>
+            {isAddingCategory ? (
+              <form
+                onSubmit={handleAddCategorySubmit}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  flex: '1 1 280px',
+                  maxWidth: '380px',
+                }}
+              >
+                <input
+                  placeholder="List name (e.g. Clothing)"
+                  type="text"
+                  value={newCategoryName}
+                  onChange={(e) => setNewCategoryName(e.target.value)}
+                  autoFocus
+                  style={{
+                    flex: '1 1 0%',
+                    padding: '8px 12px',
+                    borderRadius: '10px',
+                    border: '1px solid var(--border-primary)',
+                    fontSize: 'calc(13.5px * var(--fs-scale-body, 1))',
+                    fontFamily: 'inherit',
+                    outline: 'none',
+                    color: 'var(--text-primary)',
+                    background: 'var(--bg-card, #ffffff)',
+                  }}
+                />
+                <button
+                  type="submit"
+                  className="packing-add-category-btn"
+                  disabled={!newCategoryName.trim()}
+                  style={{ padding: '8px 14px' }}
+                >
+                  <span>Add</span>
+                </button>
+                <button
+                  type="button"
+                  className="packing-inline-add-cancel"
+                  onClick={() => {
+                    setIsAddingCategory(false)
+                    setNewCategoryName('')
+                  }}
+                  title="Cancel"
+                >
+                  <SvgIcon name="x" size={14} />
+                </button>
+              </form>
+            ) : (
+              <button
+                type="button"
+                className="packing-add-category-btn"
+                onClick={() => setIsAddingCategory(true)}
+              >
+                <SvgIcon name="plus" size={14} />
+                <span>Add list</span>
+              </button>
+            )}
           </div>
 
           {/* Packing Filters Toolbar */}
@@ -469,7 +695,8 @@ export default function ListsTab({
               className={`packing-filter-pill ${packingStatus === 'all' ? 'is-active' : ''}`}
               onClick={() => setPackingStatus('all')}
             >
-              All
+              <span>All</span>
+              <span className="pill-badge">{packingStats.total}</span>
             </button>
 
             <button
@@ -477,7 +704,8 @@ export default function ListsTab({
               className={`packing-filter-pill ${packingStatus === 'open' ? 'is-active' : ''}`}
               onClick={() => setPackingStatus('open')}
             >
-              Open
+              <span>Open</span>
+              <span className="pill-badge">{packingStats.total - packingStats.completed}</span>
             </button>
 
             <button
@@ -485,7 +713,8 @@ export default function ListsTab({
               className={`packing-filter-pill ${packingStatus === 'done' ? 'is-active' : ''}`}
               onClick={() => setPackingStatus('done')}
             >
-              Done
+              <span>Done</span>
+              <span className="pill-badge">{packingStats.completed}</span>
             </button>
           </div>
 
@@ -547,8 +776,23 @@ export default function ListsTab({
                   {/* Category Body */}
                   {!isCollapsed && (
                     <div className="packing-cat-body">
+                      {visibleItems.length === 0 && (
+                        <div style={{ padding: '12px 14px', fontSize: '13px', color: 'var(--text-faint)', fontStyle: 'italic' }}>
+                          {packingStatus === 'done'
+                            ? 'No packed items in this list yet.'
+                            : packingStatus === 'open'
+                            ? 'All items in this list are packed! 🎉'
+                            : 'No items in this list yet.'}
+                        </div>
+                      )}
+
                       {visibleItems.map((item) => (
-                        <div key={item.id} className="packing-item-row">
+                        <div
+                          key={item.id}
+                          className="packing-item-row"
+                          onClick={() => handleTogglePacking(item.id)}
+                          style={{ cursor: 'pointer' }}
+                        >
                           {/* 6-dot drag handle */}
                           <div className="packing-drag-handle" title="Reorder item">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -562,7 +806,10 @@ export default function ListsTab({
                             type="button"
                             className="packing-checkbox-btn"
                             aria-label={item.checked ? 'Mark as unpacked' : 'Mark as packed'}
-                            onClick={() => handleTogglePacking(item.id)}
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              handleTogglePacking(item.id)
+                            }}
                           >
                             <svg
                               className="packing-checkbox-svg-box"
@@ -614,7 +861,8 @@ export default function ListsTab({
                               type="text"
                               value={item.quantity || 1}
                               className="packing-qty-input"
-                              onChange={(e) => handleQtyChange(item, e.target.value)}
+                              onClick={(e) => e.stopPropagation()}
+                              onChange={(e) => handleQtyChange(item.id, e.target.value)}
                             />
                             <span className="packing-qty-x">x</span>
                           </div>
@@ -625,6 +873,7 @@ export default function ListsTab({
                               type="button"
                               className="packing-icon-btn"
                               title="Move to list"
+                              onClick={(e) => e.stopPropagation()}
                             >
                               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#3b82f6', display: 'inline-block' }} />
                             </button>
@@ -632,7 +881,10 @@ export default function ListsTab({
                               type="button"
                               className="packing-icon-btn is-delete"
                               title="Delete item"
-                              onClick={() => deletePackingItem && deletePackingItem(item.id)}
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                handleDeletePacking(item.id)
+                              }}
                             >
                               <SvgIcon name="trash" size={13} />
                             </button>
@@ -731,6 +983,7 @@ export default function ListsTab({
             >
               <SvgIcon name="user" size={14} />
               <span>My Tasks</span>
+              <span className="nav-count">{todoStats.total}</span>
             </button>
 
             <button
@@ -740,6 +993,7 @@ export default function ListsTab({
             >
               <SvgIcon name="clock" size={14} />
               <span>Overdue</span>
+              <span className="nav-count">0</span>
             </button>
 
             <button
@@ -749,6 +1003,7 @@ export default function ListsTab({
             >
               <SvgIcon name="checkSquare" size={14} />
               <span>Done</span>
+              <span className="nav-count">{todoStats.completed}</span>
             </button>
 
             <div className="todo-nav-header">Sort by</div>
@@ -793,7 +1048,13 @@ export default function ListsTab({
             <div className="todo-tasks-scroll">
               {filteredTodoTasks.length === 0 ? (
                 <div style={{ padding: '40px 20px', textAlign: 'center', color: '#64748b' }}>
-                  <p style={{ margin: 0, fontSize: 14 }}>No tasks in this view.</p>
+                  <p style={{ margin: 0, fontSize: 14 }}>
+                    {todoFilter === 'overdue'
+                      ? "No overdue tasks — you're all caught up! ✨"
+                      : todoFilter === 'done'
+                      ? 'No completed tasks yet. Check off items as you complete them!'
+                      : 'No tasks in this view.'}
+                  </p>
                 </div>
               ) : (
                 filteredTodoTasks.map((task) => {
@@ -801,77 +1062,265 @@ export default function ListsTab({
                   return (
                     <div
                       key={task.id}
+                      role="button"
+                      data-no-press="true"
+                      tabIndex={0}
                       className={`todo-task-row ${isSelected ? 'is-selected' : ''}`}
                       onClick={() => handleSelectTask(task)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '10px 20px',
+                        borderBottom: '1px solid var(--border-faint)',
+                        cursor: 'pointer',
+                        background: isSelected ? 'rgba(217, 231, 235, 0.45)' : 'transparent',
+                        opacity: 1,
+                        boxShadow: 'none',
+                        transition: 'background 0.1s, opacity 0.15s',
+                      }}
                     >
-                      {/* Drag handle */}
-                      <div className="packing-drag-handle" title="Reorder task">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <circle cx="9" cy="12" r="1" /><circle cx="9" cy="5" r="1" /><circle cx="9" cy="19" r="1" />
-                          <circle cx="15" cy="12" r="1" /><circle cx="15" cy="5" r="1" /><circle cx="15" cy="19" r="1" />
+                      <div
+                        role="presentation"
+                        draggable="true"
+                        style={{
+                          cursor: 'grab',
+                          display: 'flex',
+                          alignItems: 'center',
+                          color: 'var(--text-faint)',
+                          flexShrink: 0,
+                          marginLeft: '-6px',
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-grip-vertical "
+                        >
+                          <circle cx="9" cy="12" r="1"></circle>
+                          <circle cx="9" cy="5" r="1"></circle>
+                          <circle cx="9" cy="19" r="1"></circle>
+                          <circle cx="15" cy="12" r="1"></circle>
+                          <circle cx="15" cy="5" r="1"></circle>
+                          <circle cx="15" cy="19" r="1"></circle>
                         </svg>
                       </div>
 
-                      {/* Interactive Dual Checkbox SVG */}
                       <button
                         type="button"
-                        className="packing-checkbox-btn"
-                        aria-label={task.done ? 'Mark incomplete' : 'Mark complete'}
+                        style={{
+                          background: 'none',
+                          borderWidth: 'medium',
+                          borderStyle: 'none',
+                          borderColor: 'currentcolor',
+                          borderImage: 'none',
+                          cursor: 'pointer',
+                          padding: '0px',
+                          flexShrink: 0,
+                          color: task.done ? 'rgb(34, 197, 94)' : 'var(--text-faint)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                        aria-label={task.done ? 'Mark task incomplete' : 'Mark task complete'}
                         onClick={(e) => {
                           e.stopPropagation()
                           handleToggleTodo(task.id)
                         }}
                       >
-                        <svg
-                          className="packing-checkbox-svg-box"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          style={{
-                            opacity: task.done ? 0 : 1,
-                            transform: task.done ? 'scale(0.5)' : 'scale(1)',
-                          }}
-                        >
-                          <rect width="18" height="18" x="3" y="3" rx="2" />
-                        </svg>
-                        <svg
-                          className="packing-checkbox-svg-box"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          style={{
-                            opacity: task.done ? 1 : 0,
-                            transform: task.done ? 'scale(1)' : 'scale(0.5)',
-                            color: '#059669',
-                          }}
-                        >
-                          <path d="m9 11 3 3L22 4" />
-                          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                        </svg>
+                        {task.done ? (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-check-square "
+                          >
+                            <path d="m9 11 3 3L22 4"></path>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                          </svg>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-square"
+                          >
+                            <rect width="18" height="18" x="3" y="3" rx="2" />
+                          </svg>
+                        )}
                       </button>
 
-                      {/* Title */}
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div className={`todo-task-title ${task.done ? 'is-done' : ''}`}>
+                      <div style={{ flex: '1 1 0%', minWidth: '0px' }}>
+                        <div
+                          style={{
+                            fontSize: 'calc(14px * var(--fs-scale-body, 1))',
+                            color: task.done ? 'var(--text-faint)' : 'var(--text-primary)',
+                            textDecoration: task.done ? 'line-through' : 'none',
+                            lineHeight: 1.4,
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                          }}
+                        >
                           {task.title}
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '5px', marginTop: '5px', flexWrap: 'wrap' }}>
+                          {task.priority && task.priority !== 'none' && (
+                            <span
+                              style={{
+                                fontSize: 'calc(10px * var(--fs-scale-caption, 1))',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '3px',
+                                padding: '2px 7px',
+                                borderRadius: '5px',
+                                fontWeight: 600,
+                                color:
+                                  task.priority === 'p1'
+                                    ? 'rgb(239, 68, 68)'
+                                    : task.priority === 'p2'
+                                    ? 'rgb(245, 158, 11)'
+                                    : 'rgb(59, 130, 246)',
+                                background:
+                                  task.priority === 'p1'
+                                    ? 'rgba(239, 68, 68, 0.063)'
+                                    : task.priority === 'p2'
+                                    ? 'rgba(245, 158, 11, 0.08)'
+                                    : 'rgba(59, 130, 246, 0.08)',
+                                border:
+                                  task.priority === 'p1'
+                                    ? '1px solid rgba(239, 68, 68, 0.145)'
+                                    : task.priority === 'p2'
+                                    ? '1px solid rgba(245, 158, 11, 0.2)'
+                                    : '1px solid rgba(59, 130, 246, 0.2)',
+                              }}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="9"
+                                height="9"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-flag "
+                              >
+                                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                                <line x1="4" x2="4" y1="22" y2="15"></line>
+                              </svg>
+                              {task.priority.toUpperCase()}
+                            </span>
+                          )}
+
+                          {task.dueDate && (
+                            <span
+                              style={{
+                                fontSize: 'calc(10px * var(--fs-scale-caption, 1))',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '3px',
+                                padding: '2px 7px',
+                                borderRadius: '5px',
+                                fontWeight: 500,
+                                color: 'var(--text-secondary)',
+                                background: 'var(--bg-hover)',
+                                border: '1px solid var(--border-faint)',
+                              }}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="9"
+                                height="9"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-calendar "
+                              >
+                                <path d="M8 2v4"></path>
+                                <path d="M16 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                              </svg>
+                              {formatTaskDate(task.dueDate)}
+                            </span>
+                          )}
+
+                          <span
+                            style={{
+                              fontSize: 'calc(10px * var(--fs-scale-caption, 1))',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              padding: '2px 7px',
+                              borderRadius: '5px',
+                              fontWeight: 500,
+                              color: 'var(--text-secondary)',
+                              background: 'var(--bg-hover)',
+                              border: '1px solid var(--border-faint)',
+                            }}
+                          >
+                            <span
+                              style={{
+                                width: '13px',
+                                height: '13px',
+                                borderRadius: '50%',
+                                background: 'var(--border-primary)',
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: 'calc(7px * var(--fs-scale-caption, 1))',
+                                color: 'var(--text-faint)',
+                                fontWeight: 700,
+                              }}
+                            >
+                              {task.assignee ? task.assignee.charAt(0).toUpperCase() : 'J'}
+                            </span>
+                            {task.assignee || 'Jonas Weber'}
+                          </span>
                         </div>
                       </div>
 
-                      {/* Due Date */}
-                      {task.dueDate && (
-                        <span className="todo-tag-date">📅 {task.dueDate}</span>
-                      )}
-
-                      {/* Priority Tag */}
-                      {task.priority && task.priority !== 'none' && (
-                        <span className={`todo-tag-prio ${task.priority}`}>
-                          {task.priority.toUpperCase()}
-                        </span>
-                      )}
-
-                      <SvgIcon name="chevRight" size={14} className="todo-row-arrow" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="var(--text-faint)"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-chevron-right "
+                        style={{ flexShrink: 0, opacity: 0.4 }}
+                      >
+                        <path d="m9 18 6-6-6-6"></path>
+                      </svg>
                     </div>
                   )
                 })

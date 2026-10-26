@@ -155,7 +155,12 @@ export const ServiceDetailModal = ({
         /* Little info + Book inputs */
         <form onSubmit={handleBookNow} className="popup-detail-content">
           <div className="popup-media-strip">
-            <img src={service.coverImage} alt={service.title} className="popup-img" />
+            <img
+              src={service.coverImage || service.image || "/himalayan-trek.jpg"}
+              alt={service.title}
+              className="popup-img"
+              onError={(e) => { e.currentTarget.src = "/himalayan-trek.jpg"; }}
+            />
             <div className="popup-info-header">
               <span className="badge badge-aegean mb-1">{service.category}</span>
               <h3 className="popup-service-title font-heading">{service.title}</h3>

@@ -8,6 +8,7 @@ import { ToastProvider } from './context/ToastContext';
 import { TripProvider } from './context/TripContext';
 
 import Navbar from './components/layout/Navbar';
+import TravelerGatePreloader from './components/common/TravelerGatePreloader';
 
 import Home from './pages/Home';
 import ServicesPage from './pages/ServicesPage';
@@ -80,20 +81,36 @@ function DashboardRedirect() {
   return <Navigate to="/itinerary" replace />;
 }
 
+function RootRedirect() {
+  const { user, userRole } = useAuth();
+
+  if (!user) {
+    return <Navigate to="/signin" replace />;
+  }
+  if (userRole === 'guide') {
+    return <Navigate to="/guide" replace />;
+  }
+  return <Home />;
+}
+
 /**
  * App Shell managing conditional layout chrome.
  * Traveler navbar and footer are hidden on Auth pages and Guide portal.
  */
 function AppShell() {
-  const { userRole } = useAuth();
+  const { user, userRole } = useAuth();
   const location = useLocation();
 
-  const isAuthPage = location.pathname === '/signin' || location.pathname === '/signup';
+  const isAuthPage =
+    location.pathname === '/signin' ||
+    location.pathname === '/signup' ||
+    (location.pathname === '/' && !user);
   const isGuidePage = location.pathname.startsWith('/guide');
   const showTravelerChrome = !isAuthPage && !isGuidePage && userRole !== 'guide';
 
   return (
     <div className="app-shell">
+      {showTravelerChrome && <TravelerGatePreloader />}
       {showTravelerChrome && <Navbar />}
 
       <Routes>
@@ -117,7 +134,7 @@ function AppShell() {
         <Route path="/login" element={<Navigate to="/signin" replace />} />
 
         {/* Traveler Primary Routes (With full navigation bar) */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RootRedirect />} />
         <Route
           path="/services"
           element={
